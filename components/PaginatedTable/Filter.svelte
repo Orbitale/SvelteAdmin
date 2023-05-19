@@ -17,24 +17,28 @@
 
 	let locale = localeFromDateFnsLocale(enGB);
 
+	async function resolveAsyncValue(value: any) {
+		if (value instanceof Promise) {
+			return await resolveAsyncValue(await value);
+		} else if (typeof value === 'function' && value.constructor.name === 'AsyncFunction') {
+			return await resolveAsyncValue(await value());
+		} else if (typeof value === 'function') {
+			return await resolveAsyncValue(value());
+		} else if (Array.isArray(value)) {
+			return value;
+		}
+
+		throw new Error('Could not find type of "filter.options.entities". Must be either an array or a function.');
+	}
+
 	onMount(async () => {
 		if (filter.type === FilterType.entity) {
 			const entities: Array<SelectOption>|(() => Array<SelectOption>|Promise<Array<SelectOption>>) = filter.options.entities;
 
-			if (typeof entities === 'function') {
-				const functionResult = entities.constructor.name === 'AsyncFunction'
-					? await entities()
-					: entities();
-
-				options = functionResult;
-			} else if (Array.isArray(entities)) {
-				options = entities;
-			} else {
-				throw new Error('Could not find type of "filter.options.entities". Must be either an array or a function.');
-			}
+			options = await resolveAsyncValue(entities);
 
 			options.map((i: any) => {
-				if (typeof i.name === undefined || typeof i.value === undefined) {
+				if (typeof i.name === 'undefined' || typeof i.value === 'undefined') {
 					throw new Error('Configured filter option "entities" contains or returned a value that does not match the expected type.\nValues must correspond to the type { name: string , value: string }');
 				}
 			});
@@ -254,14 +258,7 @@
 	</div>
 </div>
 
-<style lang="scss" global>
-	@import 'bootstrap/scss/bootstrap-utilities';
-	@import 'bootstrap/scss/forms/form-control';
-	.date-time-field {
-		input {
-			@extend .form-control;
-		}
-	}
+<style lang="scss">
 	.filter-row {
 		margin-bottom: 1rem;
 	}
