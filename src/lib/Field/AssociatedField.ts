@@ -1,4 +1,4 @@
-import Field, {type FieldOptions} from "./Field";
+import Field, {type FieldOptions} from "./Field.js";
 
 export type AssociatedFieldOptions = {[key: string]: any};
 

@@ -1,4 +1,4 @@
-import Field from "./Field";
+import Field from "./Field.js";
 
 export default class DateField extends Field {
     validate(value: any): void {

@@ -1,8 +1,7 @@
-import DataSource from "./DataSource";
+import DataSource from "./DataSource.js";
 import type {Writable} from 'svelte/store';
-import type Filter from "../Filter/Filter";
+import type Filter from "../Filter/Filter.js";
 
-// TODO
 export default class SvelteStoreDataSource<T> extends DataSource<T> {
     private readonly store: Writable<Array<T>>;
     private data: Array<T> = [];
@@ -10,20 +9,26 @@ export default class SvelteStoreDataSource<T> extends DataSource<T> {
     constructor(store: Writable<Array<T>>) {
         super();
         this.store = store;
-        this.store.subscribe(this.storeSubscriber)
+        this.subscribeToStore();
     }
 
-    private storeSubscriber(data: Array<T>|null|undefined) {
-        if (Array.isArray(data)) {
+    private subscribeToStore() {
+        this.store.subscribe((data: Array<T>|null|undefined) => {
+            if (data === null || data === undefined) {
+                return;
+            }
+
+            console.info('storeSub', data);
+            if (!Array.isArray(data)) {
+                throw new Error(`Could not set store data. Expected an array of objects, got "${typeof data}" instead.`);
+            }
+
             this.data = data;
-        } else if (data !== null && data !== undefined) {
-            throw new Error(`Could not set store data. Expected an array of objects, got "${typeof data}" instead.`);
-        }
+        })
     }
 
     public getList(filters: Array<Filter>): Promise<Array<T>> {
-        // TODO
-        return Promise.resolve([]);
+        return Promise.resolve(this.data);
     }
 
     public getOne(): Promise<T|null> {

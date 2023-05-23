@@ -1,4 +1,4 @@
-export default abstract class Action<T> {
+export default abstract class Action {
     public readonly name: string;
     public readonly label: string;
 

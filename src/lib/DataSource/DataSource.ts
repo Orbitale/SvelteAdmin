@@ -1,4 +1,4 @@
-import type Filter from "../Filter/Filter";
+import type Filter from "../Filter/Filter.js";
 
 export default abstract class DataSource<T> {
     // Example: GET http://my.api.url/posts?sort=["title","ASC"]&range=[0, 24]&filter={"title":"bar"}

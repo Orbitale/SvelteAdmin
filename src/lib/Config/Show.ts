@@ -1,5 +1,5 @@
-import DataSource from "../DataSource/DataSource";
-import Field from "../Field/Field";
+import DataSource from "../DataSource/DataSource.js";
+import Field from "../Field/Field.js";
 
 export default class Show<T> {
     private readonly dataSource: DataSource<T>;

@@ -10,7 +10,7 @@ export type FieldOptions = {[key: string]: any};
  */
 export default abstract class Field {
 	public readonly name: string;
-	public readonly text: string;
+	public readonly label: string;
 	public readonly field_options: FieldOptions;
 
 	constructor(
@@ -19,7 +19,7 @@ export default abstract class Field {
 		options: FieldOptions = {},
 	) {
 		this.name = name;
-		this.text = label === '' ? name : label;
+		this.label = label === '' ? name : label;
 		this.field_options = options;
 	}
 
