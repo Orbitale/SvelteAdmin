@@ -6,4 +6,19 @@
     export let field: Field<Options>;
 </script>
 
-<TextInput labelText="{field.label}" placeholder="{field.options?.placeholder || ''}" />
+<TextInput
+    name="{field.name}"
+    labelText="{field.label}"
+    placeholder="{field.options?.placeholder || ''}"
+    on:change
+    on:input
+    on:click
+    on:mouseover
+    on:mouseenter
+    on:mouseleave
+    on:keydown
+    on:keyup
+    on:focus
+    on:blur
+    on:paste
+/>

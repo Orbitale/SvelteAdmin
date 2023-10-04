@@ -10,10 +10,10 @@ export interface FieldInterface<T extends Options> {
 }
 
 export abstract class Field<T extends Options> implements FieldInterface<T> {
-    readonly name: string;
-    readonly label: string;
-    readonly options: Partial<T>;
-    readonly formComponent: ComponentType = DefaultFieldComponent;
+    public readonly name: string;
+    public readonly label: string;
+    public readonly options: Partial<T>;
+    public readonly formComponent: ComponentType = DefaultFieldComponent;
 
     constructor(name: string, label: string = '', options: T = {} as T) {
         this.name = name;

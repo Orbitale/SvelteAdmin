@@ -6,8 +6,20 @@
 </script>
 
 <TextInput
+    name="{field.name}"
     labelText="{field.label}"
     helperText="{field.options.help}"
     placeholder="{field.options?.placeholder || ''}"
     maxCount={field.options.maxLength}
+    on:change
+    on:input
+    on:click
+    on:mouseover
+    on:mouseenter
+    on:mouseleave
+    on:keydown
+    on:keyup
+    on:focus
+    on:blur
+    on:paste
 />
