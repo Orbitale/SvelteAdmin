@@ -1,8 +1,10 @@
 <script lang="ts">
     import {createEventDispatcher} from "svelte";
-    import type {Field} from "../Fields/Field";
-    import type {Options} from "../Fields/Options";
+    import type {Field} from "../FieldDefinitions/Field";
+    import type {Options} from "../FieldDefinitions/Options";
+    import type {CrudAction} from "./actions";
 
+    export let action: CrudAction;
     export let field: Field<Options>;
 
     const dispatchEvent = createEventDispatcher<{
@@ -23,6 +25,7 @@
 <svelte:component
     this={field.formComponent}
     field={field}
+    action={action}
     on:change={onFieldChange}
     on:blur
     on:check

@@ -1,11 +1,19 @@
 <script lang="ts">
-    import {Form, FormGroup} from "carbon-components-svelte";
+    import {Button, Form, FormGroup} from "carbon-components-svelte";
+    import {createEventDispatcher} from "svelte";
+    import {_} from "svelte-i18n";
+
     import CrudFormField from "./CrudFormField.svelte";
     import Tabs from "./Tabs.svelte";
-    import type {FieldInterface} from "../Fields/Field";
-    import {TabsField} from "../Fields/TabsField";
-    import {createEventDispatcher} from "svelte";
+    import {TabsField} from "../FieldDefinitions/TabsField";
 
+    import type {CrudAction} from "./actions";
+    import type {SubmitButtonType} from "../config/types";
+    import type {FieldInterface} from "../FieldDefinitions/Field";
+
+    export let submitButtonType: SubmitButtonType = "primary";
+    export let formAction: "get" | "post" = "post";
+    export let crudAction: CrudAction;
     export let fields: FieldInterface<any>[] = [];
 
     let tabbed_fields: Array<TabsField> = [];
@@ -40,6 +48,7 @@
 </script>
 
 <Form
+    method="{formAction}"
     on:click
     on:keydown
     on:mouseover
@@ -53,12 +62,14 @@
     {#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
         {#each fields as field (field.name)}
             <FormGroup>
-                <CrudFormField {field} on:fieldChange />
+                <CrudFormField action={crudAction} {field} on:fieldChange />
             </FormGroup>
         {/each}
     {:else}
-        <Tabs fields={tabbed_fields} on:fieldChange />
+        <Tabs fields={tabbed_fields} action={crudAction} on:fieldChange />
     {/if}
+
+    <Button kind="{submitButtonType}" type="submit">{$_('crud.form.submit')}</Button>
 
     <slot name="form-footer"></slot>
 </Form>

@@ -41,7 +41,9 @@ export class UrlAction extends DefaultAction {
 		let url = this._url;
 
 		Object.keys(item).forEach((field) => {
-			url = url.replace(`:${field}`, item[field]);
+            // @ts-ignore
+            const value = item[field];
+			url = url.replace(`:${field}`, value as string);
 		});
 
 		this.params.forEach((field, value) => {

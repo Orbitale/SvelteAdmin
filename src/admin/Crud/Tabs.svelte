@@ -1,8 +1,10 @@
 <script lang="ts">
     import {Tabs, Tab, TabContent} from "carbon-components-svelte";
     import CrudFormField from "./CrudFormField.svelte";
-    import {TabsField} from "$lib/admin/Fields/TabsField";
+    import {TabsField} from "../FieldDefinitions/TabsField";
+    import type {CrudAction} from "./actions";
 
+    export let action: CrudAction;
     export let fields: Array<TabsField> = [];
 </script>
 
@@ -13,7 +15,7 @@
     <svelte:fragment slot="content">
         {#each fields as tabbed_field (tabbed_field.name)}
             <TabContent>
-                <CrudFormField field={tabbed_field} on:fieldChange />
+                <CrudFormField {action} field={tabbed_field} on:fieldChange />
             </TabContent>
         {/each}
     </svelte:fragment>
