@@ -2,9 +2,9 @@
     import {createEventDispatcher} from "svelte";
     import type {Field} from "../FieldDefinitions/Field";
     import type {Options} from "../FieldDefinitions/Options";
-    import type {CrudAction} from "./actions";
+    import type {CrudActionName} from "./actions";
 
-    export let action: CrudAction;
+    export let action: CrudActionName;
     export let field: Field<Options>;
 
     const dispatchEvent = createEventDispatcher<{

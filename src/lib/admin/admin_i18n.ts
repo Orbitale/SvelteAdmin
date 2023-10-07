@@ -1,10 +1,11 @@
 import {init, locale as localeStore, addMessages, _ as translationsStore} from 'svelte-i18n';
 import { get } from 'svelte/store';
 
+import {KeyValueObject} from "./generic_types.ts";
 import en from "./translations/en.ts";
 import fr from "./translations/fr.ts";
 
-export type Dictionary = {[key: string]: string};
+export type Dictionary = KeyValueObject;
 export type Dictionaries = {[key: string]: Dictionary};
 
 const admin_dictionaries: Dictionaries = {

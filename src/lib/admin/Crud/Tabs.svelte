@@ -2,9 +2,9 @@
     import {Tabs, Tab, TabContent} from "carbon-components-svelte";
     import CrudFormField from "./CrudFormField.svelte";
     import {TabsField} from "../FieldDefinitions/TabsField";
-    import type {CrudAction} from "./actions";
+    import type {CrudActionName} from "./actions";
 
-    export let action: CrudAction;
+    export let action: CrudActionName;
     export let fields: Array<TabsField> = [];
 </script>
 

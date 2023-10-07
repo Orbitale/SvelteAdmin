@@ -2,14 +2,13 @@
     import {_} from "svelte-i18n";
     import type {FieldInterface} from "../FieldDefinitions/Field";
     import CrudForm from "./CrudForm.svelte";
-    import {CrudAction} from "../Crud/actions";
 
     export let fields: FieldInterface<any>[] = [];
 </script>
 
 <CrudForm
     {fields}
-    action="{CrudAction.EDIT}"
+    action="edit"
     on:click
     on:keydown
     on:mouseover
