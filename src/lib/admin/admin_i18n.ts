@@ -1,8 +1,8 @@
 import {init, locale as localeStore, addMessages, _ as translationsStore} from 'svelte-i18n';
 import { get } from 'svelte/store';
 
-import en from "./translations/en";
-import fr from "./translations/fr";
+import en from "./translations/en.ts";
+import fr from "./translations/fr.ts";
 
 export type Dictionary = {[key: string]: string};
 export type Dictionaries = {[key: string]: Dictionary};
