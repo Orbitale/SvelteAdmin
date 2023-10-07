@@ -1,6 +1,6 @@
 <script lang="ts">
     import {Checkbox} from "carbon-components-svelte";
-    import {CheckboxField, type CheckboxOptions} from "../../Fields/Checkbox";
+    import {CheckboxField, type CheckboxOptions} from "../../FieldDefinitions/Checkbox";
     import {createEventDispatcher} from "svelte";
 
     export let field: CheckboxField<CheckboxOptions>;

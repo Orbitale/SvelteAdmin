@@ -5,7 +5,7 @@
 
     import TopMenu from "../Menu/TopMenu.svelte";
     import SideMenu from '../Menu/SideMenu.svelte';
-    import type { MenuLink, Submenu } from '../Menu/MenuLinks';
+    import type { MenuLink } from '../Menu/MenuLinks';
 
     import fr from '../translations/fr';
     import en from '../translations/en';

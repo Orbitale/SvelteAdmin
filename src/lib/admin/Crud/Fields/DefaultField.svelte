@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type {Field} from "../../Fields/Field";
+    import type {Field} from "../../FieldDefinitions/Field";
     import {TextInput} from "carbon-components-svelte";
-    import type {Options} from "../../Fields/Options";
+    import type {Options} from "../../FieldDefinitions/Options";
 
     export let field: Field<Options>;
 </script>

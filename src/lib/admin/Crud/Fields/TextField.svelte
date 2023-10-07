@@ -1,6 +1,6 @@
 <script lang="ts">
     import {TextInput} from "carbon-components-svelte";
-    import {TextField, type TextOptions} from "../../Fields/Text";
+    import {TextField, type TextOptions} from "../../FieldDefinitions/Text";
 
     export let field: TextField<TextOptions>;
 </script>

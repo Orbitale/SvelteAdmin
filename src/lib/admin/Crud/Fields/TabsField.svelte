@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {TabsField, type TabOptions} from "../../Fields/TabsField";
+    import {TabsField, type TabOptions} from "../../FieldDefinitions/TabsField";
     import CrudFormField from "../CrudFormField.svelte";
     import {FormGroup} from "carbon-components-svelte";
 

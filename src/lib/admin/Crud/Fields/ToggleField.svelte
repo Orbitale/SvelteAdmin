@@ -1,6 +1,6 @@
 <script lang="ts">
     import {Toggle} from "carbon-components-svelte";
-    import {ToggleField, type ToggleOptions} from "../../Fields/Toggle";
+    import {ToggleField, type ToggleOptions} from "../../FieldDefinitions/Toggle";
     import {createEventDispatcher} from "svelte";
 
     export let field: ToggleField<ToggleOptions>;
