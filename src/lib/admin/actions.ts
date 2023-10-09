@@ -1,5 +1,5 @@
-import type {SvelteComponent} from "svelte";
-import type {Optional} from "./generic_types.ts";
+import type { SvelteComponent } from 'svelte';
+import type { Optional } from './generic_types.ts';
 
 export type ActionIcon = object | string | HTMLElement | SvelteComponent;
 
@@ -9,7 +9,7 @@ export interface Action {
 
 export abstract class DefaultAction implements Action {
 	protected readonly _label: string;
-    protected readonly _icon?: Optional<ActionIcon>;
+	protected readonly _icon?: Optional<ActionIcon>;
 
 	protected constructor(label: string, icon?: Optional<ActionIcon>) {
 		this._label = label;
@@ -20,9 +20,9 @@ export abstract class DefaultAction implements Action {
 		return this._label;
 	}
 
-    get icon(): ActionIcon|null|undefined {
-        return this._icon;
-    }
+	get icon(): ActionIcon | null | undefined {
+		return this._icon;
+	}
 }
 
 export class CallbackAction extends DefaultAction {
@@ -42,7 +42,12 @@ export class UrlAction extends DefaultAction {
 	private readonly params: Map<string, string>;
 	private readonly _url: string;
 
-	constructor(label: string, icon: Optional<ActionIcon>, url: string, params?: Map<string, string>) {
+	constructor(
+		label: string,
+		icon: Optional<ActionIcon>,
+		url: string,
+		params?: Map<string, string>
+	) {
 		super(label, icon);
 		this.params = params || new Map();
 		this._url = url;
@@ -52,11 +57,11 @@ export class UrlAction extends DefaultAction {
 		let url = this._url || '';
 
 		Object.keys(item || {}).forEach((field) => {
-            // @ts-ignore
-            let value = item[field];
-            if (!value.toString) {
-                value = '';
-            }
+			// @ts-ignore
+			let value = item[field];
+			if (!value.toString) {
+				value = '';
+			}
 			url = url.replace(`:${field}`, value.toString() || '');
 		});
 

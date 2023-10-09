@@ -1,16 +1,16 @@
-import {init, locale as localeStore, addMessages, _ as translationsStore} from 'svelte-i18n';
+import { init, locale as localeStore, addMessages, _ as translationsStore } from 'svelte-i18n';
 import { get } from 'svelte/store';
 
-import {KeyValueObject} from "./generic_types.ts";
-import en from "./translations/en.ts";
-import fr from "./translations/fr.ts";
+import type { KeyValueObject } from './generic_types.ts';
+import en from './translations/en.ts';
+import fr from './translations/fr.ts';
 
 export type Dictionary = KeyValueObject;
-export type Dictionaries = {[key: string]: Dictionary};
+export type Dictionaries = { [key: string]: Dictionary };
 
 const admin_dictionaries: Dictionaries = {
-    'en': en,
-    'fr': fr,
+	en: en,
+	fr: fr
 };
 
 export function initLocale(
@@ -25,24 +25,24 @@ export function initLocale(
 		if (localeFromLocalStorage) {
 			locale = localeFromLocalStorage;
 		}
-        localeStore.subscribe((newLocale: string | null | undefined) => {
-            if (!newLocale) {
-                return;
-            }
-            window.localStorage.setItem('__admin_locale', newLocale);
-        });
-    }
+		localeStore.subscribe((newLocale: string | null | undefined) => {
+			if (!newLocale) {
+				return;
+			}
+			window.localStorage.setItem('__admin_locale', newLocale);
+		});
+	}
 
 	// Validate locale.
-    validateLocale(locale);
+	validateLocale(locale);
 
-    // Admin translations
+	// Admin translations
 	Object.keys(admin_dictionaries).forEach((locale) => {
 		addMessages(locale, admin_dictionaries[locale]);
 	});
 
-    // User-customized translations
-    Object.keys(dictionaries).forEach((locale) => {
+	// User-customized translations
+	Object.keys(dictionaries).forEach((locale) => {
 		addMessages(locale, dictionaries[locale] || {});
 	});
 
@@ -59,30 +59,32 @@ export function translateSync(term: string, options?: object) {
 	return get(translationsStore)(term, options);
 }
 
-function configureLocaleFromLocalStorage(available_locales: Array<Intl.Locale | string>): string | null {
+function configureLocaleFromLocalStorage(
+	available_locales: Array<Intl.Locale | string>
+): string | null {
 	const storedLocale = window.localStorage.getItem('__admin_locale');
 
 	if (!storedLocale) {
 		return null;
 	}
-    if (available_locales.indexOf(storedLocale) < 0) {
-        console.warn(`Locale saved in local storage is "${storedLocale}" but is not configured in the application locales.
+	if (available_locales.indexOf(storedLocale) < 0) {
+		console.warn(`Locale saved in local storage is "${storedLocale}" but is not configured in the application locales.
 One of the possible causes is that it is not supported by the SvelteAdmin package.
 Possible values: ${available_locales.join(', ')}).
 Using fallback locale as default.`);
-        return null;
-    }
+		return null;
+	}
 
-    validateLocale(storedLocale);
+	validateLocale(storedLocale);
 
 	return storedLocale;
 }
 
 function validateLocale(locale: string) {
-    try {
-        new Intl.Locale(locale);
-    } catch (e) {
-        console.error(`Locale "${locale}" is not a valid standard locale.`);
-        throw e;
-    }
+	try {
+		new Intl.Locale(locale);
+	} catch (e) {
+		console.error(`Locale "${locale}" is not a valid standard locale.`);
+		throw e;
+	}
 }

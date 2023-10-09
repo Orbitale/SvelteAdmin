@@ -34,7 +34,9 @@
 </slot>
 
 <slot name="side_menu">
-    <SideMenu links={side_menu_links} />
+    {#if side_menu_links.length}
+        <SideMenu links={side_menu_links} />
+    {/if}
 </slot>
 
 <Content>

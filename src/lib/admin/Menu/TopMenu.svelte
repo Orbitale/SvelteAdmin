@@ -15,5 +15,7 @@
     </svelte:fragment>
 
     <TopLeftMenu links={left_links} />
-    <TopRightMenu links={right_links} />
+    {#if right_links.length}
+        <TopRightMenu links={right_links} />
+    {/if}
 </Header>
