@@ -4,6 +4,7 @@ const dictionary: Dictionary = {
 	'crud.header.edit': 'Modifier',
 	'crud.header.new': 'Créer',
 	'crud.form.submit': 'Envoyer',
+	'crud.list.label': 'Liste "{name}"',
 	'data_table.items.unsupported_action': 'Type d\'action "{action}" non prise en charge.',
 	'error.crud.could_not_find_crud_name': 'Configuration de CRUD "{crud}" introuvable.',
 	'error.crud.no_crud_specified':

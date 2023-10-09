@@ -4,13 +4,10 @@
 
     import ItemActions from "./actions/ItemActions.svelte";
     import {type Action} from "../actions";
-    import type {CrudAction} from "../Crud/actions.ts";
-    import {type Headers, type Rows, createEmptyRow} from "./DataTable.ts";
+    import {type Headers, type Rows} from "./DataTable.ts";
 
-    export let action: CrudAction;
     export let headers: Headers = [];
     export let rows: Rows = [];
-
     export let actions: Action[] = [];
 
     let actionsCellIndex = -1;
@@ -24,7 +21,7 @@
     }
 </script>
 
-<DataTable headers={headers} rows={rows.length ? rows : [createEmptyRow(action)]} {...$$restProps}>
+<DataTable headers={headers} rows={rows} {...$$restProps}>
     {#if !rows.length}
         <InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
             {$_('error.crud.list.no_elements')}

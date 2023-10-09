@@ -4,6 +4,7 @@ const dictionary: Dictionary = {
 	'crud.header.edit': 'Edit',
 	'crud.header.new': 'New',
 	'crud.form.submit': 'Submit',
+	'crud.list.entity': 'List',
 	'data_table.items.unsupported_action': 'Action type "{action}" not supported.',
 	'error.crud.could_not_find_crud_name': 'Could not find a CRUD config with name "{crud}".',
 	'error.crud.no_crud_specified': 'No CRUD name was specified when displaying the Dashboard.',

@@ -27,6 +27,7 @@
 
 <AdminLayout
     locales={dashboard.options.locales}
+    translations={dashboard.options.localeDictionaries}
     side_menu_links={dashboard.options.sideMenu}
     top_left_menu_links={dashboard.options.topLeftMenu}
     top_right_menu_links={dashboard.options.topRightMenu}

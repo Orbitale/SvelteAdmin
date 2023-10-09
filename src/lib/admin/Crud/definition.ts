@@ -3,7 +3,10 @@ import type { StateProvider } from '../State/Provider.ts';
 import type { StateProcessor } from '../State/Processor.ts';
 
 export type CrudDefinitionOptions = {
-	label: string,
+	label: {
+		singular: string,
+		plural: string,
+	},
 	defaultAction?: string;
 	actions: Array<CrudAction>;
 	stateProvider?: StateProvider;

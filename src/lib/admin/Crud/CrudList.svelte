@@ -3,13 +3,14 @@
     import type {CrudDefinition} from "./definition.ts";
     import type {CrudAction} from "./actions.ts";
     import DataTable from "../DataTable/DataTable.svelte";
-    import type {Headers, Header} from '../DataTable/types.ts';
+    import {type Headers, type Header, createEmptyRow} from '../DataTable/DataTable.ts';
     import type {Field} from "../FieldDefinitions/Field.ts";
     import type {StateProvider} from "$lib/admin/State/Provider.ts";
+    import {_} from "svelte-i18n";
 
-    export let dashboard: DashboardDefinition;
-    export let crud: CrudDefinition;
-    export let action: CrudAction;
+    export const dashboard: DashboardDefinition;
+    export const crud: CrudDefinition;
+    export const action: CrudAction;
 
     let fields = action.fields;
     let headers: Headers = action.fields.map((field: Field<Option>): Header => {
@@ -20,7 +21,13 @@
     }
     let stateProvider: StateProvider = crud.options.stateProvider;
     let rows = stateProvider.provide(action);
+    if (!rows.length) {
+        rows = [createEmptyRow(action)];
+    }
 
+    const actions = [];
 </script>
 
-<DataTable {action} {headers} {rows}></DataTable>
+<h2>{$_(action.label, {values: {name: $_(crud.options.label.plural)}})}</h2>
+
+<DataTable {action} {headers} {rows} {actions}></DataTable>
