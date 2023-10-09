@@ -50,6 +50,11 @@
                 {/if}
             </InlineNotification>
         {/if}
-        <svelte:component this={currentCrudAction?.displayComponent}></svelte:component>
+        <svelte:component
+            this={currentCrudAction?.displayComponent}
+            dashboard={dashboard}
+            crud={currentCrud}
+            action={currentCrudAction}
+        ></svelte:component>
     </slot>
 </AdminLayout>

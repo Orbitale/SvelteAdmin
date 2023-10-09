@@ -7,14 +7,16 @@
     import Tabs from "./Tabs.svelte";
     import {TabsField} from "../FieldDefinitions/TabsField";
 
-    import type {CrudActionName} from "./actions";
+    import type {CrudAction} from "./actions";
     import type {SubmitButtonType} from "../config/types";
     import type {FieldInterface} from "../FieldDefinitions/Field";
+    import type {CrudDefinition} from "./definition.ts";
 
     export let submitButtonType: SubmitButtonType = "primary";
     export let formAction: "get" | "post" = "post";
-    export let crudAction: CrudActionName;
-    export let fields: FieldInterface<any>[] = [];
+    export let crud: CrudDefinition;
+    export let crudAction: CrudAction;
+    let fields: FieldInterface<any>[] = crudAction.fields;
 
     let tabbed_fields: Array<TabsField> = [];
 

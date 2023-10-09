@@ -4,11 +4,11 @@ import type { KeyValueObject } from '../generic_types.ts';
 export type StateProviderResult = object | Array<any> | null;
 
 export interface StateProvider {
-	provide(operation: CrudAction, requestParameters: KeyValueObject): StateProviderResult;
+	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult;
 }
 
 export type StateProviderCallback = (
-	operation: CrudAction,
+	action: CrudAction,
 	requestParameters: KeyValueObject
 ) => StateProviderResult;
 
@@ -19,7 +19,7 @@ export class CallbackStateProvider implements StateProvider {
 		this._callback = callback;
 	}
 
-	provide(operation: CrudAction, requestParameters: KeyValueObject): StateProviderResult {
-		return this._callback(operation, requestParameters);
+	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult {
+		return this._callback(action, requestParameters);
 	}
 }

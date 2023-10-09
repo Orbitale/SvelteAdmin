@@ -10,7 +10,8 @@ const dictionary: Dictionary = {
 	'error.crud.could_not_find_action_name':
 		'Could not find a CRUD action named "{action}" for CRUD definition named "{crud}".',
 	'error.crud.no_action_specified':
-		'No CRUD action was specified when displaying the "{crud}" CRUD.'
+		'No CRUD action was specified when displaying the "{crud}" CRUD.',
+	'error.crud.list.no_elements': 'No elements found.'
 };
 
 export default dictionary;

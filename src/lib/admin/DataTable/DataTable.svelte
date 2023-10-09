@@ -1,12 +1,15 @@
 <script lang="ts">
-    import { DataTable } from "carbon-components-svelte";
-    import type {DataTableHeader, DataTableRow} from "carbon-components-svelte/types/DataTable/DataTable.svelte";
+    import {DataTable, InlineNotification} from "carbon-components-svelte";
+    import {_} from "svelte-i18n";
 
     import ItemActions from "./actions/ItemActions.svelte";
     import {type Action} from "../actions";
+    import type {CrudAction} from "../Crud/actions.ts";
+    import {type Headers, type Rows, createEmptyRow} from "./DataTable.ts";
 
-    export let headers: Array<DataTableHeader> = [];
-    export let rows: Array<DataTableRow> = [];
+    export let action: CrudAction;
+    export let headers: Headers = [];
+    export let rows: Rows = [];
 
     export let actions: Action[] = [];
 
@@ -21,7 +24,12 @@
     }
 </script>
 
-<DataTable headers={headers} rows={rows} {...$$restProps}>
+<DataTable headers={headers} rows={rows.length ? rows : [createEmptyRow(action)]} {...$$restProps}>
+    {#if !rows.length}
+        <InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
+            {$_('error.crud.list.no_elements')}
+        </InlineNotification>
+    {/if}
     <div slot="cell" let:cell let:row let:cellIndex>
         {#if cellIndex === actionsCellIndex}
             <ItemActions {actions} item={row} />

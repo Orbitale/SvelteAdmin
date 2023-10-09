@@ -11,7 +11,8 @@ const dictionary: Dictionary = {
 	'error.crud.could_not_find_action_name':
 		'Action "{action}" introuvable pour la configuration de CRUD "{crud}".',
 	'error.crud.no_action_specified':
-		'Aucune action n\'a été spécifié pour afficher le CRUD "{crud}".'
+		'Aucune action n\'a été spécifié pour afficher le CRUD "{crud}".',
+	'error.crud.list.no_elements': 'Aucun élément trouvé.'
 };
 
 export default dictionary;
