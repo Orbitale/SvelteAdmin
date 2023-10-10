@@ -1,11 +1,12 @@
 <script lang="ts">
-    import {InlineNotification} from "carbon-components-svelte";
+    import {ComponentType} from "svelte";
     import {_} from "svelte-i18n";
+    import {InlineNotification} from "carbon-components-svelte";
     import AdminLayout from "../Layout/AdminLayout.svelte";
     import type {DashboardDefinition} from "./definition.ts";
     import type {CrudAction} from "../Crud/actions.ts";
     import type {CrudDefinition} from "../Crud/definition.ts";
-    import {configStore} from "$lib/admin/config/stores.ts";
+    import {configStore} from "../config/stores.ts";
 
     export let dashboard: DashboardDefinition;
     export let crud: string|undefined;

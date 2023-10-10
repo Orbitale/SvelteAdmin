@@ -5,16 +5,16 @@ import CrudNew from './CrudNew.svelte';
 import CrudEdit from './CrudEdit.svelte';
 import CrudList from './CrudList.svelte';
 import CrudDelete from './CrudDelete.svelte';
-import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-import type { Action } from '$lib/admin/actions.ts';
+import type { CrudDefinition } from './definition.ts';
+import type { DashboardDefinition } from '../Dashboard/definition.ts';
+import type { Action } from '../actions.ts';
 
 export type CrudActionName = 'new' | 'edit' | 'list' | 'delete' | string;
 
 export interface CrudAction {
 	readonly name: CrudActionName;
 	readonly label: string;
-	readonly displayComponent: ComponentType<
+	readonly displayComponent: HTMLElement | ComponentType<
 		SvelteComponent<{
 			dashboard: DashboardDefinition;
 			crud: CrudDefinition;
@@ -27,7 +27,7 @@ export interface CrudAction {
 
 export class BaseCrudAction implements CrudAction {
 	public readonly name: CrudActionName;
-	public readonly displayComponent: ComponentType;
+	public readonly displayComponent: HTMLElement | ComponentType;
 	public readonly fields: Array<Field<Options>>;
 	public readonly label: string;
 	public readonly actions: Action[];
@@ -35,7 +35,7 @@ export class BaseCrudAction implements CrudAction {
 	constructor(
 		name: CrudActionName,
 		label: string,
-		displayComponent: ComponentType,
+		displayComponent: HTMLElement | ComponentType,
 		fields: Array<Field<Options>>,
 		actions: Action[] = []
 	) {

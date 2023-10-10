@@ -4,7 +4,7 @@
     import DataTable from "../DataTable/DataTable.svelte";
     import {type Headers, type Header, createEmptyRow} from '../DataTable/DataTable.ts';
     import type {Field} from "../FieldDefinitions/Field.ts";
-    import type {StateProvider} from "$lib/admin/State/Provider.ts";
+    import type {StateProvider} from "../State/Provider.ts";
     import {_} from "svelte-i18n";
 
     export let crud: CrudDefinition;
