@@ -1,77 +1,78 @@
 <script lang="ts">
-    import {Button, Form, FormGroup} from "carbon-components-svelte";
-    import {createEventDispatcher} from "svelte";
-    import {_} from "svelte-i18n";
+	import { Button, Form, FormGroup } from 'carbon-components-svelte';
+	import { createEventDispatcher } from 'svelte';
+	import { _ } from 'svelte-i18n';
 
-    import CrudFormField from "./CrudFormField.svelte";
-    import Tabs from "./Tabs.svelte";
-    import {TabsField} from "../FieldDefinitions/TabsField";
+	import CrudFormField from './CrudFormField.svelte';
+	import Tabs from './Tabs.svelte';
+	import { TabsField } from '../FieldDefinitions/TabsField';
 
-    import type {CrudAction} from "./actions";
-    import type {SubmitButtonType} from "../config/types";
-    import type {FieldInterface} from "../FieldDefinitions/Field";
-    import type {CrudDefinition} from "./definition.ts";
+	import type { CrudAction } from './actions';
+	import type { SubmitButtonType } from '../config/types';
+	import type { FieldInterface } from '../FieldDefinitions/Field';
+	import type { CrudDefinition } from './definition.ts';
+	import type { Options } from '../FieldDefinitions/Options.ts';
 
-    export let submitButtonType: SubmitButtonType = "primary";
-    export let formAction: "get" | "post" = "post";
-    export let crud: CrudDefinition;
-    export let crudAction: CrudAction;
-    let fields: FieldInterface<any>[] = crudAction.fields;
+	export let submitButtonType: SubmitButtonType = 'primary';
+	export let formAction: 'get' | 'post' = 'post';
+	export let crud: CrudDefinition;
+	export let crudAction: CrudAction;
+	let fields: FieldInterface<Options>[] = crudAction.fields;
 
-    let tabbed_fields: Array<TabsField> = [];
+	let tabbed_fields: Array<TabsField> = [];
 
-    let current_tab: TabsField|null = null;
-    for (let i = 0; i < fields.length; i++){
-        const field = fields[i];
-        if (field instanceof TabsField) {
-            current_tab = null;
-            tabbed_fields.push(field);
-        } else {
-            if (!current_tab) {
-                current_tab = new TabsField(`tab_${i}`, `Tab #${i+1}`);
-                tabbed_fields.push(current_tab);
-            }
-            current_tab.fields.push(field);
-        }
-    }
+	let current_tab: TabsField | null = null;
+	for (let i = 0; i < fields.length; i++) {
+		const field = fields[i];
+		if (field instanceof TabsField) {
+			current_tab = null;
+			tabbed_fields.push(field);
+		} else {
+			if (!current_tab) {
+				current_tab = new TabsField(`tab_${i}`, `Tab #${i + 1}`);
+				tabbed_fields.push(current_tab);
+			}
+			current_tab.fields.push(field);
+		}
+	}
 
-    const dispatchEvent = createEventDispatcher<{
-        submitData: Map<string, any>,
-    }>();
+	const dispatchEvent = createEventDispatcher<{
+		submitData: Map<string, string | Array>;
+	}>();
 
-    function onSubmit(event: SubmitEvent) {
-        const data = new FormData(event.target, event.submitter);
-        const dataMap = new Map<string, any>();
-        data.forEach((value, key) => {
-            dataMap.set(key, value);
-        });
-        dispatchEvent('submitData', dataMap);
-    }
+	function onSubmit(event: SubmitEvent) {
+		const data = new FormData(event.target, event.submitter);
+		const dataMap = new Map<string, string | Array>();
+		data.forEach((value, key) => {
+			dataMap.set(key, value);
+		});
+		dispatchEvent('submitData', dataMap);
+	}
 </script>
 
 <Form
-    method="{formAction}"
-    on:click
-    on:keydown
-    on:mouseover
-    on:mouseenter
-    on:mouseleave
-    on:submit="{onSubmit}"
-    on:submit
+	method={formAction}
+	on:click
+	on:keydown
+	on:mouseover
+	on:mouseenter
+	on:mouseleave
+	on:submit={onSubmit}
+	on:submit
 >
-    <slot name="form-header"></slot>
+	<slot name="form-header" />
 
-    {#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
-        {#each fields as field (field.name)}
-            <FormGroup>
-                <CrudFormField action="{crudAction}" {field} on:fieldChange />
-            </FormGroup>
-        {/each}
-    {:else}
-        <Tabs fields={tabbed_fields} action="{crudAction}" on:fieldChange />
-    {/if}
+	{#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
+		{#each fields as field (field.name)}
+			<FormGroup>
+				<CrudFormField action={crudAction} {field} on:fieldChange />
+			</FormGroup>
+		{/each}
+	{:else}
+		<Tabs fields={tabbed_fields} action={crudAction} on:fieldChange />
+	{/if}
 
-    <Button kind="{submitButtonType}" type="submit">{$_('crud.form.submit')}</Button>
+	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>
 
-    <slot name="form-footer"></slot>
+	<slot name="form-footer" />
 </Form>

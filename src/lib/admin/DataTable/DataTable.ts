@@ -5,6 +5,7 @@ import type {
 import type { CrudAction } from '../Crud/actions.ts';
 import type { Field } from '../FieldDefinitions/Field.ts';
 import type { KeyValueObject } from '../generic_types.ts';
+import type { Options } from '../FieldDefinitions/Options.ts';
 
 export type Header = DataTableHeader;
 export type Headers = Array<Header>;
@@ -15,7 +16,7 @@ export type Rows = Array<Row>;
 export function createEmptyRow(action: CrudAction): Row {
 	let fields: KeyValueObject = {};
 
-	action.fields.forEach((field: Field<any>) => {
+	action.fields.forEach((field: Field<Options>) => {
 		fields[field.name] = '-';
 	});
 

@@ -1,7 +1,7 @@
-import type { AdminConfig } from '../config/types.ts';
 import type { MenuLink } from '../Menu/MenuLinks.ts';
 import type { Dictionaries } from '../admin_i18n.ts';
 import type { CrudDefinition } from '../Crud/definition.ts';
+import type { AdminConfig } from '../config/adminConfig.ts';
 
 export type DashboardDefinitionOptions = {
 	admin: AdminConfig;

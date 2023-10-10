@@ -26,9 +26,9 @@ export abstract class DefaultAction implements Action {
 }
 
 export class CallbackAction extends DefaultAction {
-	private readonly _callback: Function;
+	private readonly _callback: (...args: any[]) => any;
 
-	constructor(label: string, icon: Optional<ActionIcon>, callback: Function) {
+	constructor(label: string, icon: Optional<ActionIcon>, callback: (...args: any[]) => any) {
 		super(label, icon);
 		this._callback = callback;
 	}

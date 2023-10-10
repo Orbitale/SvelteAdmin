@@ -14,13 +14,15 @@ export type CrudActionName = 'new' | 'edit' | 'list' | 'delete' | string;
 export interface CrudAction {
 	readonly name: CrudActionName;
 	readonly label: string;
-	readonly displayComponent: HTMLElement | ComponentType<
-		SvelteComponent<{
-			dashboard: DashboardDefinition;
-			crud: CrudDefinition;
-			crudAction: CrudAction;
-		}>
-	>;
+	readonly displayComponent:
+		| HTMLElement
+		| ComponentType<
+				SvelteComponent<{
+					dashboard: DashboardDefinition;
+					crud: CrudDefinition;
+					crudAction: CrudAction;
+				}>
+		  >;
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Action[];
 }

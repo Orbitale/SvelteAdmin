@@ -13,7 +13,10 @@ function process(data: any, operation: CrudAction, requestParameters: KeyValueOb
 	console.info('TODO: process new, edit or delete actions', { data, operation, requestParameters });
 }
 
-function provide(operation: CrudAction, requestParameters: KeyValueObject): Array<any> {
+function provide(
+	operation: CrudAction,
+	requestParameters: KeyValueObject
+): Array<{ id: number; title: string; description: string }> {
 	console.info('TODO: return actual data', { operation, requestParameters });
 
 	// Sample data.

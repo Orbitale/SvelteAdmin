@@ -1,11 +1,11 @@
 <script lang="ts">
-    import {type Action} from "../../actions";
-    import SingleAction from "./SingleAction.svelte";
+	import { type Action } from '../../actions';
+	import SingleAction from './SingleAction.svelte';
 
-    export let actions: Action[] = [];
-    export let item: any = undefined;
+	export let actions: Action[] = [];
+	export let item: any = undefined;
 </script>
 
 {#each actions as action}
-    <SingleAction {action} {item} />
+	<SingleAction {action} {item} />
 {/each}

@@ -1,10 +1,3 @@
-export type AdminConfig = {
-	head: {
-		brandName: string;
-		appName: string;
-	};
-};
-
 export type SubmitButtonType =
 	| 'primary'
 	| 'secondary'

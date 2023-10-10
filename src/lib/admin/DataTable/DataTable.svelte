@@ -1,37 +1,37 @@
 <script lang="ts">
-    import {DataTable, InlineNotification} from "carbon-components-svelte";
-    import {_} from "svelte-i18n";
+	import { DataTable, InlineNotification } from 'carbon-components-svelte';
+	import { _ } from 'svelte-i18n';
 
-    import ItemActions from "./actions/ItemActions.svelte";
-    import {type Action} from "../actions";
-    import {type Headers, type Rows} from "./DataTable.ts";
+	import ItemActions from './actions/ItemActions.svelte';
+	import { type Action } from '../actions';
+	import { type Headers, type Rows } from './DataTable.ts';
 
-    export let headers: Headers = [];
-    export let rows: Rows = [];
-    export let actions: Action[] = [];
+	export let headers: Headers = [];
+	export let rows: Rows = [];
+	export let actions: Action[] = [];
 
-    let actionsCellIndex = -1;
+	let actionsCellIndex = -1;
 
-    if (actions.length) {
-        headers.push({
-            key: '__item_actions',
-            empty: true,
-        });
-        actionsCellIndex = headers.length - 1;
-    }
+	if (actions.length) {
+		headers.push({
+			key: '__item_actions',
+			empty: true
+		});
+		actionsCellIndex = headers.length - 1;
+	}
 </script>
 
-<DataTable headers={headers} rows={rows} {...$$restProps}>
-    {#if !rows.length}
-        <InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
-            {$_('error.crud.list.no_elements')}
-        </InlineNotification>
-    {/if}
-    <div slot="cell" let:cell let:row let:cellIndex>
-        {#if cellIndex === actionsCellIndex}
-            <ItemActions {actions} item={row} />
-        {:else}
-            {cell.display ? cell.display(cell.value) : cell.value}
-        {/if}
-    </div>
+<DataTable {headers} {rows} {...$$restProps}>
+	{#if !rows.length}
+		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
+			{$_('error.crud.list.no_elements')}
+		</InlineNotification>
+	{/if}
+	<div slot="cell" let:cell let:row let:cellIndex>
+		{#if cellIndex === actionsCellIndex}
+			<ItemActions {actions} item={row} />
+		{:else}
+			{cell.display ? cell.display(cell.value) : cell.value}
+		{/if}
+	</div>
 </DataTable>
