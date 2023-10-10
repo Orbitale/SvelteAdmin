@@ -26,6 +26,17 @@
     configStore.set(dashboard.options.admin);
 </script>
 
+<svelte:options
+    customElement={{
+        tag: "sa-dashboard",
+        props: {
+            dashboard: { reflect: false, type: "Object" },
+            crud: { reflect: true, type: "String" },
+            action: { reflect: true, type: "String" }
+        }
+    }}
+/>
+
 <AdminLayout
     locales={dashboard.options.locales}
     translations={dashboard.options.localeDictionaries}
@@ -52,11 +63,20 @@
                 {/if}
             </InlineNotification>
         {/if}
-        <svelte:component
-            this={currentCrudAction?.displayComponent}
-            dashboard={dashboard}
-            crud={currentCrud}
-            action={currentCrudAction}
-        ></svelte:component>
+        {#if field.formComponent instanceof ComponentType}
+            <svelte:component
+                this={currentCrudAction?.displayComponent}
+                dashboard={dashboard}
+                crud={currentCrud}
+                action={currentCrudAction}
+            ></svelte:component>
+        {:else}
+            <svelte:element
+                this={currentCrudAction?.displayComponent}
+                data-dashboard="{dashboard}"
+                data-crud="{currentCrud}"
+                data-action="{currentCrudAction}"
+            ></svelte:element>
+        {/if}
     </slot>
 </AdminLayout>

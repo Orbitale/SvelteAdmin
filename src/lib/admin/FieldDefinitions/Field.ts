@@ -6,7 +6,7 @@ export interface FieldInterface<T extends Options> {
 	readonly name: string;
 	readonly label: string;
 	readonly options: Partial<T>;
-	readonly formComponent: ComponentType;
+	readonly formComponent: ComponentType | HTMLElement;
 }
 
 export class Field<T extends Options> implements FieldInterface<T> {

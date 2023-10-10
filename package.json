@@ -7,11 +7,12 @@
 	"author": "Alex \"Pierstoval\" Rock <alex@orbitale.io>",
 	"license": "LGPL-3.0-or-later",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build && npm run package",
+		"dev": "vite dev --host=0.0.0.0",
+		"build": "vite build && yarn run package",
+		"build:webcomponents": "vite -c ./vite.webcomponents.config.ts build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
-		"prepublishOnly": "npm run package",
+		"prepublishOnly": "yarn run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
@@ -29,11 +30,14 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^4.0.0"
+		"carbon-components-svelte": "^0.80.0",
+		"carbon-icons-svelte": "^12.3.0",
+		"svelte": "^4.0.0",
+		"svelte-i18n": "^3.7.4"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.20.4",
+		"@sveltejs/kit": "^1.25.2",
 		"@sveltejs/package": "^2.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
@@ -45,7 +49,7 @@
 		"prettier": "^3.0.3",
 		"prettier-plugin-svelte": "^3.0.3",
 		"publint": "^0.2.4",
-		"sass": "^1.69.0",
+		"sass": "^1.69.1",
 		"svelte": "^4.2.1",
 		"svelte-check": "^3.4.3",
 		"svelte-i18n": "^3.7.4",

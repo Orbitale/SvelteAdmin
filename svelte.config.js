@@ -14,6 +14,7 @@ const config = {
 		adapter: adapter()
 	},
 
+	customElement: true,
 	compilerOptions: {
 		customElement: true
 	}
