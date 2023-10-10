@@ -31,7 +31,7 @@ const fields = [
 	})
 ];
 
-const actions = [new UrlAction('Edit', Pen, '/admin/book/edit/:id')];
+const actions = [new UrlAction('Edit', Pen, '/admin/books/edit/:id')];
 
 export const bookCrud = new CrudDefinition('books', {
 	label: { singular: 'Book', plural: 'Books' },

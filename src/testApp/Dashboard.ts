@@ -1,6 +1,6 @@
 // src/lib/Dashboard.ts
 import { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-import { bookCrud } from '$lib/testApp/BookCrud.ts';
+import { bookCrud } from './BookCrud.ts';
 import { UrlAction } from '$lib/admin/actions.ts';
 import { Book, Home } from 'carbon-icons-svelte';
 import fr from './translations/fr.ts';
