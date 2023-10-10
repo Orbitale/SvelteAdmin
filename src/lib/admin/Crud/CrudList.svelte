@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type {DashboardDefinition} from "../Dashboard/definition.ts";
     import type {CrudDefinition} from "./definition.ts";
     import type {CrudAction} from "./actions.ts";
     import DataTable from "../DataTable/DataTable.svelte";
@@ -8,26 +7,23 @@
     import type {StateProvider} from "$lib/admin/State/Provider.ts";
     import {_} from "svelte-i18n";
 
-    export const dashboard: DashboardDefinition;
-    export const crud: CrudDefinition;
-    export const action: CrudAction;
+    export let crud: CrudDefinition;
+    export let action: CrudAction;
 
-    let fields = action.fields;
-    let headers: Headers = action.fields.map((field: Field<Option>): Header => {
+    const actions = action.actions;
+    const headers: Headers = action.fields.map((field: Field<Option>): Header => {
         return {key: field.name, value: field.label};
     });
     if (!crud.options.stateProvider) {
         throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
     }
-    let stateProvider: StateProvider = crud.options.stateProvider;
+    const stateProvider: StateProvider = crud.options.stateProvider;
     let rows = stateProvider.provide(action);
     if (!rows.length) {
         rows = [createEmptyRow(action)];
     }
-
-    const actions = [];
 </script>
 
 <h2>{$_(action.label, {values: {name: $_(crud.options.label.plural)}})}</h2>
 
-<DataTable {action} {headers} {rows} {actions}></DataTable>
+<DataTable {headers} {rows} {actions}></DataTable>

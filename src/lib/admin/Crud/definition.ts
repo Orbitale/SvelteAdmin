@@ -4,9 +4,9 @@ import type { StateProcessor } from '../State/Processor.ts';
 
 export type CrudDefinitionOptions = {
 	label: {
-		singular: string,
-		plural: string,
-	},
+		singular: string;
+		plural: string;
+	};
 	defaultAction?: string;
 	actions: Array<CrudAction>;
 	stateProvider?: StateProvider;

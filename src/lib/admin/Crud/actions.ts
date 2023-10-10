@@ -1,24 +1,26 @@
-import type {ComponentType, SvelteComponent} from 'svelte';
+import type { ComponentType, SvelteComponent } from 'svelte';
 import type { Field } from '../FieldDefinitions/Field.ts';
 import type { Options } from '../FieldDefinitions/Options.ts';
 import CrudNew from './CrudNew.svelte';
 import CrudEdit from './CrudEdit.svelte';
 import CrudList from './CrudList.svelte';
 import CrudDelete from './CrudDelete.svelte';
-import type {CrudDefinition} from "$lib/admin/Crud/definition.ts";
-import type {DashboardDefinition} from "$lib/admin/Dashboard/definition.ts";
-import type {Action} from "$lib/admin/actions.ts";
+import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
+import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
+import type { Action } from '$lib/admin/actions.ts';
 
 export type CrudActionName = 'new' | 'edit' | 'list' | 'delete' | string;
 
 export interface CrudAction {
 	readonly name: CrudActionName;
 	readonly label: string;
-	readonly displayComponent: ComponentType<SvelteComponent<{
-		dashboard: DashboardDefinition,
-		crud: CrudDefinition;
-		crudAction: CrudAction;
-	}>>;
+	readonly displayComponent: ComponentType<
+		SvelteComponent<{
+			dashboard: DashboardDefinition;
+			crud: CrudDefinition;
+			crudAction: CrudAction;
+		}>
+	>;
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Action[];
 }

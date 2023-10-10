@@ -1,5 +1,6 @@
 <script lang="ts">
     import {UnorderedList} from "carbon-components-svelte";
+    import {_} from "svelte-i18n";
 
     import {dashboard} from "$lib/testApp/Dashboard.ts";
     import Dashboard from "$lib/admin/Dashboard/Dashboard.svelte";
@@ -16,7 +17,7 @@
         {#each dashboard.options.cruds as crud}
             <li>
                 <a href="/admin/{crud.name}/{crud.defaultAction}">
-                    {crud.options.label}
+                    {$_(crud.options.label.plural)}
                 </a>
             </li>
         {/each}
