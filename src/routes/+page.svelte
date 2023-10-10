@@ -2,8 +2,8 @@
     import {UnorderedList} from "carbon-components-svelte";
     import {_} from "svelte-i18n";
 
-    import {dashboard} from "$lib/testApp/Dashboard.ts";
     import Dashboard from "$lib/admin/Dashboard/Dashboard.svelte";
+    import {dashboard} from "../testApp/Dashboard.ts";
 </script>
 
 <Dashboard {dashboard}>
