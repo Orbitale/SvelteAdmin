@@ -16,7 +16,6 @@
 	import type { DashboardDefinition } from './definition.ts';
 	import type { CrudAction } from '../Crud/actions.ts';
 	import type { CrudDefinition } from '../Crud/definition.ts';
-	import { configStore } from '../config/stores.ts';
 
 	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined;
@@ -32,8 +31,6 @@
 	currentCrud?.options.actions
 		.filter((crudAction: CrudAction) => action === crudAction.name)
 		.forEach((resolved: CrudAction) => (currentCrudAction = resolved));
-
-	configStore.set(dashboard.options.admin);
 </script>
 
 <AdminLayout
@@ -63,20 +60,11 @@
 				{/if}
 			</InlineNotification>
 		{/if}
-		{#if field.formComponent instanceof HTMLElement}
-			<svelte:element
-				this={currentCrudAction?.displayComponent}
-				data-dashboard={dashboard}
-				data-crud={currentCrud}
-				data-action={currentCrudAction}
-			></svelte:element>
-		{:else}
-			<svelte:component
-				this={currentCrudAction?.displayComponent}
-				{dashboard}
-				crud={currentCrud}
-				action={currentCrudAction}
-			></svelte:component>
-		{/if}
+		<svelte:component
+			this={currentCrudAction?.displayComponent}
+			{dashboard}
+			crud={currentCrud}
+			action={currentCrudAction}
+		></svelte:component>
 	</slot>
 </AdminLayout>

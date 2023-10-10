@@ -1,14 +1,27 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import type { FieldInterface } from '../FieldDefinitions/Field';
-	import CrudForm from './CrudForm.svelte';
-	import type { Options } from '../FieldDefinitions/Options.ts';
 
-	export let fields: FieldInterface<Options>[] = [];
+	import {page} from "$app/stores";
+
+	import CrudForm from './CrudForm.svelte';
+	import type {CrudDefinition} from "./definition.ts";
+	import type {CrudAction} from "./actions.ts";
+
+	export let crud: CrudDefinition;
+	export let action: CrudAction;
+
+	let id: string = $page.params.id || $page.url.searchParams.id;
+
+	// TODO: reuse in forms
+	let defaultData = crud.options.stateProvider?.provide(action, {id: id, ...$page.url.searchParams});
 </script>
 
+<pre>Default data:
+{JSON.stringify(defaultData, null, 4)}</pre>
+
 <CrudForm
-	{fields}
+	fields={action.fields}
+	crudAction={action}
 	action="edit"
 	on:click
 	on:keydown

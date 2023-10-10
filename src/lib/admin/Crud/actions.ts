@@ -9,7 +9,7 @@ import type { CrudDefinition } from './definition.ts';
 import type { DashboardDefinition } from '../Dashboard/definition.ts';
 import type { Action } from '../actions.ts';
 
-export type CrudActionName = 'new' | 'edit' | 'list' | 'delete' | string;
+export type CrudActionName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
 
 export interface CrudAction {
 	readonly name: CrudActionName;
