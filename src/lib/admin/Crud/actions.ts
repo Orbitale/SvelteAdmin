@@ -70,10 +70,7 @@ export class ListAction extends BaseCrudAction {
 export class DeleteAction extends BaseCrudAction {
 	public readonly redirectTo: Action;
 
-	constructor(
-		fields: Array<Field<Options>>,
-		redirectTo: Action,
-	) {
+	constructor(fields: Array<Field<Options>>, redirectTo: Action) {
 		super('delete', 'crud.delete.label', CrudDelete, fields, []);
 		this.redirectTo = redirectTo;
 	}

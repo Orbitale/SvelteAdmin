@@ -14,7 +14,7 @@ export type Row = DataTableRow;
 export type Rows = Array<Row>;
 
 export function createEmptyRow(action: CrudAction): Row {
-	let fields: KeyValueObject = {};
+	const fields: KeyValueObject = {};
 
 	action.fields.forEach((field: Field<Options>) => {
 		fields[field.name] = '-';

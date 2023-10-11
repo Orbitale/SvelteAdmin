@@ -19,11 +19,11 @@
 </script>
 
 {#if !defaultData}
-	<InlineNotification kind='error'>
+	<InlineNotification kind="error">
 		{$_('error.crud.entity.not_found')}
 	</InlineNotification>
 {:else}
-		<CrudForm
+	<CrudForm
 		fields={action.fields}
 		crudAction={action}
 		{defaultData}

@@ -7,7 +7,6 @@
 	export let item: any = undefined;
 </script>
 
-
 <Column>
 	{#if action instanceof UrlAction}
 		<Link href={action.url(item)} icon={action.icon}>

@@ -40,20 +40,22 @@
 </script>
 
 {#if !data}
-	<InlineNotification kind='error' hideCloseButton={true}>
+	<InlineNotification kind="error" hideCloseButton={true}>
 		{$_('error.crud.entity.not_found')}
 	</InlineNotification>
 {:else}
 	<InlineNotification kind="warning" hideCloseButton={true}>
-		{$_('crud.delete.are_you_sure', {values: {
-			id,
-			name: $_(crud.options.label.singular)
-		}})}
+		{$_('crud.delete.are_you_sure', {
+			values: {
+				id,
+				name: $_(crud.options.label.singular)
+			}
+		})}
 	</InlineNotification>
-	<Button kind='danger' on:click={clickDelete}>
+	<Button kind="danger" on:click={clickDelete}>
 		{$_('crud.delete.yes_delete')}
 	</Button>
-	<Button kind='tertiary' on:click={clickCancel}>
+	<Button kind="tertiary" on:click={clickCancel}>
 		{$_('crud.delete.cancel')}
 	</Button>
 {/if}

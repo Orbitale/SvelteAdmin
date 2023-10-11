@@ -34,7 +34,7 @@ export const bookCrud = new CrudDefinition('books', {
 	actions: [
 		new ListAction(fields, actions),
 		new EditAction(fields, []),
-		new DeleteAction(fields, new UrlAction('List', '/admin/books/list', null)),
+		new DeleteAction(fields, new UrlAction('List', '/admin/books/list', null))
 	],
 
 	stateProcessor: new CallbackStateProcessor(function (
