@@ -17,6 +17,8 @@
 	export let formAction: 'get' | 'post' = 'post';
 	export let crud: CrudDefinition;
 	export let crudAction: CrudAction;
+	export let defaultData: { [key: string]: string | number | null | undefined | object } = {};
+
 	let fields: FieldInterface<Options>[] = crudAction.fields;
 
 	let tabbed_fields: Array<TabsField> = [];
@@ -65,7 +67,7 @@
 	{#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
 		{#each fields as field (field.name)}
 			<FormGroup>
-				<CrudFormField action={crudAction} {field} on:fieldChange />
+				<CrudFormField action={crudAction} {field} on:fieldChange value={defaultData[field.name]} />
 			</FormGroup>
 		{/each}
 	{:else}

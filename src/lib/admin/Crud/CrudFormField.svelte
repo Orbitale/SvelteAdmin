@@ -6,6 +6,12 @@
 
 	export let action: CrudActionName;
 	export let field: Field<Options>;
+	export let data: object | undefined;
+	export let value: unknown;
+
+	if (value === undefined && data) {
+		value = data[field.name];
+	}
 
 	const dispatchEvent = createEventDispatcher<{
 		fieldChange: {
@@ -26,6 +32,8 @@
 	this={field.formComponent}
 	{field}
 	{action}
+	{value}
+	{data}
 	on:change={onFieldChange}
 	on:blur
 	on:check

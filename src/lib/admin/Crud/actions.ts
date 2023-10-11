@@ -68,7 +68,13 @@ export class ListAction extends BaseCrudAction {
 }
 
 export class DeleteAction extends BaseCrudAction {
-	constructor(fields: Array<Field<Options>>, actions: Action[] = []) {
-		super('delete', 'crud.delete.label', CrudDelete, fields, actions);
+	public readonly redirectTo: Action;
+
+	constructor(
+		fields: Array<Field<Options>>,
+		redirectTo: Action,
+	) {
+		super('delete', 'crud.delete.label', CrudDelete, fields, []);
+		this.redirectTo = redirectTo;
 	}
 }

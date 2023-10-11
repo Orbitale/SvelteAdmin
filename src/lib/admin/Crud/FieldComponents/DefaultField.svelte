@@ -4,12 +4,14 @@
 	import type { Options } from '../../FieldDefinitions/Options';
 
 	export let field: Field<Options>;
+	export let value: any;
 </script>
 
 <TextInput
 	name={field.name}
 	labelText={field.label}
 	placeholder={field.options?.placeholder || ''}
+	{value}
 	on:change
 	on:input
 	on:click

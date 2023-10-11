@@ -44,8 +44,8 @@ export class UrlAction extends DefaultAction {
 
 	constructor(
 		label: string,
-		icon: Optional<ActionIcon>,
 		url: string,
+		icon: Optional<ActionIcon>,
 		params?: Map<string, string>
 	) {
 		super(label, icon);
@@ -59,10 +59,10 @@ export class UrlAction extends DefaultAction {
 		Object.keys(item || {}).forEach((field) => {
 			// @ts-ignore
 			let value = item[field];
-			if (!value.toString) {
-				value = '';
+			value = !value.toString ? '' : value.toString();
+			if (value.length) {
+				url = url.replace(`:${field}`, value.toString() || '');
 			}
-			url = url.replace(`:${field}`, value.toString() || '');
 		});
 
 		this.params.forEach((field, value) => {

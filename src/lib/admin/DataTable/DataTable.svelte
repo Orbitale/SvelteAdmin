@@ -21,7 +21,7 @@
 	}
 </script>
 
-<DataTable {headers} {rows} {...$$restProps}>
+<DataTable {headers} {rows} zebra={true} {...$$restProps}>
 	{#if !rows.length}
 		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
 			{$_('error.crud.list.no_elements')}

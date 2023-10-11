@@ -3,6 +3,7 @@
 	import { TextField, type TextOptions } from '../../FieldDefinitions/Text';
 
 	export let field: TextField<TextOptions>;
+	export let value: string | undefined;
 </script>
 
 <TextInput
@@ -11,6 +12,7 @@
 	helperText={field.options.help}
 	placeholder={field.options?.placeholder || ''}
 	maxCount={field.options.maxLength}
+	{value}
 	on:change
 	on:input
 	on:click

@@ -26,4 +26,4 @@
 
 <h2>{$_(action.label, { values: { name: $_(crud.options.label.plural) } })}</h2>
 
-<DataTable {headers} {rows} {actions}></DataTable>
+<DataTable {headers} {rows} {actions} />

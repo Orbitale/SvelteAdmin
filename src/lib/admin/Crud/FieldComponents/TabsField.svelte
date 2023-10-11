@@ -4,10 +4,11 @@
 	import CrudFormField from '../CrudFormField.svelte';
 
 	export let field: TabsField<TabOptions>;
+	export let data: object | undefined = {};
 </script>
 
 {#each field.fields as field}
 	<FormGroup>
-		<CrudFormField {field} />
+		<CrudFormField {data} value={data[field.name]} {field} />
 	</FormGroup>
 {/each}

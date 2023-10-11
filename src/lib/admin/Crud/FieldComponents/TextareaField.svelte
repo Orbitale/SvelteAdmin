@@ -3,6 +3,7 @@
 	import { TextareaField, type TextareaOptions } from '../../FieldDefinitions/Textarea';
 
 	export let field: TextareaField<TextareaOptions>;
+	export let value: string | undefined;
 </script>
 
 <TextArea
@@ -11,6 +12,7 @@
 	helperText={field.options.help}
 	placeholder={field.options.placeholder}
 	rows={field.options.rows}
+	{value}
 	on:click
 	on:mouseover
 	on:mouseenter

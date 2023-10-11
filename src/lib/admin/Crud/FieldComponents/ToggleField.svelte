@@ -4,11 +4,17 @@
 	import { ToggleField, type ToggleOptions } from '../../FieldDefinitions/Toggle';
 
 	export let field: ToggleField<ToggleOptions>;
+	export let value: boolean | undefined;
+
+	if (value === undefined) {
+		value = false;
+	}
+
 	const dispatchEvent = createEventDispatcher<{
 		change: boolean;
 	}>();
 
-	let is_checked: boolean;
+	$: is_checked = value;
 
 	function onChange() {
 		dispatchEvent('change', is_checked);

@@ -7,6 +7,11 @@
 	const maxCount = 2083;
 
 	export let field: UrlField<UrlOptions>;
+	export let value: URL | string | undefined;
+
+	if (value instanceof URL) {
+		value = value.toString();
+	}
 </script>
 
 <TextInput
@@ -15,6 +20,7 @@
 	helperText={field.options.help}
 	placeholder={field.options?.placeholder || ''}
 	{maxCount}
+	{value}
 	on:change
 	on:input
 	on:click

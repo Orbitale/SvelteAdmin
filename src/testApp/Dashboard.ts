@@ -13,8 +13,8 @@ export const dashboard = new DashboardDefinition({
 		}
 	},
 	sideMenu: [
-		new UrlAction('Homepage', Home, '/'),
-		new UrlAction('Books', Book, '/admin/books/list')
+		new UrlAction('Homepage', '/', Home),
+		new UrlAction('Books', '/admin/books/list', Book)
 	],
 	topLeftMenu: [],
 	topRightMenu: [],

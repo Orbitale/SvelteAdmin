@@ -3,6 +3,14 @@
 	import { NumberField, type NumberOptions } from '../../FieldDefinitions/Number';
 
 	export let field: NumberField<NumberOptions>;
+	export let value: string | number | undefined;
+
+	if (typeof value === 'string') {
+		value = parseInt(value);
+	}
+	if (isNaN(value)) {
+		value = undefined;
+	}
 </script>
 
 <NumberInput
