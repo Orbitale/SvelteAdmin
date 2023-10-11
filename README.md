@@ -67,9 +67,7 @@ export const dashboard = new DashboardDefinition({
 	// Here you set all the Crud configurations of your admin panel
 	// For organization purposes, we recommend you to define your Crud configs
 	//   in separate typescript files, it makes it easier to read and maintain.
-	cruds: [
-		booksCrud,
-	]
+	cruds: [booksCrud]
 });
 ```
 
@@ -85,15 +83,15 @@ import { Pen, TrashCan } from 'carbon-icons-svelte';
 
 // SvelteAdmin classes:
 import {
-	TextField, 
-	TextareaField, 
+	TextField,
+	TextareaField,
 	UrlAction,
 	ListAction,
 	EditAction,
 	DeleteAction,
 	type BaseCrudAction,
 	CallbackStateProcessor,
-	CallbackStateProvider,
+	CallbackStateProvider
 } from '@orbitale/svelte-admin';
 
 // These are the most common fields you want for your "Book" entity:
@@ -104,7 +102,7 @@ const fields = [
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
 	})
 ];
-// Note: these fields can obviously change based on different pages/actions, 
+// Note: these fields can obviously change based on different pages/actions,
 //   so feel free to spread this out if you have more complex admins!
 
 // Finally: the actual Crud object!
@@ -141,7 +139,7 @@ export const booksCrud = new CrudDefinition(
 			console.info('TODO: process new, edit or delete data based on the current action');
 		}),
 
-			// See below about state processors and providers.
+		// See below about state processors and providers.
 		stateProvider: new CallbackStateProvider(function (action: BaseCrudAction, requestParameters: KeyValueObject = {}): Array | null {
 			console.info('TODO: return actual data, like from an API');
 
@@ -170,10 +168,10 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 ```sveltehtml
 <script lang="ts">
 	// src/routes/[crud]/[action]/+page.svelte
-	
+
 	// The Dashboard component that will render all the things:
 	import Dashboard from '@orbitale/svelte-admin';
-	
+
 	// This is a custom Svelte store created by SvelteKit,
 	//   it points to an instance of a Page object,
 	//   which can allow us to gather data from the current page,
@@ -189,13 +187,43 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 
 	let crud: string = $page.params.crud;
 	let action: string = $page.params.action;
+
+	// Here, we merge URL.searchParams (the query string)
+	// with "$page.params", which corresponds to Route parameters.
+	// In our case, route parameters are [crud] and [action].
+	// This means that "?crud=..." or "?crud=...&action=..."
+	// will not be able to override /admin/[crud]/[action]
+	// An entire admin in one single route, in short :)
+	let requestParameters = {
+		...$page.url.searchParams,
+		...$page.params,
+	}
 </script>
 
-<Dashboard {dashboard} {crud} {action} />
+<Dashboard {dashboard} {crud} {action} {requestParameters} />
 ```
 
 That's it!
 
 Now, your admin is prepared.
 
-## TODO: followup of the readme.
+Here is the shorter version with no comments, if you want to copy-paste for a quick setup:
+
+```sveltehtml
+<script lang="ts">
+	import Dashboard from '@orbitale/svelte-admin';
+	import { page } from '$app/stores';
+	import { dashboard } from '$lib/admin/Dashboard.ts';
+
+	let crud: string = $page.params.crud;
+	let action: string = $page.params.action;
+	let requestParameters = { ...$page.url.searchParams, ...$page.params };
+</script>
+
+<Dashboard {dashboard} {crud} {action} {requestParameters} />
+```
+
+---
+
+## TODO continue the readme,
+## TODO roadmap: state providers, state processors, translations.
