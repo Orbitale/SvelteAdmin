@@ -22,7 +22,7 @@
 	<CrudForm
 		fields={action.fields}
 		crudAction={action}
-		defaultData={defaultData}
+		{defaultData}
 		on:click
 		on:keydown
 		on:mouseover

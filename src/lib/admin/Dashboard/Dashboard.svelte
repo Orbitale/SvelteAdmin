@@ -66,7 +66,7 @@
 			{dashboard}
 			crud={currentCrud}
 			action={currentCrudAction}
-			requestParameters={requestParameters}
+			{requestParameters}
 		></svelte:component>
 	</slot>
 </AdminLayout>

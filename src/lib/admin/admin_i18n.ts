@@ -12,10 +12,7 @@ const adminDictionaries: Dictionaries = {
 	fr: fr
 };
 
-export function initLocale(
-	locale: Intl.Locale | string,
-	dictionaries: Dictionaries = {}
-) {
+export function initLocale(locale: Intl.Locale | string, dictionaries: Dictionaries = {}) {
 	locale = locale.toString();
 
 	// Validate locale.

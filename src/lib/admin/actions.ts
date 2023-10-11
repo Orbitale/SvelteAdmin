@@ -41,11 +41,7 @@ export class CallbackAction extends DefaultAction {
 export class UrlAction extends DefaultAction {
 	private readonly _url: string;
 
-	constructor(
-		label: string,
-		url: string,
-		icon?: ActionIcon
-	) {
+	constructor(label: string, url: string, icon?: ActionIcon) {
 		super(label, icon);
 		this._url = url;
 	}
@@ -69,7 +65,7 @@ export class UrlAction extends DefaultAction {
 		});
 
 		if (mightNeedId && !hasIdAsParameter) {
-			url += '?id='+(item.id ?? '');
+			url += '?id=' + (item.id ?? '');
 		}
 
 		return `${url}`;
