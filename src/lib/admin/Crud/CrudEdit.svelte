@@ -1,21 +1,17 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 
-	import { page } from '$app/stores';
-
 	import CrudForm from './CrudForm.svelte';
 	import type { CrudDefinition } from './definition.ts';
 	import type { CrudAction } from './actions.ts';
 	import { InlineNotification } from 'carbon-components-svelte';
+	import type { KeyValueObject } from '../generic_types.ts';
 
 	export let crud: CrudDefinition;
 	export let action: CrudAction;
+	export let requestParameters: KeyValueObject = {};
 
-	const id: string = $page.params.id || $page.url.searchParams.id;
-	const defaultData = crud.options.stateProvider?.provide(action, {
-		id: id,
-		...$page.url.searchParams
-	});
+	const defaultData = crud.options.stateProvider?.provide(action, requestParameters);
 </script>
 
 {#if !defaultData}
@@ -26,8 +22,7 @@
 	<CrudForm
 		fields={action.fields}
 		crudAction={action}
-		{defaultData}
-		action="edit"
+		defaultData={defaultData}
 		on:click
 		on:keydown
 		on:mouseover

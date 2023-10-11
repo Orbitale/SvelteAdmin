@@ -10,12 +10,10 @@
 	import type { CrudAction } from './actions';
 	import type { SubmitButtonType } from '../config/types';
 	import type { FieldInterface } from '../FieldDefinitions/Field';
-	import type { CrudDefinition } from './definition.ts';
 	import type { Options } from '../FieldDefinitions/Options.ts';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let formAction: 'get' | 'post' = 'post';
-	export let crud: CrudDefinition;
 	export let crudAction: CrudAction;
 	export let defaultData: { [key: string]: string | number | null | undefined | object } = {};
 

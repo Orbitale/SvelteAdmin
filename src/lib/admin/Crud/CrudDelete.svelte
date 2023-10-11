@@ -2,21 +2,16 @@
 	import { _ } from 'svelte-i18n';
 	import { Button, InlineNotification } from 'carbon-components-svelte';
 
-	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
-
 	import type { CrudDefinition } from './definition.ts';
 	import { type CrudAction, DeleteAction } from './actions.ts';
 	import { CallbackAction, UrlAction } from '../actions.ts';
+	import type { KeyValueObject } from '../generic_types.ts';
 
 	export let crud: CrudDefinition;
 	export let action: CrudAction;
+	export let requestParameters: KeyValueObject = {};
 
-	const id: string = $page.params.id || $page.url.searchParams.id;
-	const data = crud.options.stateProvider?.provide(action, {
-		id: id,
-		...$page.url.searchParams
-	});
+	const data = crud.options.stateProvider?.provide(action, requestParameters);
 
 	function clickCancel() {
 		// TODO: check if it's the best method
@@ -24,12 +19,12 @@
 	}
 
 	function clickDelete() {
-		crud.options.stateProcessor?.process(data, action, { id: id, ...$page.url.searchParams });
+		crud.options.stateProcessor?.process(data, action, requestParameters);
 
 		if (action instanceof DeleteAction) {
 			const redirect = action.redirectTo;
 			if (redirect instanceof UrlAction) {
-				goto(redirect.url(data));
+				window.location.replace(redirect.url(data));
 			} else if (redirect instanceof CallbackAction) {
 				redirect.call(data);
 			} else {

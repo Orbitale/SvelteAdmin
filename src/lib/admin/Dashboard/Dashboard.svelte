@@ -16,10 +16,12 @@
 	import type { DashboardDefinition } from './definition.ts';
 	import type { CrudAction } from '../Crud/actions.ts';
 	import type { CrudDefinition } from '../Crud/definition.ts';
+	import type { KeyValueObject } from '../generic_types.ts';
 
 	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined;
 	export let action: string | undefined;
+	export let requestParameters: KeyValueObject = {};
 
 	let currentCrud: CrudDefinition | undefined;
 	let currentCrudAction: CrudAction | undefined;
@@ -64,6 +66,7 @@
 			{dashboard}
 			crud={currentCrud}
 			action={currentCrudAction}
+			requestParameters={requestParameters}
 		></svelte:component>
 	</slot>
 </AdminLayout>
