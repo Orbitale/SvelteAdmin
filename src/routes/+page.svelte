@@ -14,7 +14,7 @@
 	<p>Here are the available CRUDs:</p>
 
 	<UnorderedList expressive={true}>
-		{#each dashboard.options.cruds as crud}
+		{#each dashboard.cruds as crud}
 			<li>
 				<a href="/admin/{crud.name}/{crud.defaultAction}">
 					{$_(crud.options.label.plural)}

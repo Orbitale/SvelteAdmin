@@ -6,7 +6,7 @@ import { Book, Home } from 'carbon-icons-svelte';
 import fr from './translations/fr.ts';
 
 export const dashboard = new DashboardDefinition({
-	admin: {
+	adminConfig: {
 		head: {
 			brandName: 'Brand name',
 			appName: 'App name'
@@ -16,9 +16,6 @@ export const dashboard = new DashboardDefinition({
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book)
 	],
-	topLeftMenu: [],
-	topRightMenu: [],
 	localeDictionaries: { fr },
-	locales: ['fr', 'en'],
 	cruds: [bookCrud]
 });

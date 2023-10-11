@@ -2,13 +2,12 @@
 	import 'carbon-components-svelte/css/all.css';
 	import { Content } from 'carbon-components-svelte';
 	import { onMount } from 'svelte';
+	import { getLocaleFromNavigator } from 'svelte-i18n';
 
 	import TopMenu from '../Menu/TopMenu.svelte';
 	import SideMenu from '../Menu/SideMenu.svelte';
 	import type { MenuLink } from '../Menu/MenuLinks';
 
-	import fr from '../translations/fr';
-	import en from '../translations/en';
 	import { type Dictionaries, initLocale } from '../admin_i18n';
 	import type { AdminConfig } from '../config/adminConfig.ts';
 
@@ -17,15 +16,14 @@
 
 	export let adminConfig: AdminConfig = {};
 
-	export let locale = 'fr';
-	export let locales = ['en', 'fr'];
+	export let locale;
 	export let translations: Dictionaries = {};
 
 	export let side_menu_links: Array<MenuLink> = [];
 	export let top_left_menu_links: Array<MenuLink> = [];
 	export let top_right_menu_links: Array<MenuLink> = [];
 
-	initLocale(locale, locales, translations);
+	initLocale(locale || getLocaleFromNavigator() || 'en', translations);
 
 	onMount(() => {
 		document.documentElement.setAttribute('theme', theme);

@@ -39,22 +39,25 @@ export class CallbackAction extends DefaultAction {
 }
 
 export class UrlAction extends DefaultAction {
-	private readonly params: Map<string, string>;
 	private readonly _url: string;
 
 	constructor(
 		label: string,
 		url: string,
-		icon: Optional<ActionIcon>,
-		params?: Map<string, string>
+		icon?: ActionIcon
 	) {
 		super(label, icon);
-		this.params = params || new Map();
 		this._url = url;
 	}
 
-	public url(item?: object): string {
+	public url(item?: object & { id?: string }): string {
+		if (!item) {
+			item = {};
+		}
 		let url = this._url || '';
+
+		const mightNeedId = item.id !== undefined;
+		const hasIdAsParameter = url.match(':id');
 
 		Object.keys(item || {}).forEach((field) => {
 			// @ts-ignore
@@ -65,9 +68,9 @@ export class UrlAction extends DefaultAction {
 			}
 		});
 
-		this.params.forEach((field, value) => {
-			url = url.replace(`:${field}`, value);
-		});
+		if (mightNeedId && !hasIdAsParameter) {
+			url += '?id='+(item.id ?? '');
+		}
 
 		return `${url}`;
 	}

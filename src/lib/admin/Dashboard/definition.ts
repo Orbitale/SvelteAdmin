@@ -4,19 +4,30 @@ import type { CrudDefinition } from '../Crud/definition.ts';
 import type { AdminConfig } from '../config/adminConfig.ts';
 
 export type DashboardDefinitionOptions = {
-	admin: AdminConfig;
-	sideMenu: Array<MenuLink>;
-	topLeftMenu: Array<MenuLink>;
-	topRightMenu: Array<MenuLink>;
-	locales: Array<string>;
-	localeDictionaries: Dictionaries;
+	adminConfig: AdminConfig;
 	cruds: Array<CrudDefinition>;
+	sideMenu?: Array<MenuLink>;
+	topLeftMenu?: Array<MenuLink>;
+	topRightMenu?: Array<MenuLink>;
+	localeDictionaries?: Dictionaries;
 };
 
 export class DashboardDefinition {
-	public readonly options: DashboardDefinitionOptions;
+	public readonly adminConfig: AdminConfig;
+	public readonly cruds: Array<CrudDefinition>;
+	public readonly sideMenu: Array<MenuLink> = [];
+	public readonly topLeftMenu: Array<MenuLink> = [];
+	public readonly topRightMenu: Array<MenuLink> = [];
+	public readonly localeDictionaries: Dictionaries = {};
+
+	public readonly options = {};
 
 	constructor(options: DashboardDefinitionOptions) {
-		this.options = options;
+		this.adminConfig = options.adminConfig;
+		this.cruds = options.cruds;
+		this.sideMenu = options.sideMenu || [];
+		this.topLeftMenu = options.topLeftMenu || [];
+		this.topRightMenu = options.topRightMenu || [];
+		this.localeDictionaries = options.localeDictionaries || {};
 	}
 }

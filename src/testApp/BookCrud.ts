@@ -24,8 +24,8 @@ const fields = [
 ];
 
 const actions = [
-	new UrlAction('Edit', '/admin/books/edit/:id', Pen),
-	new UrlAction('Delete', '/admin/books/delete/:id', TrashCan)
+	new UrlAction('Edit', '/admin/books/edit/', Pen),
+	new UrlAction('Delete', '/admin/books/delete/', TrashCan)
 ];
 
 export const bookCrud = new CrudDefinition('books', {
@@ -34,7 +34,7 @@ export const bookCrud = new CrudDefinition('books', {
 	actions: [
 		new ListAction(fields, actions),
 		new EditAction(fields, []),
-		new DeleteAction(fields, new UrlAction('List', '/admin/books/list', null))
+		new DeleteAction(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
 	stateProcessor: new CallbackStateProcessor(function (

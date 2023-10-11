@@ -24,7 +24,7 @@
 	let currentCrud: CrudDefinition | undefined;
 	let currentCrudAction: CrudAction | undefined;
 
-	dashboard.options.cruds
+	dashboard.cruds
 		.filter((dashboardCrud: CrudDefinition) => crud === dashboardCrud.name)
 		.forEach((resolved: CrudDefinition) => (currentCrud = resolved));
 
@@ -34,12 +34,11 @@
 </script>
 
 <AdminLayout
-	adminConfig={dashboard.options.admin}
-	locales={dashboard.options.locales}
-	translations={dashboard.options.localeDictionaries}
-	side_menu_links={dashboard.options.sideMenu}
-	top_left_menu_links={dashboard.options.topLeftMenu}
-	top_right_menu_links={dashboard.options.topRightMenu}
+	adminConfig={dashboard.adminConfig}
+	translations={dashboard.localeDictionaries}
+	side_menu_links={dashboard.sideMenu}
+	top_left_menu_links={dashboard.topLeftMenu}
+	top_right_menu_links={dashboard.topRightMenu}
 >
 	<slot>
 		{#if !currentCrud}
