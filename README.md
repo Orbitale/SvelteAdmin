@@ -165,7 +165,7 @@ Since we will mostly use the URL to determine what Crud and actions we are looki
 
 Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 
-```sveltehtml
+```html
 <script lang="ts">
 	// src/routes/[crud]/[action]/+page.svelte
 
@@ -209,7 +209,7 @@ Now, your admin is prepared.
 
 Here is the shorter version with no comments, if you want to copy-paste for a quick setup:
 
-```sveltehtml
+```html
 <script lang="ts">
 	import Dashboard from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
