@@ -4,7 +4,7 @@ const dictionary: Dictionary = {
 	'crud.header.edit': 'Edit',
 	'crud.header.new': 'New',
 	'crud.form.submit': 'Submit',
-	'crud.list.entity': 'List',
+	'crud.list.label': 'List "{name}"',
 	'crud.delete.are_you_sure': 'Are you sure you want to delete {name} with identifier "{id}"?',
 	'crud.delete.cancel': 'No, cancel',
 	'crud.delete.yes_delete': 'Yes, delete',
