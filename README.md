@@ -223,7 +223,26 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 <Dashboard {dashboard} {crud} {action} {requestParameters} />
 ```
 
+#### Fetching your data with State providers
+
+As we have seen before, there is one single entrypoint to your data source: a state provider, and there is only one per Crud.
+
+A SateProvider is just a class that implements this interface:
+
+```typescript
+export interface StateProvider {
+	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult;
+}
+```
+
+* The `action` object is the same as one of the Crud actions, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` actions, with a simple `if` statement to discriminate both.
+* The `requestParameters` is just a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[action]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
+
+The return type `StateProviderResult` corresponds to the `object | Array<any> | null` type, so you could return almost anything that represents an entity, or a list of entities.
+
+The only implemented provider so far is the `CallbackStateProvider`, and you just define an external callback function that does whatever you want.
+
 ---
 
 ## TODO continue the readme,
-## TODO roadmap: state providers, state processors, translations.
+## TODO roadmap: state processors, translations.
