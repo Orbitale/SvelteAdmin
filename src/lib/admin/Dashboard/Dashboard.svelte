@@ -19,8 +19,8 @@
 	import type { KeyValueObject } from '../generic_types.ts';
 
 	export let dashboard: DashboardDefinition;
-	export let crud: string | undefined;
-	export let action: string | undefined;
+	export let crud: string | undefined = undefined;
+	export let action: string | undefined = undefined;
 	export let requestParameters: KeyValueObject = {};
 
 	let currentCrud: CrudDefinition | undefined;

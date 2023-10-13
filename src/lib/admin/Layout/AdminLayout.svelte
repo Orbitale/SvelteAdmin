@@ -16,7 +16,7 @@
 
 	export let adminConfig: AdminConfig = {};
 
-	export let locale;
+	export let locale = undefined;
 	export let translations: Dictionaries = {};
 
 	export let side_menu_links: Array<MenuLink> = [];
