@@ -50,7 +50,9 @@ export const bookCrud = new CrudDefinition('books', {
 			requestParameters
 		});
 		if (operation.name === 'delete') {
-			alert(`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`)
+			alert(
+				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
+			);
 		}
 	}),
 

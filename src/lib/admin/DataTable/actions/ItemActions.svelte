@@ -6,7 +6,7 @@
 	import type { Action } from '../../actions';
 
 	export let actions: Action[] = [];
-	export let item: object|undefined = undefined;
+	export let item: object | undefined = undefined;
 </script>
 
 <Grid style="max-width: 14rem;">

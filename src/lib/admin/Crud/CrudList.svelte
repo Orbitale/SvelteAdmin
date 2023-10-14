@@ -25,7 +25,9 @@
 
 	let rows = crud.options.stateProvider.provide(action, requestParameters);
 	if (rows && !Array.isArray(rows)) {
-		throw new Error('CrudList expected state provider to return an array, current result is non-empty and not an array.');
+		throw new Error(
+			'CrudList expected state provider to return an array, current result is non-empty and not an array.'
+		);
 	}
 	if (!rows || !rows.length) {
 		rows = [createEmptyRow(action)];

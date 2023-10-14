@@ -1,4 +1,4 @@
-import {dashboard} from "../../../../testApp/Dashboard.ts";
+import { dashboard } from '../../../../testApp/Dashboard.ts';
 
 export const prerender = true;
 
@@ -10,8 +10,8 @@ export function entries() {
 		for (const action of crud.options.actions) {
 			routes.push({
 				crud: crud.name,
-				action: action.name,
-			})
+				action: action.name
+			});
 		}
 	}
 

@@ -7,7 +7,7 @@
 	import { type Action, CallbackAction, UrlAction } from '../../actions';
 
 	export let action: Action;
-	export let item: object|undefined = undefined;
+	export let item: object | undefined = undefined;
 
 	function clickLink() {
 		console.info('CLICK args', arguments);

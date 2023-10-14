@@ -1,6 +1,7 @@
 //
-// Classes
+// Classes & functions
 //
+export { CallbackAction, UrlAction } from './actions.ts';
 export { BaseCrudAction, NewAction, EditAction, ListAction, DeleteAction } from './Crud/actions.ts';
 export { CrudDefinition } from './Crud/definition.ts';
 
@@ -15,10 +16,12 @@ export { TextField } from './FieldDefinitions/Text.ts';
 export { ToggleField } from './FieldDefinitions/Toggle.ts';
 export { UrlField } from './FieldDefinitions/Url.ts';
 
-export { Submenu } from './Menu/MenuLinks.ts';
+export { Submenu, Divider } from './Menu/MenuLinks.ts';
 
 export { CallbackStateProcessor } from './State/Processor.ts';
 export { CallbackStateProvider } from './State/Provider.ts';
+
+export { getRequestParams } from './request.ts';
 
 //
 // Components

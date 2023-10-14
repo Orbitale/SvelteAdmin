@@ -1,5 +1,5 @@
 import type { ComponentType } from 'svelte';
-import type { Field, FieldInterface } from './Field';
+import type { FieldInterface } from './Field';
 import TabsFieldComponent from '../Crud/FieldComponents/TabsField.svelte';
 import type { Options } from './Options';
 

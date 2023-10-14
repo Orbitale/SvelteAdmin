@@ -19,7 +19,7 @@
 		{#each fields as tabbed_field (tabbed_field.name)}
 			<TabContent>
 				<CrudFormField
-					action={action}
+					{action}
 					field={tabbed_field}
 					{defaultData}
 					value={defaultData[tabbed_field.name]}

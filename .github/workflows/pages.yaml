@@ -2,13 +2,13 @@ name: Deploy to Github Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:

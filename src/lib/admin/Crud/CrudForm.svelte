@@ -77,12 +77,7 @@
 			</FormGroup>
 		{/each}
 	{:else}
-		<Tabs
-			fields={tabbed_fields}
-			action={crudAction}
-			{defaultData}
-			on:fieldChange
-		/>
+		<Tabs fields={tabbed_fields} action={crudAction} {defaultData} on:fieldChange />
 	{/if}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>

@@ -137,12 +137,19 @@ export const booksCrud = new CrudDefinition(
 		],
 
 		// See below about state processors and providers.
-		stateProcessor: new CallbackStateProcessor(function (data: any, action: BaseCrudAction, requestParameters = {}): void {
+		stateProcessor: new CallbackStateProcessor(function (
+			data: any,
+			action: BaseCrudAction,
+			requestParameters = {}
+		): void {
 			console.info('TODO: process new, edit or delete data based on the current action');
 		}),
 
 		// See below about state processors and providers.
-		stateProvider: new CallbackStateProvider(function (action: BaseCrudAction, requestParameters: KeyValueObject = {}): Array | null {
+		stateProvider: new CallbackStateProvider(function (
+			action: BaseCrudAction,
+			requestParameters: KeyValueObject = {}
+		): Array | null {
 			console.info('TODO: return actual data, like from an API');
 
 			return null;
@@ -171,7 +178,7 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 <script lang="ts">
 	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';
 	import { page } from '$app/stores';
-	import { browser } from "$app/environment";
+	import { browser } from '$app/environment';
 	import { dashboard } from '../../../../testApp/Dashboard.ts';
 	import { getRequestParams } from '$lib/admin/request.ts';
 
@@ -181,7 +188,7 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 </script>
 
 {#key $page}
-	<Dashboard {dashboard} {crud} {action} {requestParameters} />
+<Dashboard {dashboard} {crud} {action} {requestParameters} />
 {/key}
 
 <script lang="ts">
@@ -202,7 +209,7 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 	// Same here as the previous "page" store, but the "browser" var contains
 	//   a boolean that is set to "false" during server-side rendering, and to
 	//   "true" when the Svelte component is mounted to the DOM.
-	import { browser } from "$app/environment";
+	import { browser } from '$app/environment';
 
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
@@ -232,7 +239,7 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 <script lang="ts">
 	import { DashboardComponent, getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
-	import { browser } from "$app/environment";
+	import { browser } from '$app/environment';
 	import { dashboard } from '$lib/admin/Dashboard.ts';
 
 	$: crud = $page.params.crud;
@@ -241,7 +248,7 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 </script>
 
 {#key $page}
-	<Dashboard {dashboard} {crud} {action} {requestParameters} />
+<Dashboard {dashboard} {crud} {action} {requestParameters} />
 {/key}
 ```
 
@@ -257,8 +264,8 @@ export interface StateProvider {
 }
 ```
 
-* The `action` object is the same as one of the Crud actions, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` actions, with a simple `if` statement to discriminate both.
-* The `requestParameters` is just a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[action]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
+- The `action` object is the same as one of the Crud actions, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` actions, with a simple `if` statement to discriminate both.
+- The `requestParameters` is just a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[action]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
 
 The return type `StateProviderResult` corresponds to the `object | Array<any> | null` type, so you could return almost anything that represents an entity, or a list of entities.
 

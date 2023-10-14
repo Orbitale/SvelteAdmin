@@ -10,11 +10,14 @@
 	<h1>Svelte Admin demo app</h1>
 
 	<p>
-		Svelte Admin is a (currently prototype) admin generator delivered as a Typescript library and a set of Svelte components as rendering system.
+		Svelte Admin is a (currently prototype) admin generator delivered as a Typescript library and a
+		set of Svelte components as rendering system.
 	</p>
 
 	<p>
-		If you detect any bug in this demo, feel free to clone the project or submit an issue in the [Github Repository (https://github.com/Orbitale/SvelteAdmin)](https://github.com/Orbitale/SvelteAdmin)!
+		If you detect any bug in this demo, feel free to clone the project or submit an issue in the
+		[Github Repository
+		(https://github.com/Orbitale/SvelteAdmin)](https://github.com/Orbitale/SvelteAdmin)!
 	</p>
 
 	<p>Here are the available CRUDs for the demo app:</p>
