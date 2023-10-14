@@ -7,8 +7,8 @@
 	"author": "Alex \"Pierstoval\" Rock <alex@orbitale.io>",
 	"license": "LGPL-3.0-or-later",
 	"scripts": {
-		"dev": "vite dev --host=0.0.0.0",
-		"build": "vite build && yarn run package",
+		"dev": "vite dev",
+		"build": "vite build",
 		"build:webcomponents": "vite -c ./vite.webcomponents.config.ts build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
