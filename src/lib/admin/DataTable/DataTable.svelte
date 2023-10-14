@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { DataTable, InlineNotification } from 'carbon-components-svelte';
+	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
+	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import { _ } from 'svelte-i18n';
 
 	import ItemActions from './actions/ItemActions.svelte';

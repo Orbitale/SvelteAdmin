@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { NumberInput } from 'carbon-components-svelte';
-	import { NumberField, type NumberOptions } from '../../FieldDefinitions/Number';
+	import NumberInput from 'carbon-components-svelte/src/NumberInput/NumberInput.svelte';
+	import type { NumberField } from '../../FieldDefinitions/Number';
 
-	export let field: NumberField<NumberOptions>;
+	export let field: NumberField;
 	export let value: string | number | undefined;
 
 	if (typeof value === 'string') {

@@ -1,14 +1,15 @@
 <script lang="ts">
-	import {
-		SideNav,
-		SideNavItems,
-		SideNavMenu,
-		SideNavMenuItem,
-		SideNavLink,
-		SideNavDivider
-	} from 'carbon-components-svelte';
+	import SideNav from 'carbon-components-svelte/src/UIShell/SideNav.svelte';
+	import SideNavItems from 'carbon-components-svelte/src/UIShell/SideNavItems.svelte';
+	import SideNavMenu from 'carbon-components-svelte/src/UIShell/SideNavMenu.svelte';
+	import SideNavMenuItem from 'carbon-components-svelte/src/UIShell/SideNavMenuItem.svelte';
+	import SideNavLink from 'carbon-components-svelte/src/UIShell/SideNavLink.svelte';
+	import SideNavDivider from 'carbon-components-svelte/src/UIShell/SideNavDivider.svelte';
+
+	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
+	import Link from 'carbon-icons-svelte/lib/Link.svelte';
+
 	import { _ } from 'svelte-i18n';
-	import { Folder, Link } from 'carbon-icons-svelte';
 
 	import { Divider, Submenu } from './MenuLinks';
 	import { type Action, CallbackAction, UrlAction } from '../actions';

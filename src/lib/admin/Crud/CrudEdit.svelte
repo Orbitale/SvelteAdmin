@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
-	import {
-		ButtonSkeleton,
-		CheckboxSkeleton,
-		InlineNotification,
-		TextAreaSkeleton,
-		TextInputSkeleton
-	} from 'carbon-components-svelte';
+	import ButtonSkeleton from 'carbon-components-svelte/src/Button/ButtonSkeleton.svelte';
+	import CheckboxSkeleton from 'carbon-components-svelte/src/Checkbox/CheckboxSkeleton.svelte';
+	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
+	import TextAreaSkeleton from 'carbon-components-svelte/src/TextArea/TextAreaSkeleton.svelte';
+	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 
 	import CrudForm from './CrudForm.svelte';
 	import type { CrudDefinition } from './definition.ts';

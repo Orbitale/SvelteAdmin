@@ -40,7 +40,8 @@ Then, create a ̀ src/lib/admin/Dashboard.ts` file, and start writing the necess
 // src/lib/admin/Dashboard.ts
 
 // Some fancy icons for a neat UI:
-import { Book, Home } from 'carbon-icons-svelte';
+import Book from 'carbon-icons-svelte/lib/Book.svelte';
+import Home from 'carbon-icons-svelte/lib/Home.svelte';
 
 // SvelteAdmin classes:
 import { DashboardDefinition, UrlAction } from '@orbitale/svelte-admin';
@@ -79,7 +80,8 @@ Then, create the `src/lib/admin/booksCrud.ts` file, it will host your "Books" Cr
 // src/lib/admin/booksCrud.ts
 
 // Again, some icons to pop your admin!
-import { Pen, TrashCan } from 'carbon-icons-svelte';
+import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
+import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 // SvelteAdmin classes:
 import {
@@ -122,8 +124,8 @@ export const booksCrud = new CrudDefinition(
 			// Basic data grid listing all your Books.
 			// Will display "edit" and "delete" buttons on the right of the list.
 			new ListAction(fields, [
-				new UrlAction('Edit', '/admin/books/edit/:id', Pen),
-				new UrlAction('Delete', '/admin/books/delete/:id', TrashCan)
+				new UrlAction('Edit', '/admin/books/edit', Pen),
+				new UrlAction('Delete', '/admin/books/delete', TrashCan)
 			]),
 
 			// Straightforward "edit" form, can be accessed via the "edit" link above.

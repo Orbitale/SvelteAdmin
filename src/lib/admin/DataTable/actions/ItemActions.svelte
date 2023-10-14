@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Grid, Row } from 'carbon-components-svelte';
+	import Grid from 'carbon-components-svelte/src/Grid/Grid.svelte';
+	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 
 	import SingleAction from './SingleAction.svelte';
 	import type { Action } from '../../actions';

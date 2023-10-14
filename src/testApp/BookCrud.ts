@@ -7,7 +7,9 @@ import { CallbackStateProvider } from '$lib/admin/State/Provider.ts';
 import { TextField } from '$lib/admin/FieldDefinitions/Text.ts';
 import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.ts';
 import { UrlAction } from '$lib/admin/actions.ts';
-import { Pen, TrashCan } from 'carbon-icons-svelte';
+
+import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
+import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 type Book = { id: number; title: string; description: string };
 const books: Array<Book> = [
@@ -24,8 +26,8 @@ const fields = [
 ];
 
 const actions = [
-	new UrlAction('Edit', '/admin/books/edit/', Pen),
-	new UrlAction('Delete', '/admin/books/delete/', TrashCan)
+	new UrlAction('Edit', '/admin/books/edit', Pen),
+	new UrlAction('Delete', '/admin/books/delete', TrashCan)
 ];
 
 export const bookCrud = new CrudDefinition('books', {

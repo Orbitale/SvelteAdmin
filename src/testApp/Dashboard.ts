@@ -1,9 +1,11 @@
-// src/lib/Dashboard.ts
+import Book from 'carbon-icons-svelte/lib/Home.svelte';
+import Home from 'carbon-icons-svelte/lib/Home.svelte';
+
 import { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-import { bookCrud } from './BookCrud.ts';
 import { UrlAction } from '$lib/admin/actions.ts';
-import { Book, Home } from 'carbon-icons-svelte';
+
 import fr from './translations/fr.ts';
+import { bookCrud } from './BookCrud.ts';
 
 export const dashboard = new DashboardDefinition({
 	adminConfig: {

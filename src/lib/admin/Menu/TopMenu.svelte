@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Header, SkipToContent } from 'carbon-components-svelte';
+	import Header from 'carbon-components-svelte/src/UIShell/Header.svelte';
+	import SkipToContent from 'carbon-components-svelte/src/UIShell/SkipToContent.svelte';
 	import TopLeftMenu from './TopLeftMenu.svelte';
 	import TopRightMenu from './TopRightMenu.svelte';
 	import type { MenuLink } from './MenuLinks';

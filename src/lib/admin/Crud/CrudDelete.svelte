@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { Button, InlineNotification } from 'carbon-components-svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import type { CrudDefinition } from './definition.ts';
 	import { type CrudAction, DeleteAction } from './actions.ts';

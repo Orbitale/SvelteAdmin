@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { Button, Column, Link, ToastNotification } from 'carbon-components-svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
+	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
+	import ToastNotification from 'carbon-components-svelte/src/Notification/ToastNotification.svelte';
 	import { type Action, CallbackAction, UrlAction } from '../../actions';
 
 	export let action: Action;

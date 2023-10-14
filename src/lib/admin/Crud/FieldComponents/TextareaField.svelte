@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { TextArea } from 'carbon-components-svelte';
-	import { TextareaField, type TextareaOptions } from '../../FieldDefinitions/Textarea';
+	import TextArea from 'carbon-components-svelte/src/TextArea/TextArea.svelte';
+	import type { TextareaField } from '../../FieldDefinitions/Textarea';
 
-	export let field: TextareaField<TextareaOptions>;
+	export let field: TextareaField;
 	export let value: string | undefined;
 </script>
 

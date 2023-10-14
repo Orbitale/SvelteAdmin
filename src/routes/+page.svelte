@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UnorderedList } from 'carbon-components-svelte';
+	import UnorderedList from 'carbon-components-svelte/src/UnorderedList/UnorderedList.svelte';
 	import { _ } from 'svelte-i18n';
 
 	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';

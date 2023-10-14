@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { Button, Form, FormGroup } from 'carbon-components-svelte';
+	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
+	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 

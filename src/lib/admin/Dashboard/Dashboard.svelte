@@ -11,7 +11,7 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import { InlineNotification } from 'carbon-components-svelte';
+	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import AdminLayout from '../Layout/AdminLayout.svelte';
 	import type { DashboardDefinition } from './definition.ts';
 	import type { CrudAction } from '../Crud/actions.ts';

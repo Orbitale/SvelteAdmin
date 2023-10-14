@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import {
-		HeaderAction,
-		HeaderPanelDivider,
-		HeaderPanelLink,
-		HeaderPanelLinks,
-		HeaderUtilities
-	} from 'carbon-components-svelte';
-	import { Link } from 'carbon-icons-svelte';
+	import HeaderAction from 'carbon-components-svelte/src/UIShell/HeaderAction.svelte';
+	import HeaderPanelDivider from 'carbon-components-svelte/src/UIShell/HeaderPanelDivider.svelte';
+	import HeaderPanelLink from 'carbon-components-svelte/src/UIShell/HeaderPanelLink.svelte';
+	import HeaderPanelLinks from 'carbon-components-svelte/src/UIShell/HeaderPanelLinks.svelte';
+	import HeaderUtilities from 'carbon-components-svelte/src/UIShell/HeaderUtilities.svelte';
+
+	import Link from 'carbon-icons-svelte/lib/Link.svelte';
 
 	import { Divider, type MenuLink, Submenu } from './MenuLinks';
 	import { CallbackAction, UrlAction } from '../actions';

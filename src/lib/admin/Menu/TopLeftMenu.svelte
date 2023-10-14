@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { HeaderNav, HeaderNavItem, HeaderNavMenu } from 'carbon-components-svelte';
+	import HeaderNav from 'carbon-components-svelte/src/UIShell/HeaderNav.svelte';
+	import HeaderNavItem from 'carbon-components-svelte/src/UIShell/HeaderNavItem.svelte';
+	import HeaderNavMenu from 'carbon-components-svelte/src/UIShell/HeaderNavMenu.svelte';
 	import { _ } from 'svelte-i18n';
-	import { Folder, Link } from 'carbon-icons-svelte';
+	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
+	import Link from 'carbon-icons-svelte/lib/Link.svelte';
 
 	import { Divider, type MenuLink, Submenu } from './MenuLinks';
 	import { CallbackAction, UrlAction } from '../actions';
