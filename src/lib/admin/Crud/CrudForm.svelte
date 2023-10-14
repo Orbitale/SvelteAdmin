@@ -15,7 +15,7 @@
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let formAction: 'get' | 'post' = 'post';
 	export let crudAction: CrudAction;
-	export let defaultData: { [key: string]: string | number | null | undefined | object } = {};
+	export let defaultData: object = {};
 
 	let fields: FieldInterface<Options>[] = crudAction.fields;
 
@@ -37,12 +37,12 @@
 	}
 
 	const dispatchEvent = createEventDispatcher<{
-		submitData: Map<string, string | Array>;
+		submitData: Map<string, string | File | Array<string>>;
 	}>();
 
 	function onSubmit(event: SubmitEvent) {
 		const data = new FormData(event.target, event.submitter);
-		const dataMap = new Map<string, string | Array>();
+		const dataMap = new Map<string, string | File | Array<string>>();
 		data.forEach((value, key) => {
 			dataMap.set(key, value);
 		});
@@ -65,11 +65,22 @@
 	{#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
 		{#each fields as field (field.name)}
 			<FormGroup>
-				<CrudFormField action={crudAction} {field} on:fieldChange value={defaultData[field.name]} />
+				<CrudFormField
+					action={crudAction}
+					{field}
+					{defaultData}
+					value={defaultData[field.name]}
+					on:fieldChange
+				/>
 			</FormGroup>
 		{/each}
 	{:else}
-		<Tabs fields={tabbed_fields} action={crudAction} on:fieldChange />
+		<Tabs
+			fields={tabbed_fields}
+			action={crudAction}
+			{defaultData}
+			on:fieldChange
+		/>
 	{/if}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>

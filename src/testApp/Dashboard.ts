@@ -8,8 +8,8 @@ import fr from './translations/fr.ts';
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
 		head: {
-			brandName: 'Brand name',
-			appName: 'App name'
+			brandName: 'Svelte Admin',
+			appName: 'Demo'
 		}
 	},
 	sideMenu: [

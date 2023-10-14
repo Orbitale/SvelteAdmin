@@ -47,12 +47,15 @@ export const bookCrud = new CrudDefinition('books', {
 			operation,
 			requestParameters
 		});
+		if (operation.name === 'delete') {
+			alert(`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`)
+		}
 	}),
 
-	stateProvider: new CallbackStateProvider(function (
+	stateProvider: new CallbackStateProvider<Book>(function (
 		operation: CrudAction,
 		requestParameters: KeyValueObject = {}
-	): Array<Book> | Book | null {
+	) {
 		console.info('TODO: return actual data', { operation, requestParameters });
 
 		if (operation.name === 'list') {

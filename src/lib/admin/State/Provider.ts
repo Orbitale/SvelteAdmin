@@ -1,25 +1,25 @@
 import type { CrudAction } from '../Crud/actions.ts';
 import type { KeyValueObject } from '../generic_types.ts';
 
-export type StateProviderResult = object | Array<any> | null;
+export type StateProviderResult<T> = T | Array<T> | null;
 
-export interface StateProvider {
-	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult;
+export interface StateProvider<T> {
+	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult<T>;
 }
 
-export type StateProviderCallback = (
+export type StateProviderCallback<T> = (
 	action: CrudAction,
 	requestParameters: KeyValueObject
-) => StateProviderResult;
+) => StateProviderResult<T>;
 
-export class CallbackStateProvider implements StateProvider {
-	private readonly _callback: StateProviderCallback;
+export class CallbackStateProvider<T> implements StateProvider<T> {
+	private readonly _callback: StateProviderCallback<T>;
 
-	constructor(callback: StateProviderCallback) {
+	constructor(callback: StateProviderCallback<T>) {
 		this._callback = callback;
 	}
 
-	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult {
+	provide(action: CrudAction, requestParameters: KeyValueObject): StateProviderResult<T> {
 		return this._callback(action, requestParameters);
 	}
 }

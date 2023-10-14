@@ -1,26 +1,48 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
+	import {
+		ButtonSkeleton,
+		CheckboxSkeleton,
+		InlineNotification,
+		TextAreaSkeleton,
+		TextInputSkeleton
+	} from 'carbon-components-svelte';
 
 	import CrudForm from './CrudForm.svelte';
 	import type { CrudDefinition } from './definition.ts';
 	import type { CrudAction } from './actions.ts';
-	import { InlineNotification } from 'carbon-components-svelte';
 	import type { KeyValueObject } from '../generic_types.ts';
 
 	export let crud: CrudDefinition;
 	export let action: CrudAction;
 	export let requestParameters: KeyValueObject = {};
 
-	const defaultData = crud.options.stateProvider?.provide(action, requestParameters);
+	let defaultData = crud.options.stateProvider?.provide(action, requestParameters);
+
+	let mounted = false;
+
+	onMount(() => {
+		if (!defaultData) {
+			defaultData = crud.options.stateProvider?.provide(action, requestParameters);
+		}
+		mounted = true;
+	});
 </script>
 
 {#if !defaultData}
-	<InlineNotification kind="error">
-		{$_('error.crud.entity.not_found')}
-	</InlineNotification>
+	{#if mounted}
+		<InlineNotification kind="error">
+			{$_('error.crud.entity.not_found')}
+		</InlineNotification>
+	{:else}
+		<TextInputSkeleton />
+		<CheckboxSkeleton />
+		<TextAreaSkeleton />
+		<ButtonSkeleton />
+	{/if}
 {:else}
 	<CrudForm
-		fields={action.fields}
 		crudAction={action}
 		{defaultData}
 		on:click

@@ -167,10 +167,27 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 
 ```html
 <script lang="ts">
+	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';
+	import { page } from '$app/stores';
+	import { browser } from "$app/environment";
+	import { dashboard } from '../../../../testApp/Dashboard.ts';
+	import { getRequestParams } from '$lib/admin/request.ts';
+
+	$: crud = $page.params.crud;
+	$: action = $page.params.action;
+	$: requestParameters = getRequestParams($page, browser);
+</script>
+
+{#key $page}
+	<Dashboard {dashboard} {crud} {action} {requestParameters} />
+{/key}
+
+<script lang="ts">
 	// src/routes/[crud]/[action]/+page.svelte
 
-	// The Dashboard component that will render all the things:
-	import Dashboard from '@orbitale/svelte-admin';
+	// The Dashboard component that will render all the things,
+	// and the function helper that gathers URL parameters
+	import { DashboardComponent, getRequestParams } from '@orbitale/svelte-admin';
 
 	// This is a custom Svelte store created by SvelteKit,
 	//   it points to an instance of a Page object,
@@ -180,24 +197,24 @@ Create a `src/routes/[crud]/[action]/+page.svelte` file with the following code:
 	//   https://kit.svelte.dev/docs/modules#$app-stores-page
 	import { page } from '$app/stores';
 
+	// Same here as the previous "page" store, but the "browser" var contains
+	//   a boolean that is set to "false" during server-side rendering, and to
+	//   "true" when the Svelte component is mounted to the DOM.
+	import { browser } from "$app/environment";
+
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
 	//   it always points to your "src/lib/" directory.
 	import { dashboard } from '$lib/admin/Dashboard.ts';
 
-	let crud: string = $page.params.crud;
-	let action: string = $page.params.action;
-
-	// Here, we merge URL.searchParams (the query string)
-	// with "$page.params", which corresponds to Route parameters.
-	// In our case, route parameters are [crud] and [action].
-	// This means that "?crud=..." or "?crud=...&action=..."
-	// will not be able to override /admin/[crud]/[action]
-	// An entire admin in one single route, in short :)
-	let requestParameters = {
-		...$page.url.searchParams,
-		...$page.params,
-	}
+	// The "$:" syntax is valid Javascript code that tells Svelte
+	//   that the following code is reactive, based on the values it depends on.
+	// On this code, reactivity depends on "page" and "browser" variables.
+	$: crud = $page.params.crud;
+	$: action = $page.params.action;
+	$: requestParameters = getRequestParams($page, browser);
+	// Note: prefixing "page" with "$" makes sure we refer to the store's actual value.
+	// If we didn't add this "$" prefix, we would use an object containing a method ".subscribe()", but we can use it to execude code whenever the store data changes. The "$" prefix sort of shortens everything for us automatically.
 </script>
 
 <Dashboard {dashboard} {crud} {action} {requestParameters} />
@@ -211,16 +228,19 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 
 ```html
 <script lang="ts">
-	import Dashboard from '@orbitale/svelte-admin';
+	import { DashboardComponent, getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
+	import { browser } from "$app/environment";
 	import { dashboard } from '$lib/admin/Dashboard.ts';
 
-	let crud: string = $page.params.crud;
-	let action: string = $page.params.action;
-	let requestParameters = { ...$page.url.searchParams, ...$page.params };
+	$: crud = $page.params.crud;
+	$: action = $page.params.action;
+	$: requestParameters = getRequestParams($page, browser);
 </script>
 
-<Dashboard {dashboard} {crud} {action} {requestParameters} />
+{#key $page}
+	<Dashboard {dashboard} {crud} {action} {requestParameters} />
+{/key}
 ```
 
 #### Fetching your data with State providers

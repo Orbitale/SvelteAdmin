@@ -10,14 +10,14 @@ export type TabOptions = Options & {
 export class TabsField implements FieldInterface<TabOptions> {
 	public readonly name: string;
 	public readonly label: string;
-	public readonly fields: Array<Field<Options>>;
+	public readonly fields: Array<FieldInterface<Options>>;
 	public readonly options: Partial<TabOptions>;
 	public readonly formComponent: ComponentType = TabsFieldComponent;
 
 	constructor(
 		name: string,
 		label: string = '',
-		fields: Array<Field<Options>> = [],
+		fields: Array<FieldInterface<Options>> = [],
 		options: TabOptions = {} as TabOptions
 	) {
 		this.name = name;

@@ -3,8 +3,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import ItemActions from './actions/ItemActions.svelte';
-	import { type Action } from '../actions';
-	import { type Headers, type Rows } from './DataTable.ts';
+	import type { Action } from '../actions';
+	import type { Headers, Rows } from './DataTable.ts';
 
 	export let headers: Headers = [];
 	export let rows: Rows = [];

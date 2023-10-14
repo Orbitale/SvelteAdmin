@@ -1,7 +1,7 @@
-import type { SvelteComponent } from 'svelte';
+import type { ComponentType, SvelteComponent } from 'svelte';
 import type { Optional } from './generic_types.ts';
 
-export type ActionIcon = object | string | HTMLElement | SvelteComponent;
+export type ActionIcon = object | string | HTMLElement | SvelteComponent | ComponentType;
 
 export interface Action {
 	get label(): string;

@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { type Action } from '../../actions';
-	import SingleAction from './SingleAction.svelte';
 	import { Grid, Row } from 'carbon-components-svelte';
 
+	import SingleAction from './SingleAction.svelte';
+	import type { Action } from '../../actions';
+
 	export let actions: Action[] = [];
-	export let item: any = undefined;
+	export let item: object|undefined = undefined;
 </script>
 
 <Grid style="max-width: 14rem;">
