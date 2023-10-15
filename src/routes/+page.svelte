@@ -16,8 +16,8 @@
 
 	<p>
 		If you detect any bug in this demo, feel free to clone the project or submit an issue in the
-		[Github Repository
-		(https://github.com/Orbitale/SvelteAdmin)](https://github.com/Orbitale/SvelteAdmin)!
+		<a href="https://github.com/Orbitale/SvelteAdmin">Github Repository
+		(https://github.com/Orbitale/SvelteAdmin)</a>!
 	</p>
 
 	<p>Here are the available CRUDs for the demo app:</p>
