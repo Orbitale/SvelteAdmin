@@ -10,7 +10,7 @@ export type CrudDefinitionOptions<T> = {
 	defaultAction?: string;
 	actions: Array<CrudAction<T>>;
 	stateProvider?: StateProvider<T>;
-	stateProcessor?: StateProcessor;
+	stateProcessor?: StateProcessor<T>;
 };
 
 export class CrudDefinition<T> {

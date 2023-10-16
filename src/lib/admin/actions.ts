@@ -1,5 +1,5 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
-import type { Optional } from '$lib/admin/generic_types.ts';
+import type { KeyValueObject, Optional } from '$lib/admin/generic_types.ts';
 
 export type ActionIcon = object | string | HTMLElement | SvelteComponent | ComponentType;
 
@@ -26,9 +26,9 @@ export abstract class DefaultAction implements Action {
 }
 
 export class CallbackAction extends DefaultAction {
-	private readonly _callback: (...args: any[]) => any;
+	private readonly _callback: (item: object) => string;
 
-	constructor(label: string, icon: Optional<ActionIcon>, callback: (...args: any[]) => any) {
+	constructor(label: string, icon: Optional<ActionIcon>, callback: (item: object) => string) {
 		super(label, icon);
 		this._callback = callback;
 	}
@@ -46,23 +46,19 @@ export class UrlAction extends DefaultAction {
 		this._url = url;
 	}
 
-	public url(item?: object & { id?: string }): string {
-		if (!item) {
-			item = {};
-		}
+	public url(item: object & KeyValueObject & { id?: string } = {}): string {
 		let url = this._url || '';
 
 		const mightNeedId = item.id !== undefined;
 		const hasIdAsParameter = url.match(':id');
 
-		Object.keys(item || {}).forEach((field) => {
-			// @ts-ignore
+		for (const field in item) {
 			let value = item[field];
 			value = !value.toString ? '' : value.toString();
 			if (value.length) {
 				url = url.replace(`:${field}`, value.toString() || '');
 			}
-		});
+		}
 
 		if (mightNeedId && !hasIdAsParameter) {
 			url += '?id=' + (item.id ?? '');

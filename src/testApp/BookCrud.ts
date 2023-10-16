@@ -2,8 +2,8 @@
 import { type CrudAction, DeleteAction, EditAction, ListAction } from '$lib/admin/Crud/actions.ts';
 import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-import { CallbackStateProcessor } from '$lib/admin/State/Processor.ts';
-import { CallbackStateProvider } from '$lib/admin/State/Provider.ts';
+import { CallbackStateProcessor, type StateProcessorInput } from '$lib/admin/State/Processor.ts';
+import { CallbackStateProvider, type StateProviderResult } from '$lib/admin/State/Provider.ts';
 import { TextField } from '$lib/admin/FieldDefinitions/Text.ts';
 import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.ts';
 import { UrlAction } from '$lib/admin/actions.ts';
@@ -40,8 +40,8 @@ export const bookCrud = new CrudDefinition('books', {
 	],
 
 	stateProcessor: new CallbackStateProcessor(function (
-		data: any,
-		operation: CrudAction,
+		data: StateProcessorInput<Book>,
+		operation: CrudAction<Book>,
 		requestParameters: KeyValueObject = {}
 	) {
 		console.info('TODO: process new, edit or delete actions', {
@@ -57,9 +57,9 @@ export const bookCrud = new CrudDefinition('books', {
 	}),
 
 	stateProvider: new CallbackStateProvider<Book>(function (
-		operation: CrudAction,
+		operation: CrudAction<Book>,
 		requestParameters: KeyValueObject = {}
-	) {
+	): StateProviderResult<Book> {
 		console.info('TODO: return actual data', { operation, requestParameters });
 
 		if (operation.name === 'list') {

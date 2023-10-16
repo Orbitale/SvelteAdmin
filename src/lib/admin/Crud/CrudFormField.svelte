@@ -16,7 +16,7 @@
 	const dispatchEvent = createEventDispatcher<{
 		fieldChange: {
 			key: string;
-			value: any;
+			value: object | unknown;
 		};
 	}>();
 

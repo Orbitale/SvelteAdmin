@@ -1,12 +1,18 @@
 import type { CrudAction } from '$lib/admin/Crud/actions.ts';
 import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 
+export type StateProcessorInput<T> = T | Array<T> | null;
+
 export interface StateProcessor<T> {
-	process(data: any, operation: CrudAction<T>, requestParameters: KeyValueObject): void;
+	process(
+		data: StateProcessorInput<T>,
+		operation: CrudAction<T>,
+		requestParameters: KeyValueObject
+	): void;
 }
 
 export type StateProcessorCallback<T> = (
-	data: any,
+	data: StateProcessorInput<T>,
 	operation: CrudAction<T>,
 	requestParameters: KeyValueObject
 ) => void;
@@ -18,7 +24,11 @@ export class CallbackStateProcessor<T> implements StateProcessor<T> {
 		this._callback = callback;
 	}
 
-	process(data: any, operation: CrudAction<T>, requestParameters: KeyValueObject): void {
+	process(
+		data: StateProcessorInput<T>,
+		operation: CrudAction<T>,
+		requestParameters: KeyValueObject
+	): void {
 		return this._callback(data, operation, requestParameters);
 	}
 }

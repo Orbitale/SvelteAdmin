@@ -4,7 +4,7 @@
 	import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 	export let field: Field<Options>;
-	export let value: any;
+	export let value: object | undefined;
 </script>
 
 <TextInput

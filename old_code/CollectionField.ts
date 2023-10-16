@@ -7,17 +7,21 @@ export default class CollectionField extends Field {
 		super(name, text, new FieldOptions(item_field));
 	}
 
-	public displayFromItem(item: object | any): any {
-		let field: Field | AssociatedField;
-
+	public displayFromItem(item: object | Array): object | Array | null {
 		const items = item[this.name];
 
 		if (items.length === 0 || !(items instanceof Array)) {
 			return null;
 		}
 
-		field = this._associated_field;
+		if (!this._associated_field) {
+			return null;
+		}
 
-		return items.map((singleItem) => field.displayFromItem(singleItem));
+		let field: Field | AssociatedField | null = this._associated_field;
+
+		return items.map(
+			(singleItem: object | Array) => this._associated_field?.displayFromItem(singleItem)
+		);
 	}
 }
