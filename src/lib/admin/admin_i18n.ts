@@ -1,6 +1,7 @@
 import { init, addMessages } from 'svelte-i18n';
 
-import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+
 import en from '$lib/admin/translations/en.ts';
 import fr from '$lib/admin/translations/fr.ts';
 

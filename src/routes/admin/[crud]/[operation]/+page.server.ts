@@ -7,10 +7,10 @@ export function entries() {
 	const routes = [];
 
 	for (const crud of dashboard.cruds) {
-		for (const action of crud.options.actions) {
+		for (const operation of crud.options.operations) {
 			routes.push({
 				crud: crud.name,
-				action: action.name
+				operation: operation.name
 			});
 		}
 	}

@@ -10,15 +10,11 @@
 
 	export let action: Action;
 	export let item: object | undefined = undefined;
-
-	function clickLink() {
-		console.info('CLICK args', arguments);
-	}
 </script>
 
 <Column>
 	{#if action instanceof UrlAction}
-		<Link href={action.url(item)} icon={action.icon} on:click={clickLink}>
+		<Link href={action.url(item)} icon={action.icon}>
 			{$_(action.label)}
 		</Link>
 	{:else if action instanceof CallbackAction}

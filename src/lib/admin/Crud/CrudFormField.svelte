@@ -2,9 +2,9 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options';
-	import type { CrudAction } from '$lib/admin/Crud/actions';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 
-	export let action: CrudAction<object>;
+	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;
 	export let data: object | undefined;
 	export let value: unknown;
@@ -31,7 +31,7 @@
 <svelte:component
 	this={field.formComponent}
 	{field}
-	{action}
+	{operation}
 	{value}
 	{data}
 	on:change={onFieldChange}

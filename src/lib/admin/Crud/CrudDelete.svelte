@@ -5,14 +5,14 @@
 
 	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 	import { CallbackAction, UrlAction } from '$lib/admin/actions.ts';
-	import { type CrudAction, DeleteAction } from '$lib/admin/Crud/actions.ts';
-	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+	import { type CrudOperation, Delete } from '$lib/admin/Crud/Operations.ts';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 
 	export let crud: CrudDefinition<object>;
-	export let action: CrudAction<object>;
+	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	const data = crud.options.stateProvider?.provide(action, requestParameters);
+	const data = crud.options.stateProvider?.provide(operation, requestParameters);
 
 	function clickCancel() {
 		// TODO: check if it's the best method
@@ -20,10 +20,10 @@
 	}
 
 	function clickDelete() {
-		crud.options.stateProcessor?.process(data, action, requestParameters);
+		crud.options.stateProcessor?.process(data, operation, requestParameters);
 
-		if (action instanceof DeleteAction) {
-			const redirect = action.redirectTo;
+		if (operation instanceof Delete) {
+			const redirect = operation.redirectTo;
 			if (redirect instanceof UrlAction) {
 				window.location.replace(redirect.url(data));
 			} else if (redirect instanceof CallbackAction) {

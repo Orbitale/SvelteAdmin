@@ -5,9 +5,9 @@
 
 	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
 	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
-	import type { CrudAction } from '$lib/admin/Crud/actions';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 
-	export let action: CrudAction;
+	export let operation: CrudOperation;
 	export let fields: Array<TabsField> = [];
 	export let defaultData: object = {};
 </script>
@@ -20,9 +20,9 @@
 		{#each fields as tabbed_field (tabbed_field.name)}
 			<TabContent>
 				<CrudFormField
-					{action}
-					field={tabbed_field}
+					{operation}
 					{defaultData}
+					field={tabbed_field}
 					value={defaultData[tabbed_field.name]}
 					on:fieldChange
 				/>

@@ -16,25 +16,25 @@
 
 	import AdminLayout from '$lib/admin/Layout/AdminLayout.svelte';
 	import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-	import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 
 	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined = undefined;
-	export let action: string | undefined = undefined;
+	export let operation: string | undefined = undefined;
 	export let requestParameters: KeyValueObject = {};
 
 	let currentCrud: CrudDefinition | undefined;
-	let currentCrudAction: CrudAction | undefined;
+	let currentCrudOperation: CrudOperation | undefined;
 
 	dashboard.cruds
 		.filter((dashboardCrud: CrudDefinition) => crud === dashboardCrud.name)
 		.forEach((resolved: CrudDefinition) => (currentCrud = resolved));
 
-	currentCrud?.options.actions
-		.filter((crudAction: CrudAction) => action === crudAction.name)
-		.forEach((resolved: CrudAction) => (currentCrudAction = resolved));
+	currentCrud?.options.operations
+		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
+		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 </script>
 
 <AdminLayout
@@ -48,26 +48,28 @@
 		{#if !currentCrud}
 			<InlineNotification hideCloseButton={true}>
 				{#if crud}
-					{$_('error.crud.could_not_find_crud_name', { values: { crud: crud } })}
+					{$_('error.crud.could_not_find_crud_name', { values: { crud } })}
 				{:else}
 					{$_('error.crud.no_crud_specified')}
 				{/if}
 			</InlineNotification>
 		{/if}
-		{#if currentCrud && !currentCrudAction}
+		{#if currentCrud && !currentCrudOperation}
 			<InlineNotification hideCloseButton={true}>
-				{#if action}
-					{$_('error.crud.could_not_find_action_name', { values: { crud: crud, action: action } })}
+				{#if operation}
+					{$_('error.crud.could_not_find_operation_name', {
+						values: { crud, operation }
+					})}
 				{:else}
-					{$_('error.crud.no_action_specified', { values: { crud: crud } })}
+					{$_('error.crud.no_operation_specified', { values: { crud } })}
 				{/if}
 			</InlineNotification>
 		{/if}
 		<svelte:component
-			this={currentCrudAction?.displayComponent}
+			this={currentCrudOperation?.displayComponent}
 			{dashboard}
 			crud={currentCrud}
-			action={currentCrudAction}
+			operation={currentCrudOperation}
 			{requestParameters}
 		/>
 	</slot>

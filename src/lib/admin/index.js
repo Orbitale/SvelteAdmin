@@ -2,7 +2,7 @@
 // Classes & functions
 //
 export { CallbackAction, UrlAction } from './actions.ts';
-export { BaseCrudAction, NewAction, EditAction, ListAction, DeleteAction } from './Crud/actions.ts';
+export { BaseCrudOperation, New, Edit, List, Delete } from './Crud/Operations.ts';
 export { CrudDefinition } from './Crud/definition.ts';
 
 export { DashboardDefinition } from './Dashboard/definition.ts';

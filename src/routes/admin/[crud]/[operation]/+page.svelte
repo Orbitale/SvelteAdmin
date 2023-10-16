@@ -6,10 +6,10 @@
 	import { getRequestParams } from '$lib/admin/request.ts';
 
 	$: crud = $page.params.crud;
-	$: action = $page.params.action;
+	$: operation = $page.params.operation;
 	$: requestParameters = getRequestParams($page, browser);
 </script>
 
 {#key $page}
-	<Dashboard {dashboard} {crud} {action} {requestParameters} />
+	<Dashboard {dashboard} {crud} {operation} {requestParameters} />
 {/key}

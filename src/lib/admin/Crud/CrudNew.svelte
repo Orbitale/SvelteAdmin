@@ -2,17 +2,17 @@
 	import { _ } from 'svelte-i18n';
 
 	import CrudForm from '$lib/admin/Crud/CrudForm.svelte';
-	import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 	// import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	// import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+	// import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 
-	export let action: CrudAction;
+	export let operation: CrudOperation;
 	// export let crud: CrudDefinition<object>;
 	// export let requestParameters: KeyValueObject = {};
 </script>
 
 <CrudForm
-	crudAction={action}
+	{operation}
 	on:click
 	on:keydown
 	on:mouseover

@@ -1,6 +1,6 @@
 // src/lib/BookCrud.ts
-import { type CrudAction, DeleteAction, EditAction, ListAction } from '$lib/admin/Crud/actions.ts';
-import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+import { type CrudOperation, Delete, Edit, List } from '$lib/admin/Crud/Operations.ts';
+import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 import { CallbackStateProcessor, type StateProcessorInput } from '$lib/admin/State/Processor.ts';
 import { CallbackStateProvider, type StateProviderResult } from '$lib/admin/State/Provider.ts';
@@ -33,15 +33,15 @@ const actions = [
 export const bookCrud = new CrudDefinition('books', {
 	label: { singular: 'Book', plural: 'Books' },
 
-	actions: [
-		new ListAction(fields, actions),
-		new EditAction(fields, []),
-		new DeleteAction(fields, new UrlAction('List', '/admin/books/list'))
+	operations: [
+		new List(fields, actions),
+		new Edit(fields, []),
+		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
 	stateProcessor: new CallbackStateProcessor(function (
 		data: StateProcessorInput<Book>,
-		operation: CrudAction<Book>,
+		operation: CrudOperation<Book>,
 		requestParameters: KeyValueObject = {}
 	) {
 		console.info('TODO: process new, edit or delete actions', {
@@ -57,7 +57,7 @@ export const bookCrud = new CrudDefinition('books', {
 	}),
 
 	stateProvider: new CallbackStateProvider<Book>(function (
-		operation: CrudAction<Book>,
+		operation: CrudOperation<Book>,
 		requestParameters: KeyValueObject = {}
 	): StateProviderResult<Book> {
 		console.info('TODO: return actual data', { operation, requestParameters });

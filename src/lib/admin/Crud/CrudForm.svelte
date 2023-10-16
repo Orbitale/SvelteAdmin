@@ -9,17 +9,17 @@
 	import Tabs from '$lib/admin/Crud/Tabs.svelte';
 	import { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
 
-	import type { CrudAction } from '$lib/admin/Crud/actions';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 	import type { SubmitButtonType } from '$lib/admin/config/types';
 	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
-	export let formAction: 'get' | 'post' = 'post';
-	export let crudAction: CrudAction<object>;
+	export let method: 'get' | 'post' = 'post';
+	export let operation: CrudOperation<object>;
 	export let defaultData: object = {};
 
-	let fields: FieldInterface<Options>[] = crudAction.fields;
+	let fields: FieldInterface<Options>[] = operation.fields;
 
 	let tabbed_fields: Array<TabsField> = [];
 
@@ -53,7 +53,7 @@
 </script>
 
 <Form
-	method={formAction}
+	{method}
 	on:click
 	on:keydown
 	on:mouseover
@@ -68,7 +68,7 @@
 		{#each fields as field (field.name)}
 			<FormGroup>
 				<CrudFormField
-					action={crudAction}
+					{operation}
 					{field}
 					{defaultData}
 					value={defaultData[field.name]}
@@ -77,7 +77,7 @@
 			</FormGroup>
 		{/each}
 	{:else}
-		<Tabs fields={tabbed_fields} action={crudAction} {defaultData} on:fieldChange />
+		<Tabs fields={tabbed_fields} {operation} {defaultData} on:fieldChange />
 	{/if}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>

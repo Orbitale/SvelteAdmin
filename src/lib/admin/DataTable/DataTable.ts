@@ -3,9 +3,9 @@ import type {
 	DataTableRow
 } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
-import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
-import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 
 export type Header = DataTableHeader;
@@ -14,10 +14,10 @@ export type Headers = Array<Header>;
 export type Row = DataTableRow;
 export type Rows = Array<Row>;
 
-export function createEmptyRow(action: CrudAction<object>): Row {
+export function createEmptyRow(operation: CrudOperation<unknown>): Row {
 	const fields: KeyValueObject = {};
 
-	action.fields.forEach((field: Field<Options>) => {
+	operation.fields.forEach((field: Field<Options>) => {
 		fields[field.name] = '-';
 	});
 

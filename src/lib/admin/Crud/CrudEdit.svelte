@@ -9,20 +9,20 @@
 
 	import CrudForm from '$lib/admin/Crud/CrudForm.svelte';
 	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	import type { CrudAction } from '$lib/admin/Crud/actions.ts';
-	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 
 	export let crud: CrudDefinition<object>;
-	export let action: CrudAction<object>;
+	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	let defaultData = crud.options.stateProvider?.provide(action, requestParameters);
+	let defaultData = crud.options.stateProvider?.provide(operation, requestParameters);
 
 	let mounted = false;
 
 	onMount(() => {
 		if (!defaultData) {
-			defaultData = crud.options.stateProvider?.provide(action, requestParameters);
+			defaultData = crud.options.stateProvider?.provide(operation, requestParameters);
 		}
 		mounted = true;
 	});
@@ -41,7 +41,7 @@
 	{/if}
 {:else}
 	<CrudForm
-		crudAction={action}
+		{operation}
 		{defaultData}
 		on:click
 		on:keydown
