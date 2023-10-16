@@ -20,6 +20,7 @@ export class CrudDefinition<T> {
 
 	constructor(name: string, options: CrudDefinitionOptions<T>) {
 		this.name = name;
+
 		if (!options?.operations.length) {
 			throw new Error(
 				`Crud definition "${name}" has no Crud operations set.\nDid you forget to add an "operations" key when creating your Crud definition?`
@@ -29,7 +30,7 @@ export class CrudDefinition<T> {
 		const defaultOperationName = options.defaultOperationName || options.operations[0]?.name;
 		if (!defaultOperationName || !defaultOperationName.length) {
 			throw new Error(
-				`Crud definition "${name}" has an invalid default operation name "${defaultOperationName}".\nYou can fix this issue by adding the "defaultOperationName" option when creating your Crud definition.`
+				`Crud definition "${name}" has an invalid default operation name "${defaultOperationName}".\nYou can fix this issue by customizing the "defaultOperationName" option when creating your Crud definition.`
 			);
 		}
 

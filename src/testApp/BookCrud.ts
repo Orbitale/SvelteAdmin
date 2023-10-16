@@ -2,8 +2,8 @@
 import { type CrudOperation, Delete, Edit, List } from '$lib/admin/Crud/Operations.ts';
 import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-import { CallbackStateProcessor, type StateProcessorInput } from '$lib/admin/State/Processor.ts';
-import { CallbackStateProvider, type StateProviderResult } from '$lib/admin/State/Provider.ts';
+import { CallbackStateProcessor } from '$lib/admin/State/Processor.ts';
+import { CallbackStateProvider } from '$lib/admin/State/Provider.ts';
 import { TextField } from '$lib/admin/FieldDefinitions/Text.ts';
 import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.ts';
 import { UrlAction } from '$lib/admin/actions.ts';
