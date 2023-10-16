@@ -39,11 +39,7 @@ export const bookCrud = new CrudDefinition('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(function (
-		data: StateProcessorInput<Book>,
-		operation: CrudOperation<Book>,
-		requestParameters: KeyValueObject = {}
-	) {
+	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
 		console.info('TODO: process new, edit or delete actions', {
 			data,
 			operation,
@@ -56,10 +52,7 @@ export const bookCrud = new CrudDefinition('books', {
 		}
 	}),
 
-	stateProvider: new CallbackStateProvider<Book>(function (
-		operation: CrudOperation<Book>,
-		requestParameters: KeyValueObject = {}
-	): StateProviderResult<Book> {
+	stateProvider: new CallbackStateProvider(function (operation, requestParameters: KeyValueObject = {}) {
 		console.info('TODO: return actual data', { operation, requestParameters });
 
 		if (operation.name === 'list') {
