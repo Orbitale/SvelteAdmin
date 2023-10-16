@@ -1,5 +1,5 @@
-import type { CrudAction } from '../Crud/actions.ts';
-import type { KeyValueObject } from '../generic_types.ts';
+import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 
 export type StateProviderResult<T> = T | Array<T> | null;
 

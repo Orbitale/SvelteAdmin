@@ -1,7 +1,7 @@
 import type { ComponentType } from 'svelte';
-import ToggleFieldComponent from '../Crud/FieldComponents/ToggleField.svelte';
-import { Field } from './Field';
-import type { Options } from './Options';
+import ToggleFieldComponent from '$lib/admin/Crud/FieldComponents/ToggleField.svelte';
+import { Field } from '$lib/admin/FieldDefinitions/Field';
+import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 export type ToggleOptions = Options;
 

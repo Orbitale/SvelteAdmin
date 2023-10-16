@@ -11,12 +11,14 @@
 
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
+
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
-	import AdminLayout from '../Layout/AdminLayout.svelte';
-	import type { DashboardDefinition } from './definition.ts';
-	import type { CrudAction } from '../Crud/actions.ts';
-	import type { CrudDefinition } from '../Crud/definition.ts';
-	import type { KeyValueObject } from '../generic_types.ts';
+
+	import AdminLayout from '$lib/admin/Layout/AdminLayout.svelte';
+	import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
+	import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
+	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 
 	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined = undefined;

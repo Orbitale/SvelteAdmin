@@ -1,5 +1,5 @@
-import { type Action, type ActionIcon, DefaultAction } from '../actions';
-import type { Optional } from '../generic_types';
+import { type Action, type ActionIcon, DefaultAction } from '$lib/admin/actions';
+import type { Optional } from '$lib/admin/generic_types';
 
 export type MenuLink = Action;
 

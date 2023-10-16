@@ -1,7 +1,7 @@
 import type { ComponentType } from 'svelte';
-import TextFieldComponent from '../Crud/FieldComponents/TextField.svelte';
-import { Field } from './Field';
-import type { CommonOptions } from './Options';
+import TextFieldComponent from '$lib/admin/Crud/FieldComponents/TextField.svelte';
+import { Field } from '$lib/admin/FieldDefinitions/Field';
+import type { CommonOptions } from '$lib/admin/FieldDefinitions/Options';
 
 export type TextOptions = CommonOptions & {
 	maxLength?: number;

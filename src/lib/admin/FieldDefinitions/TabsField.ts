@@ -1,7 +1,7 @@
 import type { ComponentType } from 'svelte';
-import type { FieldInterface } from './Field';
-import TabsFieldComponent from '../Crud/FieldComponents/TabsField.svelte';
-import type { Options } from './Options';
+import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
+import TabsFieldComponent from '$lib/admin/Crud/FieldComponents/TabsField.svelte';
+import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 export type TabOptions = Options & {
 	headerType: 'default' | 'container';

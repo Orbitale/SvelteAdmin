@@ -3,9 +3,9 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import ItemActions from './actions/ItemActions.svelte';
-	import type { Action } from '../actions';
-	import type { Headers, Rows } from './DataTable.ts';
+	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
+	import type { Action } from '$lib/admin/actions';
+	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
 
 	export let headers: Headers = [];
 	export let rows: Rows = [];

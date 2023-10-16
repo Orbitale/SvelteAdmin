@@ -4,12 +4,12 @@
 	import { onMount } from 'svelte';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 
-	import TopMenu from '../Menu/TopMenu.svelte';
-	import SideMenu from '../Menu/SideMenu.svelte';
-	import type { MenuLink } from '../Menu/MenuLinks';
+	import TopMenu from '$lib/admin/Menu/TopMenu.svelte';
+	import SideMenu from '$lib/admin/Menu/SideMenu.svelte';
+	import type { MenuLink } from '$lib/admin/Menu/MenuLinks';
 
-	import { type Dictionaries, initLocale } from '../admin_i18n';
-	import type { AdminConfig } from '../config/adminConfig.ts';
+	import { type Dictionaries, initLocale } from '$lib/admin/admin_i18n';
+	import type { AdminConfig } from '$lib/admin/config/adminConfig.ts';
 
 	// Available Carbon themes: "white" | "g10" | "g80" | "g90" | "g100"
 	export let theme = 'g10';

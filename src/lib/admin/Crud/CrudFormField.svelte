@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import type { FieldInterface } from '../FieldDefinitions/Field';
-	import type { Options } from '../FieldDefinitions/Options';
-	import type { CrudAction } from './actions';
+	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
+	import type { Options } from '$lib/admin/FieldDefinitions/Options';
+	import type { CrudAction } from '$lib/admin/Crud/actions';
 
 	export let action: CrudAction;
 	export let field: FieldInterface<Options>;

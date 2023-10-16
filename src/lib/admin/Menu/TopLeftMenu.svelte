@@ -6,8 +6,8 @@
 	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
 	import Link from 'carbon-icons-svelte/lib/Link.svelte';
 
-	import { Divider, type MenuLink, Submenu } from './MenuLinks';
-	import { CallbackAction, UrlAction } from '../actions';
+	import { Divider, type MenuLink, Submenu } from '$lib/admin/Menu/MenuLinks';
+	import { CallbackAction, UrlAction } from '$lib/admin/actions';
 
 	export let links: Array<MenuLink> = [];
 </script>

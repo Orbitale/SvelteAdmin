@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TextInput from 'carbon-components-svelte/src/TextInput/TextInput.svelte';
-	import type { Field } from '../../FieldDefinitions/Field';
-	import type { Options } from '../../FieldDefinitions/Options';
+	import type { Field } from '$lib/admin/FieldDefinitions/Field';
+	import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 	export let field: Field<Options>;
 	export let value: any;

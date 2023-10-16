@@ -7,10 +7,10 @@
 	import TextAreaSkeleton from 'carbon-components-svelte/src/TextArea/TextAreaSkeleton.svelte';
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 
-	import CrudForm from './CrudForm.svelte';
-	import type { CrudDefinition } from './definition.ts';
-	import type { CrudAction } from './actions.ts';
-	import type { KeyValueObject } from '../generic_types.ts';
+	import CrudForm from '$lib/admin/Crud/CrudForm.svelte';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
+	import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 
 	export let crud: CrudDefinition;
 	export let action: CrudAction;

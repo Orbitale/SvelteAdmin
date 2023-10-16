@@ -1,7 +1,7 @@
-import type { MenuLink } from '../Menu/MenuLinks.ts';
-import type { Dictionaries } from '../admin_i18n.ts';
-import type { CrudDefinition } from '../Crud/definition.ts';
-import type { AdminConfig } from '../config/adminConfig.ts';
+import type { MenuLink } from '$lib/admin/Menu/MenuLinks.ts';
+import type { Dictionaries } from '$lib/admin/admin_i18n.ts';
+import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
+import type { AdminConfig } from '$lib/admin/config/adminConfig.ts';
 
 export type DashboardDefinitionOptions = {
 	adminConfig: AdminConfig;

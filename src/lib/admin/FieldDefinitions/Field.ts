@@ -1,6 +1,6 @@
 import type { ComponentType } from 'svelte';
-import DefaultFieldComponent from '../Crud/FieldComponents/DefaultField.svelte';
-import type { Options } from './Options';
+import DefaultFieldComponent from '$lib/admin/Crud/FieldComponents/DefaultField.svelte';
+import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 export interface FieldInterface<T extends Options> {
 	readonly name: string;

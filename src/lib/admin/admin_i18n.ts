@@ -1,8 +1,8 @@
 import { init, addMessages } from 'svelte-i18n';
 
-import type { KeyValueObject } from './generic_types.ts';
-import en from './translations/en.ts';
-import fr from './translations/fr.ts';
+import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+import en from '$lib/admin/translations/en.ts';
+import fr from '$lib/admin/translations/fr.ts';
 
 export type Dictionary = KeyValueObject;
 export type Dictionaries = { [key: string]: Dictionary };

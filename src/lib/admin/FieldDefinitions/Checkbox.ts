@@ -1,7 +1,7 @@
 import type { ComponentType } from 'svelte';
-import CheckboxFieldComponent from '../Crud/FieldComponents/CheckboxField.svelte';
-import { Field } from './Field';
-import type { Options } from './Options';
+import CheckboxFieldComponent from '$lib/admin/Crud/FieldComponents/CheckboxField.svelte';
+import { Field } from '$lib/admin/FieldDefinitions/Field';
+import type { Options } from '$lib/admin/FieldDefinitions/Options';
 
 export type CheckboxOptions = Options;
 

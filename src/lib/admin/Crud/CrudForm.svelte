@@ -5,14 +5,14 @@
 	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
-	import CrudFormField from './CrudFormField.svelte';
-	import Tabs from './Tabs.svelte';
-	import { TabsField } from '../FieldDefinitions/TabsField';
+	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
+	import Tabs from '$lib/admin/Crud/Tabs.svelte';
+	import { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
 
-	import type { CrudAction } from './actions';
-	import type { SubmitButtonType } from '../config/types';
-	import type { FieldInterface } from '../FieldDefinitions/Field';
-	import type { Options } from '../FieldDefinitions/Options.ts';
+	import type { CrudAction } from '$lib/admin/Crud/actions';
+	import type { SubmitButtonType } from '$lib/admin/config/types';
+	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
+	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let formAction: 'get' | 'post' = 'post';

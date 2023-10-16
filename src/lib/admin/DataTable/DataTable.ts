@@ -2,10 +2,11 @@ import type {
 	DataTableHeader,
 	DataTableRow
 } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
-import type { CrudAction } from '../Crud/actions.ts';
-import type { Field } from '../FieldDefinitions/Field.ts';
-import type { KeyValueObject } from '../generic_types.ts';
-import type { Options } from '../FieldDefinitions/Options.ts';
+
+import type { CrudAction } from '$lib/admin/Crud/actions.ts';
+import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
+import type { KeyValueObject } from '$lib/admin/generic_types.ts';
+import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 
 export type Header = DataTableHeader;
 export type Headers = Array<Header>;

@@ -1,7 +1,7 @@
 import type { ComponentType } from 'svelte';
-import UrlFieldComponent from '../Crud/FieldComponents/UrlField.svelte';
-import { Field } from './Field';
-import type { CommonOptions } from './Options';
+import UrlFieldComponent from '$lib/admin/Crud/FieldComponents/UrlField.svelte';
+import { Field } from '$lib/admin/FieldDefinitions/Field';
+import type { CommonOptions } from '$lib/admin/FieldDefinitions/Options';
 
 export type UrlOptions = CommonOptions;
 

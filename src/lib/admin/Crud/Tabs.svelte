@@ -2,9 +2,10 @@
 	import Tabs from 'carbon-components-svelte/src/Tabs/Tabs.svelte';
 	import Tab from 'carbon-components-svelte/src/Tabs/Tab.svelte';
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
-	import CrudFormField from './CrudFormField.svelte';
-	import type { TabsField } from '../FieldDefinitions/TabsField';
-	import type { CrudAction } from './actions';
+
+	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
+	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
+	import type { CrudAction } from '$lib/admin/Crud/actions';
 
 	export let action: CrudAction;
 	export let fields: Array<TabsField> = [];
