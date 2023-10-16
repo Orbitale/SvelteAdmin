@@ -1,4 +1,4 @@
-import Book from 'carbon-icons-svelte/lib/Home.svelte';
+import Book from 'carbon-icons-svelte/lib/Book.svelte';
 import Home from 'carbon-icons-svelte/lib/Home.svelte';
 
 import { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
