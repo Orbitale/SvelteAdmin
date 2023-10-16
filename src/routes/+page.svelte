@@ -1,5 +1,6 @@
 <script lang="ts">
 	import UnorderedList from 'carbon-components-svelte/src/UnorderedList/UnorderedList.svelte';
+	import LogoGithub from "carbon-icons-svelte/lib/LogoGithub.svelte";
 	import { _ } from 'svelte-i18n';
 
 	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';
@@ -16,8 +17,7 @@
 
 	<p>
 		If you detect any bug in this demo, feel free to clone the project or submit an issue in the
-		<a href="https://github.com/Orbitale/SvelteAdmin">Github Repository
-		(https://github.com/Orbitale/SvelteAdmin)</a>!
+		<a href="https://github.com/Orbitale/SvelteAdmin"><LogoGithub /> Github Repository</a>!
 	</p>
 
 	<p>Here are the available CRUDs for the demo app:</p>
