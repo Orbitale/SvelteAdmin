@@ -10,7 +10,7 @@
 	import DataTable from '$lib/admin/DataTable/DataTable.svelte';
 	import { _ } from 'svelte-i18n';
 
-	export let crud: CrudDefinition;
+	export let crud: CrudDefinition<object>;
 	export let action: CrudAction;
 	export let requestParameters: KeyValueObject = {};
 

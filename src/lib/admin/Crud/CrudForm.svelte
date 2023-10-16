@@ -16,7 +16,7 @@
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let formAction: 'get' | 'post' = 'post';
-	export let crudAction: CrudAction;
+	export let crudAction: CrudAction<object>;
 	export let defaultData: object = {};
 
 	let fields: FieldInterface<Options>[] = crudAction.fields;

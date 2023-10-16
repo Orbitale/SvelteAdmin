@@ -8,8 +8,8 @@
 	import { type CrudAction, DeleteAction } from '$lib/admin/Crud/actions.ts';
 	import type { KeyValueObject } from '$lib/admin/generic_types.ts';
 
-	export let crud: CrudDefinition;
-	export let action: CrudAction;
+	export let crud: CrudDefinition<object>;
+	export let action: CrudAction<object>;
 	export let requestParameters: KeyValueObject = {};
 
 	const data = crud.options.stateProvider?.provide(action, requestParameters);

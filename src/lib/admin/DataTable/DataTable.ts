@@ -14,7 +14,7 @@ export type Headers = Array<Header>;
 export type Row = DataTableRow;
 export type Rows = Array<Row>;
 
-export function createEmptyRow(action: CrudAction): Row {
+export function createEmptyRow(action: CrudAction<object>): Row {
 	const fields: KeyValueObject = {};
 
 	action.fields.forEach((field: Field<Options>) => {

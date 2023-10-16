@@ -1,6 +1,6 @@
 <script lang="ts">
 	import UnorderedList from 'carbon-components-svelte/src/UnorderedList/UnorderedList.svelte';
-	import LogoGithub from "carbon-icons-svelte/lib/LogoGithub.svelte";
+	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import { _ } from 'svelte-i18n';
 
 	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';

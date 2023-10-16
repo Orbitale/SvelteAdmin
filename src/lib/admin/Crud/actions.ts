@@ -11,25 +11,25 @@ import type { Action } from '$lib/admin/actions.ts';
 
 export type CrudActionName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
 
-export interface CrudAction {
+export type TemplateComponent<T> = ComponentType<
+	SvelteComponent<{
+		dashboard: DashboardDefinition<T>;
+		crud: CrudDefinition<T>;
+		crudAction: CrudAction<T>;
+	}>
+>;
+
+export interface CrudAction<T> {
 	readonly name: CrudActionName;
 	readonly label: string;
-	readonly displayComponent:
-		| HTMLElement
-		| ComponentType<
-				SvelteComponent<{
-					dashboard: DashboardDefinition;
-					crud: CrudDefinition;
-					crudAction: CrudAction;
-				}>
-		  >;
+	readonly displayComponent: TemplateComponent<T>;
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Action[];
 }
 
-export class BaseCrudAction implements CrudAction {
+export class BaseCrudAction<T> implements CrudAction<T> {
 	public readonly name: CrudActionName;
-	public readonly displayComponent: HTMLElement | ComponentType;
+	public readonly displayComponent: TemplateComponent<T>;
 	public readonly fields: Array<Field<Options>>;
 	public readonly label: string;
 	public readonly actions: Action[];
@@ -37,7 +37,7 @@ export class BaseCrudAction implements CrudAction {
 	constructor(
 		name: CrudActionName,
 		label: string,
-		displayComponent: HTMLElement | ComponentType,
+		displayComponent: TemplateComponent<T>,
 		fields: Array<Field<Options>>,
 		actions: Action[] = []
 	) {
@@ -49,25 +49,25 @@ export class BaseCrudAction implements CrudAction {
 	}
 }
 
-export class NewAction extends BaseCrudAction {
+export class NewAction<T> extends BaseCrudAction<T> {
 	constructor(fields: Array<Field<Options>>, actions: Action[] = []) {
 		super('new', 'crud.new.label', CrudNew, fields, actions);
 	}
 }
 
-export class EditAction extends BaseCrudAction {
+export class EditAction<T> extends BaseCrudAction<T> {
 	constructor(fields: Array<Field<Options>>, actions: Action[] = []) {
 		super('edit', 'crud.edit.label', CrudEdit, fields, actions);
 	}
 }
 
-export class ListAction extends BaseCrudAction {
+export class ListAction<T> extends BaseCrudAction<T> {
 	constructor(fields: Array<Field<Options>>, actions: Action[] = []) {
 		super('list', 'crud.list.label', CrudList, fields, actions);
 	}
 }
 
-export class DeleteAction extends BaseCrudAction {
+export class DeleteAction<T> extends BaseCrudAction<T> {
 	public readonly redirectTo: Action;
 
 	constructor(fields: Array<Field<Options>>, redirectTo: Action) {
