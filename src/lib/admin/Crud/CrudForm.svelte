@@ -2,7 +2,7 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
-	import { createEventDispatcher } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
 	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
@@ -18,6 +18,8 @@
 	export let method: 'get' | 'post' = 'post';
 	export let operation: CrudOperation<object>;
 	export let defaultData: object = {};
+
+	export let htmlFormElement: HTMLFormElement;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
@@ -43,17 +45,45 @@
 	}>();
 
 	function onSubmit(event: SubmitEvent) {
-		const data = new FormData(event.target, event.submitter);
-		const dataMap = new Map<string, string | File | Array<string>>();
-		data.forEach((value, key) => {
-			dataMap.set(key, value);
+		if (operation.options?.preventHttpFormSubmit) {
+			event.preventDefault();
+		}
+
+		console.info('Submit', arguments);
+		const normalizedData: Record<string, unknown> = {};
+		new FormData(event.target, event.submitter).forEach(
+			(value, key) => (normalizedData[key] = value)
+		);
+		event.normalizedData = normalizedData;
+		dispatchEvent('submitData', normalizedData);
+		operation.eventHandlers.forEach(([eventName, callback]) => {
+			if (eventName === 'submitData') {
+				callback(event);
+			}
 		});
-		dispatchEvent('submitData', dataMap);
 	}
+
+	const enableEvents = () =>
+		operation.eventHandlers.forEach(([event, callback]) =>
+			htmlFormElement.addEventListener(event, callback)
+		);
+	const disableEvents = () =>
+		operation.eventHandlers.forEach(([event, callback]) =>
+			htmlFormElement.removeEventListener(event, callback)
+		);
+
+	onMount(() => {
+		enableEvents();
+	});
+
+	onDestroy(() => {
+		disableEvents();
+	});
 </script>
 
 <Form
 	{method}
+	bind:ref={htmlFormElement}
 	on:click
 	on:keydown
 	on:mouseover

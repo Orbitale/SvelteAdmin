@@ -5,9 +5,11 @@
 	import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
 	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
+	import { type CrudOperation, List } from '$lib/admin/Crud/Operations.ts';
 
+	import type { Action } from '$lib/admin/actions.ts';
 	import DataTable from '$lib/admin/DataTable/DataTable.svelte';
+
 	import { _ } from 'svelte-i18n';
 
 	export let crud: CrudDefinition<object>;
@@ -32,8 +34,15 @@
 	if (!rows || !rows.length) {
 		rows = [createEmptyRow(operation)];
 	}
+
+	let globalActions: Array<Action> = [];
+	if (operation instanceof List<any> || operation.options?.globalActions?.length) {
+		globalActions = operation.options.globalActions;
+	}
 </script>
 
-<h2>{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}</h2>
-
-<DataTable {headers} {rows} {actions} />
+<DataTable {headers} {rows} {actions} {globalActions}>
+	<h2 slot="title">
+		{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
+	</h2>
+</DataTable>

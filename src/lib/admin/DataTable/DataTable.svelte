@@ -3,13 +3,15 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import { _ } from 'svelte-i18n';
 
+	import DataTableToolbar from '$lib/admin/DataTable/DataTableToolbar.svelte';
 	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
-	import type { Action } from '$lib/admin/actions';
 	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
+	import type { Action } from '$lib/admin/actions';
 
 	export let headers: Headers = [];
 	export let rows: Rows = [];
 	export let actions: Action[] = [];
+	export let globalActions: Array<Action> = [];
 
 	let actionsCellIndex = -1;
 
@@ -22,7 +24,16 @@
 	}
 </script>
 
-<DataTable {headers} {rows} zebra={true} {...$$restProps}>
+<DataTable {headers} {rows} size="short" zebra={true} {...$$restProps}>
+	<svelte:fragment slot="title">
+		<slot name="title" />
+	</svelte:fragment>
+	<svelte:fragment slot="description">
+		<slot name="description" />
+	</svelte:fragment>
+	{#if globalActions.length}
+		<DataTableToolbar actions={globalActions} />
+	{/if}
 	{#if !rows.length}
 		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
 			{$_('error.crud.list.no_elements')}

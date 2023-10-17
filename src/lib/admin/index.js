@@ -4,6 +4,7 @@
 export { CallbackAction, UrlAction } from './actions.ts';
 export { BaseCrudOperation, New, Edit, List, Delete } from './Crud/Operations.ts';
 export { CrudDefinition } from './Crud/definition.ts';
+export { getSubmittedFormData } from './Crud/form.ts';
 
 export { DashboardDefinition } from './Dashboard/definition.ts';
 

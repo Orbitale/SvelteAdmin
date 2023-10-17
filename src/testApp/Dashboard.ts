@@ -18,6 +18,8 @@ export const dashboard = new DashboardDefinition({
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book)
 	],
-	localeDictionaries: { fr },
+	localeDictionaries: {
+		fr: fr
+	},
 	cruds: [bookCrud]
 });

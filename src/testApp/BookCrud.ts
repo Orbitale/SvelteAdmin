@@ -1,5 +1,5 @@
 // src/lib/BookCrud.ts
-import { type CrudOperation, Delete, Edit, List } from '$lib/admin/Crud/Operations.ts';
+import { Delete, Edit, List, New, type OperationCallback } from '$lib/admin/Crud/Operations.ts';
 import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 import { CallbackStateProcessor } from '$lib/admin/State/Processor.ts';
@@ -10,6 +10,7 @@ import { UrlAction } from '$lib/admin/actions.ts';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+import { getSubmittedFormData } from '$lib/admin/Crud/form.ts';
 
 type Book = { id: number; title: string; description: string };
 const books: Array<Book> = [
@@ -25,17 +26,33 @@ const fields = [
 	})
 ];
 
-const actions = [
-	new UrlAction('Edit', '/admin/books/edit', Pen),
-	new UrlAction('Delete', '/admin/books/delete', TrashCan)
-];
+const formSubmit = (e: SubmitEvent) => {
+	const formData: Record<string, unknown> = ({} = getSubmittedFormData(e));
+	console.info(formData);
+	alert(
+		'Submitted form!\nHere are the data you submitted:\n' +
+			JSON.stringify(formData, null, 4) +
+			'\nYou should put this in a database via an API 😉'
+	);
+};
 
 export const bookCrud = new CrudDefinition('books', {
 	label: { singular: 'Book', plural: 'Books' },
 
 	operations: [
-		new List(fields, actions),
-		new Edit(fields, []),
+		new List(
+			fields,
+			[
+				new UrlAction('Edit', '/admin/books/edit', Pen),
+				new UrlAction('Delete', '/admin/books/delete', TrashCan)
+			],
+			[],
+			{
+				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
+			}
+		),
+		new New(fields, [], [['submit', formSubmit as OperationCallback]]),
+		new Edit(fields, [], [['submit', formSubmit as OperationCallback]]),
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
@@ -52,7 +69,10 @@ export const bookCrud = new CrudDefinition('books', {
 		}
 	}),
 
-	stateProvider: new CallbackStateProvider(function (operation, requestParameters: KeyValueObject = {}) {
+	stateProvider: new CallbackStateProvider(function (
+		operation,
+		requestParameters: KeyValueObject = {}
+	) {
 		console.info('TODO: return actual data', { operation, requestParameters });
 
 		if (operation.name === 'list') {
