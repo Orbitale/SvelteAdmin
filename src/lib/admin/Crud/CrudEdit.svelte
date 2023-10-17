@@ -12,7 +12,6 @@
 	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
-	import DataTable from '../DataTable/DataTable.svelte';
 
 	export let crud: CrudDefinition<object>;
 	export let operation: CrudOperation<object>;
@@ -29,10 +28,6 @@
 		mounted = true;
 	});
 </script>
-
-<h2 slot="title">
-	{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
-</h2>
 
 {#if !defaultData}
 	{#if mounted}
@@ -58,7 +53,7 @@
 		on:submitData
 	>
 		<svelte:fragment slot="form-header">
-			<h1>{$_('crud.header.edit')}</h1>
+			<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
 		</svelte:fragment>
 	</CrudForm>
 {/if}

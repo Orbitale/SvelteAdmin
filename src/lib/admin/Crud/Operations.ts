@@ -67,7 +67,7 @@ type FormOperationOptions = object & {
 	preventHttpFormSubmit: boolean;
 };
 const DEFAULT_FORM_OPERATION_OPTION: FormOperationOptions = {
-	preventHttpFormSubmit: true
+	preventHttpFormSubmit: true,
 };
 
 export class New<T> extends BaseCrudOperation<T> {

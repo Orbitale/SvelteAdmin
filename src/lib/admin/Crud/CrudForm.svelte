@@ -69,7 +69,7 @@
 		);
 	const disableEvents = () =>
 		operation.eventHandlers.forEach(([event, callback]) =>
-			htmlFormElement.removeEventListener(event, callback)
+			htmlFormElement?.removeEventListener(event, callback)
 		);
 
 	onMount(() => {

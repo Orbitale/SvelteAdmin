@@ -3,7 +3,7 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import DataTableToolbar from '$lib/admin/DataTable/DataTableToolbar.svelte';
+	import DataTableToolbar from '$lib/admin/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
 	import type { Action } from '$lib/admin/actions';

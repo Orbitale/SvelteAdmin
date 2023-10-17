@@ -3,18 +3,11 @@
 
 	import CrudForm from '$lib/admin/Crud/CrudForm.svelte';
 	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-	import { crud } from '$lib/admin';
-	// import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	// import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 
 	export let operation: CrudOperation;
-	// export let crud: CrudDefinition<object>;
-	// export let requestParameters: KeyValueObject = {};
+	export let crud: CrudDefinition<object>;
 </script>
-
-<h2>
-	{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
-</h2>
 
 <CrudForm
 	{operation}
@@ -27,6 +20,6 @@
 	on:submitData
 >
 	<svelte:fragment slot="form-header">
-		<h1>{$_('crud.header.new')}</h1>
+		<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
 	</svelte:fragment>
 </CrudForm>
