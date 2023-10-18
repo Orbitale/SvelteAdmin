@@ -17,18 +17,16 @@
 	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	let defaultData: undefined | null | Record<string, unknown> = crud.options.stateProvider.provide(
+	let defaultData: Promise<undefined | null | Record<string, unknown>> = crud.options.stateProvider.provide(
 		operation,
 		requestParameters
 	);
 
-	let mounted = false;
-
-	onMount(() => {
-		if (!defaultData) {
+	onMount(async () => {
+		const data = await defaultData;
+		if (!data) {
 			defaultData = crud.options.stateProvider.provide(operation, requestParameters);
 		}
-		mounted = true;
 	});
 
 	function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
@@ -38,32 +36,32 @@
 	}
 </script>
 
-{#if !defaultData}
-	{#if mounted}
+{#await defaultData}
+	<FormGroup><TextInputSkeleton /></FormGroup>
+	<FormGroup><CheckboxSkeleton /></FormGroup>
+	<FormGroup><TextAreaSkeleton /></FormGroup>
+	<FormGroup><ButtonSkeleton /></FormGroup>
+{:then}
+	{#if !defaultData}
 		<InlineNotification kind="error">
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		<FormGroup><TextInputSkeleton /></FormGroup>
-		<FormGroup><CheckboxSkeleton /></FormGroup>
-		<FormGroup><TextAreaSkeleton /></FormGroup>
-		<FormGroup><ButtonSkeleton /></FormGroup>
+		<CrudForm
+				{operation}
+				{defaultData}
+				on:click
+				on:keydown
+				on:mouseover
+				on:mouseenter
+				on:mouseleave
+				on:submit
+				on:submitData
+				on:submitData={onSubmitData}
+		>
+			<svelte:fragment slot="form-header">
+				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
+			</svelte:fragment>
+		</CrudForm>
 	{/if}
-{:else}
-	<CrudForm
-		{operation}
-		{defaultData}
-		on:click
-		on:keydown
-		on:mouseover
-		on:mouseenter
-		on:mouseleave
-		on:submit
-		on:submitData
-		on:submitData={onSubmitData}
-	>
-		<svelte:fragment slot="form-header">
-			<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
-		</svelte:fragment>
-	</CrudForm>
-{/if}
+{/await}

@@ -16,6 +16,7 @@
 	import DataTable from '$lib/admin/DataTable/DataTable.svelte';
 
 	import { _ } from 'svelte-i18n';
+	import {onMount} from "svelte";
 
 	export let crud: CrudDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
@@ -30,20 +31,30 @@
 		throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
 	}
 
-	const rows: Promise<unknown> = crud.options.stateProvider.provide(operation, requestParameters)
-		.then((r: unknown) => {
-			console.info(r);
-			if (r && !Array.isArray(r)) {
+	function getResults() {
+		return crud.options.stateProvider.provide(operation, requestParameters).then((results) => {
+			console.info(results);
+			if (results && !Array.isArray(results)) {
 				throw new Error(
-					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
+						'CrudList expected state provider to return an array, current result is non-empty and not an array.'
 				);
 			}
-			if (!r || !r?.length) {
-				r = [createEmptyRow(operation)];
+			if (!results || !results?.length) {
+				results = [createEmptyRow(operation)];
 			}
 
-			return r;
+			return results;
 		});
+	}
+
+	let rows: Promise<unknown> = getResults();
+
+	onMount(async () => {
+		const data = await rows;
+		if (!data) {
+			rows = getResults();
+		}
+	});
 
 	let globalActions: Array<Action> = [];
 	if (operation instanceof List<unknown> || operation.options?.globalActions?.length) {
