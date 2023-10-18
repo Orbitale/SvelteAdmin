@@ -12,7 +12,7 @@
 	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	const data = crud.options.stateProvider?.provide(operation, requestParameters);
+	const data = crud.options.stateProvider.provide(operation, requestParameters);
 
 	function clickCancel() {
 		// TODO: check if it's the best method
@@ -20,7 +20,7 @@
 	}
 
 	function clickDelete() {
-		crud.options.stateProcessor?.process(data, operation, requestParameters);
+		crud.options.stateProcessor.process(data, operation, requestParameters);
 
 		if (operation instanceof Delete) {
 			const redirect = operation.redirectTo;

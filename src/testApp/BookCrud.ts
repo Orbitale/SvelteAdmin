@@ -50,10 +50,13 @@ export const bookCrud = new CrudDefinition('books', {
 		operation,
 		requestParameters = {}
 	) {
+		console.info(operation.name, requestParameters);
 		if (operation.name === 'delete') {
 			alert(
 				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
 			);
+
+			return;
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
@@ -65,16 +68,17 @@ export const bookCrud = new CrudDefinition('books', {
 					'\nYou should push this to a database via an API for example ;)'
 			);
 
-			return Promise.resolve(null);
+			return;
 		}
 
-		throw new Error('Unsupported Books Crud action "' + operation.name + '".');
+		console.warn('Unsupported Books Crud action "' + operation.name + '".');
 	}),
 
 	stateProvider: new CallbackStateProvider(async function (
 		operation,
 		requestParameters: KeyValueObject = {}
 	) {
+		console.info(operation.name, requestParameters);
 		if (operation.name === 'list') {
 			return new Promise((resolve) => setTimeout(resolve, 400)).then(() => books);
 		}
@@ -83,9 +87,10 @@ export const bookCrud = new CrudDefinition('books', {
 			const ret = books.filter(
 				(book: { id: number }) => book.id && book.id.toString() === requestParameters.id
 			);
+
 			return Promise.resolve(ret[0] || null);
 		}
 
-		throw new Error('Unsupported Books Crud action "' + operation.name + '".');
+		console.warn('Unsupported Books Crud action "' + operation.name + '".');
 	})
 });

@@ -28,7 +28,6 @@
 
 	function getResults() {
 		return crud.options.stateProvider.provide(operation, requestParameters).then((results) => {
-			console.info(results);
 			if (results && !Array.isArray(results)) {
 				throw new Error(
 					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
