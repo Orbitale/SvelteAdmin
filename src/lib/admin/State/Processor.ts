@@ -1,5 +1,5 @@
-import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
+import type { KeyValueObject } from '$lib/admin/genericTypes.js';
 
 export type StateProcessorInput<T> = T | Array<T> | null;
 

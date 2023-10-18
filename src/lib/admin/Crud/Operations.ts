@@ -1,14 +1,14 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
-import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
-import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
+import type { Field } from '$lib/admin/FieldDefinitions/Field.js';
+import type { Options } from '$lib/admin/FieldDefinitions/Options.js';
 import CrudNew from '$lib/admin/Crud/CrudNew.svelte';
 import CrudEdit from '$lib/admin/Crud/CrudEdit.svelte';
 import CrudList from '$lib/admin/Crud/CrudList.svelte';
 import CrudDelete from '$lib/admin/Crud/CrudDelete.svelte';
-import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-import type { Action } from '$lib/admin/actions.ts';
-import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+import type { CrudDefinition } from '$lib/admin/Crud/definition.js';
+import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.js';
+import type { Action } from '$lib/admin/actions.js';
+import type { KeyValueObject } from '$lib/admin/genericTypes.js';
 
 export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
 

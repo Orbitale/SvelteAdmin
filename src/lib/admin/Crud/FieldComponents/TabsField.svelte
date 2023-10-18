@@ -2,7 +2,7 @@
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
 	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
 
 	export let operation: CrudOperation;
 	export let field: TabsField;

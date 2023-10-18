@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { type Headers, type Header, createEmptyRow } from '$lib/admin/DataTable/DataTable.ts';
-	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
-	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
-	import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
-	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
+	import { type Headers, type Header, createEmptyRow } from '$lib/admin/DataTable/DataTable.js';
+	import type { Options } from '$lib/admin/FieldDefinitions/Options.js';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.js';
+	import type { Field } from '$lib/admin/FieldDefinitions/Field.js';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.js';
 
-	import { type CrudOperation, List } from '$lib/admin/Crud/Operations.ts';
+	import { type CrudOperation, List } from '$lib/admin/Crud/Operations.js';
 
-	import type { Action } from '$lib/admin/actions.ts';
+	import type { Action } from '$lib/admin/actions.js';
 	import DataTable from '$lib/admin/DataTable/DataTable.svelte';
 
 	import { _ } from 'svelte-i18n';

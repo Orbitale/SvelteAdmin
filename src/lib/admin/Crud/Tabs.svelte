@@ -4,8 +4,8 @@
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
 
 	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
-	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
+	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField.js';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
 
 	export let operation: CrudOperation<unknown>;
 	export let fields: Array<TabsField> = [];

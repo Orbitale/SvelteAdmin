@@ -7,14 +7,14 @@
 
 	import CrudFormField from '$lib/admin/Crud/CrudFormField.svelte';
 	import Tabs from '$lib/admin/Crud/Tabs.svelte';
-	import { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
+	import { TabsField } from '$lib/admin/FieldDefinitions/TabsField.js';
 
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-	import type { SubmitButtonType } from '$lib/admin/config/types';
-	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
-	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
-	import { getSubmittedFormData } from '$lib/admin';
-	import type { SubmittedData } from '$lib/admin/Crud/form.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
+	import type { SubmitButtonType } from '$lib/admin/config/types.js';
+	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field.js';
+	import type { Options } from '$lib/admin/FieldDefinitions/Options.js';
+	import { getSubmittedFormData } from '$lib/admin/Crud/form.js';
+	import type { SubmittedData } from '$lib/admin/Crud/form.js';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';

@@ -9,9 +9,9 @@
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
 	import CrudForm from '$lib/admin/Crud/CrudForm.svelte';
-	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.js';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.js';
 
 	export let crud: CrudDefinition<object>;
 	export let operation: CrudOperation<object>;

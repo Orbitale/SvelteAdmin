@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options';
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
 
 	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;

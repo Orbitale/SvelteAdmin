@@ -1,28 +1,28 @@
 //
 // Classes & functions
 //
-export { CallbackAction, UrlAction } from './actions.ts';
-export { BaseCrudOperation, New, Edit, List, Delete } from './Crud/Operations.ts';
-export { CrudDefinition } from './Crud/definition.ts';
-export { getSubmittedFormData } from './Crud/form.ts';
+export { CallbackAction, UrlAction } from './actions.js';
+export { BaseCrudOperation, New, Edit, List, Delete } from './Crud/Operations.js';
+export { CrudDefinition } from './Crud/definition.js';
+export { getSubmittedFormData } from './Crud/form.js';
 
-export { DashboardDefinition } from './Dashboard/definition.ts';
+export { DashboardDefinition } from './Dashboard/definition.js';
 
-export { CheckboxField } from './FieldDefinitions/Checkbox.ts';
-export { Field } from './FieldDefinitions/Field.ts';
-export { NumberField } from './FieldDefinitions/Number.ts';
-export { TabsField } from './FieldDefinitions/TabsField.ts';
-export { TextareaField } from './FieldDefinitions/Textarea.ts';
-export { TextField } from './FieldDefinitions/Text.ts';
-export { ToggleField } from './FieldDefinitions/Toggle.ts';
-export { UrlField } from './FieldDefinitions/Url.ts';
+export { CheckboxField } from './FieldDefinitions/Checkbox.js';
+export { Field } from './FieldDefinitions/Field.js';
+export { NumberField } from './FieldDefinitions/Number.js';
+export { TabsField } from './FieldDefinitions/TabsField.js';
+export { TextareaField } from './FieldDefinitions/Textarea.js';
+export { TextField } from './FieldDefinitions/Text.js';
+export { ToggleField } from './FieldDefinitions/Toggle.js';
+export { UrlField } from './FieldDefinitions/Url.js';
 
-export { Submenu, Divider } from './Menu/MenuLinks.ts';
+export { Submenu, Divider } from './Menu/MenuLinks.js';
 
-export { CallbackStateProcessor } from './State/Processor.ts';
-export { CallbackStateProvider } from './State/Provider.ts';
+export { CallbackStateProcessor } from './State/Processor.js';
+export { CallbackStateProvider } from './State/Provider.js';
 
-export { getRequestParams } from './request.ts';
+export { getRequestParams } from './request.js';
 
 //
 // Components

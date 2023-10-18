@@ -9,7 +9,7 @@
 	import type { MenuLink } from '$lib/admin/Menu/MenuLinks';
 
 	import { type Dictionaries, initLocale } from '$lib/admin/admin_i18n';
-	import type { AdminConfig } from '$lib/admin/config/adminConfig.ts';
+	import type { AdminConfig } from '$lib/admin/config/adminConfig.js';
 
 	// Available Carbon themes: "white" | "g10" | "g80" | "g90" | "g100"
 	export let theme = 'g10';

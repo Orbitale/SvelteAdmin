@@ -4,7 +4,7 @@
 	import { _ } from 'svelte-i18n';
 
 	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';
-	import { dashboard } from '../testApp/Dashboard.ts';
+	import { dashboard } from '../testApp/Dashboard.js';
 </script>
 
 <Dashboard {dashboard}>

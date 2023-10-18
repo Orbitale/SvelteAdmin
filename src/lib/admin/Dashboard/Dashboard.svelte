@@ -15,10 +15,10 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/admin/Layout/AdminLayout.svelte';
-	import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.ts';
-	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-	import type { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+	import type { DashboardDefinition } from '$lib/admin/Dashboard/definition.js';
+	import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
+	import type { CrudDefinition } from '$lib/admin/Crud/definition.js';
+	import type { KeyValueObject } from '$lib/admin/genericTypes.js';
 
 	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined = undefined;

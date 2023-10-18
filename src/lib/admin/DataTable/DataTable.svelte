@@ -6,7 +6,7 @@
 
 	import DataTableToolbar from '$lib/admin/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
-	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
+	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.js';
 	import type { Action } from '$lib/admin/actions';
 
 	export let headers: Headers = [];

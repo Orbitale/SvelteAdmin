@@ -1,5 +1,5 @@
 import { describe, it, expect, type TestOptions } from 'vitest';
-import { createEmptyRow } from '$lib/admin/DataTable/DataTable.ts';
+import { createEmptyRow } from '$lib/admin/DataTable/DataTable.js';
 import {
 	List,
 	CheckboxField,

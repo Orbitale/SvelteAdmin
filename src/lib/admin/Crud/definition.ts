@@ -1,6 +1,6 @@
-import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
-import type { StateProvider } from '$lib/admin/State/Provider.ts';
-import type { StateProcessor } from '$lib/admin/State/Processor.ts';
+import type { CrudOperation } from '$lib/admin/Crud/Operations.js';
+import type { StateProvider } from '$lib/admin/State/Provider.js';
+import type { StateProcessor } from '$lib/admin/State/Processor.js';
 
 export type CrudDefinitionOptions<T> = {
 	label: {

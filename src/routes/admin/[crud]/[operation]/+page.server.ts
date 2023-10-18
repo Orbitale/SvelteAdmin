@@ -1,4 +1,4 @@
-import { dashboard } from '../../../../testApp/Dashboard.ts';
+import { dashboard } from '../../../../testApp/Dashboard.js';
 
 export const prerender = true;
 

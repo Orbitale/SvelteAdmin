@@ -1,12 +1,12 @@
 // src/lib/BookCrud.ts
-import { Delete, Edit, List, New } from '$lib/admin/Crud/Operations.ts';
-import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
-import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
-import { CallbackStateProcessor } from '$lib/admin/State/Processor.ts';
-import { CallbackStateProvider } from '$lib/admin/State/Provider.ts';
-import { TextField } from '$lib/admin/FieldDefinitions/Text.ts';
-import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.ts';
-import { UrlAction } from '$lib/admin/actions.ts';
+import { Delete, Edit, List, New } from '$lib/admin/Crud/Operations.js';
+import type { KeyValueObject } from '$lib/admin/genericTypes.js';
+import { CrudDefinition } from '$lib/admin/Crud/definition.js';
+import { CallbackStateProcessor } from '$lib/admin/State/Processor.js';
+import { CallbackStateProvider } from '$lib/admin/State/Provider.js';
+import { TextField } from '$lib/admin/FieldDefinitions/Text.js';
+import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.js';
+import { UrlAction } from '$lib/admin/actions.js';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
@@ -74,7 +74,7 @@ export const bookCrud = new CrudDefinition('books', {
 		requestParameters: KeyValueObject = {}
 	) {
 		if (operation.name === 'list') {
-			return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => books);
+			return new Promise((resolve) => setTimeout(resolve, 400)).then(() => books);
 		}
 
 		if (requestParameters.id !== undefined) {

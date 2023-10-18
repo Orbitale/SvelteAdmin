@@ -1,4 +1,4 @@
-import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
+import type { KeyValueObject } from '$lib/admin/genericTypes.js';
 import type { Page } from '@sveltejs/kit';
 
 /**
