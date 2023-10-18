@@ -1,5 +1,6 @@
 <script lang="ts">
 	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
+	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import { _ } from 'svelte-i18n';
 
@@ -7,7 +8,6 @@
 	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
 	import type { Action } from '$lib/admin/actions';
-	import { DataTableSkeleton } from 'carbon-components-svelte';
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;
