@@ -67,6 +67,8 @@ export const bookCrud = new CrudDefinition('books', {
 
 			return Promise.resolve(null);
 		}
+
+		throw new Error('Unsupported Books Crud action "' + operation.name + '".');
 	}),
 
 	stateProvider: new CallbackStateProvider(async function (
@@ -84,6 +86,6 @@ export const bookCrud = new CrudDefinition('books', {
 			return Promise.resolve(ret[0] || null);
 		}
 
-		return Promise.resolve(null);
+		throw new Error('Unsupported Books Crud action "' + operation.name + '".');
 	})
 });

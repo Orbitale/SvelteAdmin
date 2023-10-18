@@ -1,6 +1,6 @@
 # Svelte admin, prototype
 
-⚠ This package is totally a **prototype**. It's used in one single personal project and not meant for production (yet)!
+⚠ This package is totally a **prototype**. It is not complete, and
 
 It's being rewritten for now, documentation will come when architecture will be stabilized.
 
@@ -190,7 +190,7 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
 	//   it always points to your "src/lib/" directory.
-	import { dashboard } from '$lib/admin/Dashboard.js';
+	import { dashboard } from '$lib/admin/Dashboard.ts';
 
 	// The "$:" syntax is valid Javascript code that tells Svelte
 	//   that the following code is reactive, based on the values it depends on.
@@ -223,7 +223,7 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 	import { Dashboard, getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import { dashboard } from '$lib/admin/Dashboard.js';
+	import { dashboard } from '$lib/admin/Dashboard.ts';
 
 	$: crud = $page.params.crud;
 	$: operation = $page.params.operation;
@@ -237,25 +237,87 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 
 #### Fetching your data with State providers
 
-As we have seen before, there is one single entrypoint to your data source: a state provider, and there is only one per Crud.
+As we have seen before, there are two entrypoints to your data source, one of them is the **state provider**, and there is only one per Crud.
 
-A SateProvider is just a class that implements this interface:
+A SateProvider is a class that implements this interface:
 
 ```typescript
-export interface StateProvider {
-	provide(operation: CrudOperation, requestParameters: KeyValueObject): StateProviderResult;
+export interface StateProvider<T> {
+	provide(action: CrudOperation<T>, requestParameters: KeyValueObject): StateProviderResult<T>;
 }
 ```
 
 - The `operation` object is the same as one of the Crud operations, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` operations, with a simple `if` statement to discriminate both.
 - The `requestParameters` is just a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[operation]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
 
-The return type `StateProviderResult` corresponds to the `object | Array<any> | null` type, so you could return almost anything that represents an entity, or a list of entities.
+The return type `StateProviderResult<T>` resolves to `Promise<T | Array<T> | null>`, so you could return almost anything that represents an entity, or a list of entities.<br>
+It **must** though be a `Promise` object.<br>
+If your code is synchronous, you can use the `Promise.resolve(your_value)` method in order to return a _"semi-synchronous"_ promise.
 
-The only implemented provider so far is the `CallbackStateProvider`, and you just define an external callback function that does whatever you want.
+The only implemented provider so far is the `CallbackStateProvider`, and you just define an external callback function that returns whatever you want.
+
+#### Storing your data with State processors
+
+The second entrypoint to your data source is the **state processor**, and as for the state provider, there is only one processor per Crud.
+
+A StateProcessor is a class that implements this interface:
+
+```typescript
+export interface StateProcessor<T> {
+	process(
+		data: StateProcessorInput<T>,
+		operation: CrudOperation<T>,
+		requestParameters: KeyValueObject
+	): void;
+}
+```
+
+The `StateProcessorInput<T>` type resolves to `T | Array<T> | null`, similarly to `StateProviderResult` you have seen in the previous section. This way, it can resolve to most of your entity types.
+
+Very useful to send HTTP requests to your API to save data!
+
+The only implemented provider so far is the `CallbackStateProcessor`, and you just define an external callback function that does whatever you want.
+
+#### Translations
+
+SvelteAdmin is translated, by using the [svelte-i18n](https://github.com/kaisermann/svelte-i18n) package.
+
+Most **labels** you will provide to your dashboard (fields labels, Crud operations labels, etc.) will be translated with svelte-i18n, whether or not they have an associated translation.<br>
+Fallback will be to the `en` locale anyway.
+
+If you want **your own translations**, or if you need to **override** existing translations, you can provide your own translation dictionaries to SvelteAdmin.
+
+To do so, provide the `localeDictionaries` option to your `DashboardDefinition` creation:
+
+```typescript
+export const dashboard = new DashboardDefinition({
+	// ...
+	localeDictionaries: {
+		en: {
+			my_text: 'My Translation'
+		}
+	}
+});
+```
+
+This dictionary will **append or override** existing translations. If the translation key exists in SvelteAdmin, your custom translations will override it.
+
+To avoid having a big dashboard definition file, you can put your translations in an external file.
+
+For the rest of translations, you can still use the same dictionary for a local `svelte-i18n`-based setup in your own application.
+
+## Roadmap
+
+This project is still incomplete, and if you want to contribute, feel free to submit an [issue](https://github.com/Orbitale/SvelteAdmin/issues/new) or a [pull-request](https://github.com/Orbitale/SvelteAdmin/compare)!
+
+In the meantime, here is the roadmap for future features:
+
+- Add a `Read` operation, to view a single item.
+- Add filters in the `List` operation.
+- Add pagination in the `List` operation.
+- Tabs are supported in `CrudForm`, but "grid sections" are also needed, to have more form components on a single screen.
+- Add support for validation in CrudForm (therefore Edit and New operations).
 
 ---
 
-## TODO continue the readme,
-
-## TODO roadmap: state processors, translations.
+This project is published under the GNU-LGPL license, feel free to check the [LICENSE](./LICENSE) file for more details.
