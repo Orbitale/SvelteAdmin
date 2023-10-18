@@ -1,14 +1,18 @@
 # Svelte admin, prototype
 
-⚠ This package is totally a **prototype**. It is not complete, and
-
-It's being rewritten for now, documentation will come when architecture will be stabilized.
-
-It is actually the second prototype. The first one is in the [v0](https://github.com/Orbitale/SvelteAdmin/tree/v0) branch.
+⚠ This package is totally a **prototype**. It is not complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are missing.
 
 ## Installation
 
-For now, since the package is only a prototype, you can run one of these commands to add it to your project:
+You can install SvelteAdmin with one of these commands, depending on your package manager:
+
+```bash
+yarn add "@orbitale/svelte-admin"
+
+npm install --save "@orbitale/svelte-admin"
+```
+
+If you want to use the latest version committed to Github, you can run one of these commands to add it to your project:
 
 ```bash
 yarn add "@orbitale/svelte-admin@git://github.com/Orbitale/SvelteAdmin.git"
