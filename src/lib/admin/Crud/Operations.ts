@@ -32,7 +32,7 @@ export interface CrudOperation<T> {
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Array<Action>;
 	readonly eventHandlers: Array<OperationEventCallback>;
-	readonly options: object;
+	readonly options: Record<string, string | unknown>;
 }
 
 export class BaseCrudOperation<T> implements CrudOperation<T> {
@@ -42,7 +42,7 @@ export class BaseCrudOperation<T> implements CrudOperation<T> {
 	public readonly label: string;
 	public readonly actions: Array<Action>;
 	public readonly eventHandlers: Array<OperationEventCallback> = [];
-	public readonly options: object = {};
+	public readonly options: Record<string, string | unknown> = {};
 
 	constructor(
 		name: CrudOperationName,
@@ -51,7 +51,7 @@ export class BaseCrudOperation<T> implements CrudOperation<T> {
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
 		eventHandlers: Array<OperationEventCallback> = [],
-		options: object = {}
+		options: Record<string, string | unknown> = {}
 	) {
 		this.name = name;
 		this.label = label;
@@ -67,7 +67,7 @@ type FormOperationOptions = object & {
 	preventHttpFormSubmit: boolean;
 };
 const DEFAULT_FORM_OPERATION_OPTION: FormOperationOptions = {
-	preventHttpFormSubmit: true,
+	preventHttpFormSubmit: true
 };
 
 export class New<T> extends BaseCrudOperation<T> {

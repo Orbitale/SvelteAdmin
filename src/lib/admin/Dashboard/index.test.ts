@@ -13,7 +13,7 @@ const testOpts: TestOptions = {
 	repeats: process.env.REPEAT ? parseInt(process.env.REPEAT) : undefined
 };
 
-type Book = {};
+type Book = object;
 
 describe(
 	'Dashboard',

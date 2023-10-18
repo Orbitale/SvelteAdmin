@@ -6,7 +6,7 @@
 
 	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;
-	export let data: object | undefined;
+	export let data: Record<string, unknown> = {};
 	export let value: unknown;
 
 	if (value === undefined && data) {

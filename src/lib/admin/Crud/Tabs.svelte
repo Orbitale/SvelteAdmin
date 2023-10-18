@@ -7,9 +7,9 @@
 	import type { TabsField } from '$lib/admin/FieldDefinitions/TabsField';
 	import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 
-	export let operation: CrudOperation;
+	export let operation: CrudOperation<unknown>;
 	export let fields: Array<TabsField> = [];
-	export let defaultData: object = {};
+	export let data: Record<string, unknown> = {};
 </script>
 
 <Tabs>
@@ -21,9 +21,9 @@
 			<TabContent>
 				<CrudFormField
 					{operation}
-					{defaultData}
+					{data}
 					field={tabbed_field}
-					value={defaultData[tabbed_field.name]}
+					value={data[tabbed_field.name]}
 					on:fieldChange
 				/>
 			</TabContent>

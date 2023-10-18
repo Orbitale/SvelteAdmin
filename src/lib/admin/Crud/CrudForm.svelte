@@ -13,13 +13,17 @@
 	import type { SubmitButtonType } from '$lib/admin/config/types';
 	import type { FieldInterface } from '$lib/admin/FieldDefinitions/Field';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
+	import { getSubmittedFormData } from '$lib/admin';
+	import type { SubmittedData } from '$lib/admin/Crud/form.ts';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';
-	export let operation: CrudOperation<object>;
-	export let defaultData: object = {};
+	export let operation: CrudOperation<unknown>;
+	export let defaultData: undefined | null | Record<string, unknown> = {};
 
-	export let htmlFormElement: HTMLFormElement;
+	const data: Record<string, unknown> = defaultData ?? {};
+
+	export let htmlFormElement: HTMLFormElement | null | undefined;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
@@ -40,32 +44,31 @@
 		}
 	}
 
-	const dispatchEvent = createEventDispatcher<{
-		submitData: Map<string, string | File | Array<string>>;
-	}>();
+	const dispatchEvent = createEventDispatcher<{ submitData: SubmittedData }>();
 
 	function onSubmit(event: SubmitEvent) {
-		if (operation.options?.preventHttpFormSubmit) {
+		if (operation.options?.preventHttpFormSubmit ?? true) {
 			event.preventDefault();
 		}
 
-		console.info('Submit', arguments);
-		const normalizedData: Record<string, unknown> = {};
-		new FormData(event.target, event.submitter).forEach(
-			(value, key) => (normalizedData[key] = value)
-		);
-		event.normalizedData = normalizedData;
+		const normalizedData = getSubmittedFormData(event);
 		dispatchEvent('submitData', normalizedData);
+
+		const normalizedEvent: CustomEvent<{ submitData: SubmittedData }> = new CustomEvent(
+			'submitData',
+			normalizedData
+		);
+
 		operation.eventHandlers.forEach(([eventName, callback]) => {
 			if (eventName === 'submitData') {
-				callback(event);
+				callback(normalizedEvent);
 			}
 		});
 	}
 
 	const enableEvents = () =>
 		operation.eventHandlers.forEach(([event, callback]) =>
-			htmlFormElement.addEventListener(event, callback)
+			htmlFormElement?.addEventListener(event, callback)
 		);
 	const disableEvents = () =>
 		operation.eventHandlers.forEach(([event, callback]) =>
@@ -97,17 +100,11 @@
 	{#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
 		{#each fields as field (field.name)}
 			<FormGroup>
-				<CrudFormField
-					{operation}
-					{field}
-					{defaultData}
-					value={defaultData[field.name]}
-					on:fieldChange
-				/>
+				<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
 			</FormGroup>
 		{/each}
 	{:else}
-		<Tabs fields={tabbed_fields} {operation} {defaultData} on:fieldChange />
+		<Tabs fields={tabbed_fields} {operation} {data} on:fieldChange />
 	{/if}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>

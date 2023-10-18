@@ -1,5 +1,5 @@
 // src/lib/BookCrud.ts
-import { Delete, Edit, List, New, type OperationCallback } from '$lib/admin/Crud/Operations.ts';
+import { Delete, Edit, List, New } from '$lib/admin/Crud/Operations.ts';
 import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 import { CrudDefinition } from '$lib/admin/Crud/definition.ts';
 import { CallbackStateProcessor } from '$lib/admin/State/Processor.ts';
@@ -10,7 +10,6 @@ import { UrlAction } from '$lib/admin/actions.ts';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
-import { getSubmittedFormData } from '$lib/admin/Crud/form.ts';
 
 type Book = { id: number; title: string; description: string };
 const books: Array<Book> = [
@@ -25,16 +24,6 @@ const fields = [
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
 	})
 ];
-
-const formSubmit = (e: SubmitEvent) => {
-	const formData: Record<string, unknown> = ({} = getSubmittedFormData(e));
-	console.info(formData);
-	alert(
-		'Submitted form!\nHere are the data you submitted:\n' +
-			JSON.stringify(formData, null, 4) +
-			'\nYou should put this in a database via an API 😉'
-	);
-};
 
 export const bookCrud = new CrudDefinition('books', {
 	label: { singular: 'Book', plural: 'Books' },
@@ -51,20 +40,25 @@ export const bookCrud = new CrudDefinition('books', {
 				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
 			}
 		),
-		new New(fields, [], [['submit', formSubmit as OperationCallback]]),
-		new Edit(fields, [], [['submit', formSubmit as OperationCallback]]),
+		new New(fields),
+		new Edit(fields),
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
 	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
-		console.info('TODO: process new, edit or delete actions', {
-			data,
-			operation,
-			requestParameters
-		});
 		if (operation.name === 'delete') {
 			alert(
 				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
+			);
+		}
+
+		if (operation.name === 'edit' || operation.name === 'new') {
+			alert(
+				'Submitted book ' +
+					operation.name +
+					'!\nHere are your data:\n' +
+					JSON.stringify(data) +
+					'\nYou should push this to a database via an API for example ;)'
 			);
 		}
 	}),
@@ -73,8 +67,6 @@ export const bookCrud = new CrudDefinition('books', {
 		operation,
 		requestParameters: KeyValueObject = {}
 	) {
-		console.info('TODO: return actual data', { operation, requestParameters });
-
 		if (operation.name === 'list') {
 			return books;
 		}

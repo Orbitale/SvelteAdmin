@@ -16,8 +16,6 @@ const testOpts: TestOptions = {
 	repeats: process.env.REPEAT ? parseInt(process.env.REPEAT) : undefined
 };
 
-type Book = {};
-
 describe(
 	'DataTable',
 	() => {

@@ -5,7 +5,7 @@ const testOpts: TestOptions = {
 	repeats: process.env.REPEAT ? parseInt(process.env.REPEAT) : undefined
 };
 
-type Book = {};
+type Book = object;
 
 describe(
 	'Crud definition',
@@ -64,7 +64,6 @@ describe(
 
 		it('cannot be instantiated if default operation name does not exist in operations list', () => {
 			const construct = () => {
-				const operations = Array(2);
 				new CrudDefinition<Book>('books', {
 					label: { singular: '', plural: '' },
 					operations: [new List([])],

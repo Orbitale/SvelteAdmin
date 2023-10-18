@@ -1,5 +1,10 @@
 <script lang="ts">
-	import { type Headers, type Header, createEmptyRow } from '$lib/admin/DataTable/DataTable.ts';
+	import {
+		type Headers,
+		type Header,
+		createEmptyRow,
+		type Rows
+	} from '$lib/admin/DataTable/DataTable.ts';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 	import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
@@ -12,8 +17,8 @@
 
 	import { _ } from 'svelte-i18n';
 
-	export let crud: CrudDefinition<object>;
-	export let operation: CrudOperation;
+	export let crud: CrudDefinition<unknown>;
+	export let operation: CrudOperation<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
 	const actions = operation.actions;
@@ -25,7 +30,7 @@
 		throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
 	}
 
-	let rows = crud.options.stateProvider.provide(operation, requestParameters);
+	let rows: Rows = crud.options.stateProvider.provide(operation, requestParameters);
 	if (rows && !Array.isArray(rows)) {
 		throw new Error(
 			'CrudList expected state provider to return an array, current result is non-empty and not an array.'
@@ -36,7 +41,7 @@
 	}
 
 	let globalActions: Array<Action> = [];
-	if (operation instanceof List<any> || operation.options?.globalActions?.length) {
+	if (operation instanceof List<unknown> || operation.options?.globalActions?.length) {
 		globalActions = operation.options.globalActions;
 	}
 </script>

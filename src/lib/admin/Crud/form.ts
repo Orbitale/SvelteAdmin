@@ -1,7 +1,9 @@
-export function getSubmittedFormData(event: SubmitEvent): Record<string, unknown> {
-	const normalizedData: Record<string, unknown> = {};
+export type SubmittedData = Record<string, FormDataEntryValue>;
 
-	let target = event.target;
+export function getSubmittedFormData(event: SubmitEvent): SubmittedData {
+	const normalizedData: SubmittedData = {};
+
+	const target = event.target;
 
 	if (!target) {
 		console.error(

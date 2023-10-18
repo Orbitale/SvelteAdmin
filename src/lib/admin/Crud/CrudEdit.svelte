@@ -17,7 +17,10 @@
 	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	let defaultData = crud.options.stateProvider.provide(operation, requestParameters);
+	let defaultData: undefined | null | Record<string, unknown> = crud.options.stateProvider.provide(
+		operation,
+		requestParameters
+	);
 
 	let mounted = false;
 
@@ -27,6 +30,12 @@
 		}
 		mounted = true;
 	});
+
+	function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
+		const data = event.detail;
+
+		crud.options.stateProcessor.process(data, operation, requestParameters);
+	}
 </script>
 
 {#if !defaultData}
@@ -51,6 +60,7 @@
 		on:mouseleave
 		on:submit
 		on:submitData
+		on:submitData={onSubmitData}
 	>
 		<svelte:fragment slot="form-header">
 			<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
