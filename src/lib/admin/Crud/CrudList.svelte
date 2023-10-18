@@ -1,10 +1,5 @@
 <script lang="ts">
-	import {
-		type Headers,
-		type Header,
-		createEmptyRow,
-		type Rows
-	} from '$lib/admin/DataTable/DataTable.ts';
+	import { type Headers, type Header, createEmptyRow } from '$lib/admin/DataTable/DataTable.ts';
 	import type { Options } from '$lib/admin/FieldDefinitions/Options.ts';
 	import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 	import type { Field } from '$lib/admin/FieldDefinitions/Field.ts';
@@ -16,7 +11,7 @@
 	import DataTable from '$lib/admin/DataTable/DataTable.svelte';
 
 	import { _ } from 'svelte-i18n';
-	import {onMount} from "svelte";
+	import { onMount } from 'svelte';
 
 	export let crud: CrudDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
@@ -36,7 +31,7 @@
 			console.info(results);
 			if (results && !Array.isArray(results)) {
 				throw new Error(
-						'CrudList expected state provider to return an array, current result is non-empty and not an array.'
+					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
 				);
 			}
 			if (!results || !results?.length) {

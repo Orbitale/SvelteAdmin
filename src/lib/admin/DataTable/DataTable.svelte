@@ -15,7 +15,7 @@
 	export let globalActions: Array<Action> = [];
 
 	let resolvedRows: Rows = [];
-	rows.then(r => resolvedRows = r);
+	rows.then((r) => (resolvedRows = r));
 
 	let actionsCellIndex = -1;
 

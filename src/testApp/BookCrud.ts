@@ -45,7 +45,11 @@ export const bookCrud = new CrudDefinition('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(async function (data, operation, requestParameters = {}) {
+	stateProcessor: new CallbackStateProcessor(async function (
+		data,
+		operation,
+		requestParameters = {}
+	) {
 		if (operation.name === 'delete') {
 			alert(
 				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
@@ -70,7 +74,7 @@ export const bookCrud = new CrudDefinition('books', {
 		requestParameters: KeyValueObject = {}
 	) {
 		if (operation.name === 'list') {
-			return new Promise(resolve => setTimeout(resolve, 1000)).then(() => books);
+			return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => books);
 		}
 
 		if (requestParameters.id !== undefined) {

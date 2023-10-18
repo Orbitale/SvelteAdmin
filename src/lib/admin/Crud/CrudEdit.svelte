@@ -17,10 +17,8 @@
 	export let operation: CrudOperation<object>;
 	export let requestParameters: KeyValueObject = {};
 
-	let defaultData: Promise<undefined | null | Record<string, unknown>> = crud.options.stateProvider.provide(
-		operation,
-		requestParameters
-	);
+	let defaultData: Promise<undefined | null | Record<string, unknown>> =
+		crud.options.stateProvider.provide(operation, requestParameters);
 
 	onMount(async () => {
 		const data = await defaultData;
@@ -48,16 +46,16 @@
 		</InlineNotification>
 	{:else}
 		<CrudForm
-				{operation}
-				{defaultData}
-				on:click
-				on:keydown
-				on:mouseover
-				on:mouseenter
-				on:mouseleave
-				on:submit
-				on:submitData
-				on:submitData={onSubmitData}
+			{operation}
+			{defaultData}
+			on:click
+			on:keydown
+			on:mouseover
+			on:mouseenter
+			on:mouseleave
+			on:submit
+			on:submitData
+			on:submitData={onSubmitData}
 		>
 			<svelte:fragment slot="form-header">
 				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
