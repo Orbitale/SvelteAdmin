@@ -45,7 +45,6 @@
 		"@typescript-eslint/parser": "^6.0.0",
 		"carbon-components-svelte": "^0.81.0",
 		"carbon-icons-svelte": "^12.3.0",
-		"carbon-preprocess-svelte": "^0.10.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -64,5 +63,6 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {}
 }
