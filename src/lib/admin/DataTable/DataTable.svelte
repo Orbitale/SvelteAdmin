@@ -7,11 +7,15 @@
 	import ItemActions from '$lib/admin/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Rows } from '$lib/admin/DataTable/DataTable.ts';
 	import type { Action } from '$lib/admin/actions';
+	import { DataTableSkeleton } from 'carbon-components-svelte';
 
 	export let headers: Headers = [];
-	export let rows: Rows = [];
+	export let rows: Promise<Rows>;
 	export let actions: Action[] = [];
 	export let globalActions: Array<Action> = [];
+
+	let resolvedRows: Rows = [];
+	rows.then(r => resolvedRows = r);
 
 	let actionsCellIndex = -1;
 
@@ -24,26 +28,30 @@
 	}
 </script>
 
-<DataTable {headers} {rows} size="short" zebra={true} {...$$restProps}>
-	<svelte:fragment slot="title">
-		<slot name="title" />
-	</svelte:fragment>
-	<svelte:fragment slot="description">
-		<slot name="description" />
-	</svelte:fragment>
-	{#if globalActions.length}
-		<DataTableToolbar actions={globalActions} />
-	{/if}
-	{#if !rows.length}
-		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
-			{$_('error.crud.list.no_elements')}
-		</InlineNotification>
-	{/if}
-	<div slot="cell" let:cell let:row let:cellIndex>
-		{#if cellIndex === actionsCellIndex}
-			<ItemActions {actions} item={row} />
-		{:else}
-			{cell.display ? cell.display(cell.value) : cell.value}
+{#await rows}
+	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
+{:then}
+	<DataTable {headers} rows={resolvedRows} size="short" zebra={true} {...$$restProps}>
+		<svelte:fragment slot="title">
+			<slot name="title" />
+		</svelte:fragment>
+		<svelte:fragment slot="description">
+			<slot name="description" />
+		</svelte:fragment>
+		{#if globalActions.length}
+			<DataTableToolbar actions={globalActions} />
 		{/if}
-	</div>
-</DataTable>
+		{#if !resolvedRows.length}
+			<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
+				{$_('error.crud.list.no_elements')}
+			</InlineNotification>
+		{/if}
+		<div slot="cell" let:cell let:row let:cellIndex>
+			{#if cellIndex === actionsCellIndex}
+				<ItemActions {actions} item={row} />
+			{:else}
+				{cell.display ? cell.display(cell.value) : cell.value}
+			{/if}
+		</div>
+	</DataTable>
+{/await}

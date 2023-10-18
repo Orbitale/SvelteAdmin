@@ -30,15 +30,20 @@
 		throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
 	}
 
-	let rows: Rows = crud.options.stateProvider.provide(operation, requestParameters);
-	if (rows && !Array.isArray(rows)) {
-		throw new Error(
-			'CrudList expected state provider to return an array, current result is non-empty and not an array.'
-		);
-	}
-	if (!rows || !rows.length) {
-		rows = [createEmptyRow(operation)];
-	}
+	const rows: Promise<unknown> = crud.options.stateProvider.provide(operation, requestParameters)
+		.then((r: unknown) => {
+			console.info(r);
+			if (r && !Array.isArray(r)) {
+				throw new Error(
+					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
+				);
+			}
+			if (!r || !r?.length) {
+				r = [createEmptyRow(operation)];
+			}
+
+			return r;
+		});
 
 	let globalActions: Array<Action> = [];
 	if (operation instanceof List<unknown> || operation.options?.globalActions?.length) {

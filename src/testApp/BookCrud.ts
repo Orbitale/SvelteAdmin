@@ -45,7 +45,7 @@ export const bookCrud = new CrudDefinition('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
+	stateProcessor: new CallbackStateProcessor(async function (data, operation, requestParameters = {}) {
 		if (operation.name === 'delete') {
 			alert(
 				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
@@ -60,24 +60,26 @@ export const bookCrud = new CrudDefinition('books', {
 					JSON.stringify(data) +
 					'\nYou should push this to a database via an API for example ;)'
 			);
+
+			return Promise.resolve(null);
 		}
 	}),
 
-	stateProvider: new CallbackStateProvider(function (
+	stateProvider: new CallbackStateProvider(async function (
 		operation,
 		requestParameters: KeyValueObject = {}
 	) {
 		if (operation.name === 'list') {
-			return books;
+			return new Promise(resolve => setTimeout(resolve, 1000)).then(() => books);
 		}
 
 		if (requestParameters.id !== undefined) {
 			const ret = books.filter(
 				(book: { id: number }) => book.id && book.id.toString() === requestParameters.id
 			);
-			return ret[0] || null;
+			return Promise.resolve(ret[0] || null);
 		}
 
-		return null;
+		return Promise.resolve(null);
 	})
 });

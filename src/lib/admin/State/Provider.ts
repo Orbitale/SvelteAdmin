@@ -1,7 +1,7 @@
 import type { CrudOperation } from '$lib/admin/Crud/Operations.ts';
 import type { KeyValueObject } from '$lib/admin/genericTypes.ts';
 
-export type StateProviderResult<T> = T | Array<T> | null;
+export type StateProviderResult<T> = Promise<T | Array<T> | null>;
 
 export interface StateProvider<T> {
 	provide(action: CrudOperation<T>, requestParameters: KeyValueObject): StateProviderResult<T>;
