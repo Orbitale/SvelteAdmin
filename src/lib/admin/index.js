@@ -24,6 +24,8 @@ export { CallbackStateProvider } from './State/Provider.js';
 
 export { getRequestParams } from './request.js';
 
+export { initLocale } from './admin_i18n.js';
+
 //
 // Components
 //
