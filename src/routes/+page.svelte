@@ -3,8 +3,12 @@
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import Dashboard from '$lib/admin/Dashboard/Dashboard.svelte';
+	import { initLocale } from '$lib';
+	import { Dashboard } from '$lib/themes/carbon';
 	import { dashboard } from '../testApp/Dashboard.js';
+	import fr from '../testApp/translations/fr.ts';
+
+	initLocale('fr', { fr });
 </script>
 
 <Dashboard {dashboard}>

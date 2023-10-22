@@ -38,10 +38,10 @@ First, create a classic [SvelteKit project](https://kit.svelte.dev/), as a simpl
 
 #### The Dashboard config
 
-Then, create a `src/lib/admin/Dashboard.ts` file, and start writing the necessary data to create a Dasbhoard object:
+Then, create a `src/lib/Dashboard.ts` file, and start writing the necessary data to create a Dasbhoard object:
 
 ```typescript
-// src/lib/admin/Dashboard.ts
+// src/lib/Dashboard.ts
 
 // Some fancy icons for a neat UI:
 import Book from 'carbon-icons-svelte/lib/Book.svelte';
@@ -78,10 +78,10 @@ export const dashboard = new DashboardDefinition({
 
 #### The Crud config
 
-Then, create the `src/lib/admin/booksCrud.ts` file, it will host your "Books" Crud configuration:
+Then, create the `src/lib/booksCrud.ts` file, it will host your "Books" Crud configuration:
 
 ```typescript
-// src/lib/admin/booksCrud.ts
+// src/lib/booksCrud.ts
 
 // Again, some icons to pop your admin!
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
@@ -176,7 +176,11 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 
 	// The Dashboard component that will render all the things,
 	// and the function helper that gathers URL parameters
-	import { Dashboard, getRequestParams } from '@orbitale/svelte-admin';
+	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
+
+	// This function helps retrieving the [crud] and [operation] variables from the URL,
+	// as well as the potential query string params like "?id=..."
+	import { getRequestParams } from '@orbitale/svelte-admin';
 
 	// This is a custom Svelte store created by SvelteKit,
 	//   it points to an instance of a Page object,
@@ -194,7 +198,7 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
 	//   it always points to your "src/lib/" directory.
-	import { dashboard } from '$lib/admin/Dashboard.ts';
+	import { dashboard } from '$lib/Dashboard.ts';
 
 	// The "$:" syntax is valid Javascript code that tells Svelte
 	//   that the following code is reactive, based on the values it depends on.
@@ -224,10 +228,11 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 
 ```html
 <script lang="ts">
-	import { Dashboard, getRequestParams } from '@orbitale/svelte-admin';
+	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
+	import { getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import { dashboard } from '$lib/admin/Dashboard.ts';
+	import { dashboard } from '$lib/Dashboard.ts';
 
 	$: crud = $page.params.crud;
 	$: operation = $page.params.operation;
@@ -321,6 +326,7 @@ In the meantime, here is the roadmap for future features:
 - Add pagination in the `List` operation.
 - Tabs are supported in `CrudForm`, but "grid sections" are also needed, to have more form components on a single screen.
 - Add support for validation in CrudForm (therefore Edit and New operations).
+- Add other themes than Carbon, which is the default for now.
 
 ---
 

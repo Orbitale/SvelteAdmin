@@ -1,12 +1,12 @@
 // src/lib/BookCrud.ts
-import { Delete, Edit, List, New } from '$lib/admin/Crud/Operations.js';
-import type { KeyValueObject } from '$lib/admin/genericTypes.js';
-import { CrudDefinition } from '$lib/admin/Crud/definition.js';
-import { CallbackStateProcessor } from '$lib/admin/State/Processor.js';
-import { CallbackStateProvider } from '$lib/admin/State/Provider.js';
-import { TextField } from '$lib/admin/FieldDefinitions/Text.js';
-import { TextareaField } from '$lib/admin/FieldDefinitions/Textarea.js';
-import { UrlAction } from '$lib/admin/actions.js';
+import { Delete, Edit, List, New } from '$lib/Crud/Operations.js';
+import type { KeyValueObject } from '$lib/genericTypes.js';
+import { CrudDefinition } from '$lib/Crud/definition.js';
+import { CallbackStateProcessor } from '$lib/State/Processor.js';
+import { CallbackStateProvider } from '$lib/State/Provider.js';
+import { TextField } from '$lib/FieldDefinitions/Text.js';
+import { TextareaField } from '$lib/FieldDefinitions/Textarea.js';
+import { UrlAction } from '$lib/actions.js';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
