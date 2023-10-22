@@ -2,7 +2,7 @@
 // Classes & functions
 //
 export { CallbackAction, UrlAction } from '$lib/actions';
-export { BaseCrudOperation, New, Edit, List, Delete } from '$lib/Crud/Operations';
+export { BaseCrudOperation, New, Edit, List, Delete, View } from '$lib/Crud/Operations';
 export { CrudDefinition } from '$lib/Crud/definition';
 export { getSubmittedFormData } from '$lib/Crud/form';
 

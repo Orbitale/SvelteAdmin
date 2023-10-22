@@ -6,7 +6,7 @@
 	import { _ } from 'svelte-i18n';
 
 	import CrudFormField from '$lib/themes/carbon/Crud/CrudFormField.svelte';
-	import Tabs from '$lib/themes/carbon/Crud/Tabs.svelte';
+	import TabsForms from '$lib/themes/carbon/FormFieldsComponents/TabsForms.svelte';
 	import { TabsField } from '$lib/FieldDefinitions/TabsField.ts';
 
 	import type { CrudOperation } from '$lib/Crud/Operations.ts';
@@ -104,7 +104,7 @@
 			</FormGroup>
 		{/each}
 	{:else}
-		<Tabs fields={tabbed_fields} {operation} {data} on:fieldChange />
+		<TabsForms fields={tabbed_fields} {operation} {data} on:fieldChange />
 	{/if}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>

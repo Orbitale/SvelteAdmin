@@ -8,6 +8,7 @@ const dictionary: Dictionary = {
 	'crud.delete.label': 'Delete {name}',
 	'crud.new.label': 'Create new {name}',
 	'crud.edit.label': 'Update {name}',
+	'crud.view.label': 'View {name}',
 	'crud.delete.are_you_sure': 'Are you sure you want to delete {name} with identifier "{id}"?',
 	'crud.delete.cancel': 'No, cancel',
 	'crud.delete.yes_delete': 'Yes, delete',

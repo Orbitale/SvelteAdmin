@@ -14,9 +14,6 @@
 	export let actions: Action[] = [];
 	export let globalActions: Array<Action> = [];
 
-	let resolvedRows: Rows = [];
-	rows.then((r) => (resolvedRows = r));
-
 	let actionsCellIndex = -1;
 
 	if (actions.length) {
@@ -30,7 +27,7 @@
 
 {#await rows}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
-{:then}
+{:then resolvedRows}
 	<DataTable {headers} rows={resolvedRows} size="short" zebra={true} {...$$restProps}>
 		<svelte:fragment slot="title">
 			<slot name="title" />

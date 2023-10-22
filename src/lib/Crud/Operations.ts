@@ -5,6 +5,7 @@ import CrudNew from '../themes/carbon/Crud/CrudNew.svelte';
 import CrudEdit from '../themes/carbon/Crud/CrudEdit.svelte';
 import CrudList from '../themes/carbon/Crud/CrudList.svelte';
 import CrudDelete from '../themes/carbon/Crud/CrudDelete.svelte';
+import CrudView from '../themes/carbon/Crud/CrudView.svelte';
 import type { CrudDefinition } from '$lib/Crud/definition.ts';
 import type { DashboardDefinition } from '$lib/Dashboard/definition.ts';
 import type { Action } from '$lib/actions.ts';
@@ -119,5 +120,11 @@ export class Delete<T> extends BaseCrudOperation<T> {
 	) {
 		super('delete', 'crud.delete.label', CrudDelete, fields, [], eventHandlers);
 		this.redirectTo = redirectTo;
+	}
+}
+
+export class View<T> extends BaseCrudOperation<T> {
+	constructor(fields: Array<Field<Options>>, eventHandlers: Array<OperationEventCallback> = []) {
+		super('view', 'crud.view.label', CrudView, fields, [], eventHandlers);
 	}
 }

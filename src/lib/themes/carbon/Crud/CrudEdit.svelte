@@ -12,13 +12,16 @@
 	import type { CrudDefinition } from '$lib/Crud/definition.ts';
 	import type { CrudOperation } from '$lib/Crud/Operations.ts';
 	import type { KeyValueObject } from '$lib/genericTypes.ts';
+	import type { StateProviderResult } from '$lib/State/Provider.ts';
 
-	export let crud: CrudDefinition<object>;
-	export let operation: CrudOperation<object>;
+	export let crud: CrudDefinition<unknown>;
+	export let operation: CrudOperation<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
-	let defaultData: Promise<undefined | null | Record<string, unknown>> =
-		crud.options.stateProvider.provide(operation, requestParameters);
+	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+		operation,
+		requestParameters
+	);
 
 	onMount(async () => {
 		const data = await defaultData;
@@ -39,15 +42,15 @@
 	<FormGroup><CheckboxSkeleton /></FormGroup>
 	<FormGroup><TextAreaSkeleton /></FormGroup>
 	<FormGroup><ButtonSkeleton /></FormGroup>
-{:then}
-	{#if !defaultData}
+{:then data}
+	{#if !data}
 		<InlineNotification kind="error">
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
 		<CrudForm
 			{operation}
-			{defaultData}
+			defaultData={data}
 			on:click
 			on:keydown
 			on:mouseover

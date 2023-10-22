@@ -3,9 +3,9 @@
 	import Tab from 'carbon-components-svelte/src/Tabs/Tab.svelte';
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
 
-	import CrudFormField from './CrudFormField.svelte';
-	import type { TabsField } from '../../../FieldDefinitions/TabsField.ts';
-	import type { CrudOperation } from '../../../Crud/Operations.ts';
+	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
+	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { TabsField } from '$lib';
 
 	export let operation: CrudOperation<unknown>;
 	export let fields: Array<TabsField> = [];
@@ -19,7 +19,7 @@
 	<svelte:fragment slot="content">
 		{#each fields as tabbed_field (tabbed_field.name)}
 			<TabContent>
-				<CrudFormField
+				<CrudViewField
 					{operation}
 					{data}
 					field={tabbed_field}

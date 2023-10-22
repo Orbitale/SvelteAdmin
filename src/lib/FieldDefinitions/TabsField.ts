@@ -1,6 +1,6 @@
 import type { ComponentType } from 'svelte';
 import type { FieldInterface } from '$lib/FieldDefinitions/Field';
-import TabsFieldComponent from '$lib/themes/carbon/FieldComponents/TabsField.svelte';
+import TabsFieldComponent from '$lib/themes/carbon/FormFieldsComponents/TabsField.svelte';
 import type { Options } from '$lib/FieldDefinitions/Options';
 
 export type TabOptions = Options & {

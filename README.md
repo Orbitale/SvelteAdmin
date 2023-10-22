@@ -1,6 +1,6 @@
 # Svelte admin, prototype
 
-⚠ This package is totally a **prototype**. It is not complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are missing.
+⚠ This package is a **prototype**. It is not complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are missing.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Usually, you will have only **one dashboard** and set **one Crud per entity** to
 
 ### Create a Dashboard
 
-First, create a classic [SvelteKit project](https://kit.svelte.dev/), as a simple empty application, and when prompted whether to use Typescript, say **yes** (we highly recommend using Typescript).
+First, create a classic [SvelteKit project](https://kit.svelte.dev/), as an empty application, and when prompted whether to use Typescript, say **yes** (we highly recommend using Typescript).
 
 #### The Dashboard config
 
@@ -255,14 +255,14 @@ export interface StateProvider<T> {
 }
 ```
 
-- The `operation` object is the same as one of the Crud operations, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` operations, with a simple `if` statement to discriminate both.
-- The `requestParameters` is just a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[operation]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
+- The `operation` object is the same as one of the Crud operations, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` operations, with an `if` statement to discriminate both.
+- The `requestParameters` is a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[operation]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
 
 The return type `StateProviderResult<T>` resolves to `Promise<T | Array<T> | null>`, so you could return almost anything that represents an entity, or a list of entities.<br>
 It **must** though be a `Promise` object.<br>
 If your code is synchronous, you can use the `Promise.resolve(your_value)` method in order to return a _"semi-synchronous"_ promise.
 
-The only implemented provider so far is the `CallbackStateProvider`, and you just define an external callback function that returns whatever you want.
+The only implemented provider so far is the `CallbackStateProvider`, and you define an external callback function that returns whatever you want.
 
 #### Storing your data with State processors
 
@@ -284,7 +284,7 @@ The `StateProcessorInput<T>` type resolves to `T | Array<T> | null`, similarly t
 
 Very useful to send HTTP requests to your API to save data!
 
-The only implemented provider so far is the `CallbackStateProcessor`, and you just define an external callback function that does whatever you want.
+The only implemented provider so far is the `CallbackStateProcessor`, and you define an external callback function that does whatever you want.
 
 #### Translations
 
@@ -320,7 +320,6 @@ This project is still incomplete, and if you want to contribute, feel free to su
 
 In the meantime, here is the roadmap for future features:
 
-- Add a `Read` operation, to view a single item.
 - Add filters in the `List` operation.
 - Add pagination in the `List` operation.
 - Tabs are supported in `CrudForm`, but "grid sections" are also needed, to have more form components on a single screen.

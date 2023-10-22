@@ -1,25 +1,32 @@
 // src/lib/BookCrud.ts
-import { Delete, Edit, List, New } from '$lib/Crud/Operations.js';
+import {
+	Delete,
+	Edit,
+	List,
+	New,
+	View,
+	CrudDefinition,
+	CallbackStateProcessor,
+	CallbackStateProvider,
+	TextField,
+	TextareaField,
+	UrlAction
+} from '$lib';
 import type { KeyValueObject } from '$lib/genericTypes.js';
-import { CrudDefinition } from '$lib/Crud/definition.js';
-import { CallbackStateProcessor } from '$lib/State/Processor.js';
-import { CallbackStateProvider } from '$lib/State/Provider.js';
-import { TextField } from '$lib/FieldDefinitions/Text.js';
-import { TextareaField } from '$lib/FieldDefinitions/Textarea.js';
-import { UrlAction } from '$lib/actions.js';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 
 type Book = { id: number; title: string; description: string };
 const books: Array<Book> = [
-	{ id: 1, title: 'The Hobbit', description: 'Something' },
-	{ id: 2, title: 'Dune', description: 'Something else' }
+	{ id: 1, title: 'The Hobbit', description: 'In a hole, lived a hobbit' },
+	{ id: 2, title: 'Dune', description: 'Pretty spicy' }
 ];
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
-	new TextareaField('description', 'description', {
+	new TextareaField('description', 'Description', {
 		placeholder: "Enter the book's descrption",
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
 	})
@@ -32,6 +39,7 @@ export const bookCrud = new CrudDefinition('books', {
 		new List(
 			fields,
 			[
+				new UrlAction('View', '/admin/books/view', ViewIcon),
 				new UrlAction('Edit', '/admin/books/edit', Pen),
 				new UrlAction('Delete', '/admin/books/delete', TrashCan)
 			],
@@ -40,6 +48,7 @@ export const bookCrud = new CrudDefinition('books', {
 				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
 			}
 		),
+		new View(fields),
 		new New(fields),
 		new Edit(fields),
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
@@ -80,7 +89,7 @@ export const bookCrud = new CrudDefinition('books', {
 	) {
 		console.info(operation.name, requestParameters);
 		if (operation.name === 'list') {
-			return new Promise((resolve) => setTimeout(resolve, 400)).then(() => books);
+			return Promise.resolve(books);
 		}
 
 		if (requestParameters.id !== undefined) {
