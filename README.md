@@ -174,8 +174,7 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 <script lang="ts">
 	// src/routes/[crud]/[operation]/+page.svelte
 
-	// The Dashboard component that will render all the things,
-	// and the function helper that gathers URL parameters
+	// The Dashboard component that will render all the things!
 	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
 
 	// This function helps retrieving the [crud] and [operation] variables from the URL,
