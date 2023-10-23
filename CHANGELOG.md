@@ -1,6 +1,14 @@
+# v0.3.3
+
+Changes:
+
+- Added missing exports in `package.json`
+
 # v0.3.2
 
-Turns out previous version was incorrectly built when pushed to npm registry, so rebuilt it.
+Changes:
+
+- Turns out previous version was incorrectly built when pushed to npm registry, so rebuilt it.
 
 # v0.3.1
 
