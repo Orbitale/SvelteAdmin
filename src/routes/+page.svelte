@@ -5,8 +5,8 @@
 
 	import { initLocale } from '$lib';
 	import { Dashboard } from '$lib/themes/carbon';
-	import { dashboard } from '../testApp/Dashboard.js';
-	import fr from '../testApp/translations/fr.ts';
+	import { dashboard } from '../testApp/Dashboard';
+	import fr from '../testApp/translations/fr';
 
 	initLocale('fr', { fr });
 </script>

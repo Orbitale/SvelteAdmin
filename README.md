@@ -51,7 +51,7 @@ import Home from 'carbon-icons-svelte/lib/Home.svelte';
 import { DashboardDefinition, UrlAction } from '@orbitale/svelte-admin';
 
 // See later:
-import booksCrud from './booksCrud.js';
+import booksCrud from './booksCrud';
 
 // The dashboard setup:
 export const dashboard = new DashboardDefinition({
@@ -197,7 +197,7 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
 	//   it always points to your "src/lib/" directory.
-	import { dashboard } from '$lib/Dashboard.ts';
+	import { dashboard } from '$lib/Dashboard';
 
 	// The "$:" syntax is valid Javascript code that tells Svelte
 	//   that the following code is reactive, based on the values it depends on.
@@ -231,7 +231,7 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 	import { getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import { dashboard } from '$lib/Dashboard.ts';
+	import { dashboard } from '$lib/Dashboard';
 
 	$: crud = $page.params.crud;
 	$: operation = $page.params.operation;

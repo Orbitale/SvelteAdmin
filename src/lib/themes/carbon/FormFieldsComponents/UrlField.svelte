@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TextInput from 'carbon-components-svelte/src/TextInput/TextInput.svelte';
-	import type { UrlField } from '$lib/FieldDefinitions/Url.ts';
+	import type { UrlField } from '$lib/FieldDefinitions/Url';
 
 	// Maximum length of an URL in Chrome (and IE…) is 2083, Firefox is 65536 and Safari is 80000.
 	// The lowest value is the safest one to use for cross-browser compatibility.

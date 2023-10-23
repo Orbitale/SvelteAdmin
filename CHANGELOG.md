@@ -1,3 +1,9 @@
+# v0.3.1
+
+Changes:
+
+- Remove all extensions from file imports
+
 # v0.3.0
 
 Changes:

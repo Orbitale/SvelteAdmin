@@ -7,7 +7,7 @@ import {
 	List
 } from '$lib';
 
-import { emptyAdminConfig } from '$lib/config/adminConfig.ts';
+import { emptyAdminConfig } from '$lib/config/adminConfig';
 
 const testOpts: TestOptions = {
 	repeats: process.env.REPEAT ? parseInt(process.env.REPEAT) : undefined

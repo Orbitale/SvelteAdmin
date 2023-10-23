@@ -6,10 +6,10 @@
 
 	import TopMenu from '../Menu/TopMenu.svelte';
 	import SideMenu from '../Menu/SideMenu.svelte';
-	import type { MenuLink } from '$lib/Menu/MenuLinks.ts';
+	import type { MenuLink } from '$lib/Menu/MenuLinks';
 
-	import { type Dictionaries, initLocale } from '$lib/admin_i18n.ts';
-	import type { AdminConfig } from '$lib/config/adminConfig.ts';
+	import { type Dictionaries, initLocale } from '$lib/admin_i18n';
+	import type { AdminConfig } from '$lib/config/adminConfig';
 
 	// Available Carbon themes: "white" | "g10" | "g80" | "g90" | "g100"
 	export let theme = 'g10';

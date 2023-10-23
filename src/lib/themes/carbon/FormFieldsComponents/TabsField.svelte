@@ -1,9 +1,9 @@
 <script lang="ts">
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import type { TabsField } from '$lib/FieldDefinitions/TabsField.ts';
+	import type { TabsField } from '$lib/FieldDefinitions/TabsField';
 	import CrudFormField from '../Crud/CrudFormField.svelte';
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { CrudOperation } from '$lib/Crud/Operations';
 
 	export let operation: CrudOperation<object>;
 	export let field: TabsField;

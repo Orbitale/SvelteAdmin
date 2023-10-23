@@ -4,12 +4,12 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
-	import type { KeyValueObject } from '$lib/genericTypes.ts';
+	import type { CrudOperation } from '$lib/Crud/Operations';
+	import type { KeyValueObject } from '$lib/genericTypes';
 	import { type CrudDefinition, TabsField } from '$lib';
-	import type { FieldInterface } from '$lib/FieldDefinitions/Field.ts';
-	import type { Options } from '$lib/FieldDefinitions/Options.ts';
-	import type { StateProviderResult } from '$lib/State/Provider.ts';
+	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
+	import type { Options } from '$lib/FieldDefinitions/Options';
+	import type { StateProviderResult } from '$lib/State/Provider';
 	import TabsView from '$lib/themes/carbon/ViewFieldsComponents/TabsView.svelte';
 	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
 

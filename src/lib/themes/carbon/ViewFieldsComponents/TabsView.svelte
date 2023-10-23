@@ -4,7 +4,7 @@
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
 
 	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { TabsField } from '$lib';
 
 	export let operation: CrudOperation<unknown>;

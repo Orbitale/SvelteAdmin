@@ -3,9 +3,9 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import type { FieldInterface } from '$lib/FieldDefinitions/Field.ts';
-	import type { Options } from '$lib/FieldDefinitions/Options.ts';
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
+	import type { Options } from '$lib/FieldDefinitions/Options';
+	import type { CrudOperation } from '$lib/Crud/Operations';
 	import ViewLabel from '$lib/themes/carbon/ViewFieldsComponents/ViewLabel.svelte';
 
 	export let operation: CrudOperation<object>;

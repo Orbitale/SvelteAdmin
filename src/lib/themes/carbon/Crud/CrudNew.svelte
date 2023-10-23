@@ -2,9 +2,9 @@
 	import { _ } from 'svelte-i18n';
 
 	import CrudForm from './CrudForm.svelte';
-	import type { CrudOperation } from '../../../Crud/Operations.ts';
-	import type { CrudDefinition } from '../../../Crud/definition.ts';
-	import type { KeyValueObject } from '../../../genericTypes.ts';
+	import type { CrudOperation } from '../../../Crud/Operations';
+	import type { CrudDefinition } from '../../../Crud/definition';
+	import type { KeyValueObject } from '../../../genericTypes';
 
 	export let operation: CrudOperation<unknown>;
 	export let crud: CrudDefinition<unknown>;

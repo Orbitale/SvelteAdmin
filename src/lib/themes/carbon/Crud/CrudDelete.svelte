@@ -3,10 +3,10 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/definition.ts';
-	import { CallbackAction, UrlAction } from '$lib/actions.ts';
-	import { type CrudOperation, Delete } from '$lib/Crud/Operations.ts';
-	import type { KeyValueObject } from '$lib/genericTypes.ts';
+	import type { CrudDefinition } from '$lib/Crud/definition';
+	import { CallbackAction, UrlAction } from '$lib/actions';
+	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
+	import type { KeyValueObject } from '$lib/genericTypes';
 
 	export let crud: CrudDefinition<object>;
 	export let operation: CrudOperation<object>;

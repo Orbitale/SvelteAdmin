@@ -3,10 +3,10 @@ import type {
 	DataTableRow
 } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
-import type { CrudOperation } from '$lib/Crud/Operations.ts';
-import type { Field } from '$lib/FieldDefinitions/Field.ts';
-import type { KeyValueObject } from '$lib/genericTypes.ts';
-import type { Options } from '$lib/FieldDefinitions/Options.ts';
+import type { CrudOperation } from '$lib/Crud/Operations';
+import type { Field } from '$lib/FieldDefinitions/Field';
+import type { KeyValueObject } from '$lib/genericTypes';
+import type { Options } from '$lib/FieldDefinitions/Options';
 
 export type Header = DataTableHeader;
 export type Headers = Array<Header>;

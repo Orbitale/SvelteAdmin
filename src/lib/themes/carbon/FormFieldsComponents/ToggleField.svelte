@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Toggle from 'carbon-components-svelte/src/Toggle/Toggle.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import type { ToggleField } from '$lib/FieldDefinitions/Toggle.ts';
+	import type { ToggleField } from '$lib/FieldDefinitions/Toggle';
 
 	export let field: ToggleField;
 	export let value: boolean | undefined;

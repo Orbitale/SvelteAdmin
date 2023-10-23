@@ -12,7 +12,7 @@ import {
 	TextareaField,
 	UrlAction
 } from '$lib';
-import type { KeyValueObject } from '$lib/genericTypes.js';
+import type { KeyValueObject } from '$lib/genericTypes';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';

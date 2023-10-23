@@ -5,7 +5,7 @@ export default defineConfig({
 	build: {
 		outDir: 'web-components',
 		lib: {
-			entry: './src/lib/index.js',
+			entry: './src/lib/index',
 			formats: ['es']
 		}
 	},

@@ -11,8 +11,8 @@
 
 	import { _ } from 'svelte-i18n';
 
-	import { Divider, Submenu } from '$lib/Menu/MenuLinks.ts';
-	import { type Action, CallbackAction, UrlAction } from '$lib/actions.ts';
+	import { Divider, Submenu } from '$lib/Menu/MenuLinks';
+	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
 
 	export let links: Array<Action> = [];
 </script>

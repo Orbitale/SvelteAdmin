@@ -7,14 +7,14 @@
 
 	import CrudFormField from '$lib/themes/carbon/Crud/CrudFormField.svelte';
 	import TabsForms from '$lib/themes/carbon/FormFieldsComponents/TabsForms.svelte';
-	import { TabsField } from '$lib/FieldDefinitions/TabsField.ts';
+	import { TabsField } from '$lib/FieldDefinitions/TabsField';
 
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
-	import type { SubmitButtonType } from '$lib/config/types.ts';
-	import type { FieldInterface } from '$lib/FieldDefinitions/Field.ts';
-	import type { Options } from '$lib/FieldDefinitions/Options.ts';
-	import { getSubmittedFormData } from '$lib/Crud/form.ts';
-	import type { SubmittedData } from '$lib/Crud/form.ts';
+	import type { CrudOperation } from '$lib/Crud/Operations';
+	import type { SubmitButtonType } from '$lib/config/types';
+	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
+	import type { Options } from '$lib/FieldDefinitions/Options';
+	import { getSubmittedFormData } from '$lib/Crud/form';
+	import type { SubmittedData } from '$lib/Crud/form';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';

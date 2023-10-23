@@ -1,5 +1,5 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
-import type { KeyValueObject, Optional } from '$lib/genericTypes.ts';
+import type { KeyValueObject, Optional } from '$lib/genericTypes';
 
 export type ActionIcon = object | string | SvelteComponent | ComponentType;
 

@@ -6,8 +6,8 @@
 
 	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
-	import type { Headers, Rows } from '$lib/DataTable/DataTable.ts';
-	import type { Action } from '$lib/actions.ts';
+	import type { Headers, Rows } from '$lib/DataTable/DataTable';
+	import type { Action } from '$lib/actions';
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;

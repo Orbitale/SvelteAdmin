@@ -1,5 +1,5 @@
-import type { CrudOperation } from '$lib/Crud/Operations.ts';
-import type { KeyValueObject } from '$lib/genericTypes.ts';
+import type { CrudOperation } from '$lib/Crud/Operations';
+import type { KeyValueObject } from '$lib/genericTypes';
 
 export type StateProviderResult<T> = Promise<T | Array<T> | null>;
 

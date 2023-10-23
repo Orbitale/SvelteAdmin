@@ -2,7 +2,7 @@
 	import Toolbar from 'carbon-components-svelte/src/DataTable/Toolbar.svelte';
 	import ToolbarContent from 'carbon-components-svelte/src/DataTable/ToolbarContent.svelte';
 
-	import type { Action } from '$lib/actions.ts';
+	import type { Action } from '$lib/actions';
 	import ToolbarAction from '$lib/themes/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 
 	export let actions: Array<Action> = [];

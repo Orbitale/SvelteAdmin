@@ -5,7 +5,7 @@
 
 	import CrudFormField from '../Crud/CrudFormField.svelte';
 	import type { TabsField } from '$lib';
-	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { CrudOperation } from '$lib/Crud/Operations';
 
 	export let operation: CrudOperation<unknown>;
 	export let fields: Array<TabsField> = [];

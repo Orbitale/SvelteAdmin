@@ -2,8 +2,8 @@
 	import Dashboard from '../../../../lib/themes/carbon/Dashboard/Dashboard.svelte';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import { dashboard } from '../../../../testApp/Dashboard.js';
-	import { getRequestParams } from '$lib/request.js';
+	import { dashboard } from '../../../../testApp/Dashboard';
+	import { getRequestParams } from '$lib/request';
 
 	$: crud = $page.params.crud;
 	$: operation = $page.params.operation;
