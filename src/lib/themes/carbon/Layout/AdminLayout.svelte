@@ -16,14 +16,13 @@
 
 	export let adminConfig: AdminConfig = {};
 
-	export let locale = undefined;
 	export let translations: Dictionaries = {};
 
 	export let side_menu_links: Array<MenuLink> = [];
 	export let top_left_menu_links: Array<MenuLink> = [];
 	export let top_right_menu_links: Array<MenuLink> = [];
 
-	initLocale(locale || getLocaleFromNavigator() || 'en', translations);
+	initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
 
 	onMount(() => {
 		document.documentElement.setAttribute('theme', theme);

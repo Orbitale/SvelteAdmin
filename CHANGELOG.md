@@ -1,3 +1,9 @@
+# v0.3.4
+
+Changes:
+
+- Added `AdminConfig.defaultLocale` property, to avoid having to set the locale manually outside the dashboard.
+
 # v0.3.3
 
 Changes:

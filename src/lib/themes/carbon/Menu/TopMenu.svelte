@@ -13,7 +13,10 @@
 	export let adminConfig: AdminConfig = emptyAdminConfig();
 </script>
 
-<Header company={adminConfig.head.brandName} platformName={adminConfig.head.appName}>
+<Header
+	company={adminConfig?.head?.brandName || ''}
+	platformName={adminConfig?.head?.appName || ''}
+>
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
 	</svelte:fragment>

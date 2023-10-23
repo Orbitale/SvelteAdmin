@@ -1,6 +1,6 @@
 {
 	"name": "@orbitale/svelte-admin",
-	"version": "0.3.3",
+	"version": "0.3.4",
 	"description": "(prototype) Crud base for Svelte projects",
 	"main": "src/lib/index.js",
 	"repository": "https://github.com/Orbitale/SvelteAdmin",
