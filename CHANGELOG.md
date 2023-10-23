@@ -1,3 +1,7 @@
+# v0.3.2
+
+Turns out previous version was incorrectly built when pushed to npm registry, so rebuilt it.
+
 # v0.3.1
 
 Changes:
