@@ -21,7 +21,7 @@
 	<SideNavItems>
 		{#each links as link}
 			{#if link instanceof Submenu}
-				<SideNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : null}>
+				<SideNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : ''}>
 					{#each link.links as subLink}
 						{#if subLink instanceof Divider}
 							<br />

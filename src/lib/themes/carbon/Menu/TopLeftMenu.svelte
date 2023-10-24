@@ -15,7 +15,7 @@
 <HeaderNav>
 	{#each links as link}
 		{#if link instanceof Submenu}
-			<HeaderNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : null}>
+			<HeaderNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : ''}>
 				{#each link.links as subLink}
 					{#if subLink instanceof Divider}
 						<br />

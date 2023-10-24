@@ -1,3 +1,9 @@
+# v0.3.5
+
+Changes:
+
+- Fixed wrong empty label display in menus
+
 # v0.3.4
 
 Changes:
