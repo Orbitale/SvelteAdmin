@@ -35,7 +35,7 @@
 
 <slot name="side_menu">
 	{#if side_menu_links.length}
-		<SideMenu links={side_menu_links} />
+		<SideMenu autoClose={adminConfig?.autoCloseSideMenu || false} links={side_menu_links} />
 	{/if}
 </slot>
 

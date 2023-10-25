@@ -9,15 +9,19 @@
 	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
 	import Link from 'carbon-icons-svelte/lib/Link.svelte';
 
+	export let autoClose = true;
+
 	import { _ } from 'svelte-i18n';
 
 	import { Divider, Submenu } from '$lib/Menu/MenuLinks';
+	import { sideMenuOpen } from "$lib/Menu/stores.ts";
 	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
+	import Icon from '../Icon.svelte';
 
 	export let links: Array<Action> = [];
 </script>
 
-<SideNav isOpen={true} fixed={true}>
+<SideNav rail={autoClose} bind:isOpen={$sideMenuOpen}>
 	<SideNavItems>
 		{#each links as link}
 			{#if link instanceof Submenu}
@@ -26,15 +30,18 @@
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}
-							<SideNavMenuItem icon={subLink.icon || Link} href={subLink.url()}>
+							<SideNavMenuItem href={subLink.url()}>
+								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
 						{:else if subLink instanceof CallbackAction}
-							<SideNavMenuItem icon={subLink.icon || Link} on:click={() => subLink.call()}>
+							<SideNavMenuItem on:click={() => subLink.call()}>
+								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
 						{:else}
-							<SideNavMenuItem icon={subLink.icon || Link}>
+							<SideNavMenuItem>
+								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
 						{/if}

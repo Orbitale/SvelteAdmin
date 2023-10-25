@@ -1,7 +1,7 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
 import type { KeyValueObject, Optional } from '$lib/genericTypes';
 
-export type ActionIcon = object | string | SvelteComponent | ComponentType;
+export type ActionIcon = string | SvelteComponent | ComponentType;
 
 export interface Action {
 	get label(): string;
@@ -26,14 +26,14 @@ export abstract class DefaultAction implements Action {
 }
 
 export class CallbackAction extends DefaultAction {
-	private readonly _callback: (item: object) => string;
+	private readonly _callback: (item?: object|undefined) => void;
 
-	constructor(label: string, icon: Optional<ActionIcon>, callback: (item: object) => string) {
+	constructor(label: string, icon: Optional<ActionIcon>, callback: (item?: object|undefined) => void) {
 		super(label, icon);
 		this._callback = callback;
 	}
 
-	public call(item: object): string {
+	public call(item?: object|undefined): void {
 		return this._callback.call(null, item);
 	}
 }

@@ -1,3 +1,9 @@
+# v0.3.6
+
+Changes:
+
+- Add "autoCloseSideMenu" to AdminConfig to allow customizing left-side menu
+
 # v0.3.5
 
 Changes:

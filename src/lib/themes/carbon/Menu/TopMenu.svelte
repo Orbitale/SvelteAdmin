@@ -11,11 +11,14 @@
 	export let right_links: Array<MenuLink> = [];
 
 	export let adminConfig: AdminConfig = emptyAdminConfig();
+
+	import { sideMenuOpen } from "$lib/Menu/stores.ts";
 </script>
 
 <Header
 	company={adminConfig?.head?.brandName || ''}
 	platformName={adminConfig?.head?.appName || ''}
+	bind:isSideNavOpen={$sideMenuOpen}
 >
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />
