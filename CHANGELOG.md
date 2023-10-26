@@ -50,7 +50,7 @@ Changes:
 
 Changes:
 
-- Add `initLocale` function helper to lib exports, this allows users to execute the function themselves **before** the library does
+- Add `initLocale` function helper to lib exports, this allows users to call the function themselves **before** the library does
 
 # v0.2.2
 

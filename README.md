@@ -24,13 +24,13 @@ This comes with no warranty of working perfectly (again, it's a prototype).
 
 ## Usage
 
-An administration panel is composed of three main things:
+An administration panel is composed of three main components:
 
 1. The `Dashboard` definition: it provides some metadata, the links you will add to your menus.
 2. The `Crud` definition**s**: added to your Dashboard, they define the resource type you will manipulate in each operation of your Crud. All Cruds also define how to fetch and persist your data from whatever data source you want (usually it might be some kind of API).
 3. The Svelte route that will **render** the Dashboard, based on your sole `Dashboard` definition, and called by user input (like URL parameters).
 
-Usually, you will have only **one dashboard** and set **one Crud per entity** to your administration panel.
+Usually, you will have **one dashboard** and set **one Crud per entity** to your administration panel.
 
 ### Create a Dashboard
 
@@ -55,8 +55,9 @@ import booksCrud from './booksCrud';
 
 // The dashboard setup:
 export const dashboard = new DashboardDefinition({
-	// Some metadata regarding your admin panel
+	// Some metadata related to your admin panel
 	admin: {
+        defaultLocale: 'en',
 		head: {
 			brandName: '{ Your company/brand name }',
 			appName: '{ Your app name }'
@@ -78,7 +79,7 @@ export const dashboard = new DashboardDefinition({
 
 #### The Crud config
 
-Then, create the `src/lib/booksCrud.ts` file, it will host your "Books" Crud configuration:
+Then, create the `src/lib/booksCrud.ts` file, it will contain your "Books" Crud configuration:
 
 ```typescript
 // src/lib/booksCrud.ts
@@ -107,7 +108,7 @@ const fields = [
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
 	})
 ];
-// Note: these fields can obviously change based on different pages/actions,
+// Note: these fields can of course change based on different pages/actions,
 //   so feel free to spread this out if you have more complex admins!
 
 // Finally: the actual Crud object!
@@ -156,7 +157,7 @@ export const booksCrud = new CrudDefinition(
 
 Voilà!
 
-Well, your Crud is not totally ready, because it needs two more things: being rendered, and fetching the **real** data.
+Well, your Crud is not totally ready, because it needs two more actions: being rendered, and fetching the **real** data.
 
 About the "fetching" part, we will leave this for below chapters.
 
@@ -166,7 +167,7 @@ However, let's render our dashboard!
 
 If you have a common SvelteKit project, you can directly create a new route page for your base admin.
 
-Since we will mostly use the URL to determine what Crud and operations we are looking at, let's use SvelteKit's router to make things shine with as less code as possible!
+Since we will mostly use the URL to determine what Crud and operations we are looking at, let's use SvelteKit's router to make our URLs shine with as less code as possible!
 
 Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following code:
 
@@ -174,7 +175,7 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 <script lang="ts">
 	// src/routes/[crud]/[operation]/+page.svelte
 
-	// The Dashboard component that will render all the things!
+	// The Dashboard component that will render everything!
 	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
 
 	// This function helps retrieving the [crud] and [operation] variables from the URL,
@@ -245,7 +246,7 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 
 #### Fetching your data with State providers
 
-As we have seen before, there are two entrypoints to your data source, one of them is the **state provider**, and there is only one per Crud.
+As we have seen before, there are two entrypoints to your data source, one of them is the **state provider**, and there is one per Crud.
 
 A SateProvider is a class that implements this interface:
 
