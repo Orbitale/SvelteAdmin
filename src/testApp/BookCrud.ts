@@ -54,7 +54,7 @@ export const bookCrud = new CrudDefinition('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(async function (
+	stateProcessor: new CallbackStateProcessor(function (
 		data,
 		operation,
 		requestParameters = {}
@@ -65,7 +65,7 @@ export const bookCrud = new CrudDefinition('books', {
 				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
 			);
 
-			return;
+			return Promise.resolve();
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
@@ -77,13 +77,15 @@ export const bookCrud = new CrudDefinition('books', {
 					'\nYou should push this to a database via an API for example ;)'
 			);
 
-			return;
+			return Promise.resolve();
 		}
 
-		console.warn('Unsupported Books Crud action "' + operation.name + '".');
+		console.warn('StateProcessor error: Unsupported Books Crud action "' + operation.name + '".');
+
+		return Promise.resolve();
 	}),
 
-	stateProvider: new CallbackStateProvider(async function (
+	stateProvider: new CallbackStateProvider(function (
 		operation,
 		requestParameters: KeyValueObject = {}
 	) {
@@ -100,6 +102,10 @@ export const bookCrud = new CrudDefinition('books', {
 			return Promise.resolve(ret[0] || null);
 		}
 
-		console.warn('Unsupported Books Crud action "' + operation.name + '".');
+		if (operation.name !== 'edit' && operation.name !== 'view' && operation.name !== 'delete') {
+			console.warn('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');
+		}
+
+		return Promise.resolve();
 	})
 });
