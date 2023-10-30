@@ -4,14 +4,14 @@
 	import { _ } from 'svelte-i18n';
 
 	import { initLocale } from '$lib';
-	import { Dashboard } from '$lib/themes/carbon';
+	import theme from '$lib/themes/carbon';
 	import { dashboard } from '../testApp/Dashboard';
 	import fr from '../testApp/translations/fr';
 
 	initLocale('fr', { fr });
 </script>
 
-<Dashboard {dashboard}>
+<svelte:component this={theme.dashboard} {dashboard}>
 	<h1>Svelte Admin demo app</h1>
 
 	<p>
@@ -35,7 +35,7 @@
 			</li>
 		{/each}
 	</UnorderedList>
-</Dashboard>
+</svelte:component>
 
 <style>
 	li {

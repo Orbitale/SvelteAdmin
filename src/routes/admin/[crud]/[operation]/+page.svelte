@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dashboard from '../../../../lib/themes/carbon/Dashboard/Dashboard.svelte';
+	import theme from '$lib/themes/carbon';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { dashboard } from '../../../../testApp/Dashboard';
@@ -11,5 +11,5 @@
 </script>
 
 {#key $page}
-	<Dashboard {dashboard} {crud} {operation} {requestParameters} />
+	<svelte:component this={theme.dashboard} {dashboard} {crud} {operation} {requestParameters} />
 {/key}

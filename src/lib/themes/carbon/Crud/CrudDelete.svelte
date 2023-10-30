@@ -7,9 +7,11 @@
 	import { CallbackAction, UrlAction } from '$lib/actions';
 	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
+	import type { DashboardDefinition } from '$lib';
 
-	export let crud: CrudDefinition<object>;
-	export let operation: CrudOperation<object>;
+	export let dashboard: DashboardDefinition<unknown>;
+	export let operation: CrudOperation<unknown>;
+	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
 	const data = crud.options.stateProvider.provide(operation, requestParameters);

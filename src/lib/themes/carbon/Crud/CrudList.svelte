@@ -12,9 +12,11 @@
 
 	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
+	import type { DashboardDefinition } from '$lib';
 
-	export let crud: CrudDefinition<unknown>;
+	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
+	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
 	const actions = operation.actions;

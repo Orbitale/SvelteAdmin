@@ -6,13 +6,14 @@
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
-	import { type CrudDefinition, TabsField } from '$lib';
+	import { type CrudDefinition, type DashboardDefinition, TabsField } from '$lib';
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import TabsView from '$lib/themes/carbon/ViewFieldsComponents/TabsView.svelte';
 	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
 
+	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};

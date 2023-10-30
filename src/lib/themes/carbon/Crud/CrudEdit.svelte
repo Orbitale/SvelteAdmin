@@ -13,9 +13,11 @@
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
 	import type { StateProviderResult } from '$lib/State/Provider';
+	import type { DashboardDefinition } from '$lib';
 
-	export let crud: CrudDefinition<unknown>;
+	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
+	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
 	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(

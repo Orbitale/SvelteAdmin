@@ -20,12 +20,12 @@ describe(
 	() => {
 		it('can be instantiated with simple config', () => {
 			const dashboard = new DashboardDefinition<Book>({
-				adminConfig: emptyAdminConfig(),
+				adminConfig: {},
 				cruds: [
 					new CrudDefinition<Book>('books', {
 						label: { singular: 'Book', plural: 'Books' },
 						operations: [new List([])],
-						stateProvider: new CallbackStateProvider<Book>(() => null),
+						stateProvider: new CallbackStateProvider<Book>(() => Promise.resolve(null)),
 						stateProcessor: new CallbackStateProcessor<Book>(() => {})
 					})
 				]

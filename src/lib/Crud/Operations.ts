@@ -18,18 +18,18 @@ export type OperationCallbackName = 'submit' | string;
 export type OperationCallback = (event: Event) => unknown | void;
 export type OperationEventCallback = [event: OperationCallbackName, callback: OperationCallback];
 
-export type TemplateComponent<T> = ComponentType<
-	SvelteComponent<{
-		dashboard: DashboardDefinition<T>;
-		crud: CrudDefinition<T>;
-		crudOperation: CrudOperation<T>;
-	}>
->;
+export type TemplateComponent = ComponentType;
+// SvelteComponent<{
+// 	dashboard: DashboardDefinition<unknown>;
+// 	crud: CrudDefinition<unknown>;
+// 	operation: CrudOperation<unknown>;
+// 	requestParameters: KeyValueObject;
+// }>
 
 export interface CrudOperation<T> {
 	readonly name: CrudOperationName;
 	readonly label: string;
-	readonly displayComponent: TemplateComponent<T>;
+	readonly displayComponent: TemplateComponent;
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Array<Action>;
 	readonly eventHandlers: Array<OperationEventCallback>;
@@ -38,7 +38,7 @@ export interface CrudOperation<T> {
 
 export class BaseCrudOperation<T> implements CrudOperation<T> {
 	public readonly name: CrudOperationName;
-	public readonly displayComponent: TemplateComponent<T>;
+	public readonly displayComponent: TemplateComponent;
 	public readonly fields: Array<Field<Options>>;
 	public readonly label: string;
 	public readonly actions: Array<Action>;
@@ -48,7 +48,7 @@ export class BaseCrudOperation<T> implements CrudOperation<T> {
 	constructor(
 		name: CrudOperationName,
 		label: string,
-		displayComponent: TemplateComponent<T>,
+		displayComponent: TemplateComponent,
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
 		eventHandlers: Array<OperationEventCallback> = [],

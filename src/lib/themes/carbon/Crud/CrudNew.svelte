@@ -5,7 +5,9 @@
 	import type { CrudOperation } from '../../../Crud/Operations';
 	import type { CrudDefinition } from '../../../Crud/definition';
 	import type { KeyValueObject } from '../../../genericTypes';
+	import type { DashboardDefinition } from '../../../Dashboard/definition';
 
+	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};

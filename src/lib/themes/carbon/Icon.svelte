@@ -1,18 +1,23 @@
 <script lang="ts">
-    import type {ActionIcon} from "$lib/actions.ts";
-    import {SvelteComponent} from "svelte";
+	import type { ActionIcon } from '$lib/actions';
+	import { SvelteComponent } from 'svelte';
 
-    export let icon: ActionIcon;
+	export let icon: ActionIcon;
 
-    if (!(icon instanceof SvelteComponent) && typeof icon !== 'function' && typeof icon !== 'string') {
-        console.error(`Wrong icon type: ${typeof icon}`);
-    }
+	if (
+		!(icon instanceof SvelteComponent) &&
+		typeof icon !== 'function' &&
+		typeof icon !== 'string' &&
+		typeof icon.$$render === 'undefined'
+	) {
+		console.error(`Wrong icon type: ${typeof icon}`, icon);
+	}
 </script>
 
-{#if icon instanceof SvelteComponent || typeof icon === 'function'}
-    <svelte:component this={icon} />
+{#if icon instanceof SvelteComponent || typeof icon === 'function' || typeof icon.$$render !== 'undefined'}
+	<svelte:component this={icon} />
 {:else if typeof icon === 'string'}
-    {icon}
+	{icon}
 {:else}
-    {icon.toString()}
+	{icon.toString()}
 {/if}

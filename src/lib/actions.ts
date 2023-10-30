@@ -26,14 +26,18 @@ export abstract class DefaultAction implements Action {
 }
 
 export class CallbackAction extends DefaultAction {
-	private readonly _callback: (item?: object|undefined) => void;
+	private readonly _callback: (item?: object | undefined) => void;
 
-	constructor(label: string, icon: Optional<ActionIcon>, callback: (item?: object|undefined) => void) {
+	constructor(
+		label: string,
+		icon: Optional<ActionIcon>,
+		callback: (item?: object | undefined) => void
+	) {
 		super(label, icon);
 		this._callback = callback;
 	}
 
-	public call(item?: object|undefined): void {
+	public call(item?: object | undefined): void {
 		return this._callback.call(null, item);
 	}
 }

@@ -1,7 +1,7 @@
 import type { MenuLink } from '$lib/Menu/MenuLinks';
 import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
-import {type AdminConfig, emptyAdminConfig} from '$lib/config/adminConfig';
+import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
 
 export type DashboardDefinitionOptions<T> = {
 	adminConfig: Partial<AdminConfig>;
@@ -23,7 +23,7 @@ export class DashboardDefinition<T> {
 	public readonly options = {};
 
 	constructor(options: DashboardDefinitionOptions<T>) {
-		this.adminConfig = {...emptyAdminConfig(), ...options.adminConfig};
+		this.adminConfig = { ...emptyAdminConfig(), ...options.adminConfig };
 		this.cruds = options.cruds;
 		this.sideMenu = options.sideMenu || [];
 		this.topLeftMenu = options.topLeftMenu || [];

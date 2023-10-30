@@ -54,11 +54,7 @@ export const bookCrud = new CrudDefinition('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(function (
-		data,
-		operation,
-		requestParameters = {}
-	) {
+	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
 		console.info(operation.name, requestParameters);
 		if (operation.name === 'delete') {
 			alert(

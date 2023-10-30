@@ -14,14 +14,14 @@
 	import { _ } from 'svelte-i18n';
 
 	import { Divider, Submenu } from '$lib/Menu/MenuLinks';
-	import { sideMenuOpen } from "$lib/Menu/stores.ts";
+	import { sideMenuOpen } from '$lib/Menu/stores';
 	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
 	import Icon from '../Icon.svelte';
 
 	export let links: Array<Action> = [];
 </script>
 
-<SideNav rail={autoClose} bind:isOpen={$sideMenuOpen}>
+<SideNav rail={autoClose} isOpen={$sideMenuOpen}>
 	<SideNavItems>
 		{#each links as link}
 			{#if link instanceof Submenu}

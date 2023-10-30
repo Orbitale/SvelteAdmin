@@ -57,7 +57,7 @@ import booksCrud from './booksCrud';
 export const dashboard = new DashboardDefinition({
 	// Some metadata related to your admin panel
 	admin: {
-        defaultLocale: 'en',
+		defaultLocale: 'en',
 		head: {
 			brandName: '{ Your company/brand name }',
 			appName: '{ Your app name }'
@@ -144,12 +144,14 @@ export const booksCrud = new CrudDefinition(
 		stateProvider: new CallbackStateProvider(function (operation, requestParameters = {}) {
 			console.info('TODO: return actual data, like from an API');
 
-			return null;
+			return Promise.resolve(null);
 		}),
 
 		// See below about state processors and providers.
 		stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
 			console.info('TODO: process new, edit or delete data based on the current operation');
+
+			return Promise.resolve();
 		})
 	}
 );
