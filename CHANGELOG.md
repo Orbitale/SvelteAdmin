@@ -1,3 +1,12 @@
+# v0.4.0
+
+- **BC Break**: Create a separate theme config system. Themes must now be added to the `DashboardDefinition` config via the `adminConfig` option.<br>
+  The current theme's path is `@orbitale/svelte-admin/themes/carbon`.
+- Remove some warnings in test app
+- Slight readme wording updates
+- First addition of CI script
+- Add browser-save support for whole test app. This means books are stored in your `localStorage`!
+
 # v0.3.6
 
 Changes:
