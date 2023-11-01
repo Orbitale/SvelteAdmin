@@ -13,16 +13,44 @@ import {
 	UrlAction
 } from '$lib';
 import type { KeyValueObject } from '$lib/genericTypes';
+import { v4 as uuid4 } from 'uuid';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 
-type Book = { id: number; title: string; description: string };
-const books: Array<Book> = [
-	{ id: 1, title: 'The Hobbit', description: 'In a hole, lived a hobbit' },
-	{ id: 2, title: 'Dune', description: 'Pretty spicy' }
+type Book = { id: number|string; title: string; description: string };
+const baseBooks: Array<Book> = [
+	{ id: uuid4(), title: 'The Hobbit', description: 'In a hole, lived a hobbit' },
+	{ id: uuid4(), title: 'Dune', description: 'Pretty spicy' }
 ];
+
+function getMemoryBooks(): Array<Book> {
+	if (typeof window === 'undefined') {
+		return baseBooks;
+	}
+
+	let memory = window.localStorage.getItem('books');
+	if (memory === null || memory === undefined || memory === '') {
+		memory = JSON.stringify(baseBooks);
+	}
+
+	return JSON.parse(memory || '[]') || {};
+}
+
+function getBook(id: string|number): Book {
+	const foundBooks = getMemoryBooks().filter(b => b.id.toString() === id.toString());
+
+	if (foundBooks.length === 0) {
+		throw new Error(`Book with id "${id}" was not found.`);
+	}
+
+	if (foundBooks.length !== 1) {
+		throw new Error(`Error: Found multiple books with id "${id}".`);
+	}
+
+	return foundBooks[0];
+}
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
@@ -57,26 +85,30 @@ export const bookCrud = new CrudDefinition('books', {
 	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
 		console.info(operation.name, requestParameters);
 		if (operation.name === 'delete') {
-			alert(
-				`Book ${requestParameters.id} was requested for deletion, but it's only a demo app, so as everything is in memory, you will still see it, please forgive us :)`
-			);
+			const id = requestParameters.id;
+			getBook(id);
+			const updatedBooks = getMemoryBooks().filter(b => b.id.toString() !== id);
+			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
 
 			return Promise.resolve();
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			alert(
-				'Submitted book ' +
-					operation.name +
-					'!\nHere are your data:\n' +
-					JSON.stringify(data) +
-					'\nYou should push this to a database via an API for example ;)'
-			);
+			const id = operation.name === 'edit' ? requestParameters.id : uuid4();
+			const book = data as Book;
+			book.id = id;
+			let updatedBooks = getMemoryBooks();
+
+			if (operation.name === 'new') {
+				updatedBooks.push(book);
+			} else {
+				updatedBooks = updatedBooks.map(b => b.id.toString() === id.toString() ? book : b);
+			}
+
+			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
 
 			return Promise.resolve();
 		}
-
-		console.warn('StateProcessor error: Unsupported Books Crud action "' + operation.name + '".');
 
 		return Promise.resolve();
 	}),
@@ -85,6 +117,8 @@ export const bookCrud = new CrudDefinition('books', {
 		operation,
 		requestParameters: KeyValueObject = {}
 	) {
+		const books = getMemoryBooks();
+
 		console.info(operation.name, requestParameters);
 		if (operation.name === 'list') {
 			return Promise.resolve(books);
@@ -92,7 +126,7 @@ export const bookCrud = new CrudDefinition('books', {
 
 		if (requestParameters.id !== undefined) {
 			const ret = books.filter(
-				(book: { id: number }) => book.id && book.id.toString() === requestParameters.id
+				(book: { id: string|number }) => book.id && book.id.toString() === requestParameters.id
 			);
 
 			return Promise.resolve(ret[0] || null);
