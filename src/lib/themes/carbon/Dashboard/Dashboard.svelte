@@ -20,21 +20,21 @@
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { KeyValueObject } from '$lib/genericTypes';
 
-	export let dashboard: DashboardDefinition;
+	export let dashboard: DashboardDefinition<unknown>;
 	export let crud: string | undefined = undefined;
 	export let operation: string | undefined = undefined;
 	export let requestParameters: KeyValueObject = {};
 
-	let currentCrud: CrudDefinition | undefined;
-	let currentCrudOperation: CrudOperation | undefined;
+	let currentCrud: CrudDefinition<unknown> | undefined;
+	let currentCrudOperation: CrudOperation<unknown> | undefined;
 
 	dashboard.cruds
-		.filter((dashboardCrud: CrudDefinition) => crud === dashboardCrud.name)
-		.forEach((resolved: CrudDefinition) => (currentCrud = resolved));
+		.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
+		.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
 
 	currentCrud?.options.operations
-		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
-		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
+		.filter((crudOperation: CrudOperation<unknown>) => operation === crudOperation.name)
+		.forEach((resolved: CrudOperation<unknown>) => (currentCrudOperation = resolved));
 </script>
 
 <AdminLayout

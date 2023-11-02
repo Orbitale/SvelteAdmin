@@ -5,10 +5,10 @@
 
 	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { TabsField } from '$lib';
+	import type { Tabs } from '$lib';
 
 	export let operation: CrudOperation<unknown>;
-	export let fields: Array<TabsField> = [];
+	export let fields: Array<Tabs> = [];
 	export let data: Record<string, unknown> = {};
 </script>
 

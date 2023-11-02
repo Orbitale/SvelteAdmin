@@ -11,7 +11,7 @@ export { DashboardDefinition } from '$lib/Dashboard/definition';
 export { CheckboxField } from '$lib/FieldDefinitions/Checkbox';
 export { Field } from '$lib/FieldDefinitions/Field';
 export { NumberField } from '$lib/FieldDefinitions/Number';
-export { TabsField } from '$lib/FieldDefinitions/TabsField';
+export { Tabs } from '$lib/FieldDefinitions/Tabs';
 export { TextareaField } from '$lib/FieldDefinitions/Textarea';
 export { TextField } from '$lib/FieldDefinitions/Text';
 export { ToggleField } from '$lib/FieldDefinitions/Toggle';

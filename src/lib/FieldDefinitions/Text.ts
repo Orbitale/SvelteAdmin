@@ -1,8 +1,6 @@
-import type { ComponentType } from 'svelte';
-import TextFieldComponent from '$lib/themes/carbon/FormFieldsComponents/TextField.svelte';
-import DefaultViewFieldComponent from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
 import { Field } from '$lib/FieldDefinitions/Field';
 import type { CommonOptions } from '$lib/FieldDefinitions/Options';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type TextOptions = CommonOptions & {
 	maxLength?: number;
@@ -10,6 +8,6 @@ export type TextOptions = CommonOptions & {
 };
 
 export class TextField extends Field<TextOptions> {
-	readonly formComponent: ComponentType = TextFieldComponent;
-	readonly viewComponent: ComponentType = DefaultViewFieldComponent;
+	readonly formComponent: FormFieldTheme = 'text';
+	readonly viewComponent: ViewFieldTheme = 'default';
 }

@@ -3,6 +3,7 @@ export type Options = {
 	disabled: boolean;
 	help?: string;
 	validator?: (value: object) => boolean;
+	disableOnOperations?: Array<string>;
 	[key: string]: string | number | boolean | unknown;
 };
 

@@ -48,25 +48,25 @@ const theme: ThemeConfig = {
 		delete: CrudDelete,
 		form: CrudForm,
 		viewField: CrudViewField,
-		formField: CrudFormField,
-		tabsForms: TabsForms
+		formField: CrudFormField
 	},
 	viewFields: {
-		checkboxViewField: CheckboxViewField,
-		defaultViewField: DefaultViewField,
-		tabsView: TabsView,
-		urlViewField: UrlViewField,
-		viewLabel: ViewLabel
+		checkbox: CheckboxViewField,
+		default: DefaultViewField,
+		tabs: TabsView,
+		url: UrlViewField,
+		label: ViewLabel
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
 		default: DefaultFormField,
 		number: NumberFormField,
-		tabsField: TabsFormField,
+		tabs: TabsFormField,
 		textarea: TextareaFormField,
 		text: TextFormField,
 		toggle: ToggleFormField,
-		url: UrlFormField
+		url: UrlFormField,
+		tabsForms: TabsForms
 	},
 	menu: {
 		sideMenu: SideMenu,

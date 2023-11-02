@@ -1,12 +1,10 @@
-import type { ComponentType } from 'svelte';
-import CheckboxFormComponent from '$lib/themes/carbon/FormFieldsComponents/CheckboxField.svelte';
-import CheckboxViewComponent from '$lib/themes/carbon/ViewFieldsComponents/CheckboxField.svelte';
 import { Field } from '$lib/FieldDefinitions/Field';
 import type { Options } from '$lib/FieldDefinitions/Options';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type CheckboxOptions = Options;
 
 export class CheckboxField extends Field<CheckboxOptions> {
-	readonly formComponent: ComponentType = CheckboxFormComponent;
-	readonly viewComponent: ComponentType = CheckboxViewComponent;
+	readonly formComponent: FormFieldTheme = 'checkbox';
+	readonly viewComponent: ViewFieldTheme = 'checkbox';
 }

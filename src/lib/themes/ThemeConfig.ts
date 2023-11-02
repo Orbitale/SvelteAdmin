@@ -13,24 +13,24 @@ export type ThemeConfig = {
 		form: ComponentType;
 		viewField: ComponentType;
 		formField: ComponentType;
-		tabsForms: ComponentType;
 	};
 	viewFields: {
-		checkboxViewField: ComponentType;
-		defaultViewField: ComponentType;
-		tabsView: ComponentType;
-		urlViewField: ComponentType;
-		viewLabel: ComponentType;
+		checkbox: ComponentType;
+		default: ComponentType;
+		tabs: ComponentType;
+		url: ComponentType;
+		label: ComponentType;
 	};
 	formFields: {
 		checkbox: ComponentType;
 		default: ComponentType;
 		number: ComponentType;
-		tabsField: ComponentType;
+		tabs: ComponentType;
 		textarea: ComponentType;
 		text: ComponentType;
 		toggle: ComponentType;
 		url: ComponentType;
+		tabsForms: ComponentType;
 	};
 	menu: {
 		sideMenu: ComponentType;
@@ -39,3 +39,8 @@ export type ThemeConfig = {
 		topRightMenu: ComponentType;
 	};
 };
+
+export type CrudTheme = keyof ThemeConfig['crud'];
+export type ViewFieldTheme = keyof ThemeConfig['viewFields'];
+export type FormFieldTheme = keyof ThemeConfig['formFields'];
+export type MenuTheme = keyof ThemeConfig['menu'];

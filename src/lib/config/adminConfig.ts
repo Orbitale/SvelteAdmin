@@ -1,4 +1,4 @@
-import type { ThemeConfig } from '$lib/themes/ThemeConfig.ts';
+import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 import carbon from '$lib/themes/carbon';
 
 export type AdminConfig = {

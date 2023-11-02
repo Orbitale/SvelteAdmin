@@ -7,7 +7,7 @@
 
 	import CrudFormField from '$lib/themes/carbon/Crud/CrudFormField.svelte';
 	import TabsForms from '$lib/themes/carbon/FormFieldsComponents/TabsForms.svelte';
-	import { TabsField } from '$lib/FieldDefinitions/TabsField';
+	import { Tabs } from '$lib/FieldDefinitions/Tabs';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { SubmitButtonType } from '$lib/config/types';
@@ -27,17 +27,17 @@
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
-	let tabbed_fields: Array<TabsField> = [];
+	let tabbed_fields: Array<Tabs> = [];
 
-	let current_tab: TabsField | null = null;
+	let current_tab: Tabs | null = null;
 	for (let i = 0; i < fields.length; i++) {
 		const field = fields[i];
-		if (field instanceof TabsField) {
+		if (field instanceof Tabs) {
 			current_tab = null;
 			tabbed_fields.push(field);
 		} else {
 			if (!current_tab) {
-				current_tab = new TabsField(`tab_${i}`, `Tab #${i + 1}`);
+				current_tab = new Tabs(`tab_${i}`, `Tab #${i + 1}`);
 				tabbed_fields.push(current_tab);
 			}
 			current_tab.fields.push(field);

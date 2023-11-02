@@ -4,9 +4,10 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
+	import { Tabs } from '$lib';
+	import type { CrudDefinition, DashboardDefinition } from '$lib';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
-	import { type CrudDefinition, type DashboardDefinition, TabsField } from '$lib';
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { StateProviderResult } from '$lib/State/Provider';
@@ -20,17 +21,17 @@
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
-	let tabbed_fields: Array<TabsField> = [];
+	let tabbed_fields: Array<Tabs> = [];
 
-	let current_tab: TabsField | null = null;
+	let current_tab: Tabs | null = null;
 	for (let i = 0; i < fields.length; i++) {
 		const field = fields[i];
-		if (field instanceof TabsField) {
+		if (field instanceof Tabs) {
 			current_tab = null;
 			tabbed_fields.push(field);
 		} else {
 			if (!current_tab) {
-				current_tab = new TabsField(`tab_${i}`, `Tab #${i + 1}`);
+				current_tab = new Tabs(`tab_${i}`, `Tab #${i + 1}`);
 				tabbed_fields.push(current_tab);
 			}
 			current_tab.fields.push(field);
