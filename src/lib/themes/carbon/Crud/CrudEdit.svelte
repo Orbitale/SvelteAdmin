@@ -13,7 +13,7 @@
 	import type { KeyValueObject } from '$lib/genericTypes';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { DashboardDefinition } from '$lib';
-	import theme from "$lib/stores/theme";
+	import theme from '$lib/stores/theme';
 
 	const CrudForm = $theme.crud.form;
 

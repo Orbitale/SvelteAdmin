@@ -3,7 +3,7 @@
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import {getFormFieldComponent} from "$lib/Theme";
+	import { getFormFieldComponent } from '$lib/Theme';
 
 	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;

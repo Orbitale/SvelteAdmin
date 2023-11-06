@@ -5,7 +5,7 @@
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
 	import { Tabs } from '$lib';
-	import theme from "$lib/stores/theme";
+	import theme from '$lib/stores/theme';
 	import type { CrudDefinition, DashboardDefinition } from '$lib';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';

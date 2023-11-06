@@ -13,7 +13,7 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
-	import theme from "$lib/stores/theme";
+	import theme from '$lib/stores/theme';
 
 	const TabsForms = $theme.formFields.tabsForms;
 	const CrudFormField = $theme.crud.formField;

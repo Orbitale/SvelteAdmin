@@ -6,9 +6,9 @@
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import {getViewFieldComponent} from "$lib/Theme";
-	import DefaultField from "$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte";
-	import theme from "$lib/stores/theme";
+	import { getViewFieldComponent } from '$lib/Theme';
+	import DefaultField from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
+	import theme from '$lib/stores/theme';
 
 	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;

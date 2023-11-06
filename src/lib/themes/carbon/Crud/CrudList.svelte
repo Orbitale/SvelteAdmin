@@ -12,7 +12,7 @@
 	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
 	import type { DashboardDefinition } from '$lib';
-	import theme from "$lib/stores/theme";
+	import theme from '$lib/stores/theme';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;

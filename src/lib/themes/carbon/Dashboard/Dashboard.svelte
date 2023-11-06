@@ -15,7 +15,7 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/themes/carbon/Layout/AdminLayout.svelte';
-	import { getCrudComponent } from "$lib/Theme";
+	import { getCrudComponent } from '$lib/Theme';
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud/definition';

@@ -2,7 +2,7 @@ import type { MenuLink } from '$lib/Menu/MenuLinks';
 import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
-import theme from "$lib/stores/theme";
+import theme from '$lib/stores/theme';
 
 export type DashboardDefinitionOptions<T> = {
 	adminConfig: Partial<AdminConfig>;
