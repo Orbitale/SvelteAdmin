@@ -8,7 +8,7 @@
 		!(icon instanceof SvelteComponent) &&
 		typeof icon !== 'function' &&
 		typeof icon !== 'string' &&
-		typeof icon.$$render === 'undefined'
+		typeof icon?.$$render === 'undefined'
 	) {
 		console.error(`Wrong icon type: ${typeof icon}`, icon);
 	}

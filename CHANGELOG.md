@@ -1,3 +1,9 @@
+# v0.4.3
+
+Changes:
+
+- Make sure icons can still be used when icon type is empty.
+
 # v0.4.2
 
 Changes:
