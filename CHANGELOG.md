@@ -1,8 +1,9 @@
-# upcoming
+# v0.4.2
 
 Changes:
 
 - Fix CrudOperation that's no longer generic
+- Attempt at fixing paths for themes module loading
 
 # v0.4.1
 

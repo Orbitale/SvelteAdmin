@@ -1,27 +1,27 @@
 //
 // Classes & functions
 //
-export { CallbackAction, UrlAction } from '$lib/actions';
-export { BaseCrudOperation, New, Edit, List, Delete, View } from '$lib/Crud/Operations';
-export { CrudDefinition } from '$lib/Crud/definition';
-export { getSubmittedFormData } from '$lib/Crud/form';
+export { DefaultAction, CallbackAction, UrlAction } from './actions';
+export { BaseCrudOperation, New, Edit, List, Delete, View } from './Crud/Operations';
+export { CrudDefinition } from './Crud/definition';
+export { getSubmittedFormData } from './Crud/form';
 
-export { DashboardDefinition } from '$lib/Dashboard/definition';
+export { DashboardDefinition } from './Dashboard/definition';
 
-export { CheckboxField } from '$lib/FieldDefinitions/Checkbox';
-export { Field } from '$lib/FieldDefinitions/Field';
-export { NumberField } from '$lib/FieldDefinitions/Number';
-export { Tabs } from '$lib/FieldDefinitions/Tabs';
-export { TextareaField } from '$lib/FieldDefinitions/Textarea';
-export { TextField } from '$lib/FieldDefinitions/Text';
-export { ToggleField } from '$lib/FieldDefinitions/Toggle';
-export { UrlField } from '$lib/FieldDefinitions/Url';
+export { CheckboxField } from './FieldDefinitions/Checkbox';
+export { Field } from './FieldDefinitions/Field';
+export { NumberField } from './FieldDefinitions/Number';
+export { Tabs } from './FieldDefinitions/Tabs';
+export { TextareaField } from './FieldDefinitions/Textarea';
+export { TextField } from './FieldDefinitions/Text';
+export { ToggleField } from './FieldDefinitions/Toggle';
+export { UrlField } from './FieldDefinitions/Url';
 
-export { Submenu, Divider } from '$lib/Menu/MenuLinks';
+export { Submenu, Divider } from './Menu/MenuLinks';
 
-export { CallbackStateProcessor } from '$lib/State/Processor';
-export { CallbackStateProvider } from '$lib/State/Provider';
+export { CallbackStateProcessor } from './State/Processor';
+export { CallbackStateProvider } from './State/Provider';
 
-export { getRequestParams } from '$lib/request';
+export { getRequestParams } from './request';
 
-export { initLocale } from '$lib/admin_i18n';
+export { initLocale } from './admin_i18n';

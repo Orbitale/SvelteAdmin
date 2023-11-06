@@ -44,7 +44,7 @@ export class BaseCrudOperation implements CrudOperation {
 	) {}
 }
 
-type FormOperationOptions = object & {
+export type FormOperationOptions = object & {
 	preventHttpFormSubmit: boolean;
 };
 const DEFAULT_FORM_OPERATION_OPTION: FormOperationOptions = {

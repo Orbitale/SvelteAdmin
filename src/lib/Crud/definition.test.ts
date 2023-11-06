@@ -14,7 +14,7 @@ describe(
 			const crud = new CrudDefinition<Book>('books', {
 				label: { singular: '', plural: '' },
 				operations: [new List([])],
-				stateProvider: new CallbackStateProvider<Book>(() => null),
+				stateProvider: new CallbackStateProvider<Book>(async () => null),
 				stateProcessor: new CallbackStateProcessor<Book>(() => {})
 			});
 
@@ -25,7 +25,7 @@ describe(
 				label: { singular: '', plural: '' },
 				operations: [new List([])],
 				defaultOperationName: 'list',
-				stateProvider: new CallbackStateProvider<Book>(() => null),
+				stateProvider: new CallbackStateProvider<Book>(async () => null),
 				stateProcessor: new CallbackStateProcessor<Book>(() => {})
 			});
 
@@ -37,7 +37,7 @@ describe(
 				new CrudDefinition<Book>('books', {
 					label: { singular: '', plural: '' },
 					operations: [],
-					stateProvider: new CallbackStateProvider<Book>(() => null),
+					stateProvider: new CallbackStateProvider<Book>(async () => null),
 					stateProcessor: new CallbackStateProcessor<Book>(() => {})
 				});
 			};
@@ -52,7 +52,7 @@ describe(
 				new CrudDefinition<Book>('books', {
 					label: { singular: '', plural: '' },
 					operations: operations,
-					stateProvider: new CallbackStateProvider<Book>(() => null),
+					stateProvider: new CallbackStateProvider<Book>(async () => null),
 					stateProcessor: new CallbackStateProcessor<Book>(() => {})
 				});
 			};
@@ -68,7 +68,7 @@ describe(
 					label: { singular: '', plural: '' },
 					operations: [new List([])],
 					defaultOperationName: 'edit',
-					stateProvider: new CallbackStateProvider<Book>(() => null),
+					stateProvider: new CallbackStateProvider<Book>(async () => null),
 					stateProcessor: new CallbackStateProcessor<Book>(() => {})
 				});
 			};
