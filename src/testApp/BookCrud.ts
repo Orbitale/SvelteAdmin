@@ -13,7 +13,8 @@ import {
 	View
 } from '$lib';
 import type { KeyValueObject } from '$lib/genericTypes';
-import { v4 as uuid4 } from 'uuid';
+
+import { faker } from '@faker-js/faker';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
@@ -28,12 +29,14 @@ const fields = [
 	})
 ];
 
+const IdField = new TextField('id', 'ID');
+
 export const bookCrud = new CrudDefinition('books', {
 	label: { singular: 'Book', plural: 'Books' },
 
 	operations: [
 		new List(
-			fields,
+			[IdField, ...fields],
 			[
 				new UrlAction('View', '/admin/books/view', ViewIcon),
 				new UrlAction('Edit', '/admin/books/edit', Pen),
@@ -44,7 +47,7 @@ export const bookCrud = new CrudDefinition('books', {
 				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
 			}
 		),
-		new View(fields),
+		new View([IdField, ...fields]),
 		new New(fields),
 		new Edit(fields),
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
@@ -61,7 +64,7 @@ export const bookCrud = new CrudDefinition('books', {
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? requestParameters.id : uuid4();
+			const id = operation.name === 'edit' ? requestParameters.id : faker.string.uuid();
 			const book = data as Book;
 			book.id = id;
 			let updatedBooks = getMemoryBooks();
@@ -102,6 +105,6 @@ export const bookCrud = new CrudDefinition('books', {
 			console.warn('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');
 		}
 
-		return Promise.resolve();
+		return Promise.resolve(null);
 	})
 });

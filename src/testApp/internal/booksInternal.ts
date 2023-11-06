@@ -1,4 +1,4 @@
-import { v4 as uuid4 } from 'uuid';
+import { faker } from '@faker-js/faker';
 
 export type Book = {
 	id: number | string;
@@ -8,22 +8,15 @@ export type Book = {
 	publishedAt: string;
 };
 
-const baseBooks: Array<Book> = [
-	{
-		id: uuid4(),
-		title: 'The Hobbit',
-		description: 'In a hole, lived a hobbit',
-		numberOfPages: 310,
-		publishedAt: new Date('1937-09-21').toISOString()
-	},
-	{
-		id: uuid4(),
-		title: 'Dune',
-		description: 'Pretty spicy',
-		numberOfPages: 896,
-		publishedAt: new Date('1965-08-15').toISOString()
-	}
-];
+const baseBooks: Array<Book> = Array(50).fill(undefined).map(() => {
+	return {
+		id: faker.string.uuid(),
+		title: faker.music.songName(),
+		description: faker.lorem.lines(3),
+		numberOfPages: faker.number.int({min: 50, max: 800}),
+		publishedAt: faker.date.anytime().toISOString(),
+	};
+});
 
 export function getMemoryBooks(): Array<Book> {
 	if (typeof window === 'undefined') {
@@ -31,11 +24,11 @@ export function getMemoryBooks(): Array<Book> {
 	}
 
 	let memory = window.localStorage.getItem('books');
-	if (memory === null || memory === undefined || memory === '') {
+	if (memory === null || memory === undefined || memory === '' || memory === '[]') {
 		memory = JSON.stringify(baseBooks);
 	}
 
-	return JSON.parse(memory || '[]') || {};
+	return JSON.parse(memory);
 }
 
 export function getBook(id: string | number): Book {
