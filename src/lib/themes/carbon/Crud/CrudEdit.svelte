@@ -8,12 +8,14 @@
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import CrudForm from '$lib/themes/carbon/Crud/CrudForm.svelte';
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { DashboardDefinition } from '$lib';
+	import theme from "$lib/stores/theme";
+
+	const CrudForm = $theme.crud.form;
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;

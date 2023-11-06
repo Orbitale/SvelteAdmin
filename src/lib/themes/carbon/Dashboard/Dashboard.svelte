@@ -15,6 +15,7 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/themes/carbon/Layout/AdminLayout.svelte';
+	import { getCrudComponent } from "$lib/Theme";
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud/definition';
@@ -35,6 +36,8 @@
 	currentCrud?.options.operations
 		.filter((crudOperation: CrudOperation<unknown>) => operation === crudOperation.name)
 		.forEach((resolved: CrudOperation<unknown>) => (currentCrudOperation = resolved));
+
+	const themeComponent = getCrudComponent(currentCrudOperation?.displayComponentName || '');
 </script>
 
 <AdminLayout
@@ -66,7 +69,7 @@
 			</InlineNotification>
 		{/if}
 		<svelte:component
-			this={currentCrudOperation?.displayComponent}
+			this={themeComponent}
 			{dashboard}
 			crud={currentCrud}
 			operation={currentCrudOperation}

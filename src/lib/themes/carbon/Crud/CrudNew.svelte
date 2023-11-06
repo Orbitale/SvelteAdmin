@@ -2,10 +2,10 @@
 	import { _ } from 'svelte-i18n';
 
 	import CrudForm from './CrudForm.svelte';
-	import type { CrudOperation } from '../../../Crud/Operations';
-	import type { CrudDefinition } from '../../../Crud/definition';
-	import type { KeyValueObject } from '../../../genericTypes';
-	import type { DashboardDefinition } from '../../../Dashboard/definition';
+	import type { CrudOperation } from '$lib/Crud/Operations.ts';
+	import type { CrudDefinition } from '$lib';
+	import type { KeyValueObject } from '$lib/genericTypes.ts';
+	import type { DashboardDefinition } from '$lib';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;

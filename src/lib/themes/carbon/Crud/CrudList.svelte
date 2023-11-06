@@ -8,16 +8,18 @@
 	import { type CrudOperation, List } from '$lib/Crud/Operations';
 
 	import type { Action } from '$lib/actions';
-	import DataTable from '../DataTable/DataTable.svelte';
 
 	import { _ } from 'svelte-i18n';
 	import { onMount } from 'svelte';
 	import type { DashboardDefinition } from '$lib';
+	import theme from "$lib/stores/theme";
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
+
+	const DataTable = $theme.dataTable;
 
 	const actions = operation.actions;
 	const headers: Headers = operation.fields.map((field: Field<Options>): Header => {

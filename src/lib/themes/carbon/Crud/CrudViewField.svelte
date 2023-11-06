@@ -6,12 +6,17 @@
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import ViewLabel from '$lib/themes/carbon/ViewFieldsComponents/ViewLabel.svelte';
+	import {getViewFieldComponent} from "$lib/Theme";
+	import DefaultField from "$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte";
+	import theme from "$lib/stores/theme";
 
 	export let operation: CrudOperation<object>;
 	export let field: FieldInterface<Options>;
 	export let data: Record<string, unknown> = {};
 	export let value: unknown;
+
+	const ViewLabel = $theme.viewFields.label;
+	const viewComponent = getViewFieldComponent(field.viewComponent) || DefaultField;
 
 	if (value === undefined && data) {
 		value = data[field.name];
@@ -24,7 +29,7 @@
 			<ViewLabel {field} />
 		</Column>
 		<Column sm={2} md={5} lg={12}>
-			<svelte:component this={field.viewComponent} {field} {operation} {value} {data} on:click />
+			<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
 		</Column>
 	</Row>
 </Grid>

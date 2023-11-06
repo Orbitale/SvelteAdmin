@@ -5,19 +5,21 @@
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
 	import { Tabs } from '$lib';
+	import theme from "$lib/stores/theme";
 	import type { CrudDefinition, DashboardDefinition } from '$lib';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { KeyValueObject } from '$lib/genericTypes';
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { StateProviderResult } from '$lib/State/Provider';
-	import TabsView from '$lib/themes/carbon/ViewFieldsComponents/TabsView.svelte';
-	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation<unknown>;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
+
+	const TabsView = $theme.viewFields.tabs;
+	const CrudViewField = $theme.crud.viewField;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 

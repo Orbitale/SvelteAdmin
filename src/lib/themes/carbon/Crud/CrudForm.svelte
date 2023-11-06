@@ -5,8 +5,6 @@
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
-	import CrudFormField from '$lib/themes/carbon/Crud/CrudFormField.svelte';
-	import TabsForms from '$lib/themes/carbon/FormFieldsComponents/TabsForms.svelte';
 	import { Tabs } from '$lib/FieldDefinitions/Tabs';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
@@ -15,6 +13,10 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
+	import theme from "$lib/stores/theme";
+
+	const TabsForms = $theme.formFields.tabsForms;
+	const CrudFormField = $theme.crud.formField;
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';
