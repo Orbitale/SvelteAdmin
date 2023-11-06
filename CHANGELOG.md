@@ -1,4 +1,19 @@
+# v0.4.1
+
+Changes:
+
+- Standardize more theme usage, to give form/view fields a name instead of the direct component
+- Update all crud actions with new theme system, using a store
+
+Internal work:
+
+- Move internal test app persistence to a specific file
+- Generate fake books with Faker for test app
+- Start working on a Section field (upcoming)
+
 # v0.4.0
+
+Changes:
 
 - **BC Break**: Create a separate theme config system. Themes must now be added to the `DashboardDefinition` config via the `adminConfig` option.<br>
   The current theme's path is `@orbitale/svelte-admin/themes/carbon`.
