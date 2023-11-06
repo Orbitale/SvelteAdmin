@@ -31,7 +31,7 @@ const fields = [
 
 const IdField = new TextField('id', 'ID');
 
-export const bookCrud = new CrudDefinition('books', {
+export const bookCrud = new CrudDefinition<Book>('books', {
 	label: { singular: 'Book', plural: 'Books' },
 
 	operations: [

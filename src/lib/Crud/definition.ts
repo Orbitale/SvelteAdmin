@@ -8,7 +8,7 @@ export type CrudDefinitionOptions<T> = {
 		plural: string;
 	};
 	defaultOperationName?: string;
-	operations: Array<CrudOperation<T>>;
+	operations: Array<CrudOperation>;
 	stateProvider: StateProvider<T>;
 	stateProcessor: StateProcessor<T>;
 };
@@ -16,7 +16,7 @@ export type CrudDefinitionOptions<T> = {
 export class CrudDefinition<T> {
 	public readonly name: string;
 	public readonly options: CrudDefinitionOptions<T>;
-	public readonly defaultOperation: CrudOperation<T>;
+	public readonly defaultOperation: CrudOperation;
 
 	constructor(name: string, options: CrudDefinitionOptions<T>) {
 		this.name = name;

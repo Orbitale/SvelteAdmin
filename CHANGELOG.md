@@ -1,3 +1,9 @@
+# upcoming
+
+Changes:
+
+- Fix CrudOperation that's no longer generic
+
 # v0.4.1
 
 Changes:

@@ -254,7 +254,7 @@ A SateProvider is a class that implements this interface:
 
 ```typescript
 export interface StateProvider<T> {
-	provide(action: CrudOperation<T>, requestParameters: KeyValueObject): StateProviderResult<T>;
+	provide(action: CrudOperation, requestParameters: KeyValueObject): StateProviderResult<T>;
 }
 ```
 
@@ -277,7 +277,7 @@ A StateProcessor is a class that implements this interface:
 export interface StateProcessor<T> {
 	process(
 		data: StateProcessorInput<T>,
-		operation: CrudOperation<T>,
+		operation: CrudOperation,
 		requestParameters: KeyValueObject
 	): void;
 }
