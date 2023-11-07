@@ -1,3 +1,9 @@
+# v0.4.4
+
+Changes:
+
+- Move `Icon` component outside themes, since it's generic, and export it to the public
+
 # v0.4.3
 
 Changes:

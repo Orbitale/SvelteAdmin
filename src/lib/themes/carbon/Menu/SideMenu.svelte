@@ -16,7 +16,7 @@
 	import { Divider, Submenu } from '$lib/Menu/MenuLinks';
 	import { sideMenuOpen } from '$lib/Menu/stores';
 	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
-	import Icon from '../Icon.svelte';
+	import Icon from '$lib/Layout/Icon.svelte';
 
 	export let links: Array<Action> = [];
 </script>

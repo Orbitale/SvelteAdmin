@@ -1,6 +1,3 @@
-//
-// Classes & functions
-//
 export { DefaultAction, CallbackAction, UrlAction } from './actions';
 export { BaseCrudOperation, New, Edit, List, Delete, View } from './Crud/Operations';
 export { CrudDefinition } from './Crud/definition';
@@ -25,3 +22,5 @@ export { CallbackStateProvider } from './State/Provider';
 export { getRequestParams } from './request';
 
 export { initLocale } from './admin_i18n';
+
+export { default as Icon } from './Layout/Icon.svelte';
