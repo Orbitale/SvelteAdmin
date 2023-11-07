@@ -1,3 +1,9 @@
+# v0.4.5
+
+Changes:
+
+- Fix null coalescing property call in Icon.svelte
+ 
 # v0.4.4
 
 Changes:
