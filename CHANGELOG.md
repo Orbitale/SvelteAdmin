@@ -1,3 +1,7 @@
+# Upcoming...
+
+- Create `identifierFieldName` CrudDefinition option, to allow using another field than `id` as an entity identifier. This is mandatory for Carbon's `DataTable` component.
+
 # v0.4.6
 
 Changes:

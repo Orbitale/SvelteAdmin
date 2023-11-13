@@ -50,10 +50,10 @@ export class UrlAction extends DefaultAction {
 		this._url = url;
 	}
 
-	public url(item: object & KeyValueObject & { id?: string } = {}): string {
+	public url(item: object & KeyValueObject = {}, identifierFieldName: string = 'id'): string {
 		let url = this._url || '';
 
-		const mightNeedId = item.id !== undefined;
+		const mightNeedId = item[identifierFieldName] !== undefined;
 		const hasIdAsParameter = url.match(':id');
 
 		for (const field in item) {
@@ -65,7 +65,7 @@ export class UrlAction extends DefaultAction {
 		}
 
 		if (mightNeedId && !hasIdAsParameter) {
-			url += '?id=' + (item.id ?? '');
+			url += '?id=' + (item[identifierFieldName] ?? '');
 		}
 
 		return `${url}`;

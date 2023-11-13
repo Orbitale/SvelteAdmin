@@ -9,6 +9,7 @@ export type CrudDefinitionOptions<T> = {
 	};
 	defaultOperationName?: string;
 	operations: Array<CrudOperation>;
+	identifierFieldName: 'id'|string;
 	stateProvider: StateProvider<T>;
 	stateProcessor: StateProcessor<T>;
 };
@@ -46,6 +47,8 @@ export class CrudDefinition<T> {
 		}
 
 		this.defaultOperation = defaultOperation[0];
+
+		options.identifierFieldName ??= 'id';
 		this.options = options;
 	}
 }

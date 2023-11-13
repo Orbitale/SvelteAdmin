@@ -45,7 +45,7 @@
 	<InlineNotification kind="warning" hideCloseButton={true}>
 		{$_('crud.delete.are_you_sure', {
 			values: {
-				id: requestParameters.id || '',
+				id: requestParameters[crud.options.identifierFieldName] || '',
 				name: $_(crud.options.label.singular)
 			}
 		})}

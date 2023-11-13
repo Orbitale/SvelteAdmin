@@ -41,6 +41,16 @@
 				results = [createEmptyRow(operation)];
 			}
 
+			// Make sure final results always have the "id" field,
+			// which is mandatory for Carbon's DataTable.
+			results = results.map((result: objet) => {
+				if (!result.id && crud.options.identifierFieldName !== 'id') {
+					result.id = result[crud.options.identifierFieldName];
+				}
+
+				return result;
+			});
+
 			return results;
 		});
 	}
