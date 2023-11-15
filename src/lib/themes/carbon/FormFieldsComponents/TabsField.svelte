@@ -9,14 +9,14 @@
 	export let field: Tabs;
 	export let data: Record<string, unknown> | undefined = {};
 </script>
-
-{#each field.fields as tabbed_field}
-	<FormGroup>
-		<CrudFormField
-			{operation}
-			{data}
-			value={data !== undefined ? data[tabbed_field.name] : null}
-			field={tabbed_field}
-		/>
-	</FormGroup>
-{/each}
+Haya
+<!--{#each field.fields as tabbedField}-->
+<!--	<FormGroup>-->
+<!--		<CrudFormField-->
+<!--			{operation}-->
+<!--			{data}-->
+<!--			value={data !== undefined ? data[tabbedField.name] : null}-->
+<!--			field={tabbedField}-->
+<!--		/>-->
+<!--	</FormGroup>-->
+<!--{/each}-->

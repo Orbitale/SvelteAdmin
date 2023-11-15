@@ -22,12 +22,13 @@ const baseBooks: Array<Book> = Array(50)
 
 export function getMemoryBooks(): Array<Book> {
 	if (typeof window === 'undefined') {
-		return baseBooks;
+		return [];
 	}
 
 	let memory = window.localStorage.getItem('books');
 	if (memory === null || memory === undefined || memory === '' || memory === '[]') {
 		memory = JSON.stringify(baseBooks);
+		window.localStorage.setItem('books', memory);
 	}
 
 	return JSON.parse(memory);

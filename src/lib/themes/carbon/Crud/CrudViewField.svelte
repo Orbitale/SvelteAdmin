@@ -21,15 +21,21 @@
 	if (value === undefined && data) {
 		value = data[field.name];
 	}
+
+	const fullSize = !(field.label || field.name);
 </script>
 
-<Grid>
-	<Row padding noGutterLeft noGutterRight narrow condensed>
-		<Column sm={2} md={3} lg={4}>
-			<ViewLabel {field} />
-		</Column>
-		<Column sm={2} md={5} lg={12}>
-			<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
-		</Column>
-	</Row>
-</Grid>
+{#if fullSize}
+	<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
+{:else}
+	<Grid>
+		<Row padding noGutterLeft noGutterRight narrow condensed>
+			<Column sm={2} md={3} lg={4}>
+				<ViewLabel {field} />
+			</Column>
+			<Column sm={2} md={5} lg={12}>
+				<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
+			</Column>
+		</Row>
+	</Grid>
+{/if}

@@ -6,23 +6,21 @@ export type TabOptions = Options & {
 	headerType: 'default' | 'container';
 };
 
+export type TabbedFields<T = FieldInterface<Options>> = Array<{
+	name: string;
+	label?: string;
+	fields: Array<T>
+}>;
+
 export class Tabs implements FieldInterface<TabOptions> {
-	public readonly name: string;
-	public readonly label: string;
-	public readonly fields: Array<FieldInterface<Options>>;
-	public readonly options: Partial<TabOptions>;
 	public readonly formComponent: FormFieldTheme = 'tabs';
 	public readonly viewComponent: ViewFieldTheme = 'tabs';
+	public readonly name: string = '';
+	public readonly label: string = '';
 
 	constructor(
-		name: string,
-		label: string = '',
-		fields: Array<FieldInterface<Options>> = [],
-		options: TabOptions = {} as TabOptions
+		public readonly fields: TabbedFields = [],
+		public readonly options: TabOptions = {} as TabOptions
 	) {
-		this.name = name;
-		this.label = label ? label : name;
-		this.fields = fields;
-		this.options = options || {};
 	}
 }

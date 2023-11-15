@@ -23,23 +23,6 @@
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
-	let tabbed_fields: Array<Tabs> = [];
-
-	let current_tab: Tabs | null = null;
-	for (let i = 0; i < fields.length; i++) {
-		const field = fields[i];
-		if (field instanceof Tabs) {
-			current_tab = null;
-			tabbed_fields.push(field);
-		} else {
-			if (!current_tab) {
-				current_tab = new Tabs(`tab_${i}`, `Tab #${i + 1}`);
-				tabbed_fields.push(current_tab);
-			}
-			current_tab.fields.push(field);
-		}
-	}
-
 	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
 		operation,
 		requestParameters
@@ -64,11 +47,9 @@
 		<InlineNotification kind="error">
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
-	{:else if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
+	{:else}
 		{#each fields as field (field.name)}
 			<CrudViewField {operation} {field} {data} value={data[field.name]} />
 		{/each}
-	{:else}
-		<TabsView fields={tabbed_fields} {operation} {data} />
 	{/if}
 {/await}

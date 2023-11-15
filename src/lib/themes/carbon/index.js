@@ -20,6 +20,7 @@ import TextareaFormField from './FormFieldsComponents/TextareaField.svelte';
 import TextFormField from './FormFieldsComponents/TextField.svelte';
 import ToggleFormField from './FormFieldsComponents/ToggleField.svelte';
 import UrlFormField from './FormFieldsComponents/UrlField.svelte';
+import ColumnsFormField from './FormFieldsComponents/ColumnsField.svelte';
 
 import AdminLayout from './Layout/AdminLayout.svelte';
 
@@ -33,7 +34,11 @@ import DefaultViewField from './ViewFieldsComponents/DefaultField.svelte';
 import TabsView from './ViewFieldsComponents/TabsView.svelte';
 import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
+import ColumnsView from './ViewFieldsComponents/ColumnsView.svelte';
 
+/**
+ * @type import("../ThemeConfig").ThemeConfig
+ */
 const theme = {
 	dashboard: Dashboard,
 	dataTable: DataTable,
@@ -53,7 +58,8 @@ const theme = {
 		default: DefaultViewField,
 		tabs: TabsView,
 		url: UrlViewField,
-		label: ViewLabel
+		label: ViewLabel,
+		column: ColumnsView
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
@@ -64,7 +70,8 @@ const theme = {
 		text: TextFormField,
 		toggle: ToggleFormField,
 		url: UrlFormField,
-		tabsForms: TabsForms
+		tabsForms: TabsForms,
+		column: ColumnsFormField
 	},
 	menu: {
 		sideMenu: SideMenu,

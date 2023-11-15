@@ -10,18 +10,17 @@ export interface FieldInterface<T extends Options> {
 }
 
 export class Field<T extends Options> implements FieldInterface<T> {
-	public readonly name: string;
-	public readonly label: string;
-	public readonly options: Partial<T>;
 	public readonly formComponent: FormFieldTheme = 'default';
 	public readonly viewComponent: ViewFieldTheme = 'default';
 
-	constructor(name: string, label: string = '', options: Partial<T> = {}) {
-		this.name = name;
-		this.label = label ? label : name;
+	constructor(
+		public readonly name: string,
+		public readonly label: string = '',
+		public readonly options: Partial<T> = {}
+	) {
+		this.label = label || name;
 
-		options.required ??= true;
-		options.disabled ??= false;
-		this.options = options || {};
+		this.options.required ??= true;
+		this.options.disabled ??= false;
 	}
 }

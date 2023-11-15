@@ -1,32 +1,12 @@
 <script lang="ts">
-	import Tabs from 'carbon-components-svelte/src/Tabs/Tabs.svelte';
-	import Tab from 'carbon-components-svelte/src/Tabs/Tab.svelte';
-	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
+	import Tabs from '../Tabs/Tabs.svelte';
+	import theme from "$lib/stores/theme";
+    import type {Tabs as TabsField} from "$lib";
+    import type {CrudOperation} from "$lib/Crud/Operations.ts";
 
-	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { Tabs } from '$lib';
-
-	export let operation: CrudOperation<unknown>;
-	export let fields: Array<Tabs> = [];
-	export let data: Record<string, unknown> = {};
+    export let field: TabsField;
+    export let operation: CrudOperation<unknown>;
+    export let data: Record<string, unknown> = {};
 </script>
 
-<Tabs>
-	{#each fields as tabbed_field (tabbed_field.name)}
-		<Tab label={tabbed_field.label} />
-	{/each}
-	<svelte:fragment slot="content">
-		{#each fields as tabbed_field (tabbed_field.name)}
-			<TabContent>
-				<CrudViewField
-					{operation}
-					{data}
-					field={tabbed_field}
-					value={data[tabbed_field.name]}
-					on:fieldChange
-				/>
-			</TabContent>
-		{/each}
-	</svelte:fragment>
-</Tabs>
+<Tabs FieldComponent={$theme.crud.viewField} {field} {operation} {data} />

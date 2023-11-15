@@ -2,24 +2,25 @@ import type { CrudOperation } from '$lib/Crud/Operations';
 import type { StateProvider } from '$lib/State/Provider';
 import type { StateProcessor } from '$lib/State/Processor';
 
-export type CrudDefinitionOptions<T> = {
+export type CrudDefinitionOptionsArgument<T> = {
 	label: {
 		singular: string;
 		plural: string;
 	};
 	defaultOperationName?: string;
 	operations: Array<CrudOperation>;
-	identifierFieldName: 'id'|string;
+	identifierFieldName?: 'id'|string;
 	stateProvider: StateProvider<T>;
 	stateProcessor: StateProcessor<T>;
 };
 
+export type CrudDefinitionOptions<T> = Required<CrudDefinitionOptionsArgument<T>>;
+
 export class CrudDefinition<T> {
 	public readonly name: string;
 	public readonly options: CrudDefinitionOptions<T>;
-	public readonly defaultOperation: CrudOperation;
 
-	constructor(name: string, options: CrudDefinitionOptions<T>) {
+	constructor(name: string, options: CrudDefinitionOptionsArgument<T>) {
 		this.name = name;
 
 		if (!options?.operations.length) {
@@ -37,8 +38,8 @@ export class CrudDefinition<T> {
 
 		const defaultOperation = options.operations.filter(
 			(operation) => operation.name === defaultOperationName
-		);
-		if (!defaultOperation || !defaultOperation.length) {
+		).shift();
+		if (!defaultOperation) {
 			throw new Error(
 				`Crud definition "${name}" has no default operation named "${defaultOperationName}".\nAvailable operation names: ${options.operations
 					.map((o) => o.name)
@@ -46,9 +47,9 @@ export class CrudDefinition<T> {
 			);
 		}
 
-		this.defaultOperation = defaultOperation[0];
-
+		options.defaultOperationName = defaultOperation.name;
 		options.identifierFieldName ??= 'id';
-		this.options = options;
+
+		this.options = options as CrudDefinitionOptions<T>;
 	}
 }

@@ -3,7 +3,7 @@ import type {
 	FormFieldTheme,
 	ThemeConfig,
 	ViewFieldTheme
-} from '$lib/themes/ThemeConfig.ts';
+} from '$lib/themes/ThemeConfig';
 import type { ComponentType } from 'svelte';
 import { get } from 'svelte/store';
 import themeStore from '$lib/stores/theme';

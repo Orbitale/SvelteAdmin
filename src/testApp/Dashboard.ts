@@ -21,13 +21,14 @@ export const dashboard = new DashboardDefinition({
 	},
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),
-		new Submenu('Entities', null, [
-			new UrlAction('Books (Svelte icon)', '/admin/books/list', Book),
-			new UrlAction('Books (String emoji icon)', '/admin/books/list', '📚')
-		]),
+		new UrlAction('Books', '/admin/books/list', Book),
 		new CallbackAction('Callback link', null, (item?: object | undefined) => {
 			alert('Hey, this link is called with Javascript!');
-		})
+		}),
+		new Submenu('Submenu', null, [
+			new UrlAction('Submenu 1', '#', Book),
+			new UrlAction('Submenu 2', '#', Book),
+		]),
 	],
 	localeDictionaries: {
 		fr: fr

@@ -6,6 +6,7 @@
 	import { _ } from 'svelte-i18n';
 
 	import { Tabs } from '$lib/FieldDefinitions/Tabs';
+	import { Columns } from '$lib/FieldDefinitions/Columns';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { SubmitButtonType } from '$lib/config/types';
@@ -28,23 +29,6 @@
 	export let htmlFormElement: HTMLFormElement | null | undefined;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
-
-	let tabbed_fields: Array<Tabs> = [];
-
-	let current_tab: Tabs | null = null;
-	for (let i = 0; i < fields.length; i++) {
-		const field = fields[i];
-		if (field instanceof Tabs) {
-			current_tab = null;
-			tabbed_fields.push(field);
-		} else {
-			if (!current_tab) {
-				current_tab = new Tabs(`tab_${i}`, `Tab #${i + 1}`);
-				tabbed_fields.push(current_tab);
-			}
-			current_tab.fields.push(field);
-		}
-	}
 
 	const dispatchEvent = createEventDispatcher<{ submitData: SubmittedData }>();
 
@@ -99,15 +83,15 @@
 >
 	<slot name="form-header" />
 
-	{#if tabbed_fields.length === 1 && tabbed_fields[0].name === 'tab_0'}
-		{#each fields as field (field.name)}
+	{#each fields as field (field.name)}
+		{#if field instanceof Tabs || field instanceof Columns}
+			<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
+		{:else}
 			<FormGroup>
 				<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
 			</FormGroup>
-		{/each}
-	{:else}
-		<TabsForms fields={tabbed_fields} {operation} {data} on:fieldChange />
-	{/if}
+		{/if}
+	{/each}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>
 

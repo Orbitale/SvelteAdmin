@@ -1,6 +1,8 @@
 # Upcoming...
 
 - Create `identifierFieldName` CrudDefinition option, to allow using another field than `id` as an entity identifier. This is mandatory for Carbon's `DataTable` component.
+- Revamp tabs and optimize their behavior for a simpler and more flexible approach (and even nestable, though I don't see use-cases for that).
+- Start working on "columns" (new name, replaces "sections" concept).
 
 # v0.4.6
 

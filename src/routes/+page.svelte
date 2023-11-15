@@ -29,7 +29,7 @@
 	<UnorderedList expressive={true}>
 		{#each dashboard.cruds as crud}
 			<li>
-				<a href="/admin/{crud.name}/{crud.defaultOperation.name}">
+				<a href="/admin/{crud.name}/{crud.options.defaultOperationName}">
 					{$_(crud.options.label.plural)}
 				</a>
 			</li>

@@ -20,6 +20,7 @@ export type ThemeConfig = {
 		tabs: ComponentType;
 		url: ComponentType;
 		label: ComponentType;
+		column: ComponentType;
 	};
 	formFields: {
 		checkbox: ComponentType;
@@ -31,6 +32,7 @@ export type ThemeConfig = {
 		toggle: ComponentType;
 		url: ComponentType;
 		tabsForms: ComponentType;
+		column: ComponentType;
 	};
 	menu: {
 		sideMenu: ComponentType;
