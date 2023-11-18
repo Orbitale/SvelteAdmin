@@ -20,30 +20,13 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
-import {Columns} from "$lib/FieldDefinitions/Columns";
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
 	new TextareaField('description', 'Description', {
 		placeholder: "Enter the book's descrption",
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
-	}),
-	new Columns([
-		{
-			name: 'Tab 1',
-			fields: [
-				new TextField('title', 'Title (tab 1)'),
-				new TextField('description', 'Description (tab 1)'),
-			],
-		},
-		{
-			name: 'Tab 2',
-			fields: [
-				new TextField('title', 'Title (tab 2)'),
-				new TextField('description', 'Description (tab 2)'),
-			],
-		}
-	]),
+	})
 ];
 
 const IdField = new TextField('id', 'ID');
