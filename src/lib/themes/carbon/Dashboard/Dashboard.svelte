@@ -27,15 +27,15 @@
 	export let requestParameters: KeyValueObject = {};
 
 	let currentCrud: CrudDefinition<unknown> | undefined;
-	let currentCrudOperation: CrudOperation<unknown> | undefined;
+	let currentCrudOperation: CrudOperation | undefined;
 
 	dashboard.cruds
 		.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
 		.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
 
 	currentCrud?.options.operations
-		.filter((crudOperation: CrudOperation<unknown>) => operation === crudOperation.name)
-		.forEach((resolved: CrudOperation<unknown>) => (currentCrudOperation = resolved));
+		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
+		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 
 	const themeComponent = getCrudComponent(currentCrudOperation?.displayComponentName || '');
 </script>

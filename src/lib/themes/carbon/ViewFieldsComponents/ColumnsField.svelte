@@ -9,4 +9,4 @@
 	export let data: Record<string, unknown> = {};
 </script>
 
-<Columns FieldComponent={$theme.formField} {field} {operation} {data} />
+<Columns FieldComponent={$theme.viewField} {field} {operation} {data} />

@@ -4,7 +4,6 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import { Tabs } from '$lib';
 	import theme from '$lib/stores/theme';
 	import type { CrudDefinition, DashboardDefinition } from '$lib';
 	import type { CrudOperation } from '$lib/Crud/Operations';
@@ -14,12 +13,11 @@
 	import type { StateProviderResult } from '$lib/State/Provider';
 
 	export let dashboard: DashboardDefinition<unknown>;
-	export let operation: CrudOperation<unknown>;
+	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
-	const TabsView = $theme.viewFields.tabs;
-	const CrudViewField = $theme.crud.viewField;
+	const CrudViewField = $theme.viewField;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
@@ -48,7 +46,7 @@
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		{#each fields as field (field.name)}
+		{#each fields as field}
 			<CrudViewField {operation} {field} {data} value={data[field.name]} />
 		{/each}
 	{/if}

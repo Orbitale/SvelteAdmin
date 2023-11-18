@@ -10,11 +10,11 @@ import themeStore from '$lib/stores/theme';
 
 export function getCrudComponent(name: CrudTheme): ComponentType | null {
 	const theme: ThemeConfig = get(themeStore);
-	if (!theme.crud[name]) {
+	if (!theme.crudActions[name]) {
 		return null;
 	}
 
-	return theme.crud[name];
+	return theme.crudActions[name];
 }
 
 export function getViewFieldComponent(name: ViewFieldTheme): ComponentType | null {

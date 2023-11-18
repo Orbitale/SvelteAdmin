@@ -10,16 +10,16 @@
 	export let FieldComponent: ComponentType;
 
 	export let field: TabsField;
-	export let operation: CrudOperation<unknown>;
+	export let operation: CrudOperation;
 	export let data: Record<string, unknown> = {};
 </script>
 
 <Tabs>
-	{#each field.fields as tab (tab.name)}
+	{#each field.fields as tab}
 		<Tab label={tab.label || tab.name} />
 	{/each}
 	<svelte:fragment slot="content">
-		{#each field.fields as tab (tab.name)}
+		{#each field.fields as tab}
 			<TabContent>
 				{#each tab.fields as tabbedField}
 					<FieldComponent

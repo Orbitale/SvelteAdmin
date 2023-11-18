@@ -3,4 +3,4 @@
 	import theme from "$lib/stores/theme";
 </script>
 
-<Tabs FieldComponent={$theme.crud.formField} {...$$restProps} />
+<Tabs FieldComponent={$theme.crudActions.formField} {...$$restProps} />

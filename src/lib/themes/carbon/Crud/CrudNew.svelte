@@ -8,7 +8,7 @@
 	import type { DashboardDefinition } from '$lib';
 
 	export let dashboard: DashboardDefinition<unknown>;
-	export let operation: CrudOperation<unknown>;
+	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 

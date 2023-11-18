@@ -10,11 +10,11 @@ import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 export type ColumnOptions = Options;
 
 export type ColumnedFields<T = FieldInterface<Options>> = Array<{
-	name: string;
+	name?: string;
 	label?: string;
 	size?: number;
 	offset?: number;
-	fields: Array<T>
+	fields: Array<T>;
 }>;
 
 export class Columns implements FieldInterface<ColumnOptions> {
@@ -26,6 +26,5 @@ export class Columns implements FieldInterface<ColumnOptions> {
 	constructor(
 		public readonly fields: ColumnedFields = [],
 		public readonly options: ColumnOptions = {} as ColumnOptions
-	) {
-	}
+	) {}
 }

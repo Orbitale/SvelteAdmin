@@ -1,6 +1,6 @@
 export type Options = {
-	required: boolean;
-	disabled: boolean;
+	required?: boolean;
+	disabled?: boolean;
 	help?: string;
 	validator?: (value: object) => boolean;
 	disableOnOperations?: Array<string>;

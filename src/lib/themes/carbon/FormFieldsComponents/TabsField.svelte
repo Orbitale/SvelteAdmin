@@ -1,22 +1,12 @@
 <script lang="ts">
-	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
+	import Tabs from '../Tabs/Tabs.svelte';
+	import theme from "$lib/stores/theme";
+	import type {Tabs as TabsField} from "$lib/FieldDefinitions/Tabs";
+	import type {CrudOperation} from "$lib/Crud/Operations";
 
-	import type { Tabs } from '$lib/FieldDefinitions/Tabs';
-	import CrudFormField from '../Crud/CrudFormField.svelte';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-
-	export let operation: CrudOperation<object>;
-	export let field: Tabs;
-	export let data: Record<string, unknown> | undefined = {};
+	export let field: TabsField;
+	export let operation: CrudOperation;
+	export let data: Record<string, unknown> = {};
 </script>
-Haya
-<!--{#each field.fields as tabbedField}-->
-<!--	<FormGroup>-->
-<!--		<CrudFormField-->
-<!--			{operation}-->
-<!--			{data}-->
-<!--			value={data !== undefined ? data[tabbedField.name] : null}-->
-<!--			field={tabbedField}-->
-<!--		/>-->
-<!--	</FormGroup>-->
-<!--{/each}-->
+
+<Tabs FieldComponent={$theme.formField} {field} {operation} {data} />

@@ -4,15 +4,16 @@ export type ThemeConfig = {
 	dashboard: ComponentType;
 	dataTable: ComponentType;
 	adminLayout: ComponentType;
-	crud: {
+	viewField: ComponentType;
+	formField: ComponentType;
+	form: ComponentType;
+	crudActions: {
 		view: ComponentType;
 		new: ComponentType;
 		list: ComponentType;
 		edit: ComponentType;
 		delete: ComponentType;
-		form: ComponentType;
-		viewField: ComponentType;
-		formField: ComponentType;
+		[key: string]: ComponentType;
 	};
 	viewFields: {
 		checkbox: ComponentType;
@@ -21,6 +22,7 @@ export type ThemeConfig = {
 		url: ComponentType;
 		label: ComponentType;
 		column: ComponentType;
+		[key: string]: ComponentType;
 	};
 	formFields: {
 		checkbox: ComponentType;
@@ -31,8 +33,8 @@ export type ThemeConfig = {
 		text: ComponentType;
 		toggle: ComponentType;
 		url: ComponentType;
-		tabsForms: ComponentType;
 		column: ComponentType;
+		[key: string]: ComponentType;
 	};
 	menu: {
 		sideMenu: ComponentType;
@@ -42,7 +44,7 @@ export type ThemeConfig = {
 	};
 };
 
-export type CrudTheme = keyof ThemeConfig['crud'];
+export type CrudTheme = keyof ThemeConfig['crudActions'];
 export type ViewFieldTheme = keyof ThemeConfig['viewFields'];
 export type FormFieldTheme = keyof ThemeConfig['formFields'];
 export type MenuTheme = keyof ThemeConfig['menu'];

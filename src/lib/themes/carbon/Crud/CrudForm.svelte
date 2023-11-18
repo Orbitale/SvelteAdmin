@@ -16,12 +16,11 @@
 	import type { SubmittedData } from '$lib/Crud/form';
 	import theme from '$lib/stores/theme';
 
-	const TabsForms = $theme.formFields.tabsForms;
-	const CrudFormField = $theme.crud.formField;
+	const CrudFormField = $theme.formField;
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';
-	export let operation: CrudOperation<unknown>;
+	export let operation: CrudOperation;
 	export let defaultData: undefined | null | Record<string, unknown> = {};
 
 	const data: Record<string, unknown> = defaultData ?? {};
@@ -83,7 +82,7 @@
 >
 	<slot name="form-header" />
 
-	{#each fields as field (field.name)}
+	{#each fields as field}
 		{#if field instanceof Tabs || field instanceof Columns}
 			<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
 		{:else}

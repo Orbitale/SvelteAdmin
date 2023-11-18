@@ -5,7 +5,7 @@
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import { getFormFieldComponent } from '$lib/Theme';
 
-	export let operation: CrudOperation<object>;
+	export let operation: CrudOperation;
 	export let field: FieldInterface<Options>;
 	export let data: Record<string, unknown> = {};
 	export let value: unknown;
