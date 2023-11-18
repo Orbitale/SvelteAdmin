@@ -325,9 +325,9 @@ In the meantime, here is the roadmap for future features:
 
 - Add filters in the `List` operation.
 - Add pagination in the `List` operation.
-- Tabs are supported in `CrudForm`, but "grid sections" are also needed, to have more form components on a single screen.
 - Add support for validation in CrudForm (therefore Edit and New operations).
 - Add other themes than Carbon, which is the default for now.
+- Fix issues with NPM/Node/packaging that prevents changing theme.
 
 ---
 
