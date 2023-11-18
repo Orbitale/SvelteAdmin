@@ -1,9 +1,11 @@
 # v0.5.0
 
-- Create `identifierFieldName` CrudDefinition option, to allow using another field than `id` as an entity identifier. This is mandatory for Carbon's `DataTable` component.
-- Revamp tabs and optimize their behavior for a simpler and more flexible approach (and even nestable, though I don't see use-cases for that).
-- Add "columns" field type (new name, replaces "sections" concept).
-- Reorganize some theme files, for consistency.
+Changes:
+
+- **BC Break**: Reorganize theme config, for consistency.<br>Before, some theme components were mixed in crud, view and form fields.<br>Now there are components specific to `crudActions`, `viewFields` and `formFields` that can be dynamic.<br>If end users want to, they can add new keys to these specific theme components, so their custom-created theme views can be used by their custom `Field` objects.
+- **BC Break** (internal): Revamp tabs and optimize their behavior for a simpler and more flexible approach (and even nestable, though I don't see use-cases for that).
+- Create `identifierFieldName` CrudDefinition option, to allow using another field than `id` as an entity identifier.<br>Having an `id` property is mandatory for Carbon's `DataTable` component, but might become useful for standardization of identifier usage later in filters.
+- Add `Columns` field type (new name, replaces "sections" concept). Nestable and sizeable. The `size` property in columns will have a behavior only related to the used theme. For example, Carbon has a 16-units grid, and Bootstrap's one is 12.<br>The user value will not be converted into any other grid size.
 
 # v0.4.6
 
