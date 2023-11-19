@@ -6,16 +6,19 @@
 	import type { CrudDefinition } from '$lib';
 	import type { KeyValueObject } from '$lib/genericTypes';
 	import type { DashboardDefinition } from '$lib';
+	import { goto } from '$app/navigation';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: KeyValueObject = {};
 
-	function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
+	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
 		const data = event.detail;
 
 		crud.options.stateProcessor.process(data, operation, requestParameters);
+
+		await goto(document.referrer || dashboard.getFirstActionUrl());
 	}
 </script>
 

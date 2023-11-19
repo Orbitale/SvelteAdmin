@@ -1,4 +1,4 @@
-import { type ComponentType, SvelteComponent } from 'svelte';
+import type { ComponentType, SvelteComponent } from 'svelte';
 import type { Field } from '$lib/FieldDefinitions/Field';
 import type { Options } from '$lib/FieldDefinitions/Options';
 import type { CrudDefinition } from '$lib/Crud/definition';
@@ -14,13 +14,14 @@ export type OperationCallbackName = 'submit' | string;
 export type OperationCallback = (event: Event) => unknown | void;
 export type OperationEventCallback = [event: OperationCallbackName, callback: OperationCallback];
 
-export type TemplateComponent = ComponentType;
-SvelteComponent<{
-	dashboard: DashboardDefinition<unknown>;
-	crud: CrudDefinition<unknown>;
-	operation: CrudOperation;
-	requestParameters: KeyValueObject;
-}>;
+export type TemplateComponent = ComponentType<
+	SvelteComponent<{
+		dashboard: DashboardDefinition<unknown>;
+		crud: CrudDefinition<unknown>;
+		operation: CrudOperation;
+		requestParameters: KeyValueObject;
+	}>
+>;
 
 export interface CrudOperation {
 	readonly name: CrudOperationName;

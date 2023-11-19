@@ -7,6 +7,7 @@ import theme from '$lib/stores/theme';
 export type DashboardDefinitionOptions<T> = {
 	adminConfig: Partial<AdminConfig>;
 	cruds: Array<CrudDefinition<T>>;
+	rootUrl?: string;
 	sideMenu?: Array<MenuLink>;
 	topLeftMenu?: Array<MenuLink>;
 	topRightMenu?: Array<MenuLink>;
@@ -31,5 +32,13 @@ export class DashboardDefinition<T> {
 		this.topRightMenu = options.topRightMenu || [];
 		this.localeDictionaries = options.localeDictionaries || {};
 		theme.set(this.adminConfig.theme);
+	}
+
+	public getFirstActionUrl(): string {
+		const firstCrud = this.cruds[0];
+		const firstOperation = firstCrud.options.operations[0];
+		const root = this.adminConfig.rootUrl.replace(/(^\/)|(\/$)/gi, '');
+
+		return `/${root}/${firstCrud.name}/${firstOperation.name}`;
 	}
 }

@@ -14,6 +14,7 @@
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { DashboardDefinition } from '$lib';
 	import theme from '$lib/stores/theme';
+	import { goto } from '$app/navigation';
 
 	const CrudForm = $theme.form;
 
@@ -34,10 +35,12 @@
 		}
 	});
 
-	function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
+	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
 		const data = event.detail;
 
 		crud.options.stateProcessor.process(data, operation, requestParameters);
+
+		await goto(document.referrer || dashboard.getFirstActionUrl());
 	}
 </script>
 

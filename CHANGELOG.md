@@ -1,3 +1,7 @@
+# Upcoming...
+
+- Add `adminConfig.rootUrl` and configure redirection when submitting `new` or `edit` forms.
+
 # v0.5.0
 
 Changes:

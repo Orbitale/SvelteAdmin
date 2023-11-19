@@ -14,6 +14,7 @@ export const dashboard = new DashboardDefinition({
 		theme: theme,
 		defaultLocale: 'en',
 		autoCloseSideMenu: false,
+		rootUrl: '/admin',
 		head: {
 			brandName: 'Svelte Admin',
 			appName: 'Demo'
@@ -27,8 +28,8 @@ export const dashboard = new DashboardDefinition({
 		}),
 		new Submenu('Submenu', null, [
 			new UrlAction('Submenu 1', '#', Book),
-			new UrlAction('Submenu 2', '#', Book),
-		]),
+			new UrlAction('Submenu 2', '#', Book)
+		])
 	],
 	localeDictionaries: {
 		fr: fr
