@@ -2,7 +2,7 @@ import Book from 'carbon-icons-svelte/lib/Book.svelte';
 import Home from 'carbon-icons-svelte/lib/Home.svelte';
 
 import { DashboardDefinition } from '$lib/Dashboard/definition';
-import theme from '$lib/themes/carbon';
+import theme from '$lib/themes/material3';
 import { CallbackAction, UrlAction } from '$lib/actions';
 
 import fr from './translations/fr';

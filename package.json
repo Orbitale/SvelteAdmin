@@ -45,6 +45,10 @@
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.3.1",
+		"@smui/button": "^7.0.0-beta.15",
+		"@smui/common": "^7.0.0-beta.15",
+		"@smui/paper": "^7.0.0-beta.15",
+		"@smui/top-app-bar": "^7.0.0-beta.15",
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.27.6",
@@ -62,6 +66,7 @@
 		"publint": "^0.2.5",
 		"sass": "^1.69.5",
 		"svelte-check": "^3.6.0",
+		"svelte-material-ui": "^7.0.0-beta.15",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"vite": "^5.0.0",
