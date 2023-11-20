@@ -3,6 +3,7 @@ import {
 	CallbackAction,
 	CallbackStateProcessor,
 	CallbackStateProvider,
+	Columns,
 	CrudDefinition,
 	Delete,
 	Edit,
@@ -29,7 +30,23 @@ const fields = [
 	new TextareaField('description', 'Description', {
 		placeholder: "Enter the book's descrption",
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
-	})
+	}),
+	new Columns('columns_field', 'Columns field', [
+		{
+			name: 'Tab 1',
+			fields: [
+				new TextField('title', 'Title (tab 1)'),
+				new TextField('description', 'Description (tab 1)')
+			]
+		},
+		{
+			name: 'Tab 2',
+			fields: [
+				new TextField('title', 'Title (tab 2)'),
+				new TextField('description', 'Description (tab 2)')
+			]
+		}
+	])
 ];
 
 const IdField = new TextField('id', 'ID');
