@@ -5,7 +5,7 @@
 
 	import type { Tabs as TabsField } from '$lib/FieldDefinitions/Tabs';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-    import type {ComponentType} from "svelte";
+	import type { ComponentType } from 'svelte';
 
 	export let FieldComponent: ComponentType;
 

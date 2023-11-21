@@ -1,12 +1,13 @@
 <script lang="ts">
-	import Header from 'carbon-components-svelte/src/UIShell/Header.svelte';
-	import SkipToContent from 'carbon-components-svelte/src/UIShell/SkipToContent.svelte';
-	import TopAppBar, { Row, Section, Title } from '@smui/top-app-bar';
+	import TopAppBar from '@smui/top-app-bar/dist/TopAppBar.svelte';
+	import '@smui/top-app-bar/bare.css';
+	import { Row, Title } from '@smui/top-app-bar';
+	import Section from '@smui/top-app-bar/dist/Section.svelte';
 
-	import TopLeftMenu from '$lib/themes/material3/Menu/TopLeftMenu.svelte';
-	import TopRightMenu from '$lib/themes/material3/Menu/TopRightMenu.svelte';
 	import type { MenuLink } from '$lib/Menu/MenuLinks';
 	import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
+	import TopLeftMenu from './TopLeftMenu.svelte';
+	import TopRightMenu from './TopRightMenu.svelte';
 
 	export let left_links: Array<MenuLink> = [];
 	export let right_links: Array<MenuLink> = [];
@@ -14,19 +15,25 @@
 	export let adminConfig: AdminConfig = emptyAdminConfig();
 
 	import { sideMenuOpen } from '$lib/Menu/stores';
-
-	let secondaryColor = false;
 </script>
-<TopAppBar
-  variant="static"
-  prominent={false}
-  dense={true}
-  color="primary"
->
-    {#if adminConfig?.head?.brandName}
-        {adminConfig.head.brandName}
-    {/if}
+
+<TopAppBar variant="static" dense={true} color="primary">
+	<Row>
+		<TopLeftMenu links={left_links} />
+		<Section toolbar>
+			{#if adminConfig?.head?.brandName}
+				<Title>{adminConfig.head.brandName}</Title>
+			{/if}
+			{#if adminConfig?.head?.appName}
+				<Title><small>{adminConfig.head.appName}</small></Title>
+			{/if}
+		</Section>
+		{#if right_links.length}
+			<TopRightMenu links={right_links} />
+		{/if}
+	</Row>
 </TopAppBar>
+
 <!--<Header-->
 <!--	company={adminConfig?.head?.brandName || ''}-->
 <!--	platformName={adminConfig?.head?.appName || ''}-->

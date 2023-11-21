@@ -1,15 +1,11 @@
 <script lang="ts">
-    import Paper, { Title, Content } from '@smui/paper';
+	import Paper, { Title, Content } from '@smui/paper';
 
-    export let kind:
-    | "error"
-    | "info"
-    | "success"
-    | "warning"
+	export let kind: 'error' | 'info' | 'success' | 'warning';
 </script>
 
 <Paper>
-    <Content>
-        <slot></slot>
-    </Content>
+	<Content>
+		<slot />
+	</Content>
 </Paper>
