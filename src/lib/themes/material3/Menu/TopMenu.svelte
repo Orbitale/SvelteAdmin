@@ -19,8 +19,7 @@
 
 <TopAppBar variant="static" dense={true} color="primary">
 	<Row>
-		<TopLeftMenu links={left_links} />
-		<Section toolbar>
+		<Section align="start">
 			{#if adminConfig?.head?.brandName}
 				<Title>{adminConfig.head.brandName}</Title>
 			{/if}
@@ -28,9 +27,12 @@
 				<Title><small>{adminConfig.head.appName}</small></Title>
 			{/if}
 		</Section>
-		{#if right_links.length}
-			<TopRightMenu links={right_links} />
-		{/if}
+		<TopLeftMenu links={left_links} />
+		<Section align="end">
+			{#if right_links.length}
+				<TopRightMenu links={right_links} />
+			{/if}
+		</Section>
 	</Row>
 </TopAppBar>
 

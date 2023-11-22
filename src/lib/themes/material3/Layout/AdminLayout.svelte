@@ -31,9 +31,7 @@
 	});
 </script>
 
-<svelte:head>
-
-</svelte:head>
+<svelte:head></svelte:head>
 
 <slot name="top_menu">
 	<TopMenu {adminConfig} left_links={top_left_menu_links} right_links={top_right_menu_links} />

@@ -7,7 +7,7 @@ import { CallbackAction, UrlAction } from '$lib/actions';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
-import { Submenu } from '$lib';
+import { Divider, Submenu } from '$lib';
 
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
@@ -23,6 +23,7 @@ export const dashboard = new DashboardDefinition({
 	topLeftMenu: [
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book),
+		new Divider(),
 		new CallbackAction('Callback link', null, (item?: object | undefined) => {
 			alert('Hey, this link is called with Javascript!');
 		}),
@@ -34,6 +35,7 @@ export const dashboard = new DashboardDefinition({
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book),
+		new Divider(),
 		new CallbackAction('Callback link', null, (item?: object | undefined) => {
 			alert('Hey, this link is called with Javascript!');
 		}),

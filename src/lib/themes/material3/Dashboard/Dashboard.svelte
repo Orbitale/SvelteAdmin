@@ -1,6 +1,6 @@
 <svelte:options
 	customElement={{
-		tag: 'sa-dashboard',
+		tag: 'sa-m3-dashboard',
 		props: {
 			dashboard: { reflect: false, type: 'Object' },
 			crud: { reflect: true, type: 'String' },

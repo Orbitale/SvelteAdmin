@@ -54,6 +54,7 @@
 		"@smui/menu": "^7.0.0-beta.15",
 		"@smui/paper": "^7.0.0-beta.15",
 		"@smui/ripple": "^7.0.0-beta.15",
+		"@smui/tooltip": "^7.0.0-beta.15",
 		"@smui/top-app-bar": "^7.0.0-beta.15",
 		"@sveltejs/adapter-auto": "^2.1.1",
 		"@sveltejs/adapter-static": "^2.0.3",
