@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { Columns as ColumnField } from '$lib/FieldDefinitions/Columns.ts';
+	import type { Columns as ColumnField } from '$lib/FieldDefinitions/Columns';
 	import CrudFormField from '$lib/themes/material3/Crud/CrudFormField.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 

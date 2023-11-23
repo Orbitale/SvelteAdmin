@@ -2,6 +2,7 @@
 	import TopAppBar from '@smui/top-app-bar/dist/TopAppBar.svelte';
 	import '@smui/top-app-bar/bare.css';
 	import { Row, Title } from '@smui/top-app-bar';
+	import IconButton from '@smui/icon-button/dist/IconButton.svelte';
 	import Section from '@smui/top-app-bar/dist/Section.svelte';
 
 	import type { MenuLink } from '$lib/Menu/MenuLinks';
@@ -14,25 +15,40 @@
 
 	export let adminConfig: AdminConfig = emptyAdminConfig();
 
-	import { sideMenuOpen } from '$lib/Menu/stores';
+	import Menu from "@smui/menu";
+	import List from "@smui/list";
+	import {onMount} from "svelte";
+
+	let isRightMenuOpen: boolean;
+	let leftMenuIcon: string = '';
+	let rightMenu: Menu;
+
+	$: {
+		leftMenuIcon = isRightMenuOpen ? 'apps' : 'apps';
+	}
+	onMount(() => {
+		rightMenu.setOpen(true);
+	})
 </script>
 
 <TopAppBar variant="static" dense={true} color="primary">
 	<Row>
-		<Section align="start">
+		<Section>
 			{#if adminConfig?.head?.brandName}
 				<Title>{adminConfig.head.brandName}</Title>
 			{/if}
 			{#if adminConfig?.head?.appName}
 				<Title><small>{adminConfig.head.appName}</small></Title>
 			{/if}
-		</Section>
-		<TopLeftMenu links={left_links} />
-		<Section align="end">
-			{#if right_links.length}
-				<TopRightMenu links={right_links} />
+			{#if left_links.length}
+				<TopLeftMenu links={left_links} />
 			{/if}
 		</Section>
+		{#if right_links.length}
+			<Section align="end" toolbar>
+				<TopRightMenu links={right_links} />
+			</Section>
+		{/if}
 	</Row>
 </TopAppBar>
 

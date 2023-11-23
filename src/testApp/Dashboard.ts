@@ -32,6 +32,18 @@ export const dashboard = new DashboardDefinition({
 			new UrlAction('Submenu 2', '#', Book)
 		])
 	],
+	topRightMenu: [
+		new UrlAction('Homepage', '/', Home),
+		new UrlAction('Books', '/admin/books/list', Book),
+		new Divider(),
+		new CallbackAction('Callback link', null, (item?: object | undefined) => {
+			alert('Hey, this link is called with Javascript!');
+		}),
+		new Submenu('Submenu', null, [
+			new UrlAction('Submenu 1', '#', Book),
+			new UrlAction('Submenu 2', '#', Book)
+		])
+	],
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book),
