@@ -1,6 +1,8 @@
-# Svelte admin, prototype
+# Svelte admin
 
-⚠ This package is a **prototype**. It is not complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are missing.
+This package is an **admin generator** for your JS/TS/Svelte projects. It can consume a distant API, a localStorage, or even an RPC-based data storage (like when using [Tauri](https://tauri.app/)).
+
+It is not yet complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are in the development process.
 
 ## Installation
 
@@ -325,9 +327,10 @@ In the meantime, here is the roadmap for future features:
 
 - Add filters in the `List` operation.
 - Add pagination in the `List` operation.
-- Add support for validation in CrudForm (therefore Edit and New operations).
-- Add other themes than Carbon, which is the default for now.
-- Fix issues with NPM/Node/packaging that prevents changing theme.
+- Add support for validation in CrudForm (therefore `Edit` and `New` operations).
+- Add other themes than Carbon, which is the default for now. **Note:** There is a [pending pullrequest](https://github.com/Orbitale/SvelteAdmin/pull/2) for a Material 3 theme!
+- Fix issues with NPM/Node/packaging that prevents changing theme ([#3](https://github.com/Orbitale/SvelteAdmin/issues/3))
+- Add configurable `StateProvider`s and `StateProcessor`s (especially for API endpoints).
 
 ---
 
