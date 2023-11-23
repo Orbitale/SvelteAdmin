@@ -1,5 +1,5 @@
 import type { ThemeConfig } from '$lib/themes/ThemeConfig';
-import carbon from '$lib/themes/carbon';
+import material3 from '$lib/themes/material3';
 
 export type AdminConfig = {
 	theme: ThemeConfig;
@@ -14,7 +14,7 @@ export type AdminConfig = {
 
 export function emptyAdminConfig(): AdminConfig {
 	return {
-		theme: carbon,
+		theme: material3,
 		defaultLocale: 'en',
 		autoCloseSideMenu: false,
 		rootUrl: '/',
