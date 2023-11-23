@@ -5,11 +5,11 @@
 	export let icon: ActionIcon;
 
 	if (
-		icon
-		&& !(icon instanceof SvelteComponent)
-		&& typeof icon !== 'function'
-		&& typeof icon !== 'string'
-		&& typeof icon?.$$render === 'undefined'
+		icon &&
+		!(icon instanceof SvelteComponent) &&
+		typeof icon !== 'function' &&
+		typeof icon !== 'string' &&
+		typeof icon?.$$render === 'undefined'
 	) {
 		console.error(`Wrong icon type: ${typeof icon}`, icon);
 	}
@@ -20,5 +20,5 @@
 {:else if typeof icon === 'string'}
 	{icon}
 {:else}
-	{(icon||'').toString()}
+	{(icon || '').toString()}
 {/if}

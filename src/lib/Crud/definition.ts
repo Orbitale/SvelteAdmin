@@ -9,7 +9,7 @@ export type CrudDefinitionOptionsArgument<T> = {
 	};
 	defaultOperationName?: string;
 	operations: Array<CrudOperation>;
-	identifierFieldName?: 'id'|string;
+	identifierFieldName?: 'id' | string;
 	stateProvider: StateProvider<T>;
 	stateProcessor: StateProcessor<T>;
 };
@@ -36,9 +36,9 @@ export class CrudDefinition<T> {
 			);
 		}
 
-		const defaultOperation = options.operations.filter(
-			(operation) => operation.name === defaultOperationName
-		).shift();
+		const defaultOperation = options.operations
+			.filter((operation) => operation.name === defaultOperationName)
+			.shift();
 		if (!defaultOperation) {
 			throw new Error(
 				`Crud definition "${name}" has no default operation named "${defaultOperationName}".\nAvailable operation names: ${options.operations

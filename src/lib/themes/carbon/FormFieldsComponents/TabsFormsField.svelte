@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Tabs from '../Tabs/Tabs.svelte';
-	import theme from "$lib/stores/theme";
+	import theme from '$lib/stores/theme';
 </script>
 
 <Tabs FieldComponent={$theme.crudActions.formField} {...$$restProps} />

@@ -9,7 +9,7 @@ export type TabOptions = Options & {
 export type TabbedFields<T = FieldInterface<Options>> = Array<{
 	name: string;
 	label?: string;
-	fields: Array<T>
+	fields: Array<T>;
 }>;
 
 export class Tabs implements FieldInterface<TabOptions> {
@@ -21,6 +21,5 @@ export class Tabs implements FieldInterface<TabOptions> {
 	constructor(
 		public readonly fields: TabbedFields = [],
 		public readonly options: TabOptions = {} as TabOptions
-	) {
-	}
+	) {}
 }
