@@ -4,14 +4,13 @@
 	import { _ } from 'svelte-i18n';
 
 	import { initLocale } from '$lib';
-	import theme from '$lib/themes/carbon';
 	import { dashboard } from '../testApp/Dashboard';
 	import fr from '../testApp/translations/fr';
 
 	initLocale('fr', { fr });
 </script>
 
-<svelte:component this={theme.dashboard} {dashboard}>
+<svelte:component this={dashboard.adminConfig.theme.dashboard} {dashboard}>
 	<h1>Svelte Admin demo app</h1>
 
 	<p>
