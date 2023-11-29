@@ -1,4 +1,4 @@
-import type { KeyValueObject } from '$lib/genericTypes';
+import type { RequestParameters } from '$lib/genericTypes';
 import type { Page } from '@sveltejs/kit';
 
 /**
@@ -12,7 +12,7 @@ import type { Page } from '@sveltejs/kit';
  *
  * Route params will always have precedence over QueryString, to avoid unexpected overrides.
  */
-export function getRequestParams(page: Page, browser: boolean): KeyValueObject {
+export function getRequestParams(page: Page, browser: boolean): RequestParameters {
 	let params = { ...page.params };
 
 	if (browser) {

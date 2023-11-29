@@ -1,7 +1,7 @@
-<script lang="ts">
+²<script lang="ts">
 	import { type Headers, type Header, createEmptyRow } from '$lib/DataTable/DataTable';
 	import type { Options } from '$lib/FieldDefinitions/Options';
-	import type { KeyValueObject } from '$lib/genericTypes';
+	import type { RequestParameters } from '$lib/genericTypes';
 	import type { Field } from '$lib/FieldDefinitions/Field';
 	import type { CrudDefinition } from '$lib/Crud/definition';
 
@@ -17,7 +17,7 @@
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: KeyValueObject = {};
+	export let requestParameters: RequestParameters = {};
 
 	const DataTable = $theme.dataTable;
 

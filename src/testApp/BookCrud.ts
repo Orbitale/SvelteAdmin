@@ -12,7 +12,7 @@ import {
 	UrlAction,
 	View
 } from '$lib';
-import type { KeyValueObject } from '$lib/genericTypes';
+import type { RequestParameters } from '$lib/genericTypes';
 
 import { faker } from '@faker-js/faker';
 
@@ -42,7 +42,6 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				new UrlAction('Edit', '/admin/books/edit', Pen),
 				new UrlAction('Delete', '/admin/books/delete', TrashCan)
 			],
-			[],
 			{
 				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
 			}
@@ -85,7 +84,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 
 	stateProvider: new CallbackStateProvider<Book>(function (
 		operation,
-		requestParameters: KeyValueObject = {}
+		requestParameters: RequestParameters = {}
 	) {
 		const books = getMemoryBooks();
 

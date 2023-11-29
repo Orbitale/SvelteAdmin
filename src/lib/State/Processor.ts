@@ -1,5 +1,5 @@
 import type { CrudOperation } from '$lib/Crud/Operations';
-import type { KeyValueObject } from '$lib/genericTypes';
+import type { RequestParameters } from '$lib/genericTypes';
 
 export type StateProcessorInput<T> = T | Array<T> | null;
 
@@ -7,14 +7,14 @@ export interface StateProcessor<T> {
 	process(
 		data: StateProcessorInput<T>,
 		operation: CrudOperation,
-		requestParameters: KeyValueObject
+		requestParameters: RequestParameters
 	): void;
 }
 
 export type StateProcessorCallback<T> = (
 	data: StateProcessorInput<T>,
 	operation: CrudOperation,
-	requestParameters: KeyValueObject
+	requestParameters: RequestParameters
 ) => void;
 
 export class CallbackStateProcessor<T> implements StateProcessor<T> {
@@ -27,7 +27,7 @@ export class CallbackStateProcessor<T> implements StateProcessor<T> {
 	process(
 		data: StateProcessorInput<T>,
 		operation: CrudOperation,
-		requestParameters: KeyValueObject
+		requestParameters: RequestParameters
 	): void {
 		return this._callback(data, operation, requestParameters);
 	}

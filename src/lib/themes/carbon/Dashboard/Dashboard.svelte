@@ -19,12 +19,12 @@
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud/definition';
-	import type { KeyValueObject } from '$lib/genericTypes';
+	import type { RequestParameters } from '$lib/genericTypes';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let crud: string | undefined = undefined;
 	export let operation: string | undefined = undefined;
-	export let requestParameters: KeyValueObject = {};
+	export let requestParameters: RequestParameters = {};
 
 	let currentCrud: CrudDefinition<unknown> | undefined;
 	let currentCrudOperation: CrudOperation | undefined;

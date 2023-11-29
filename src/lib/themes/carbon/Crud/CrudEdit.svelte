@@ -10,7 +10,7 @@
 
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { KeyValueObject } from '$lib/genericTypes';
+	import type { RequestParameters } from '$lib/genericTypes';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { DashboardDefinition } from '$lib';
 	import theme from '$lib/stores/theme';
@@ -21,7 +21,7 @@
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: KeyValueObject = {};
+	export let requestParameters: RequestParameters = {};
 
 	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
 		operation,

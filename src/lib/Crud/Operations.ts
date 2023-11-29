@@ -4,22 +4,17 @@ import type { Options } from '$lib/FieldDefinitions/Options';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import type { DashboardDefinition } from '$lib/Dashboard/definition';
 import type { Action } from '$lib/actions';
-import type { KeyValueObject } from '$lib/genericTypes';
+import type { KeyValueObject, RequestParameters } from '$lib/genericTypes';
 import type { CrudTheme } from '$lib/themes/ThemeConfig';
 
 export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
-
-export type OperationCallbackName = 'submit' | string;
-
-export type OperationCallback = (event: Event) => unknown | void;
-export type OperationEventCallback = [event: OperationCallbackName, callback: OperationCallback];
 
 export type TemplateComponent = ComponentType<
 	SvelteComponent<{
 		dashboard: DashboardDefinition<unknown>;
 		crud: CrudDefinition<unknown>;
 		operation: CrudOperation;
-		requestParameters: KeyValueObject;
+		requestParameters: RequestParameters;
 	}>
 >;
 
@@ -72,8 +67,21 @@ export class Edit extends BaseCrudOperation {
 	}
 }
 
+type PaginationOptions = object & {
+	enabled: boolean;
+	itemsPerPage: number;
+};
+
+export function defaultPaginationOptions(): PaginationOptions {
+	return {
+		enabled: true,
+		itemsPerPage: 20,
+	}
+}
+
 type ListOperationOptions = object & {
 	globalActions?: Array<Action>;
+	pagination?: Partial<PaginationOptions>
 };
 
 export class List extends BaseCrudOperation {
@@ -82,6 +90,7 @@ export class List extends BaseCrudOperation {
 		actions: Array<Action> = [],
 		options: ListOperationOptions = {}
 	) {
+		options.pagination = {...defaultPaginationOptions(), ...options};
 		super('list', 'crud.list.label', 'list', fields, actions, options);
 	}
 }
