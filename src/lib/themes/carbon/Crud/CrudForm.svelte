@@ -2,7 +2,7 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
-	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
 	import { Tabs } from '$lib/FieldDefinitions/Tabs';
@@ -38,35 +38,7 @@
 
 		const normalizedData = getSubmittedFormData(event);
 		dispatchEvent('submitData', normalizedData);
-
-		const normalizedEvent: CustomEvent<{ submitData: SubmittedData }> = new CustomEvent(
-			'submitData',
-			normalizedData
-		);
-
-		operation.eventHandlers.forEach(([eventName, callback]) => {
-			if (eventName === 'submitData') {
-				callback(normalizedEvent);
-			}
-		});
 	}
-
-	const enableEvents = () =>
-		operation.eventHandlers.forEach(([event, callback]) =>
-			htmlFormElement?.addEventListener(event, callback)
-		);
-	const disableEvents = () =>
-		operation.eventHandlers.forEach(([event, callback]) =>
-			htmlFormElement?.removeEventListener(event, callback)
-		);
-
-	onMount(() => {
-		enableEvents();
-	});
-
-	onDestroy(() => {
-		disableEvents();
-	});
 </script>
 
 <Form

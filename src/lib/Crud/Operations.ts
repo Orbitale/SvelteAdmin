@@ -29,7 +29,6 @@ export interface CrudOperation {
 	readonly displayComponentName: CrudTheme;
 	readonly fields: Array<Field<Options>>;
 	readonly actions: Array<Action>;
-	readonly eventHandlers: Array<OperationEventCallback>;
 	readonly options: Record<string, string | unknown>;
 }
 
@@ -40,7 +39,6 @@ export class BaseCrudOperation implements CrudOperation {
 		public readonly displayComponentName: CrudTheme,
 		public readonly fields: Array<Field<Options>>,
 		public readonly actions: Array<Action>,
-		public readonly eventHandlers: Array<OperationEventCallback> = [],
 		public readonly options: Record<string, string | unknown> = {}
 	) {}
 }
@@ -58,10 +56,9 @@ export class New extends BaseCrudOperation {
 	constructor(
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
-		eventHandlers: Array<OperationEventCallback> = [],
 		options: FormOperationOptions = DEFAULT_FORM_OPERATION_OPTION
 	) {
-		super('new', 'crud.new.label', 'new', fields, actions, eventHandlers, options);
+		super('new', 'crud.new.label', 'new', fields, actions, options);
 	}
 }
 
@@ -69,10 +66,9 @@ export class Edit extends BaseCrudOperation {
 	constructor(
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
-		eventHandlers: Array<OperationEventCallback> = [],
 		options: FormOperationOptions = DEFAULT_FORM_OPERATION_OPTION
 	) {
-		super('edit', 'crud.edit.label', 'edit', fields, actions, eventHandlers, options);
+		super('edit', 'crud.edit.label', 'edit', fields, actions, options);
 	}
 }
 
@@ -84,10 +80,9 @@ export class List extends BaseCrudOperation {
 	constructor(
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
-		eventHandlers: Array<OperationEventCallback> = [],
 		options: ListOperationOptions = {}
 	) {
-		super('list', 'crud.list.label', 'list', fields, actions, eventHandlers, options);
+		super('list', 'crud.list.label', 'list', fields, actions, options);
 	}
 }
 
@@ -97,15 +92,14 @@ export class Delete extends BaseCrudOperation {
 	constructor(
 		fields: Array<Field<Options>>,
 		redirectTo: Action,
-		eventHandlers: Array<OperationEventCallback> = []
 	) {
-		super('delete', 'crud.delete.label', 'delete', fields, [], eventHandlers);
+		super('delete', 'crud.delete.label', 'delete', fields, []);
 		this.redirectTo = redirectTo;
 	}
 }
 
 export class View extends BaseCrudOperation {
-	constructor(fields: Array<Field<Options>>, eventHandlers: Array<OperationEventCallback> = []) {
-		super('view', 'crud.view.label', 'view', fields, [], eventHandlers);
+	constructor(fields: Array<Field<Options>>) {
+		super('view', 'crud.view.label', 'view', fields, []);
 	}
 }

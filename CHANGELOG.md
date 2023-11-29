@@ -1,6 +1,9 @@
 # Upcoming...
 
 - Add `adminConfig.rootUrl` and configure redirection when submitting `new` or `edit` forms.
+- Rename Dashboard web-component name (still not sure whether the package will be built as web-components, but maybe, who knows)
+- Remove useless custom theme call in test app, this helps in making sure the Dashboard-configured theme is the main one.
+- Disable Crud events for now, they have no real usage, and they imply mandatory callback. The configuration, apart Callback providers and processors, is supposed to be as much static as possible, to be able to configure it from outside just with JSON.
 
 # v0.5.0
 
