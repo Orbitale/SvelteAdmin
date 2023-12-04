@@ -38,12 +38,10 @@
 	}
 
 	function getResults() {
-		console.info('Processing results');
 		providerResponse = null;
 		providerResponse = crud.options.stateProvider.provide(operation, requestParameters);
 
 		return providerResponse.then((results) => {
-			console.info('Thenning results');
 			if (results && !Array.isArray(results) && !(results instanceof PaginatedResults)) {
 				throw new Error(
 					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
@@ -76,7 +74,6 @@
 	}
 
 	async function updatePagination(event: CustomEvent<{page: number, pageSize: number}>) {
-		console.info('update pagination');
 		page = event.detail.page;
 		requestParameters.page = event.detail.page;
 		rows = getResults();
@@ -102,7 +99,7 @@
 			pageSize={operation.options.pagination.itemsPerPage}
 			page={resolvedResults.currentPage}
 			totalItems={resolvedResults.numberOfItems}
-			pageSizeInputDisabled
+			pageSizeInputDisabled={true}
 			on:update={updatePagination}
 		/>
 	{/if}

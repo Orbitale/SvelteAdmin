@@ -1,6 +1,7 @@
 # Upcoming...
 
 - **BC Break** (though was unused): Disable Crud events for now, they have no real usage, and they imply mandatory callback. The configuration, apart Callback providers and processors, is supposed to be as much static as possible, to be able to configure it from outside just with JSON.
+- Implemented pagination. To use it, configure the `itemsPerPage` in your action's Operation (like `List` for instance), and make sure your `StateProvider` for the same Operation returns an instance of the `PaginatedResults` object.
 - Add `adminConfig.rootUrl` and configure redirection when submitting `new` or `edit` forms.
 - Rename Dashboard web-component name to avoid duplication with other themes (still not sure whether the package will be built as web-components, but maybe, who knows)
 - Remove useless custom theme call in test app, this helps in making sure the Dashboard-configured theme is the main one.

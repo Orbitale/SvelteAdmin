@@ -326,7 +326,7 @@ This project is still incomplete, and if you want to contribute, feel free to su
 In the meantime, here is the roadmap for future features:
 
 - Add filters in the `List` operation.
-- Add pagination in the `List` operation.
+- Add sorting in the `List` operation.
 - Add support for validation in CrudForm (therefore `Edit` and `New` operations).
 - Add other themes than Carbon, which is the default for now. **Note:** There is a [pending pullrequest](https://github.com/Orbitale/SvelteAdmin/pull/2) for a Material 3 theme!
 - Fix issues with NPM/Node/packaging that prevents changing theme ([#3](https://github.com/Orbitale/SvelteAdmin/issues/3))

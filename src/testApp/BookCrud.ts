@@ -32,7 +32,7 @@ const fields = [
 
 const IdField = new TextField('id', 'ID');
 
-const itemsPerPage = 10;
+const itemsPerPage = 20;
 
 export const bookCrud = new CrudDefinition<Book>('books', {
 	label: { singular: 'Book', plural: 'Books' },
