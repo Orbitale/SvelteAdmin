@@ -13,6 +13,7 @@
 	export let rows: Promise<Rows>;
 	export let actions: Action[] = [];
 	export let globalActions: Array<Action> = [];
+	export let page: number|undefined;
 
 	let actionsCellIndex = -1;
 
@@ -28,7 +29,7 @@
 {#await rows}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
 {:then resolvedRows}
-	<DataTable {headers} rows={resolvedRows} size="short" zebra={true} {...$$restProps}>
+	<DataTable {headers} {page} rows={resolvedRows} size="short" zebra={true} {...$$restProps}>
 		<svelte:fragment slot="title">
 			<slot name="title" />
 		</svelte:fragment>

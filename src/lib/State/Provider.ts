@@ -1,7 +1,8 @@
 import type { CrudOperation } from '$lib/Crud/Operations';
 import type { RequestParameters } from '$lib/genericTypes';
+import type {PaginatedResults} from "$lib/DataTable/Pagination.ts";
 
-export type StateProviderResult<T> = Promise<T | Array<T> | null>;
+export type StateProviderResult<T> = Promise<T | PaginatedResults<T> | Array<T> | null>;
 
 export interface StateProvider<T> {
 	provide(action: CrudOperation, requestParameters: RequestParameters): StateProviderResult<T>;

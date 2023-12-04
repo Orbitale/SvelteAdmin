@@ -20,6 +20,7 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
+import {PaginatedResults} from "$lib/DataTable/Pagination.ts";
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
@@ -30,6 +31,8 @@ const fields = [
 ];
 
 const IdField = new TextField('id', 'ID');
+
+const itemsPerPage = 10;
 
 export const bookCrud = new CrudDefinition<Book>('books', {
 	label: { singular: 'Book', plural: 'Books' },
@@ -43,7 +46,11 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				new UrlAction('Delete', '/admin/books/delete', TrashCan)
 			],
 			{
-				globalActions: [new UrlAction('New', '/admin/books/new', Pen)]
+				globalActions: [new UrlAction('New', '/admin/books/new', Pen)],
+				pagination: {
+					enabled: true,
+					itemsPerPage: itemsPerPage,
+				}
 			}
 		),
 		new View([IdField, ...fields]),
@@ -52,7 +59,11 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		new Delete(fields, new UrlAction('List', '/admin/books/list'))
 	],
 
-	stateProcessor: new CallbackStateProcessor(function (data, operation, requestParameters = {}) {
+	stateProcessor: new CallbackStateProcessor(function (
+		data,
+		operation,
+		requestParameters: RequestParameters = {}
+	) {
 		if (operation.name === 'delete') {
 			const id = requestParameters.id;
 			getBook(id);
@@ -89,7 +100,17 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		const books = getMemoryBooks();
 
 		if (operation.name === 'list') {
-			return Promise.resolve(books);
+			const page = parseInt((requestParameters.page||'1').toString());
+			if (isNaN(page)) {
+				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
+			}
+			const listBooks = books.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+			return Promise.resolve(new PaginatedResults(
+				page,
+				Math.ceil(books.length / itemsPerPage),
+				books.length,
+				listBooks,
+			));
 		}
 
 		if (requestParameters.id !== undefined) {
