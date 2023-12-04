@@ -1,4 +1,4 @@
-# Upcoming...
+# v0.6.0
 
 - **BC Break** (though was unused): Disable Crud events for now, they have no real usage, and they imply mandatory callback. The configuration, apart Callback providers and processors, is supposed to be as much static as possible, to be able to configure it from outside just with JSON.
 - Implemented pagination. To use it, configure the `itemsPerPage` in your action's Operation (like `List` for instance), and make sure your `StateProvider` for the same Operation returns an instance of the `PaginatedResults` object.
