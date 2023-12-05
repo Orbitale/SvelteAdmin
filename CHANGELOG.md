@@ -1,3 +1,7 @@
+# v0.6.3
+
+- Fix wrong pagination default config
+
 # v0.6.2
 
 - Fix remaining extension imports in CrudList

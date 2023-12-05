@@ -90,7 +90,7 @@ export class List extends BaseCrudOperation {
 		actions: Array<Action> = [],
 		options: ListOperationOptions = {}
 	) {
-		options.pagination = {...defaultPaginationOptions(), ...options};
+		options.pagination = {...defaultPaginationOptions(), ...(options.pagination || {})};
 		super('list', 'crud.list.label', 'list', fields, actions, options);
 	}
 }
