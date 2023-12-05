@@ -5,6 +5,8 @@ export { getSubmittedFormData } from './Crud/form';
 
 export { DashboardDefinition } from './Dashboard/definition';
 
+export { PaginatedResults } from './DataTable/Pagination';
+
 export { CheckboxField } from './FieldDefinitions/Checkbox';
 export { Field } from './FieldDefinitions/Field';
 export { NumberField } from './FieldDefinitions/Number';

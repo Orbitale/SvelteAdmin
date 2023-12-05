@@ -1,3 +1,7 @@
+# v0.6.1
+
+- Fix missing export of `PaginatedResults` class.
+
 # v0.6.0
 
 - **BC Break** (though was unused): Disable Crud events for now, they have no real usage, and they imply mandatory callback. The configuration, apart Callback providers and processors, is supposed to be as much static as possible, to be able to configure it from outside just with JSON.
