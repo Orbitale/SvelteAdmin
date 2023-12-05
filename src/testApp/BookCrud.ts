@@ -20,7 +20,7 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
-import {PaginatedResults} from "$lib/DataTable/Pagination.ts";
+import {PaginatedResults} from "$lib/DataTable/Pagination";
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),

@@ -15,8 +15,8 @@
 
 	import type { DashboardDefinition } from '$lib';
 	import theme from '$lib/stores/theme';
-	import type {StateProviderResult} from "$lib/State/Provider.ts";
-	import {PaginatedResults} from "$lib/DataTable/Pagination.ts";
+	import type {StateProviderResult} from "$lib/State/Provider";
+	import {PaginatedResults} from "$lib/DataTable/Pagination";
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;

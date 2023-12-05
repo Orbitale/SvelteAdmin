@@ -1,3 +1,7 @@
+# v0.6.2
+
+- Fix remaining extension imports in CrudList
+
 # v0.6.1
 
 - Fix missing export of `PaginatedResults` class.
