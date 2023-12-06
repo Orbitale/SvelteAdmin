@@ -75,7 +75,7 @@ type PaginationOptions = object & {
 export function defaultPaginationOptions(): PaginationOptions {
 	return {
 		enabled: true,
-		itemsPerPage: 20,
+		itemsPerPage: 10,
 	}
 }
 

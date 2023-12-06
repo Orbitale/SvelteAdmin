@@ -41,13 +41,13 @@
 		providerResponse = null;
 		providerResponse = crud.options.stateProvider.provide(operation, requestParameters);
 
-		return providerResponse.then((results) => {
-			if (results && !Array.isArray(results) && !(results instanceof PaginatedResults)) {
+		return providerResponse.then((responseResults) => {
+			if (responseResults && !Array.isArray(responseResults) && !(responseResults instanceof PaginatedResults)) {
 				throw new Error(
 					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
 				);
 			}
-			results = results instanceof PaginatedResults ? results.currentItems : results;
+			let results = responseResults instanceof PaginatedResults ? responseResults.currentItems : results;
 			if (!results || !results?.length) {
 				results = [createEmptyRow(operation)];
 			}
@@ -62,18 +62,22 @@
 				return result;
 			});
 
+			resolvedResults = responseResults;
+
 			return results;
 		});
 	}
 
+	let showPagination = operation.options.pagination.enabled;
 	let rows: Promise<unknown> = getResults();
+	let resolvedResults: PaginatedResults<unknown>|Array<unknown>;
 	let globalActions: Array<Action> = [];
 
 	if (operation instanceof List<unknown> || operation.options?.globalActions?.length) {
 		globalActions = operation.options.globalActions;
 	}
 
-	async function updatePagination(event: CustomEvent<{page: number, pageSize: number}>) {
+	async function onPaginationUpdate(event: CustomEvent<{page: number, pageSize: number}>) {
 		page = event.detail.page;
 		requestParameters.page = event.detail.page;
 		rows = getResults();
@@ -92,15 +96,12 @@
 		{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
 	</h2>
 </DataTable>
-{#await providerResponse}
-{:then resolvedResults}
-	{#if resolvedResults instanceof PaginatedResults}
-		<Pagination
-			pageSize={operation.options.pagination.itemsPerPage}
-			page={resolvedResults.currentPage}
-			totalItems={resolvedResults.numberOfItems}
-			pageSizeInputDisabled={true}
-			on:update={updatePagination}
-		/>
-	{/if}
-{/await}
+{#if showPagination && resolvedResults instanceof PaginatedResults}
+	<Pagination
+		pageSize={operation.options.pagination?.itemsPerPage}
+		page={resolvedResults?.currentPage}
+		totalItems={resolvedResults?.numberOfItems}
+		pageSizeInputDisabled={true}
+		on:update={onPaginationUpdate}
+	/>
+{/if}

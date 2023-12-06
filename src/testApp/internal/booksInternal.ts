@@ -8,12 +8,12 @@ export type Book = {
 	publishedAt: string;
 };
 
-const baseBooks: Array<Book> = Array(50)
+const baseBooks: Array<Book> = Array(25)
 	.fill(undefined)
-	.map(() => {
+	.map((_, i) => {
 		return {
 			id: faker.string.uuid(),
-			title: faker.music.songName(),
+			title: (i+1)+' '+faker.music.songName(),
 			description: faker.lorem.lines(3),
 			numberOfPages: faker.number.int({ min: 50, max: 800 }),
 			publishedAt: faker.date.anytime().toISOString()

@@ -2,6 +2,7 @@
 	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
 	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
+	import Loading from 'carbon-components-svelte/src/Loading/Loading.svelte';
 	import { _ } from 'svelte-i18n';
 
 	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
@@ -15,7 +16,11 @@
 	export let globalActions: Array<Action> = [];
 	export let page: number|undefined;
 
+	let resolvedRows: Rows = [];
+
 	let actionsCellIndex = -1;
+
+	$: rows.then(r => resolvedRows = r);
 
 	if (actions.length) {
 		headers.push({
@@ -26,9 +31,9 @@
 	}
 </script>
 
-{#await rows}
+{#if !resolvedRows || !resolvedRows.length}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
-{:then resolvedRows}
+{:else}
 	<DataTable {headers} {page} rows={resolvedRows} size="short" zebra={true} {...$$restProps}>
 		<svelte:fragment slot="title">
 			<slot name="title" />
@@ -44,6 +49,9 @@
 				{$_('error.crud.list.no_elements')}
 			</InlineNotification>
 		{/if}
+		{#await rows}
+			<Loading />
+		{/await}
 		<div slot="cell" let:cell let:row let:cellIndex>
 			{#if cellIndex === actionsCellIndex}
 				<ItemActions {actions} item={row} />
@@ -52,4 +60,4 @@
 			{/if}
 		</div>
 	</DataTable>
-{/await}
+{/if}

@@ -32,7 +32,7 @@ const fields = [
 
 const IdField = new TextField('id', 'ID');
 
-const itemsPerPage = 20;
+const itemsPerPage = 10;
 
 export const bookCrud = new CrudDefinition<Book>('books', {
 	label: { singular: 'Book', plural: 'Books' },
@@ -65,7 +65,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		requestParameters: RequestParameters = {}
 	) {
 		if (operation.name === 'delete') {
-			const id = requestParameters.id;
+			const id = (requestParameters.id || '').toString();
 			getBook(id);
 			const updatedBooks = getMemoryBooks().filter((b) => b.id.toString() !== id);
 			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
@@ -74,7 +74,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? requestParameters.id : faker.string.uuid();
+			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const book = data as Book;
 			book.id = id;
 			let updatedBooks = getMemoryBooks();
@@ -105,7 +105,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
 			const listBooks = books.slice(itemsPerPage * (page - 1), itemsPerPage * page);
-			return Promise.resolve(new PaginatedResults(
+			return new Promise((r) => setTimeout(r, Math.random() * 500)).then(() => new PaginatedResults(
 				page,
 				Math.ceil(books.length / itemsPerPage),
 				books.length,

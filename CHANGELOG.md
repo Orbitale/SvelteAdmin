@@ -1,3 +1,7 @@
+# v0.6.4
+
+- Fix UX issue with pagination where whole DataTable disappeared
+
 # v0.6.3
 
 - Fix wrong pagination default config
