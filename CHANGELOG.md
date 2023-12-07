@@ -1,3 +1,7 @@
+# v0.6.5
+
+- Fix wrong variable assignation
+
 # v0.6.4
 
 - Fix UX issue with pagination where whole DataTable disappeared

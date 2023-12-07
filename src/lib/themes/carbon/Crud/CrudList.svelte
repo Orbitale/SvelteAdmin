@@ -47,7 +47,7 @@
 					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
 				);
 			}
-			let results = responseResults instanceof PaginatedResults ? responseResults.currentItems : results;
+			let results = responseResults instanceof PaginatedResults ? responseResults.currentItems : responseResults;
 			if (!results || !results?.length) {
 				results = [createEmptyRow(operation)];
 			}
