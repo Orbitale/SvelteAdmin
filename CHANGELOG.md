@@ -1,3 +1,9 @@
+# v0.6.6
+
+- Update dependencies internally, especially update to Vitest 1.0
+- Make sure CrudList requires a List operation object.
+- Allow forcing List state provider to wait a minimum amount of time to avoid stressful blinking. Useful for UX and accessibility.
+
 # v0.6.5
 
 - Fix wrong variable assignation

@@ -8,8 +8,10 @@ export type CrudDefinitionOptionsArgument<T> = {
 		plural: string;
 	};
 	defaultOperationName?: string;
-	operations: Array<CrudOperation>;
 	identifierFieldName?: 'id' | string;
+	minStateLoadingTimeMs?: number;
+
+	operations: Array<CrudOperation>;
 	stateProvider: StateProvider<T>;
 	stateProcessor: StateProcessor<T>;
 };

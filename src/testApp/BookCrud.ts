@@ -34,8 +34,13 @@ const IdField = new TextField('id', 'ID');
 
 const itemsPerPage = 10;
 
+function randomWait(maxMilliseconds: number) {
+	return new Promise((r: (...args: unknown[]) => unknown) => setTimeout(r, Math.random() * maxMilliseconds));
+}
+
 export const bookCrud = new CrudDefinition<Book>('books', {
 	label: { singular: 'Book', plural: 'Books' },
+	minStateLoadingTimeMs: 1000,
 
 	operations: [
 		new List(
@@ -105,7 +110,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
 			const listBooks = books.slice(itemsPerPage * (page - 1), itemsPerPage * page);
-			return new Promise((r) => setTimeout(r, Math.random() * 500)).then(() => new PaginatedResults(
+			return randomWait(500).then(() => new PaginatedResults(
 				page,
 				Math.ceil(books.length / itemsPerPage),
 				books.length,

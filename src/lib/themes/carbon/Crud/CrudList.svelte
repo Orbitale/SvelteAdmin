@@ -44,6 +44,12 @@
 	function getResults() {
 		providerResponse = null;
 		providerResponse = crud.options.stateProvider.provide(operation, requestParameters);
+		if (crud.options.minStateLoadingTimeMs && typeof window !== 'undefined') {
+			providerResponse = Promise.all([
+				providerResponse,
+				new Promise(r => setTimeout(r, crud.options.minStateLoadingTimeMs)),
+			]).then((results) => results[0]);
+		}
 
 		return providerResponse.then((responseResults) => {
 			if (responseResults && !Array.isArray(responseResults) && !(responseResults instanceof PaginatedResults)) {
