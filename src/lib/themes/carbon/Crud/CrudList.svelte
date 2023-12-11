@@ -9,7 +9,7 @@
 	import type { Field } from '$lib/FieldDefinitions/Field';
 	import type { CrudDefinition } from '$lib/Crud/definition';
 
-	import { type CrudOperation, List } from '$lib/Crud/Operations';
+	import { List } from '$lib/Crud/Operations';
 
 	import type { Action } from '$lib/actions';
 
@@ -19,9 +19,13 @@
 	import {PaginatedResults} from "$lib/DataTable/Pagination";
 
 	export let dashboard: DashboardDefinition<unknown>;
-	export let operation: CrudOperation;
+	export let operation: typeof List;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
+
+	if (!operation instanceof List) {
+		throw new Error('CrudList view can only accept operations that are instances of the List operation.');
+	}
 
 	let page: number|undefined;
 	let providerResponse: StateProviderResult<unknown> = null;
