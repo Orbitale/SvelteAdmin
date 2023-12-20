@@ -11,3 +11,6 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 /web-components
+
+# For when running "npm pack"
+orbitale-svelte-admin-*.tgz

@@ -10,8 +10,11 @@ import {
 	TextareaField,
 	TextField,
 	UrlAction,
-	View
+	View,
+	TextFilter,
+	PaginatedResults
 } from '$lib';
+import type { RequestParameters } from '$lib/request';
 
 import { faker } from '@faker-js/faker';
 
@@ -19,9 +22,6 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
-import { PaginatedResults } from '$lib/DataTable/Pagination';
-import { TextFilter } from '$lib/Filter';
-import type { RequestParameters } from '$lib/request';
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
