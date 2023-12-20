@@ -1,6 +1,6 @@
 import type { CrudOperation } from '$lib/Crud/Operations';
-import type { RequestParameters } from '$lib/genericTypes';
-import type {PaginatedResults} from "$lib/DataTable/Pagination";
+import type { PaginatedResults } from '$lib/DataTable/Pagination';
+import type { RequestParameters } from '$lib/request';
 
 export type StateProviderResult<T> = Promise<T | PaginatedResults<T> | Array<T> | null>;
 

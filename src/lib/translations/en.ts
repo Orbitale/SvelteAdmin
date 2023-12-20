@@ -20,7 +20,10 @@ const dictionary: Dictionary = {
 	'error.crud.no_operation_specified':
 		'No CRUD operation was specified when displaying the "{crud}" CRUD.',
 	'error.crud.list.no_elements': 'No elements found.',
-	'error.crud.entity.not_found': 'No element found with this identifier.'
+	'error.crud.entity.not_found': 'No element found with this identifier.',
+	'datatable.filters.menu_title': 'Filters',
+	'datatable.filters.submit_filters': 'Filter results',
+	'datatable.filters.reset_filters': 'Reset filters'
 };
 
 export default dictionary;

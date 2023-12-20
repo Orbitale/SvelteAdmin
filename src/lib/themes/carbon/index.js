@@ -35,6 +35,8 @@ import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 
+import TextFilter from './FilterComponents/TextFilter.svelte';
+
 /**
  * @type import("../ThemeConfig").ThemeConfig
  */
@@ -46,30 +48,41 @@ const theme = {
 	formField: CrudFormField,
 	form: CrudForm,
 	crudActions: {
-		view: CrudView,
-		new: CrudNew,
-		list: CrudList,
+		delete: CrudDelete,
 		edit: CrudEdit,
-		delete: CrudDelete
+		list: CrudList,
+		new: CrudNew,
+		view: CrudView
 	},
 	viewFields: {
 		checkbox: CheckboxViewField,
+		column: ColumnsViewField,
 		default: DefaultViewField,
-		tabs: TabsViewField,
-		url: UrlViewField,
 		label: ViewLabel,
-		column: ColumnsViewField
+		//number: NumberViewField,
+		tabs: TabsViewField,
+		//text: TextViewField,
+		//textarea: TextareaViewField,
+		//toggle: ToggleViewField,
+		url: UrlViewField
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
+		column: ColumnsFormField,
 		default: DefaultFormField,
+		// label: FormLabel,
 		number: NumberFormField,
 		tabs: TabsFormField,
-		textarea: TextareaFormField,
 		text: TextFormField,
+		textarea: TextareaFormField,
 		toggle: ToggleFormField,
-		url: UrlFormField,
-		column: ColumnsFormField
+		url: UrlFormField
+	},
+	filters: {
+		boolean: TextFilter,
+		text: TextFilter,
+		date: TextFilter,
+		numeric: TextFilter
 	},
 	menu: {
 		sideMenu: SideMenu,

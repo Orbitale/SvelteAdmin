@@ -1,0 +1,37 @@
+import type { KeyValueObject } from '$lib/genericTypes';
+import type { FilterTheme } from '$lib/themes/ThemeConfig';
+
+export type FilterOptions = KeyValueObject;
+
+export abstract class Filter<T extends FilterOptions> {
+	public readonly field: string;
+	public readonly label: string;
+	public readonly options: T;
+	abstract readonly componentName: FilterTheme;
+
+	constructor(field: string, label?: string, options?: T) {
+		this.field = field;
+		this.label = label || field;
+		this.options = (options as T) || {};
+	}
+}
+
+export class TextFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'text';
+}
+
+export class BooleanFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'boolean';
+}
+
+export class DateFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'date';
+}
+
+export class ExistsFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'boolean';
+}
+
+export class NumericFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'numeric';
+}

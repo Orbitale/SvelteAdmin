@@ -21,7 +21,10 @@ const dictionary: Dictionary = {
 	'error.crud.no_operation_specified':
 		'Aucune opération n\'a été spécifié pour afficher le CRUD "{crud}".',
 	'error.crud.list.no_elements': 'Aucun élément trouvé.',
-	'error.crud.entity.not_found': 'Aucun élément trouvé avec cet identifiant.'
+	'error.crud.entity.not_found': 'Aucun élément trouvé avec cet identifiant.',
+	'datatable.filters.menu_title': 'Filtres',
+	'datatable.filters.submit_filters': 'Filtrer les résultats',
+	'datatable.filters.reset_filters': 'Réinitialiser les filtres'
 };
 
 export default dictionary;

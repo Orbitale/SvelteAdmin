@@ -14,14 +14,13 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
-	import theme from '$lib/stores/theme';
-
-	const CrudFormField = $theme.formField;
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';
 	export let operation: CrudOperation;
 	export let defaultData: undefined | null | Record<string, unknown> = {};
+
+	const CrudFormField = dashboard.adminConfig.theme.formField;
 
 	const data: Record<string, unknown> = defaultData ?? {};
 

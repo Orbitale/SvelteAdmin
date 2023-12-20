@@ -4,20 +4,20 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import theme from '$lib/stores/theme';
-	import type { CrudDefinition, DashboardDefinition } from '$lib';
+	import type { CrudDefinition } from '$lib/Crud/definition';
+	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { RequestParameters } from '$lib/genericTypes';
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { StateProviderResult } from '$lib/State/Provider';
+	import type { RequestParameters } from '$lib/request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
 
-	const CrudViewField = $theme.viewField;
+	const CrudViewField = dashboard.adminConfig.theme.viewField;
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 

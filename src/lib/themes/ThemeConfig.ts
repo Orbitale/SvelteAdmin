@@ -36,6 +36,13 @@ export type ThemeConfig = {
 		column: ComponentType;
 		[key: string]: ComponentType;
 	};
+	filters: {
+		boolean: ComponentType;
+		text: ComponentType;
+		date: ComponentType;
+		numeric: ComponentType;
+		[key: string]: ComponentType;
+	};
 	menu: {
 		sideMenu: ComponentType;
 		topLeftMenu: ComponentType;
@@ -47,4 +54,5 @@ export type ThemeConfig = {
 export type CrudTheme = keyof ThemeConfig['crudActions'];
 export type ViewFieldTheme = keyof ThemeConfig['viewFields'];
 export type FormFieldTheme = keyof ThemeConfig['formFields'];
+export type FilterTheme = keyof ThemeConfig['filters'];
 export type MenuTheme = keyof ThemeConfig['menu'];

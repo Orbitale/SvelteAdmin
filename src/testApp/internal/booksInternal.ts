@@ -13,7 +13,7 @@ const baseBooks: Array<Book> = Array(25)
 	.map((_, i) => {
 		return {
 			id: faker.string.uuid(),
-			title: (i+1)+' '+faker.music.songName(),
+			title: i + 1 + ' ' + faker.music.songName(),
 			description: faker.lorem.lines(3),
 			numberOfPages: faker.number.int({ min: 50, max: 800 }),
 			publishedAt: faker.date.anytime().toISOString()

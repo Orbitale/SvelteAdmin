@@ -1,5 +1,11 @@
-import type { RequestParameters } from '$lib/genericTypes';
 import type { Page } from '@sveltejs/kit';
+import type { Optional } from '$lib/genericTypes';
+
+export type RequestParameters = {
+	page?: Optional<string | number>;
+	filters?: Optional<Record<string, unknown>>;
+	[key: string]: unknown;
+};
 
 /**
  * Extracts all parameters from the URL based on Svelte's Page store.

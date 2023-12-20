@@ -6,8 +6,8 @@
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import { CallbackAction, UrlAction } from '$lib/actions';
 	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
-	import type { RequestParameters } from '$lib/genericTypes';
-	import type { DashboardDefinition } from '$lib';
+	import type { DashboardDefinition } from '$lib/Dashboard/definition';
+	import type { RequestParameters } from '$lib/request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
@@ -21,8 +21,8 @@
 		window.history.back();
 	}
 
-	function clickDelete() {
-		crud.options.stateProcessor.process(data, operation, requestParameters);
+	async function clickDelete() {
+		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
 		if (operation instanceof Delete) {
 			const redirect = operation.redirectTo;

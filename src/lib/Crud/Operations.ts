@@ -4,8 +4,10 @@ import type { Options } from '$lib/FieldDefinitions/Options';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import type { DashboardDefinition } from '$lib/Dashboard/definition';
 import type { Action } from '$lib/actions';
-import type { KeyValueObject, RequestParameters } from '$lib/genericTypes';
 import type { CrudTheme } from '$lib/themes/ThemeConfig';
+import { defaultPaginationOptions, type PaginationOptions } from '$lib/DataTable/Pagination';
+import type { Filter, FilterOptions } from '$lib/Filter';
+import type { RequestParameters } from '$lib/request';
 
 export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
 
@@ -46,8 +48,6 @@ const DEFAULT_FORM_OPERATION_OPTION: FormOperationOptions = {
 };
 
 export class New extends BaseCrudOperation {
-	public readonly options: KeyValueObject = {};
-
 	constructor(
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
@@ -67,30 +67,20 @@ export class Edit extends BaseCrudOperation {
 	}
 }
 
-type PaginationOptions = object & {
-	enabled: boolean;
-	itemsPerPage: number;
-};
-
-export function defaultPaginationOptions(): PaginationOptions {
-	return {
-		enabled: true,
-		itemsPerPage: 10,
-	}
-}
-
-type ListOperationOptions = object & {
+export type ListOperationOptions = object & {
 	globalActions?: Array<Action>;
-	pagination?: Partial<PaginationOptions>
+	pagination?: Partial<PaginationOptions>;
+	filters?: Filter<FilterOptions>[];
 };
 
 export class List extends BaseCrudOperation {
 	constructor(
 		fields: Array<Field<Options>>,
 		actions: Array<Action> = [],
-		options: ListOperationOptions = {}
+		options: Partial<ListOperationOptions> = {}
 	) {
-		options.pagination = {...defaultPaginationOptions(), ...(options.pagination || {})};
+		options.pagination = { ...defaultPaginationOptions(), ...(options.pagination || {}) };
+		options.filters ??= [];
 		super('list', 'crud.list.label', 'list', fields, actions, options);
 	}
 }
@@ -98,10 +88,7 @@ export class List extends BaseCrudOperation {
 export class Delete extends BaseCrudOperation {
 	public readonly redirectTo: Action;
 
-	constructor(
-		fields: Array<Field<Options>>,
-		redirectTo: Action,
-	) {
+	constructor(fields: Array<Field<Options>>, redirectTo: Action) {
 		super('delete', 'crud.delete.label', 'delete', fields, []);
 		this.redirectTo = redirectTo;
 	}

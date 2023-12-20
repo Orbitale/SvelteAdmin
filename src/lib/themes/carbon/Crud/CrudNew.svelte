@@ -3,10 +3,9 @@
 
 	import CrudForm from './CrudForm.svelte';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CrudDefinition } from '$lib';
-	import type { RequestParameters } from '$lib/genericTypes';
-	import type { DashboardDefinition } from '$lib';
-	import { goto } from '$app/navigation';
+	import type { CrudDefinition } from '$lib/Crud/definition';
+	import type { DashboardDefinition } from '$lib/Dashboard/definition';
+	import type { RequestParameters } from '$lib/request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
@@ -16,9 +15,9 @@
 	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
 		const data = event.detail;
 
-		crud.options.stateProcessor.process(data, operation, requestParameters);
+		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		await goto(document.referrer || dashboard.getFirstActionUrl());
+		window.location.href = (document.referrer || dashboard.getFirstActionUrl());
 	}
 </script>
 

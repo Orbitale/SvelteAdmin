@@ -12,7 +12,6 @@ import {
 	UrlAction,
 	View
 } from '$lib';
-import type { RequestParameters } from '$lib/genericTypes';
 
 import { faker } from '@faker-js/faker';
 
@@ -20,7 +19,9 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
-import {PaginatedResults} from "$lib/DataTable/Pagination";
+import { PaginatedResults } from '$lib/DataTable/Pagination';
+import { TextFilter } from '$lib/Filter';
+import type { RequestParameters } from '$lib/request';
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
@@ -35,7 +36,9 @@ const IdField = new TextField('id', 'ID');
 const itemsPerPage = 10;
 
 function randomWait(maxMilliseconds: number) {
-	return new Promise((r: (...args: unknown[]) => unknown) => setTimeout(r, Math.random() * maxMilliseconds));
+	return new Promise((r: (...args: unknown[]) => unknown) =>
+		setTimeout(r, Math.random() * maxMilliseconds)
+	);
 }
 
 export const bookCrud = new CrudDefinition<Book>('books', {
@@ -54,8 +57,12 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				globalActions: [new UrlAction('New', '/admin/books/new', Pen)],
 				pagination: {
 					enabled: true,
-					itemsPerPage: itemsPerPage,
-				}
+					itemsPerPage: itemsPerPage
+				},
+				filters: [
+					new TextFilter('title', 'Title contains'),
+					new TextFilter('description', 'Description contains')
+				]
 			}
 		),
 		new View([IdField, ...fields]),
@@ -79,7 +86,8 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const id =
+				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const book = data as Book;
 			book.id = id;
 			let updatedBooks = getMemoryBooks();
@@ -98,24 +106,45 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		return Promise.resolve();
 	}),
 
-	stateProvider: new CallbackStateProvider<Book>(function (
+	stateProvider: new CallbackStateProvider<Book>(async function (
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
-		const books = getMemoryBooks();
+		let books = getMemoryBooks();
 
 		if (operation.name === 'list') {
-			const page = parseInt((requestParameters.page||'1').toString());
+			const page = parseInt((requestParameters.page || '1').toString());
 			if (isNaN(page)) {
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
+
+			const filters = requestParameters.filters;
+			if (filters) {
+				books = books.filter((book: Book) => {
+					if (filters.title && !book.title.match(new RegExp(filters.title.toString(), 'gi'))) {
+						return false;
+					}
+					if (
+						filters.description &&
+						!book.description.match(new RegExp(filters.description.toString(), 'gi'))
+					) {
+						return false;
+					}
+
+					return true;
+				});
+			}
+
 			const listBooks = books.slice(itemsPerPage * (page - 1), itemsPerPage * page);
-			return randomWait(500).then(() => new PaginatedResults(
+
+			await randomWait(500);
+
+			return new PaginatedResults(
 				page,
 				Math.ceil(books.length / itemsPerPage),
 				books.length,
-				listBooks,
-			));
+				listBooks
+			);
 		}
 
 		if (requestParameters.id !== undefined) {

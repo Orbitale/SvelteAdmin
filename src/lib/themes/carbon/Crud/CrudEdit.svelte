@@ -10,18 +10,16 @@
 
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { RequestParameters } from '$lib/genericTypes';
+	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { StateProviderResult } from '$lib/State/Provider';
-	import type { DashboardDefinition } from '$lib';
-	import theme from '$lib/stores/theme';
-	import { goto } from '$app/navigation';
-
-	const CrudForm = $theme.form;
+	import type { RequestParameters } from '$lib/request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
+
+	const CrudForm = dashboard.adminConfig.theme.form;
 
 	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
 		operation,
@@ -38,9 +36,9 @@
 	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
 		const data = event.detail;
 
-		crud.options.stateProcessor.process(data, operation, requestParameters);
+		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		await goto(document.referrer || dashboard.getFirstActionUrl());
+		window.location.href = (document.referrer || dashboard.getFirstActionUrl());
 	}
 </script>
 

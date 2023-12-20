@@ -19,7 +19,8 @@
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud/definition';
-	import type { RequestParameters } from '$lib/genericTypes';
+
+	import type { RequestParameters } from '$lib/request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let crud: string | undefined = undefined;

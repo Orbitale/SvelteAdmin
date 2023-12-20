@@ -1,3 +1,9 @@
+# v0.7.0
+
+- **BC Break**: `StateProcessor.process()` now returns an empty `Promise`, even though it contains nothing. It is to be in sync with the `StateProvider` class, and to make sure one can `await` the `.process()` method to execute actions _after_ it finished.
+- Instead of using SvelteKit's `goto()` to redirect in New and Edit actions, changed its usage to `window.location.href = '...';`. It's only client-compatible, but these calls were only made in client context, so it should be fine. The main reason for this was to avoid having to depend on SvelteKit when building the package.
+- Add base setup for Filters. 🎉 Now need more filter types!
+
 # v0.6.6
 
 - Update dependencies internally, especially update to Vitest 1.0
