@@ -37,3 +37,9 @@ export { CallbackStateProvider } from './State/Provider';
 export { getRequestParams } from './request';
 
 export { initLocale } from './admin_i18n';
+
+import carbon from './themes/carbon';
+
+export const themes = {
+	carbon
+};

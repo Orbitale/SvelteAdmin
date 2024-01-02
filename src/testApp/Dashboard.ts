@@ -1,29 +1,26 @@
 import Book from 'carbon-icons-svelte/lib/Book.svelte';
 import Home from 'carbon-icons-svelte/lib/Home.svelte';
 
-import { DashboardDefinition } from '$lib/Dashboard/definition';
-import theme from '$lib/themes/carbon';
-import { CallbackAction, UrlAction } from '$lib/actions';
+import { DashboardDefinition, CallbackAction, UrlAction, Submenu, themes } from '$lib';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
-import { Submenu } from '$lib';
 
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
-		theme: theme,
 		defaultLocale: 'en',
 		autoCloseSideMenu: false,
 		rootUrl: '/admin',
 		head: {
 			brandName: 'Svelte Admin',
 			appName: 'Demo'
-		}
+		},
+		theme: themes.carbon
 	},
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book),
-		new CallbackAction('Callback link', null, (item?: object | undefined) => {
+		new CallbackAction('Callback link', null, () => {
 			alert('Hey, this link is called with Javascript!');
 		}),
 		new Submenu('Submenu', null, [

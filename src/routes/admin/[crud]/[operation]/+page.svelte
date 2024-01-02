@@ -12,5 +12,11 @@
 </script>
 
 {#key $page}
-	<svelte:component this={theme.dashboard} {dashboard} {crud} {operation} {requestParameters} />
+	<svelte:component
+		this={dashboard.adminConfig.theme.dashboard}
+		{dashboard}
+		{crud}
+		{operation}
+		{requestParameters}
+	/>
 {/key}
