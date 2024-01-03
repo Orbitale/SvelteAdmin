@@ -54,6 +54,7 @@
 		</InlineNotification>
 	{:else}
 		<CrudForm
+			theme={dashboard.adminConfig.theme}
 			{operation}
 			defaultData={data}
 			on:click

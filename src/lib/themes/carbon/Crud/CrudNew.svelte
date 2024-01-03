@@ -22,6 +22,7 @@
 </script>
 
 <CrudForm
+    theme={dashboard.adminConfig.theme}
 	{operation}
 	on:click
 	on:keydown
