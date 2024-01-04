@@ -36,7 +36,7 @@ const fields = [
 	new CheckboxField('checkbox_field', 'Checkbox field'),
 	new NumberField('number_field', 'Number field'),
 	new ToggleField('toggle_field', 'Toggle field'),
-	new UrlField('url_field', 'Url field'),
+	new UrlField('url_field', 'Url field', {openInNewTab: true}),
 	new UrlField('path_field', 'Path-URL field'),
 ];
 
