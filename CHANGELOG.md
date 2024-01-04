@@ -1,3 +1,11 @@
+# v0.8.0
+
+- **BC Break**: importing a theme is now done via the `themes` variable which is exported by default in the main package.
+- Fixed some building issues caused by the test setup
+- Add a new "test" crud to showcase more fields
+- Create or improve templates for Url, Number, Checkbox and Toggle fields
+- Added `openInNewTab` option to `UrlField`, for "view" type usage (aka "list" and "view" operations)
+
 # v0.7.0
 
 - **BC Break**: `StateProcessor.process()` now returns an empty `Promise`, even though it contains nothing. It is to be in sync with the `StateProvider` class, and to make sure one can `await` the `.process()` method to execute actions _after_ it finished.
