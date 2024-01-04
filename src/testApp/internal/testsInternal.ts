@@ -5,7 +5,7 @@ export type Test = {
 	[key: string]: unknown;
 };
 
-const baseTests: Array<Test> = Array(5)
+const baseTests: Array<Test> = Array(10)
 	.fill(undefined)
 	.map(() => {
 		return {

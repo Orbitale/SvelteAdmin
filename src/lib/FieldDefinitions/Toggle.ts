@@ -6,5 +6,5 @@ export type ToggleOptions = Options;
 
 export class ToggleField extends Field<ToggleOptions> {
 	readonly formComponent: FormFieldTheme = 'toggle';
-	readonly viewComponent: ViewFieldTheme = 'checkbox';
+	readonly viewComponent: ViewFieldTheme = 'toggle';
 }

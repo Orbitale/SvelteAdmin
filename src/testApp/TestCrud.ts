@@ -11,7 +11,6 @@ import {
 	TextField,
 	UrlAction,
 	View,
-	TextFilter,
 	PaginatedResults, CheckboxField, NumberField, ToggleField, UrlField, CallbackAction
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
@@ -66,10 +65,6 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 					enabled: true,
 					itemsPerPage: 10
 				},
-				filters: [
-					new TextFilter('title', 'Title contains'),
-					new TextFilter('description', 'Description contains')
-				]
 			}
 		),
 		new View([IdField, ...fields]),
@@ -117,29 +112,12 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
-		let tests = getMemoryTests();
+		const tests = getMemoryTests();
 
 		if (operation.name === 'list') {
 			const page = parseInt((requestParameters.page || '1').toString());
 			if (isNaN(page)) {
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
-			}
-
-			const filters = requestParameters.filters;
-			if (filters) {
-				tests = tests.filter((test: Test) => {
-					if (filters.title && !test.title.match(new RegExp(filters.title.toString(), 'gi'))) {
-						return false;
-					}
-					if (
-						filters.description &&
-						!test.description.match(new RegExp(filters.description.toString(), 'gi'))
-					) {
-						return false;
-					}
-
-					return true;
-				});
 			}
 
 			const listTests = tests.slice(itemsPerPage * (page - 1), itemsPerPage * page);

@@ -9,5 +9,5 @@ export type NumberOptions = CommonOptions & {
 
 export class NumberField extends Field<NumberOptions> {
 	readonly formComponent: FormFieldTheme = 'number';
-	readonly viewComponent: ViewFieldTheme = 'default';
+	readonly viewComponent: ViewFieldTheme = 'number';
 }

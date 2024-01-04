@@ -64,7 +64,7 @@
 			return theme.viewFields.default;
 		}
 
-		const formComponent = field.formComponent;
+		const formComponent = field.viewComponent;
 		return theme.viewFields[formComponent] ?? theme.viewFields.default;
 	}
 

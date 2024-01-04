@@ -31,6 +31,8 @@ import TopRightMenu from './Menu/TopRightMenu.svelte';
 import CheckboxViewField from './ViewFieldsComponents/CheckboxField.svelte';
 import DefaultViewField from './ViewFieldsComponents/DefaultField.svelte';
 import TabsViewField from './ViewFieldsComponents/TabsField.svelte';
+import NumberViewField from './ViewFieldsComponents/NumberField.svelte';
+import ToggleViewField from './ViewFieldsComponents/ToggleField.svelte';
 import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
@@ -60,11 +62,11 @@ const theme = {
 		column: ColumnsViewField,
 		default: DefaultViewField,
 		label: ViewLabel,
-		//number: NumberViewField,
+		number: NumberViewField,
 		tabs: TabsViewField,
 		//text: TextViewField,
 		//textarea: TextareaViewField,
-		//toggle: ToggleViewField,
+		toggle: ToggleViewField,
 		url: UrlViewField
 	},
 	formFields: {

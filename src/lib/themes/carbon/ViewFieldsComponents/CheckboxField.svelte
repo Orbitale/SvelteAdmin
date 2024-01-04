@@ -1,9 +1,7 @@
 <script lang="ts">
-	import RadioButtonChecked from 'carbon-icons-svelte/lib/RadioButtonChecked.svelte';
-	import RadioButton from 'carbon-icons-svelte/lib/RadioButton.svelte';
-	import type { CheckboxField } from '$lib';
+	import CheckboxChecked from 'carbon-icons-svelte/lib/CheckboxChecked.svelte';
+	import Checkbox from 'carbon-icons-svelte/lib/Checkbox.svelte';
 
-	export let field: CheckboxField;
 	export let value: boolean | undefined;
 
 	if (value === undefined) {
@@ -12,7 +10,7 @@
 </script>
 
 {#if value}
-	<RadioButtonChecked />
+	<CheckboxChecked size={24} style="color: #0a0;" />
 {:else}
-	<RadioButton />
+	<Checkbox size={24}  style="color: #a00;" />
 {/if}
