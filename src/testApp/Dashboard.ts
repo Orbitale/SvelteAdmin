@@ -5,6 +5,7 @@ import { DashboardDefinition, CallbackAction, UrlAction, Submenu, themes } from 
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
+import { testCrud } from './TestCrud';
 
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
@@ -31,5 +32,5 @@ export const dashboard = new DashboardDefinition({
 	localeDictionaries: {
 		fr: fr
 	},
-	cruds: [bookCrud]
+	cruds: [bookCrud, testCrud]
 });

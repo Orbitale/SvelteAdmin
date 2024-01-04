@@ -36,6 +36,7 @@ import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 
 import TextFilter from './FilterComponents/TextFilter.svelte';
+import NumericFilter from "./FilterComponents/NumericFilter.svelte";
 
 /**
  * @type import("../ThemeConfig").ThemeConfig
@@ -82,7 +83,7 @@ const theme = {
 		boolean: TextFilter,
 		text: TextFilter,
 		date: TextFilter,
-		numeric: TextFilter
+		numeric: NumericFilter
 	},
 	menu: {
 		sideMenu: SideMenu,

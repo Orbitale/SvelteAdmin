@@ -8,11 +8,12 @@
 
 	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
-	import type { Headers, Rows } from '$lib/DataTable/DataTable';
+	import type {Headers, Row, Rows} from '$lib/DataTable/DataTable';
 	import type { Action } from '$lib/actions';
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
-	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/form';
+	import { type SubmittedData } from '$lib/Crud/form';
+	import {getViewFieldComponent as baseGetViewFieldComponent} from "$lib/Theme";
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;
@@ -34,6 +35,37 @@
 			empty: true
 		});
 		actionsCellIndex = headers.length - 1;
+	}
+
+	function getFieldFromRow(fieldName: string, row: Row) {
+		if (!row.__operation) {
+			console.warn('Internal "__operation" field isn\'t properly injected');
+			return theme.viewFields.default;
+		}
+
+		const matchingFields = row.__operation.fields.filter((f) => f.name === fieldName);
+
+		if (!matchingFields.length) {
+			console.warn(`Field "${fieldName}" was not found in current operation.`);
+			return theme.viewFields.default;
+		}
+
+		if (matchingFields.length > 1) {
+			console.warn(`Field "${fieldName}" was found more than once in current operation, using the first one as reference.`);
+		}
+
+		return matchingFields[0];
+	}
+
+	function getViewFieldComponent(fieldName: string, row: Row) {
+		const field = getFieldFromRow(fieldName, row);
+
+		if (!field) {
+			return theme.viewFields.default;
+		}
+
+		const formComponent = field.formComponent;
+		return theme.viewFields[formComponent] ?? theme.viewFields.default;
 	}
 
 	const dispatchEvent = createEventDispatcher<SubmittedData>();
@@ -76,7 +108,13 @@
 			{#if cellIndex === actionsCellIndex}
 				<ItemActions {actions} item={row} />
 			{:else}
-				{cell.display ? cell.display(cell.value) : cell.value}
+				<svelte:component
+					this={getViewFieldComponent(cell.key, row)}
+					field={getFieldFromRow(cell.key, row)}
+					value={cell.display ? cell.display(cell.value) : cell.value}
+				>
+					{cell.display ? cell.display(cell.value) : cell.value}
+				</svelte:component>
 			{/if}
 		</div>
 	</DataTable>

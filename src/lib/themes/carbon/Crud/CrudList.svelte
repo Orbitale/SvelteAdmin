@@ -33,7 +33,7 @@
 
 	let showPagination = operation.options.pagination.enabled;
 	let rows: Promise<unknown>;
-	let resolvedResults: PaginatedResults<unknown> | Array<unknown>;
+	let paginator: PaginatedResults<unknown> | undefined;
 	let globalActions: Array<Action> = [];
 
 	if (!crud.options.stateProvider) {
@@ -71,27 +71,31 @@
 					'CrudList expected state provider to return an array, current result is non-empty and not an array.'
 				);
 			}
-			let results =
+
+			let finalRows =
 				responseResults instanceof PaginatedResults
 					? responseResults.currentItems
 					: responseResults;
-			if (!results || !results?.length) {
-				results = [createEmptyRow(operation)];
+
+			paginator = responseResults instanceof PaginatedResults ? responseResults : undefined;
+
+			if (!finalRows || !finalRows?.length) {
+				finalRows = [createEmptyRow(operation)];
 			}
 
 			// Make sure final results always have the "id" field,
 			// which is mandatory for Carbon's DataTable.
-			results = results.map((result: objet) => {
+			finalRows = finalRows.map((result: object) => {
 				if (!result.id && crud.options.identifierFieldName !== 'id') {
 					result.id = result[crud.options.identifierFieldName];
 				}
 
+				result.__operation = operation;
+
 				return result;
 			});
 
-			resolvedResults = responseResults;
-
-			return results;
+			return finalRows;
 		});
 	}
 
@@ -133,11 +137,11 @@
 		{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
 	</h2>
 </svelte:component>
-{#if showPagination && resolvedResults instanceof PaginatedResults}
+{#if showPagination && paginator}
 	<Pagination
 		pageSize={operation.options.pagination?.itemsPerPage}
-		page={resolvedResults?.currentPage}
-		totalItems={resolvedResults?.numberOfItems}
+		page={paginator.currentPage}
+		totalItems={paginator.numberOfItems}
 		pageSizeInputDisabled={true}
 		on:update={onPaginationUpdate}
 	/>
