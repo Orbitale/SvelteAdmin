@@ -38,7 +38,7 @@
 
 		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		window.location.href = (document.referrer || dashboard.getFirstActionUrl());
+		window.location.href = document.referrer || dashboard.getFirstActionUrl();
 	}
 </script>
 

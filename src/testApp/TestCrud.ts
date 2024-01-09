@@ -11,7 +11,13 @@ import {
 	TextField,
 	UrlAction,
 	View,
-	PaginatedResults, CheckboxField, NumberField, ToggleField, UrlField, CallbackAction, Columns
+	PaginatedResults,
+	CheckboxField,
+	NumberField,
+	ToggleField,
+	UrlField,
+	CallbackAction,
+	Columns
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -26,34 +32,30 @@ const itemsPerPage = 10;
 
 const fields = [
 	new TextField('text_field', 'Text field', {
-		placeholder: "This is a placeholder",
-		help: "This is a help message!"
+		placeholder: 'This is a placeholder',
+		help: 'This is a help message!'
 	}),
 	new TextareaField('textarea_field', 'Textarea description', {
-		placeholder: "This is also a placeholder",
-		help: "This is a help message!"
+		placeholder: 'This is also a placeholder',
+		help: 'This is a help message!'
 	}),
 	new CheckboxField('checkbox_field', 'Checkbox field'),
 	new NumberField('number_field', 'Number field'),
 	new ToggleField('toggle_field', 'Toggle field'),
-	new UrlField('url_field', 'Url field', {openInNewTab: true}),
+	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
 	new Columns([
 		{
 			name: 'column_1',
 			label: 'Column 1',
-			fields: [
-				new TextField('column1_text_field', 'Text field in column 1')
-			]
+			fields: [new TextField('column1_text_field', 'Text field in column 1')]
 		},
 		{
 			name: 'column_2',
 			label: 'Column 2',
-			fields: [
-				new TextField('column2_text_field', 'Text field in column 2')
-			]
-		},
-	]),
+			fields: [new TextField('column2_text_field', 'Text field in column 2')]
+		}
+	])
 ];
 
 const IdField = new TextField('id', 'ID');
@@ -75,12 +77,12 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 					new CallbackAction('Reset memory data', TrashCan, () => {
 						window.localStorage.removeItem('tests');
 						window.location.reload();
-					}),
+					})
 				],
 				pagination: {
 					enabled: true,
 					itemsPerPage: 10
-				},
+				}
 			}
 		),
 		new View([IdField, ...fields]),
@@ -113,7 +115,9 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 			if (operation.name === 'new') {
 				updatedTests.push(test);
 			} else {
-				updatedTests = updatedTests.map((b: Test) => (b.id.toString() === id.toString() ? test : b));
+				updatedTests = updatedTests.map((b: Test) =>
+					b.id.toString() === id.toString() ? test : b
+				);
 			}
 
 			window.localStorage.setItem('tests', JSON.stringify(updatedTests));

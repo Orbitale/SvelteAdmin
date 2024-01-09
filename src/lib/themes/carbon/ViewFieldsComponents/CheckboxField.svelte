@@ -12,5 +12,5 @@
 {#if value}
 	<CheckboxChecked size={24} style="color: #0a0;" />
 {:else}
-	<Checkbox size={24}  style="color: #a00;" />
+	<Checkbox size={24} style="color: #a00;" />
 {/if}

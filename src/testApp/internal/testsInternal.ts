@@ -12,9 +12,9 @@ const baseTests: Array<Test> = Array(10)
 			id: faker.string.uuid(),
 			text_field: faker.music.songName(),
 			textarea_field: faker.lorem.lines(2),
-			checkbox_field: faker.number.int({min: 0, max: 1}) === 1,
+			checkbox_field: faker.number.int({ min: 0, max: 1 }) === 1,
 			number_field: faker.number.float(),
-			toggle_field: faker.number.int({min: 0, max: 1}) === 1,
+			toggle_field: faker.number.int({ min: 0, max: 1 }) === 1,
 			url_field: faker.internet.url(),
 			path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/')
 		};

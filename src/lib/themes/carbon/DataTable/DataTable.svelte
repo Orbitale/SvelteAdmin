@@ -8,7 +8,7 @@
 
 	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
-	import type {Headers, Row, Rows} from '$lib/DataTable/DataTable';
+	import type { Headers, Row, Rows } from '$lib/DataTable/DataTable';
 	import type { Action } from '$lib/actions';
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
@@ -50,7 +50,9 @@
 		}
 
 		if (matchingFields.length > 1) {
-			console.warn(`Field "${fieldName}" was found more than once in current operation, using the first one as reference.`);
+			console.warn(
+				`Field "${fieldName}" was found more than once in current operation, using the first one as reference.`
+			);
 		}
 
 		return matchingFields[0];

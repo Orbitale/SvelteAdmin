@@ -38,7 +38,7 @@ import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 
 import TextFilter from './FilterComponents/TextFilter.svelte';
-import NumericFilter from "./FilterComponents/NumericFilter.svelte";
+import NumericFilter from './FilterComponents/NumericFilter.svelte';
 
 /**
  * @type import("../ThemeConfig").ThemeConfig

@@ -14,8 +14,8 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
-	import type {ThemeConfig} from "$lib/themes/ThemeConfig";
-	import {themes} from "$lib";
+	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
+	import { themes } from '$lib';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';

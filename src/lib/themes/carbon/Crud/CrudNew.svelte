@@ -17,12 +17,12 @@
 
 		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		window.location.href = (document.referrer || dashboard.getFirstActionUrl());
+		window.location.href = document.referrer || dashboard.getFirstActionUrl();
 	}
 </script>
 
 <CrudForm
-    theme={dashboard.adminConfig.theme}
+	theme={dashboard.adminConfig.theme}
 	{operation}
 	on:click
 	on:keydown

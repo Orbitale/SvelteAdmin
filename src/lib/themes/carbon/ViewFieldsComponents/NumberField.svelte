@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Tag from "carbon-components-svelte/src/Tag/Tag.svelte";
+	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 	export let value: string | undefined;
 
 	if (value === undefined) {
@@ -8,5 +8,5 @@
 </script>
 
 <Tag>
-    {value}
+	{value}
 </Tag>
