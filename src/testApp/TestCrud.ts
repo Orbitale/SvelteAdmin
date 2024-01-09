@@ -11,7 +11,7 @@ import {
 	TextField,
 	UrlAction,
 	View,
-	PaginatedResults, CheckboxField, NumberField, ToggleField, UrlField, CallbackAction
+	PaginatedResults, CheckboxField, NumberField, ToggleField, UrlField, CallbackAction, Columns
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -38,6 +38,22 @@ const fields = [
 	new ToggleField('toggle_field', 'Toggle field'),
 	new UrlField('url_field', 'Url field', {openInNewTab: true}),
 	new UrlField('path_field', 'Path-URL field'),
+	new Columns([
+		{
+			name: 'column_1',
+			label: 'Column 1',
+			fields: [
+				new TextField('column1_text_field', 'Text field in column 1')
+			]
+		},
+		{
+			name: 'column_2',
+			label: 'Column 2',
+			fields: [
+				new TextField('column2_text_field', 'Text field in column 2')
+			]
+		},
+	]),
 ];
 
 const IdField = new TextField('id', 'ID');

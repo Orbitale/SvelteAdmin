@@ -13,7 +13,6 @@
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 	import { type SubmittedData } from '$lib/Crud/form';
-	import {getViewFieldComponent as baseGetViewFieldComponent} from "$lib/Theme";
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;
@@ -64,8 +63,7 @@
 			return theme.viewFields.default;
 		}
 
-		const formComponent = field.viewComponent;
-		return theme.viewFields[formComponent] ?? theme.viewFields.default;
+		return theme.viewFields[field.viewComponent] ?? theme.viewFields.default;
 	}
 
 	const dispatchEvent = createEventDispatcher<SubmittedData>();
@@ -112,6 +110,8 @@
 					this={getViewFieldComponent(cell.key, row)}
 					field={getFieldFromRow(cell.key, row)}
 					value={cell.display ? cell.display(cell.value) : cell.value}
+					operation={$$restProps.operation}
+					{theme}
 				>
 					{cell.display ? cell.display(cell.value) : cell.value}
 				</svelte:component>

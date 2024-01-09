@@ -129,6 +129,7 @@
 	{actions}
 	{globalActions}
 	{page}
+	{operation}
 	filters={configuredFilters}
 	theme={dashboard.adminConfig.theme}
 	on:submitFilters={onFiltersSubmit}

@@ -26,7 +26,11 @@
 				max={{ span: column.size, offset: column.offset }}
 			>
 				{#if column.label || column.name}
-					<h2>{$_(column.label || column.name)}</h2>
+					{#if operation.name === 'view'}
+						<h2>{$_(column.label || column.name)}</h2>
+					{:else}
+						<span>{$_(column.label || column.name)}</span>
+					{/if}
 				{/if}
 				{#each column.fields as columnedField}
 					<FieldComponent
@@ -41,3 +45,9 @@
 		{/each}
 	</Row>
 </Grid>
+
+<style>
+	span {
+		display: block;
+	}
+</style>
