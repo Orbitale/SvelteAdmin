@@ -10,7 +10,8 @@
 <TextInput
 	name={field.name}
 	labelText={field.label}
-	placeholder={field.options?.placeholder || ''}
+	placeholder={field.options?.placeholder ?? ''}
+	required={field.options.required ?? true}
 	{value}
 	on:change
 	on:input

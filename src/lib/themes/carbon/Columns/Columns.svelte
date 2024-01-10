@@ -10,9 +10,10 @@
 
 	export let FieldComponent: ComponentType;
 
-	export let operation: CrudOperation;
 	export let field: ColumnField;
-	export let data: Record<string, unknown> | undefined = {};
+	export let operation: CrudOperation;
+	export let entityObject: Record<string, unknown> = {};
+	export let value: unknown;
 </script>
 
 <Grid fullWidth>
@@ -33,11 +34,12 @@
 					{/if}
 				{/if}
 				{#each column.fields as columnedField}
-					<FieldComponent
+					<svelte:component
+						this={FieldComponent}
 						{operation}
-						{data}
+						{entityObject}
 						field={columnedField}
-						value={data[columnedField.name]}
+						value={entityObject[columnedField.name]}
 						on:fieldChange
 					/>
 				{/each}

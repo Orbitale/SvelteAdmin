@@ -21,33 +21,40 @@
 
 	let fields: FieldInterface<Options>[] = operation.fields;
 
-	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+	let providerResultPromise: StateProviderResult<unknown> = crud.options.stateProvider.provide(
 		operation,
 		requestParameters
 	);
 
 	onMount(async () => {
-		const data = await defaultData;
+		const data = await providerResultPromise;
 		if (!data) {
-			defaultData = crud.options.stateProvider.provide(operation, requestParameters);
+			providerResultPromise = crud.options.stateProvider.provide(operation, requestParameters);
 		}
 	});
 </script>
 
 <h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
 
-{#await defaultData}
+{#await providerResultPromise}
 	<SkeletonText />
 	<SkeletonText heading={true} />
 	<SkeletonText paragraph={true} lines={3} />
-{:then data}
-	{#if !data}
+{:then entityObject}
+	{#if !entityObject}
 		<InlineNotification kind="error">
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
 		{#each fields as field}
-			<CrudViewField {operation} {field} {data} value={data[field.name]} />
+			<svelte:component
+				this={CrudViewField}
+				theme={dashboard.adminConfig.theme}
+				value={entityObject[field.name]}
+				{operation}
+				{field}
+				{entityObject}
+			/>
 		{/each}
 	{/if}
 {/await}

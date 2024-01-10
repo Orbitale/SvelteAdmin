@@ -3,7 +3,8 @@ import type { Options } from '$lib/FieldDefinitions/Options';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type TabOptions = Options & {
-	headerType: 'default' | 'container';
+	name: string;
+	label?: string;
 };
 
 export type TabbedFields<T = FieldInterface<Options>> = Array<{
@@ -15,10 +16,10 @@ export type TabbedFields<T = FieldInterface<Options>> = Array<{
 export class Tabs implements FieldInterface<TabOptions> {
 	public readonly formComponent: FormFieldTheme = 'tabs';
 	public readonly viewComponent: ViewFieldTheme = 'tabs';
-	public readonly name: string = '';
-	public readonly label: string = '';
 
 	constructor(
+		public readonly name: string,
+		public readonly label: string = '',
 		public readonly fields: TabbedFields = [],
 		public readonly options: TabOptions = {} as TabOptions
 	) {}

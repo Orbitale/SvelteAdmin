@@ -1,32 +1,40 @@
 <script lang="ts">
+	import type { ComponentType } from 'svelte';
 	import Tabs from 'carbon-components-svelte/src/Tabs/Tabs.svelte';
 	import Tab from 'carbon-components-svelte/src/Tabs/Tab.svelte';
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
+	import { _ } from 'svelte-i18n';
 
-	import type { Tabs as TabsField } from '$lib/FieldDefinitions/Tabs';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ComponentType } from 'svelte';
+	import type { Tabs as TabsField } from '$lib/FieldDefinitions/Tabs';
+	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let FieldComponent: ComponentType;
-
 	export let field: TabsField;
 	export let operation: CrudOperation;
-	export let data: Record<string, unknown> = {};
+	export let entityObject: Record<string, unknown> = {};
+	export let value: unknown;
+	export let theme: ThemeConfig;
 </script>
 
 <Tabs>
-	{#each field.fields as tab}
-		<Tab label={tab.label || tab.name} />
+	{#each field.fields as tab, i}
+		<Tab
+			label={$_(tab.label || tab.name)}
+			tabindex={i.toString()}
+		/>
 	{/each}
 	<svelte:fragment slot="content">
 		{#each field.fields as tab}
 			<TabContent>
 				{#each tab.fields as tabbedField}
-					<FieldComponent
+					<svelte:component
+						this={FieldComponent}
 						{operation}
-						{data}
+						{entityObject}
+						{value}
+						{theme}
 						field={tabbedField}
-						value={data[tabbedField.name]}
 						on:fieldChange
 					/>
 				{/each}

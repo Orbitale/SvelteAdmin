@@ -17,7 +17,7 @@
 	$: is_checked = value;
 
 	function onChange() {
-		dispatchEvent('change', is_checked);
+		dispatchEvent('change', !!is_checked);
 	}
 </script>
 

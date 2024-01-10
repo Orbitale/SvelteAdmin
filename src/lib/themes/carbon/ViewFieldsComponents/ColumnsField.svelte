@@ -6,7 +6,9 @@
 
 	export let field: ColumnsField;
 	export let operation: CrudOperation;
+	export let entityObject: Record<string, unknown> = {};
+	export let value: unknown;
 	export let theme: ThemeConfig;
 </script>
 
-<Columns FieldComponent={theme.viewField} {field} {operation} />
+<Columns FieldComponent={theme.viewField} {field} {operation} {entityObject} {value} />

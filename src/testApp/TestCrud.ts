@@ -17,7 +17,8 @@ import {
 	ToggleField,
 	UrlField,
 	CallbackAction,
-	Columns
+	Columns,
+	Tabs
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -44,7 +45,7 @@ const fields = [
 	new ToggleField('toggle_field', 'Toggle field'),
 	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
-	new Columns([
+	new Columns('columns_field', 'Columns field', [
 		{
 			name: 'column_1',
 			label: 'Column 1',
@@ -54,6 +55,18 @@ const fields = [
 			name: 'column_2',
 			label: 'Column 2',
 			fields: [new TextField('column2_text_field', 'Text field in column 2')]
+		}
+	]),
+	new Tabs('tabs_fields', 'Tabs field', [
+		{
+			name: 'tab_1',
+			label: 'Tab 1',
+			fields: [new TextField('tab1_text_field', 'Text field in tab 1')]
+		},
+		{
+			name: 'tab_2',
+			label: 'Tab 2',
+			fields: [new TextField('tab2_text_field', 'Text field in tab 2')]
 		}
 	])
 ];

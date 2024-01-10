@@ -4,7 +4,7 @@
 
 	// Maximum length of an URL in Chrome (and IE…) is 2083, Firefox is 65536 and Safari is 80000.
 	// The lowest value is the safest one to use for cross-browser compatibility.
-	const maxCount = 2083;
+	const maxLength = 2083;
 
 	export let field: UrlField;
 	export let value: URL | string | null | undefined;
@@ -19,7 +19,7 @@
 	labelText={field.label}
 	helperText={field.options.help}
 	placeholder={field.options?.placeholder || ''}
-	{maxCount}
+	maxCount={maxLength}
 	{value}
 	on:change
 	on:input

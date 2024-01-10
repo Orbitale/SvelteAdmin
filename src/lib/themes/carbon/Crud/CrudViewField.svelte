@@ -12,21 +12,21 @@
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<Options>;
-	export let data: Record<string, unknown> = {};
+	export let entityObject: Record<string, unknown> = {};
 	export let value: unknown;
 
 	const ViewLabel = $theme.viewFields.label;
 	const viewComponent = getViewFieldComponent(field.viewComponent) || DefaultField;
 
-	if (value === undefined && data) {
-		value = data[field.name];
+	if (value === undefined && entityObject) {
+		value = entityObject[field.name];
 	}
 
 	const fullSize = !(field.label || field.name);
 </script>
 
 {#if fullSize}
-	<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
+	<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
 {:else}
 	<Grid>
 		<Row padding noGutterLeft noGutterRight narrow condensed>
@@ -34,7 +34,7 @@
 				<ViewLabel {field} />
 			</Column>
 			<Column sm={2} md={5} lg={12}>
-				<svelte:component this={viewComponent} {field} {operation} {value} {data} on:click />
+				<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
 			</Column>
 		</Row>
 	</Grid>

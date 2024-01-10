@@ -3,7 +3,7 @@
 	import type { NumberField } from '$lib/FieldDefinitions/Number';
 
 	export let field: NumberField;
-	export let value: string | number | undefined;
+	export let value: unknown;
 
 	if (typeof value === 'string') {
 		value = parseInt(value);

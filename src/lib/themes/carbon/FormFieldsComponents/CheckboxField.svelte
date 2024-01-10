@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let field: CheckboxField;
-	export let value: boolean | undefined;
+	export let value: unknown;
 
 	if (value === undefined) {
 		value = false;
@@ -24,6 +24,7 @@
 <Checkbox
 	name={field.name}
 	labelText={field.label}
+	required={field.options.required ?? true}
 	on:check
 	on:click
 	on:mouseover
@@ -37,7 +38,7 @@
 	<!-- TODO use HelperText component whenever it's released in Carbon's repository -->
 	<div
 		class:bx--form__helper-text={true}
-		class:bx--form__helper-text--disabled={field.options.disabled}
+		class:bx--form__helper-text--disabled={field.options.disabled ?? false}
 	>
 		{field.options.help}
 	</div>
