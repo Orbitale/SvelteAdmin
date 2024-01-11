@@ -1,3 +1,9 @@
+# v0.8.1
+
+- Fix columns and tabs rendering in List (not super UX-friendly at first, but use cases could definitely be found for that)
+- Standardize more fields to properly use dashboard's configured theme
+- Update theme injection in view & form fields
+
 # v0.8.0
 
 - **BC Break**: importing a theme is now done via the `themes` variable which is exported by default in the main package.

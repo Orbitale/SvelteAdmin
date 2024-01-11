@@ -7,7 +7,7 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import DefaultField from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
-	import type {ThemeConfig} from "$lib/themes/ThemeConfig";
+	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<Options>;
@@ -17,8 +17,8 @@
 
 	console.info({
 		props: $$props,
-		restProps: $$restProps,
-	})
+		restProps: $$restProps
+	});
 
 	const viewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
 

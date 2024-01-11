@@ -7,7 +7,7 @@
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { Columns as ColumnField } from '$lib/FieldDefinitions/Columns';
-	import type {ThemeConfig} from "$lib/themes/ThemeConfig";
+	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let FieldComponent: ComponentType;
 

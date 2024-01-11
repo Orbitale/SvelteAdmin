@@ -2,7 +2,11 @@
 
 This package is an **admin generator** for your JS/TS/Svelte projects. It can consume a distant API, a localStorage, or even an RPC-based data storage (like when using [Tauri](https://tauri.app/)).
 
-It is not yet complete, and there is a [roadmap](#roadmap) at the end of this documentation to know what features are in the development process.
+| List                                                       | View                                                       | Edit                                                       |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| ![SvelteAdmin Backoffice List](./docs/backoffice_list.png) | ![SvelteAdmin Backoffice View](./docs/backoffice_view.png) | ![SvelteAdmin Backoffice Edit](./docs/backoffice_edit.png) |
+
+There is a [roadmap](#roadmap) at the end of this documentation to know what features are soon coming!
 
 ## Installation
 
@@ -60,6 +64,7 @@ export const dashboard = new DashboardDefinition({
 	// Some metadata related to your admin panel
 	admin: {
 		defaultLocale: 'en',
+		rootUrl: '/admin',
 		head: {
 			brandName: '{ Your company/brand name }',
 			appName: '{ Your app name }'
@@ -173,18 +178,11 @@ If you have a common SvelteKit project, you can directly create a new route page
 
 Since we will mostly use the URL to determine what Crud and operations we are looking at, let's use SvelteKit's router to make our URLs shine with as less code as possible!
 
-Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following code:
+Create a `src/routes/admin/[crud]/[operation]/+page.svelte` file with the following code:
 
 ```html
 <script lang="ts">
-	// src/routes/[crud]/[operation]/+page.svelte
-
-	// The Dashboard component that will render everything!
-	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
-
-	// This function helps retrieving the [crud] and [operation] variables from the URL,
-	// as well as the potential query string params like "?id=..."
-	import { getRequestParams } from '@orbitale/svelte-admin';
+	// src/routes/admin/[crud]/[operation]/+page.svelte
 
 	// This is a custom Svelte store created by SvelteKit,
 	//   it points to an instance of a Page object,
@@ -198,6 +196,10 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 	//   a boolean that is set to "false" during server-side rendering, and to
 	//   "true" when the Svelte component is mounted to the DOM.
 	import { browser } from '$app/environment';
+
+	// This function helps retrieving the [crud] and [operation] variables from the URL,
+	// as well as the potential query string params like "?id=..."
+	import { getRequestParams } from '@orbitale/svelte-admin';
 
 	// That's your custom dashboard!
 	// The "$lib" alias is configured by SvelteKit,
@@ -216,11 +218,17 @@ Create a `src/routes/[crud]/[operation]/+page.svelte` file with the following co
 
 <!--
 The "key" block makes sure its content is re-rendered whenever its arguments change.
-Then, if the "$page" changes, the <Dashboard> component is re-rendered,
+Then, if the "$page" changes, the <svelte:component> component is re-rendered,
 which is exactly what we expect when the current web page actually changes!
 -->
 {#key $page}
-<Dashboard {dashboard} {crud} {operation} {requestParameters} />
+<svelte:component
+	this="{dashboard.adminConfig.theme.dashboard}"
+	{dashboard}
+	{crud}
+	{operation}
+	{requestParameters}
+/>
 {/key}
 ```
 
@@ -228,14 +236,14 @@ That's it!
 
 Now, your admin is prepared.
 
-Here is the shorter version with no comments, if you want to copy-paste for a quick setup:
+Here is the \*_shorter version_ with no comments, if you want to copy-paste for a quick setup:
 
 ```html
 <script lang="ts">
-	import { Dashboard } from '@orbitale/svelte-admin/themes/carbon';
-	import { getRequestParams } from '@orbitale/svelte-admin';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
+	import { getRequestParams } from '@orbitale/svelte-admin';
+
 	import { dashboard } from '$lib/Dashboard';
 
 	$: crud = $page.params.crud;
@@ -244,7 +252,13 @@ Here is the shorter version with no comments, if you want to copy-paste for a qu
 </script>
 
 {#key $page}
-<Dashboard {dashboard} {crud} {operation} {requestParameters} />
+<svelte:component
+	this="{dashboard.adminConfig.theme.dashboard}"
+	{dashboard}
+	{crud}
+	{operation}
+	{requestParameters}
+/>
 {/key}
 ```
 
@@ -263,11 +277,11 @@ export interface StateProvider<T> {
 - The `operation` object is the same as one of the Crud operations, the ones you configure in your `CrudDefinition` objects.<br>It allows you to return different data in the `List` and ̀`Edit` operations, with an `if` statement to discriminate both.
 - The `requestParameters` is a key=>value object, matching this typescript type: `{[key: string]: string}`.<br>As you have seen above in the default Svelte template we wrote, these come from both the QueryString and the Route Params.<br>It will therefore contain the `[crud]` and `[operation]` parameters extracted from the URL, but also the entity ID if you add it via `?id=...` for example.
 
-The return type `StateProviderResult<T>` resolves to `Promise<T | Array<T> | null>`, so you could return almost anything that represents an entity, or a list of entities.<br>
+The return type `StateProviderResult<T>` resolves to `Promise<T | PaginatedResults<T> | Array<T> | null>`, so you could return almost anything that represents an entity, or a list of entities.<br>
 It **must** though be a `Promise` object.<br>
 If your code is synchronous, you can use the `Promise.resolve(your_value)` method in order to return a _"semi-synchronous"_ promise.
 
-The only implemented provider so far is the `CallbackStateProvider`, and you define an external callback function that returns whatever you want.
+The only implemented provider so far is the `CallbackStateProvider`, with which you define an external callback function that returns whatever you want.
 
 #### Storing your data with State processors
 
@@ -289,7 +303,7 @@ The `StateProcessorInput<T>` type resolves to `T | Array<T> | null`, similarly t
 
 Very useful to send HTTP requests to your API to save data!
 
-The only implemented provider so far is the `CallbackStateProcessor`, and you define an external callback function that does whatever you want.
+The only implemented provider so far is the `CallbackStateProcessor`, it allows you to define an external callback function that does whatever you want.
 
 #### Translations
 
@@ -313,7 +327,7 @@ export const dashboard = new DashboardDefinition({
 });
 ```
 
-This dictionary will **append or override** existing translations. If the translation key exists in SvelteAdmin, your custom translations will override it.
+This dictionary will **append non-existing, and override existing** translations. If the translation key exists in SvelteAdmin, your custom translations will override it.
 
 To avoid having a big dashboard definition file, you can put your translations in an external file.
 

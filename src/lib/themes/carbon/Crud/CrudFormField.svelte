@@ -4,11 +4,13 @@
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import { getFormFieldComponent } from '$lib/Theme';
+	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<Options>;
 	export let data: Record<string, unknown> = {};
 	export let value: unknown;
+	export let theme: ThemeConfig;
 
 	if (value === undefined && data) {
 		value = data[field.name];
@@ -37,6 +39,7 @@
 	{operation}
 	{value}
 	{data}
+	{theme}
 	on:change={onFieldChange}
 	on:blur
 	on:check

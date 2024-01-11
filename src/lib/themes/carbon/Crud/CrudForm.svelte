@@ -58,10 +58,10 @@
 
 	{#each fields as field}
 		{#if field instanceof Tabs || field instanceof Columns}
-			<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
+			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
 		{:else}
 			<FormGroup>
-				<CrudFormField {operation} {field} {data} value={data[field.name]} on:fieldChange />
+				<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
 			</FormGroup>
 		{/if}
 	{/each}

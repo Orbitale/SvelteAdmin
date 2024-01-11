@@ -11,4 +11,4 @@
 	export let theme: ThemeConfig;
 </script>
 
-<Columns FieldComponent={theme.viewField} {theme} {field} {operation} {entityObject} {value} />
+<Columns FieldComponent={theme.viewField} {field} {operation} {entityObject} {theme} {value} />

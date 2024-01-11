@@ -78,15 +78,7 @@
 {#if !resolvedRows || !resolvedRows.length}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
 {:else}
-	<DataTable
-		{headers}
-		{page}
-		zebra
-		expandable
-		rows={resolvedRows}
-		size="short"
-		{...$$restProps}
-	>
+	<DataTable {headers} {page} zebra expandable rows={resolvedRows} size="short" {...$$restProps}>
 		<svelte:fragment slot="title">
 			<slot name="title" />
 		</svelte:fragment>

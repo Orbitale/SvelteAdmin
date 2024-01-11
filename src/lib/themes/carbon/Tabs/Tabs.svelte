@@ -19,10 +19,7 @@
 
 <Tabs>
 	{#each field.fields as tab, i}
-		<Tab
-			label={$_(tab.label || tab.name)}
-			tabindex={i.toString()}
-		/>
+		<Tab label={$_(tab.label || tab.name)} tabindex={i.toString()} />
 	{/each}
 	<svelte:fragment slot="content">
 		{#each field.fields as tab}
