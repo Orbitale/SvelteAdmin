@@ -18,7 +18,12 @@ import {
 	UrlField,
 	CallbackAction,
 	Columns,
-	Tabs
+	Tabs,
+	NumericFilter,
+	TextFilter,
+	BooleanFilter,
+	DateFilter,
+	ExistsFilter
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -91,6 +96,13 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 						window.localStorage.removeItem('tests');
 						window.location.reload();
 					})
+				],
+				filters: [
+					new TextFilter('text_field', 'Filter text'),
+					new BooleanFilter('checkbox_field', 'Filter checkbox'),
+					// new DateFilter('date_field', 'Filter date'),
+					new ExistsFilter('toggle_field', 'Filter toggle'),
+					new NumericFilter('number_field', 'Filter number')
 				],
 				pagination: {
 					enabled: true,

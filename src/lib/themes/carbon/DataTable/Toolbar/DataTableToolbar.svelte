@@ -9,7 +9,6 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import FilterIcon from 'carbon-icons-svelte/lib/Filter.svelte';
 	import FilterReset from 'carbon-icons-svelte/lib/FilterReset.svelte';
-	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 	import type { Action } from '$lib/actions';
 	import ActionComponent from '$lib/themes/carbon/DataTable/Toolbar/ToolbarAction.svelte';
@@ -36,8 +35,8 @@
 				'No target when submitted filters. Did you forget to attach the event to a Form?'
 			);
 		}
-		console.info('filtersValues', filtersValues);
 		const data = getSubmittedFormData(event);
+		console.info('filtersValues', data);
 		dispatchEvent('submitFilters', data);
 	}
 

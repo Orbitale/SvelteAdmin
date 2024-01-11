@@ -15,11 +15,6 @@
 	export let value: unknown;
 	export let theme: ThemeConfig;
 
-	console.info({
-		props: $$props,
-		restProps: $$restProps
-	});
-
 	const viewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
 
 	if (value === undefined && entityObject) {

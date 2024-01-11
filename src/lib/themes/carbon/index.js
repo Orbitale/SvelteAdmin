@@ -38,6 +38,7 @@ import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 
 import TextFilter from './FilterComponents/TextFilter.svelte';
+import BooleanFilter from './FilterComponents/BooleanFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 
 /**
@@ -82,7 +83,7 @@ const theme = {
 		url: UrlFormField
 	},
 	filters: {
-		boolean: TextFilter,
+		boolean: BooleanFilter,
 		text: TextFilter,
 		date: TextFilter,
 		numeric: NumericFilter
