@@ -47,13 +47,12 @@
 		</InlineNotification>
 	{:else}
 		{#each fields as field}
-			<svelte:component
-				this={CrudViewField}
-				theme={dashboard.adminConfig.theme}
-				value={entityObject[field.name]}
+			<CrudViewField
 				{operation}
 				{field}
 				{entityObject}
+				theme={dashboard.adminConfig.theme}
+				value={entityObject[field.name]}
 			/>
 		{/each}
 	{/if}

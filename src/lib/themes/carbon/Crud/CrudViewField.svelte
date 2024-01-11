@@ -6,17 +6,21 @@
 	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
 	import type { Options } from '$lib/FieldDefinitions/Options';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import { getViewFieldComponent } from '$lib/Theme';
 	import DefaultField from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
-	import theme from '$lib/stores/theme';
+	import type {ThemeConfig} from "$lib/themes/ThemeConfig";
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<Options>;
 	export let entityObject: Record<string, unknown> = {};
 	export let value: unknown;
+	export let theme: ThemeConfig;
 
-	const ViewLabel = $theme.viewFields.label;
-	const viewComponent = getViewFieldComponent(field.viewComponent) || DefaultField;
+	console.info({
+		props: $$props,
+		restProps: $$restProps,
+	})
+
+	const viewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
 
 	if (value === undefined && entityObject) {
 		value = entityObject[field.name];
@@ -31,7 +35,7 @@
 	<Grid>
 		<Row padding noGutterLeft noGutterRight narrow condensed>
 			<Column sm={2} md={3} lg={4}>
-				<ViewLabel {field} />
+				<svelte:component this={theme?.viewFields?.label} {field} />
 			</Column>
 			<Column sm={2} md={5} lg={12}>
 				<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />

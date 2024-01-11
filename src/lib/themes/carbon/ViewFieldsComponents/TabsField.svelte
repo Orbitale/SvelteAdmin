@@ -11,7 +11,4 @@
 	export let theme: ThemeConfig;
 </script>
 
-<pre>Theme:
-	{JSON.stringify(theme, undefined, 4)}</pre>
-
 <Tabs FieldComponent={theme.viewField} {field} {operation} {entityObject} {value} {theme} />

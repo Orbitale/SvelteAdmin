@@ -7,6 +7,7 @@
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { Columns as ColumnField } from '$lib/FieldDefinitions/Columns';
+	import type {ThemeConfig} from "$lib/themes/ThemeConfig";
 
 	export let FieldComponent: ComponentType;
 
@@ -14,6 +15,7 @@
 	export let operation: CrudOperation;
 	export let entityObject: Record<string, unknown> = {};
 	export let value: unknown;
+	export let theme: ThemeConfig;
 </script>
 
 <Grid fullWidth>
@@ -38,6 +40,7 @@
 						this={FieldComponent}
 						{operation}
 						{entityObject}
+						{theme}
 						field={columnedField}
 						value={entityObject[columnedField.name]}
 						on:fieldChange
