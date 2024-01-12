@@ -1,3 +1,10 @@
+# v0.9.0
+
+- **BC Break**: Definition options types have been renamed and merged in the `$lib/FieldDefinitions/definition.ts` file.
+- Add `DateFilter` as a range of dates
+- Add `BooleanFilter` with radio inputs
+- Remove empty values from submitted filters
+
 # v0.8.1
 
 - Fix columns and tabs rendering in List (not super UX-friendly at first, but use cases could definitely be found for that)
@@ -56,7 +63,7 @@
 
 Changes:
 
-- **BC Break**: Reorganize theme config, for consistency.<br>Before, some theme components were mixed in crud, view and form fields.<br>Now there are components specific to `crudActions`, `viewFields` and `formFields` that can be dynamic.<br>If end users want to, they can add new keys to these specific theme components, so their custom-created theme views can be used by their custom `Field` objects.
+- **BC Break**: Reorganize theme config, for consistency.<br>Before, some theme components were mixed in crud, view and form fields.<br>Now there are components specific to `crudActions`, `viewFields` and `formFields` that can be dynamic.<br>If end users want to, they can add new keys to these specific theme components, so their custom-created theme views can be used by their custom `Definition` objects.
 - **BC Break** (internal): Revamp tabs and optimize their behavior for a simpler and more flexible approach (and even nestable, though I don't see use-cases for that).
 - Create `identifierFieldName` CrudDefinition option, to allow using another field than `id` as an entity identifier.<br>Having an `id` property is mandatory for Carbon's `DataTable` component, but might become useful for standardization of identifier usage later in filters.
 - Add `Columns` field type (new name, replaces "sections" concept). Nestable and sizeable. The `size` property in columns will have a behavior only related to the used theme. For example, Carbon has a 16-units grid, and Bootstrap's one is 12.<br>The user value will not be converted into any other grid size.

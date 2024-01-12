@@ -36,6 +36,12 @@
 			);
 		}
 		const data = getSubmittedFormData(event);
+		// Remove empty values from data
+		Object.keys(data).forEach((key: string) => {
+			if (data[key] === '') {
+				delete data[key];
+			}
+		})
 		console.info('filtersValues', data);
 		dispatchEvent('submitFilters', data);
 	}
