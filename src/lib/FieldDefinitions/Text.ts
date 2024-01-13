@@ -1,8 +1,7 @@
-import { Field } from '$lib/FieldDefinitions/Field';
-import type { CommonOptions } from '$lib/FieldDefinitions/Options';
+import {Field, type InputFieldOptions} from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
-export type TextOptions = CommonOptions & {
+export type TextOptions = InputFieldOptions & {
 	maxLength?: number;
 	stripTags?: boolean;
 };

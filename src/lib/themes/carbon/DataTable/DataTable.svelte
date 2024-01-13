@@ -10,7 +10,7 @@
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Row, Rows } from '$lib/DataTable/DataTable';
 	import type { Action } from '$lib/actions';
-	import type { Filter, FilterOptions } from '$lib/Filter';
+	import type { FilterInterface, FilterOptions} from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 	import { type SubmittedData } from '$lib/Crud/form';
 
@@ -18,7 +18,7 @@
 	export let rows: Promise<Rows>;
 	export let actions: Action[] = [];
 	export let globalActions: Array<Action> = [];
-	export let filters: Array<Filter<FilterOptions>> = [];
+	export let filters: Array<FilterInterface<FilterOptions>> = [];
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
 

@@ -1,5 +1,4 @@
-import type { FieldInterface } from '$lib/FieldDefinitions/Field';
-import type { BaseOptions, Options } from '$lib/FieldDefinitions/Options';
+import type {CommonFieldOptions, FieldInterface, FieldOptions} from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 /**
@@ -7,12 +6,12 @@ import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
  * Carbon theme has a dynamic grid up from 4 to 16 columns depending on viewport,
  * while Bootstrap-based ones have 12 columns.
  */
-export type ColumnOptions = BaseOptions & {
+export type ColumnOptions = FieldOptions & {
 	name: string;
 	label?: string;
 };
 
-export type ColumnedFields<T = FieldInterface<Options>> = Array<{
+export type ColumnedFields<T = FieldInterface<CommonFieldOptions>> = Array<{
 	name?: string;
 	label?: string;
 	size?: number;

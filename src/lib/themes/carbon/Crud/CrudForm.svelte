@@ -10,8 +10,7 @@
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { SubmitButtonType } from '$lib/config/types';
-	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
-	import type { Options } from '$lib/FieldDefinitions/Options';
+	import type {CommonFieldOptions, FieldInterface} from '$lib/FieldDefinitions/definition';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
@@ -29,7 +28,7 @@
 
 	export let htmlFormElement: HTMLFormElement | null | undefined;
 
-	let fields: FieldInterface<Options>[] = operation.fields;
+	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
 
 	const dispatchEvent = createEventDispatcher<{ submitData: SubmittedData }>();
 

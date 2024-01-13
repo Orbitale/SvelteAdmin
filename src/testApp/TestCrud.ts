@@ -1,29 +1,29 @@
 // src/lib/TestCrud.ts
 import {
+	BooleanFilter,
+	CallbackAction,
 	CallbackStateProcessor,
 	CallbackStateProvider,
+	CheckboxField,
+	Columns,
 	CrudDefinition,
+	DateFilter,
 	Delete,
 	Edit,
+	ExistsFilter,
 	List,
 	New,
+	NumberField,
+	NumericFilter,
+	PaginatedResults,
+	Tabs,
 	TextareaField,
 	TextField,
-	UrlAction,
-	View,
-	PaginatedResults,
-	CheckboxField,
-	NumberField,
-	ToggleField,
-	UrlField,
-	CallbackAction,
-	Columns,
-	Tabs,
-	NumericFilter,
 	TextFilter,
-	BooleanFilter,
-	DateFilter,
-	ExistsFilter
+	ToggleField,
+	UrlAction,
+	UrlField,
+	View,
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -33,10 +33,11 @@ import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Test, getTest, getMemoryTests } from './internal/testsInternal';
+import type {FieldInterface, FieldOptions} from "$lib/FieldDefinitions/definition";
 
 const itemsPerPage = 10;
 
-const fields = [
+const fields: Array<FieldInterface<FieldOptions>> = [
 	new TextField('text_field', 'Text field', {
 		placeholder: 'This is a placeholder',
 		help: 'This is a help message!'
@@ -100,7 +101,7 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 				filters: [
 					new TextFilter('text_field', 'Filter text'),
 					new BooleanFilter('checkbox_field', 'Filter checkbox'),
-					// new DateFilter('date_field', 'Filter date'),
+					new DateFilter('date_field', 'Filter date'),
 					new ExistsFilter('toggle_field', 'Filter toggle'),
 					new NumericFilter('number_field', 'Filter number')
 				],

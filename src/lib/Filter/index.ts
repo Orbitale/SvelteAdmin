@@ -3,7 +3,14 @@ import type { FilterTheme } from '$lib/themes/ThemeConfig';
 
 export type FilterOptions = KeyValueObject;
 
-export abstract class Filter<T extends FilterOptions> {
+export interface FilterInterface<T extends FilterOptions> {
+	readonly field: string;
+	readonly label: string;
+	readonly options: T;
+	readonly componentName: FilterTheme;
+}
+
+export abstract class Filter<T extends FilterOptions> implements FilterInterface<T> {
 	public readonly field: string;
 	public readonly label: string;
 	public readonly options: T;

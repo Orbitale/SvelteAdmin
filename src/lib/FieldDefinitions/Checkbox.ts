@@ -1,8 +1,7 @@
-import { Field } from '$lib/FieldDefinitions/Field';
-import type { Options } from '$lib/FieldDefinitions/Options';
+import {type CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
-export type CheckboxOptions = Options;
+export type CheckboxOptions = CommonFieldOptions;
 
 export class CheckboxField extends Field<CheckboxOptions> {
 	readonly formComponent: FormFieldTheme = 'checkbox';

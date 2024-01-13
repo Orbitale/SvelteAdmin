@@ -1,12 +1,11 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
-import type { Field } from '$lib/FieldDefinitions/Field';
-import type { Options } from '$lib/FieldDefinitions/Options';
+import type { FieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import type { DashboardDefinition } from '$lib/Dashboard/definition';
 import type { Action } from '$lib/actions';
 import type { CrudTheme } from '$lib/themes/ThemeConfig';
 import { defaultPaginationOptions, type PaginationOptions } from '$lib/DataTable/Pagination';
-import type { Filter, FilterOptions } from '$lib/Filter';
+import type { FilterInterface, FilterOptions } from '$lib/Filter';
 import type { RequestParameters } from '$lib/request';
 
 export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
@@ -24,7 +23,7 @@ export interface CrudOperation {
 	readonly name: CrudOperationName;
 	readonly label: string;
 	readonly displayComponentName: CrudTheme;
-	readonly fields: Array<Field<Options>>;
+	readonly fields: Array<FieldInterface<FieldOptions>>;
 	readonly actions: Array<Action>;
 	readonly options: Record<string, string | unknown>;
 }
@@ -34,7 +33,7 @@ export class BaseCrudOperation implements CrudOperation {
 		public readonly name: CrudOperationName,
 		public readonly label: string,
 		public readonly displayComponentName: CrudTheme,
-		public readonly fields: Array<Field<Options>>,
+		public readonly fields: Array<FieldInterface<FieldOptions>>,
 		public readonly actions: Array<Action>,
 		public readonly options: Record<string, string | unknown> = {}
 	) {}
@@ -49,7 +48,7 @@ const DEFAULT_FORM_OPERATION_OPTION: FormOperationOptions = {
 
 export class New extends BaseCrudOperation {
 	constructor(
-		fields: Array<Field<Options>>,
+		fields: Array<FieldInterface<FieldOptions>>,
 		actions: Array<Action> = [],
 		options: FormOperationOptions = DEFAULT_FORM_OPERATION_OPTION
 	) {
@@ -59,7 +58,7 @@ export class New extends BaseCrudOperation {
 
 export class Edit extends BaseCrudOperation {
 	constructor(
-		fields: Array<Field<Options>>,
+		fields: Array<FieldInterface<FieldOptions>>,
 		actions: Array<Action> = [],
 		options: FormOperationOptions = DEFAULT_FORM_OPERATION_OPTION
 	) {
@@ -70,12 +69,12 @@ export class Edit extends BaseCrudOperation {
 export type ListOperationOptions = object & {
 	globalActions?: Array<Action>;
 	pagination?: Partial<PaginationOptions>;
-	filters?: Filter<FilterOptions>[];
+	filters?: FilterInterface<FilterOptions>[];
 };
 
 export class List extends BaseCrudOperation {
 	constructor(
-		fields: Array<Field<Options>>,
+		fields: Array<FieldInterface<FieldOptions>>,
 		actions: Array<Action> = [],
 		options: Partial<ListOperationOptions> = {}
 	) {
@@ -88,14 +87,14 @@ export class List extends BaseCrudOperation {
 export class Delete extends BaseCrudOperation {
 	public readonly redirectTo: Action;
 
-	constructor(fields: Array<Field<Options>>, redirectTo: Action) {
+	constructor(fields: Array<FieldInterface<FieldOptions>>, redirectTo: Action) {
 		super('delete', 'crud.delete.label', 'delete', fields, []);
 		this.redirectTo = redirectTo;
 	}
 }
 
 export class View extends BaseCrudOperation {
-	constructor(fields: Array<Field<Options>>) {
+	constructor(fields: Array<FieldInterface<FieldOptions>>) {
 		super('view', 'crud.view.label', 'view', fields, []);
 	}
 }

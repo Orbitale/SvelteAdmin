@@ -7,8 +7,7 @@
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { FieldInterface } from '$lib/FieldDefinitions/Field';
-	import type { Options } from '$lib/FieldDefinitions/Options';
+	import type {CommonFieldOptions, FieldInterface} from '$lib/FieldDefinitions/definition';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { RequestParameters } from '$lib/request';
 
@@ -19,7 +18,7 @@
 
 	const CrudViewField = dashboard.adminConfig.theme.viewField;
 
-	let fields: FieldInterface<Options>[] = operation.fields;
+	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
 
 	let providerResultPromise: StateProviderResult<unknown> = crud.options.stateProvider.provide(
 		operation,

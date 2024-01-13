@@ -4,8 +4,7 @@
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
 	import { type Headers, type Header, createEmptyRow } from '$lib/DataTable/DataTable';
-	import type { Options } from '$lib/FieldDefinitions/Options';
-	import type { Field } from '$lib/FieldDefinitions/Field';
+	import type {CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
 	import type { CrudDefinition } from '$lib/Crud/definition';
 
 	import { List } from '$lib/Crud/Operations';
@@ -27,7 +26,7 @@
 
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
-	const headers: Headers = operation.fields.map((field: Field<Options>): Header => {
+	const headers: Headers = operation.fields.map((field: Field<CommonFieldOptions>): Header => {
 		return { key: field.name, value: field.label };
 	});
 

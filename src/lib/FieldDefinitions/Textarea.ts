@@ -1,4 +1,4 @@
-import { Field } from '$lib/FieldDefinitions/Field';
+import { Field } from '$lib/FieldDefinitions/definition';
 import type { TextOptions } from '$lib/FieldDefinitions/Text';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
