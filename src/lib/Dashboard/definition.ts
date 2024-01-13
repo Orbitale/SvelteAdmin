@@ -4,9 +4,9 @@ import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
 import theme from '$lib/stores/theme';
 
-export type DashboardDefinitionOptions<T> = {
+export type DashboardDefinitionOptions = {
 	adminConfig: Partial<AdminConfig>;
-	cruds: Array<CrudDefinition<T>>;
+	cruds: Array<CrudDefinition<unknown>>;
 	rootUrl?: string;
 	sideMenu?: Array<MenuLink>;
 	topLeftMenu?: Array<MenuLink>;
@@ -14,9 +14,9 @@ export type DashboardDefinitionOptions<T> = {
 	localeDictionaries?: Dictionaries;
 };
 
-export class DashboardDefinition<T> {
+export class DashboardDefinition {
 	public readonly adminConfig: AdminConfig;
-	public readonly cruds: Array<CrudDefinition<T>>;
+	public readonly cruds: Array<CrudDefinition<unknown>>;
 	public readonly sideMenu: Array<MenuLink> = [];
 	public readonly topLeftMenu: Array<MenuLink> = [];
 	public readonly topRightMenu: Array<MenuLink> = [];
@@ -24,7 +24,7 @@ export class DashboardDefinition<T> {
 
 	public readonly options = {};
 
-	constructor(options: DashboardDefinitionOptions<T>) {
+	constructor(options: DashboardDefinitionOptions) {
 		this.adminConfig = { ...emptyAdminConfig(), ...options.adminConfig };
 		this.cruds = options.cruds;
 		this.sideMenu = options.sideMenu || [];

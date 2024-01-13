@@ -1,9 +1,11 @@
 # v0.9.0
 
 - **BC Break**: Definition options types have been renamed and merged in the `$lib/FieldDefinitions/definition.ts` file.
-- Add `DateFilter` as a range of dates
-- Add `BooleanFilter` with radio inputs
-- Remove empty values from submitted filters
+- Add `DateFilter` as a range of dates.
+- Add `BooleanFilter` with radio inputs.
+- Remove empty values from submitted filters.
+- Make Dashboard no longer generic.
+- Rename Field & Filter interfaces and merge definitions in one file. This was inconsistent.
 
 # v0.8.1
 
