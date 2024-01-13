@@ -6,6 +6,7 @@
 - Remove empty values from submitted filters.
 - Make Dashboard no longer generic.
 - Rename Field & Filter interfaces and merge definitions in one file. This was inconsistent.
+- (Carbon theme) Create a FilterContainer component to uniformize filters rendering.
 
 # v0.8.1
 

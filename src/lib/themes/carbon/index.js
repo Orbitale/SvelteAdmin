@@ -39,6 +39,7 @@ import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 
 import TextFilter from './FilterComponents/TextFilter.svelte';
 import BooleanFilter from './FilterComponents/BooleanFilter.svelte';
+import DateFilter from './FilterComponents/DateFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 
 /**
@@ -85,7 +86,7 @@ const theme = {
 	filters: {
 		boolean: BooleanFilter,
 		text: TextFilter,
-		date: TextFilter,
+		date: DateFilter,
 		numeric: NumericFilter
 	},
 	menu: {

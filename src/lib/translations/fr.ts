@@ -24,7 +24,9 @@ const dictionary: Dictionary = {
 	'error.crud.entity.not_found': 'Aucun élément trouvé avec cet identifiant.',
 	'datatable.filters.menu_title': 'Filtres',
 	'datatable.filters.submit_filters': 'Filtrer les résultats',
-	'datatable.filters.reset_filters': 'Réinitialiser les filtres'
+	'datatable.filters.reset_filters': 'Réinitialiser les filtres',
+	'filters.date.from': 'À partir de cette date',
+	'filters.date.to': 'Jusqu\'à cette date',
 };
 
 export default dictionary;

@@ -23,7 +23,9 @@ const dictionary: Dictionary = {
 	'error.crud.entity.not_found': 'No element found with this identifier.',
 	'datatable.filters.menu_title': 'Filters',
 	'datatable.filters.submit_filters': 'Filter results',
-	'datatable.filters.reset_filters': 'Reset filters'
+	'datatable.filters.reset_filters': 'Reset filters',
+	'filters.date.from': 'From this date',
+	'filters.date.to': 'Up to this date',
 };
 
 export default dictionary;
