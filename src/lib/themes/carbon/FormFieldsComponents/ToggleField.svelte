@@ -25,13 +25,6 @@
 	name={field.name}
 	labelText={field.label}
 	helperText={field.options.help}
-	on:click
-	on:mouseover
-	on:mouseenter
-	on:mouseleave
 	on:change={onChange}
-	on:keyup
-	on:focus
-	on:blur
 	bind:toggled={is_checked}
 />

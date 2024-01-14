@@ -12,15 +12,4 @@
 	placeholder={field.options?.placeholder ?? ''}
 	required={field.options.required ?? true}
 	{value}
-	on:change
-	on:input
-	on:click
-	on:mouseover
-	on:mouseenter
-	on:mouseleave
-	on:keydown
-	on:keyup
-	on:focus
-	on:blur
-	on:paste
 />

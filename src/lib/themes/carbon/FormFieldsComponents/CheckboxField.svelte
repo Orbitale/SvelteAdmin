@@ -25,13 +25,7 @@
 	name={field.name}
 	labelText={field.label}
 	required={field.options.required ?? true}
-	on:check
-	on:click
-	on:mouseover
-	on:mouseenter
-	on:mouseleave
 	on:change={onChange}
-	on:blur
 	bind:checked={is_checked}
 />
 {#if field.options.help}
