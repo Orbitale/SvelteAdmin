@@ -1,12 +1,12 @@
-import type {CommonFieldOptions, FieldInterface} from '$lib/FieldDefinitions/definition';
+import type {FieldInterface, FieldOptions} from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
-export type TabOptions = CommonFieldOptions & {
+export type TabOptions = FieldOptions & {
 	name: string;
 	label?: string;
 };
 
-export type TabbedFields<T = FieldInterface<CommonFieldOptions>> = Array<{
+export type TabbedFields<T = FieldInterface<TabOptions>> = Array<{
 	name: string;
 	label?: string;
 	fields: Array<T>;

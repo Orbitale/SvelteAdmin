@@ -1,4 +1,4 @@
-import type {CommonFieldOptions, FieldInterface, FieldOptions} from '$lib/FieldDefinitions/definition';
+import type {FieldInterface, FieldOptions} from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 /**
@@ -11,7 +11,7 @@ export type ColumnOptions = FieldOptions & {
 	label?: string;
 };
 
-export type ColumnedFields<T = FieldInterface<CommonFieldOptions>> = Array<{
+export type ColumnedFields<T = FieldInterface<ColumnOptions>> = Array<{
 	name?: string;
 	label?: string;
 	size?: number;
