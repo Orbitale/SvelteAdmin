@@ -4,6 +4,13 @@
 
 	export let field: TextField;
 	export let value: string | undefined;
+
+	function onChangeStripTags() {
+		if (!field.options.stripTags) {
+			return false;
+		}
+		value = value.replace(/[<>]/gi, '');
+	}
 </script>
 
 <TextInput
@@ -13,4 +20,5 @@
 	placeholder={field.options?.placeholder || ''}
 	maxCount={field.options.maxLength}
 	{value}
+	on:change={onChangeStripTags}
 />

@@ -4,6 +4,13 @@
 
 	export let field: TextareaField;
 	export let value: string | undefined;
+
+	function onChangeStripTags() {
+		if (!field.options.stripTags) {
+			return false;
+		}
+		value = value.replace(/[<>]/gi, '');
+	}
 </script>
 
 <TextArea
@@ -13,4 +20,5 @@
 	placeholder={field.options.placeholder}
 	rows={field.options.rows}
 	{value}
+	on:change={onChangeStripTags}
 />
