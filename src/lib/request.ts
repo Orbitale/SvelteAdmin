@@ -4,6 +4,7 @@ import type { Optional } from '$lib/genericTypes';
 export type RequestParameters = {
 	page?: Optional<string | number>;
 	filters?: Optional<Record<string, unknown>>;
+	sort?: Optional<Record<string, unknown>>;
 	[key: string]: unknown;
 };
 

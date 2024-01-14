@@ -1,3 +1,7 @@
+# v0.10.0
+
+- Add sortable fields for the `List` operation 🎉
+
 # v0.9.0
 
 - **BC Break**: Definition options types have been renamed and merged in the `$lib/FieldDefinitions/definition.ts` file.

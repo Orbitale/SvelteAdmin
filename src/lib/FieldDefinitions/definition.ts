@@ -8,6 +8,7 @@ export type FieldOptions = {
 export type CommonFieldOptions = FieldOptions & {
 	required?: boolean;
 	disabled?: boolean;
+	sortable?: true;
 	help?: string;
 };
 

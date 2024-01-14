@@ -21,6 +21,8 @@
 	export let filters: Array<FilterInterface<FilterOptions>> = [];
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
+	export let sortable: boolean;
+	export let onSort: () => unknown|undefined;
 
 	let resolvedRows: Rows = [];
 
@@ -78,7 +80,17 @@
 {#if !resolvedRows || !resolvedRows.length}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
 {:else}
-	<DataTable {headers} {page} zebra expandable rows={resolvedRows} size="short" {...$$restProps}>
+	<DataTable
+		{headers}
+		{page}
+		{sortable}
+		zebra
+		expandable
+		rows={resolvedRows}
+		size="short"
+		on:click:header={onSort}
+		{...$$restProps}
+	>
 		<svelte:fragment slot="title">
 			<slot name="title" />
 		</svelte:fragment>

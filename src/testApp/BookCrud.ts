@@ -24,7 +24,7 @@ import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
 import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
 
 const fields = [
-	new TextField('title', 'Title', { placeholder: "Enter the book's title" }),
+	new TextField('title', 'Title', { placeholder: "Enter the book's title", sortable: true }),
 	new TextareaField('description', 'Description', {
 		placeholder: "Enter the book's descrption",
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
@@ -110,6 +110,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
+		console.info('Books provider called', {operation: operation.name, requestParameters});
 		let books = getMemoryBooks();
 
 		if (operation.name === 'list') {

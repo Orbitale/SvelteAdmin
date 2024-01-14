@@ -42,7 +42,6 @@
 				delete data[key];
 			}
 		})
-		console.info('filtersValues', data);
 		dispatchEvent('submitFilters', data);
 	}
 

@@ -1,21 +1,22 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
-	import { onMount } from 'svelte';
+	import {_} from 'svelte-i18n';
+	import {onMount} from 'svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
-	import { type Headers, type Header, createEmptyRow } from '$lib/DataTable/DataTable';
-	import type {CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
-	import type { CrudDefinition } from '$lib/Crud/definition';
+	import {createEmptyRow, type Header, type Headers} from '$lib/DataTable/DataTable';
+	import type {Field, FieldOptions} from '$lib/FieldDefinitions/definition';
+	import type {CrudDefinition} from '$lib/Crud/definition';
 
-	import { List } from '$lib/Crud/Operations';
+	import {List} from '$lib/Crud/Operations';
 
-	import type { Action } from '$lib/actions';
+	import type {Action} from '$lib/actions';
 
-	import { type DashboardDefinition } from '$lib/Dashboard/definition';
-	import type { StateProviderResult } from '$lib/State/Provider';
-	import { PaginatedResults } from '$lib/DataTable/Pagination';
-	import type { SubmittedData } from '$lib/Crud/form';
-	import type { RequestParameters } from '$lib/request';
+	import {type DashboardDefinition} from '$lib/Dashboard/definition';
+	import type {StateProviderResult} from '$lib/State/Provider';
+	import {PaginatedResults} from '$lib/DataTable/Pagination';
+	import type {SubmittedData} from '$lib/Crud/form';
+	import type {RequestParameters} from '$lib/request';
+	import type {DataTableNonEmptyHeader} from "carbon-components-svelte/types/DataTable/DataTable.svelte";
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: typeof List;
@@ -26,8 +27,14 @@
 
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
-	const headers: Headers = operation.fields.map((field: Field<CommonFieldOptions>): Header => {
-		return { key: field.name, value: field.label };
+	const sortableDataTable = operation.fields.filter((field: Field<FieldOptions>) => !field.options?.sortable).length > 0;
+	const headers: Headers = operation.fields.map((field: Field<FieldOptions>): Header => {
+		return {
+			key: field.name,
+			value: field.label,
+			// Carbon needs the "sort" property to be a callback, else it does not display the sorting.
+			sort: field.options?.sortable ? (() => {}) : false
+		};
 	});
 
 	let showPagination = operation.options.pagination.enabled;
@@ -44,6 +51,9 @@
 			'CrudList view can only accept operations that are instances of the List operation.'
 		);
 	}
+
+	// Extracted from Carbon's DataTable
+	type SortEvent = {header: DataTableNonEmptyHeader, sortDirection?: "none"|"ascending"|"descending"};
 
 	fetchResultsFromProvider();
 
@@ -102,14 +112,31 @@
 		globalActions = operation.options.globalActions;
 	}
 
-	async function onPaginationUpdate(event: CustomEvent<{ page: number; pageSize: number }>) {
+	function onPaginationUpdate(event: CustomEvent<{ page: number; pageSize: number }>) {
 		page = event.detail.page;
 		requestParameters.page = event.detail.page;
 		fetchResultsFromProvider();
 	}
 
-	async function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
+	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
 		requestParameters.filters = event.detail;
+		fetchResultsFromProvider();
+	}
+
+	async function onSort(event: CustomEvent<SortEvent>) {
+		const {header, sortDirection} = event.detail;
+		if (sortDirection === undefined || !header.sort) {
+			// Non-sortable field
+			return;
+		}
+		requestParameters.sort ??= {};
+		if (sortDirection === 'none') {
+			delete requestParameters.sort[header.key];
+		} else if (sortDirection === 'ascending') {
+			requestParameters.sort[header.key] = 'ASC';
+		} else if (sortDirection === 'descending') {
+			requestParameters.sort[header.key] = 'DESC';
+		}
 		fetchResultsFromProvider();
 	}
 
@@ -129,6 +156,8 @@
 	{globalActions}
 	{page}
 	{operation}
+	{onSort}
+	sortable={sortableDataTable}
 	filters={configuredFilters}
 	theme={dashboard.adminConfig.theme}
 	on:submitFilters={onFiltersSubmit}
