@@ -1,3 +1,7 @@
+# v0.10.1
+
+- Fix expandable DataTable that was only here for testing
+
 # v0.10.0
 
 - Add sortable fields for the `List` operation 🎉

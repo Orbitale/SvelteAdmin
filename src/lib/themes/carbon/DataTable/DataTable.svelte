@@ -85,7 +85,6 @@
 		{page}
 		{sortable}
 		zebra
-		expandable
 		rows={resolvedRows}
 		size="short"
 		on:click:header={onSort}
