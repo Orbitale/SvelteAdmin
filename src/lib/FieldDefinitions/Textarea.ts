@@ -8,5 +8,5 @@ export type TextareaOptions = TextOptions & {
 
 export class TextareaField extends Field<TextareaOptions> {
 	readonly formComponent: FormFieldTheme = 'textarea';
-	readonly viewComponent: ViewFieldTheme = 'default';
+	readonly viewComponent: ViewFieldTheme = 'textarea';
 }

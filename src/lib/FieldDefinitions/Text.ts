@@ -8,5 +8,5 @@ export type TextOptions = InputFieldOptions & {
 
 export class TextField extends Field<TextOptions> {
 	readonly formComponent: FormFieldTheme = 'text';
-	readonly viewComponent: ViewFieldTheme = 'default';
+	readonly viewComponent: ViewFieldTheme = 'text';
 }
