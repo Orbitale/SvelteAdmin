@@ -17,15 +17,22 @@ export type ThemeConfig = {
 	};
 	viewFields: {
 		checkbox: ComponentType;
-		default: ComponentType;
-		tabs: ComponentType;
-		url: ComponentType;
-		label: ComponentType;
 		column: ComponentType;
+		date: ComponentType;
+		default: ComponentType;
+		label: ComponentType;
+		number: ComponentType;
+		tabs: ComponentType;
+		textarea: ComponentType;
+		text: ComponentType;
+		toggle: ComponentType;
+		url: ComponentType;
 		[key: string]: ComponentType;
 	};
 	formFields: {
 		checkbox: ComponentType;
+		column: ComponentType;
+		date: ComponentType;
 		default: ComponentType;
 		number: ComponentType;
 		tabs: ComponentType;
@@ -33,7 +40,6 @@ export type ThemeConfig = {
 		text: ComponentType;
 		toggle: ComponentType;
 		url: ComponentType;
-		column: ComponentType;
 		[key: string]: ComponentType;
 	};
 	filters: {

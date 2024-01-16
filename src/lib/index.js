@@ -10,6 +10,7 @@ export { PaginatedResults } from './DataTable/Pagination';
 
 export { CheckboxField } from './FieldDefinitions/Checkbox';
 export { Columns } from './FieldDefinitions/Columns';
+export { DateField } from './FieldDefinitions/Date';
 export { Field } from './FieldDefinitions/definition';
 export { NumberField } from './FieldDefinitions/Number';
 export { Tabs } from './FieldDefinitions/Tabs';
