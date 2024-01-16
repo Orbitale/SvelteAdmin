@@ -45,7 +45,10 @@ export function getMemoryTests(): Array<Test> {
 		window.localStorage.setItem('tests', memory);
 	}
 
-	return JSON.parse(memory);
+	return JSON.parse(memory).map((test: Test) => {
+		test.date_field = new Date(test.date_field.toString());
+		return test;
+	});
 	//*/
 }
 

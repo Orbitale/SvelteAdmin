@@ -12,7 +12,8 @@ import {
 	UrlAction,
 	View,
 	TextFilter,
-	PaginatedResults
+	PaginatedResults,
+	CallbackAction,
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -54,7 +55,13 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 				new UrlAction('Delete', '/admin/books/delete', TrashCan)
 			],
 			{
-				globalActions: [new UrlAction('New', '/admin/books/new', Pen)],
+				globalActions: [
+					new CallbackAction('Reset memory data', TrashCan, () => {
+						window.localStorage.removeItem('books');
+						window.location.reload();
+					}, {buttonKind: 'ghost'}),
+					new UrlAction('New', '/admin/books/new', Pen),
+				],
 				pagination: {
 					enabled: true,
 					itemsPerPage: itemsPerPage
@@ -110,7 +117,7 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
-		console.info('Books provider called', {operation: operation.name, requestParameters});
+		console.info('Books provider called', { operation: operation.name, requestParameters });
 		let books = getMemoryBooks();
 
 		if (operation.name === 'list') {

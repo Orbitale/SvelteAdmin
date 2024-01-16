@@ -1,4 +1,9 @@
-// src/lib/TestCrud.ts
+import { faker } from '@faker-js/faker';
+
+import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
+import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
+
 import {
 	BooleanFilter,
 	CallbackAction,
@@ -7,6 +12,7 @@ import {
 	CheckboxField,
 	Columns,
 	CrudDefinition,
+	DateField,
 	DateFilter,
 	Delete,
 	Edit,
@@ -16,6 +22,7 @@ import {
 	NumberField,
 	NumericFilter,
 	PaginatedResults,
+	success,
 	Tabs,
 	TextareaField,
 	TextField,
@@ -25,19 +32,14 @@ import {
 	UrlField,
 	View,
 } from '$lib';
+import type { FieldInterface, FieldOptions } from '$lib/FieldDefinitions/definition';
 import type { RequestParameters } from '$lib/request';
 
-import { faker } from '@faker-js/faker';
-
-import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
-import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
-import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
-import { type Test, getTest, getMemoryTests } from './internal/testsInternal';
-import type {FieldInterface, FieldOptions} from "$lib/FieldDefinitions/definition";
+import { type Test, getMemoryTests } from './internal/testsInternal';
 
 const itemsPerPage = 10;
 
-const fields: Array<FieldInterface<FieldOptions>> = [
+const baseFields: Array<FieldInterface<FieldOptions>> = [
 	new TextField('text_field', 'Text field', {
 		placeholder: 'This is a placeholder',
 		help: 'This is a help message!'
@@ -51,6 +53,11 @@ const fields: Array<FieldInterface<FieldOptions>> = [
 	new ToggleField('toggle_field', 'Toggle field'),
 	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
+	new DateField('date_field', 'Date field')
+];
+
+const fullFields = [
+	...baseFields,
 	new Columns('columns_field', 'Columns field', [
 		{
 			name: 'column_1',
@@ -84,7 +91,7 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 
 	operations: [
 		new List(
-			[IdField, ...fields],
+			[IdField, ...baseFields],
 			[
 				new UrlAction('View', '/admin/tests/view', ViewIcon),
 				new UrlAction('Edit', '/admin/tests/edit', Pen),
@@ -92,11 +99,11 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 			],
 			{
 				globalActions: [
-					new UrlAction('New', '/admin/tests/new', Pen),
 					new CallbackAction('Reset memory data', TrashCan, () => {
 						window.localStorage.removeItem('tests');
 						window.location.reload();
-					})
+					}, {buttonKind: 'ghost'}),
+					new UrlAction('New', '/admin/tests/new', Pen),
 				],
 				filters: [
 					new TextFilter('text_field', 'Filter text'),
@@ -111,48 +118,11 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 				}
 			}
 		),
-		new View([IdField, ...fields]),
-		new New(fields),
-		new Edit(fields),
-		new Delete(fields, new UrlAction('List', '/admin/tests/list'))
+		new View([IdField, ...fullFields]),
+		new New(fullFields),
+		new Edit(fullFields),
+		new Delete([], new UrlAction('List', '/admin/tests/list'))
 	],
-
-	stateProcessor: new CallbackStateProcessor(function (
-		data,
-		operation,
-		requestParameters: RequestParameters = {}
-	) {
-		if (operation.name === 'delete') {
-			const id = (requestParameters.id || '').toString();
-			getTest(id);
-			const updatedTests = getMemoryTests().filter((b: Test) => b.id.toString() !== id);
-			window.localStorage.setItem('tests', JSON.stringify(updatedTests));
-
-			return Promise.resolve();
-		}
-
-		if (operation.name === 'edit' || operation.name === 'new') {
-			const id =
-				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
-			const test = data as Test;
-			test.id = id;
-			let updatedTests = getMemoryTests();
-
-			if (operation.name === 'new') {
-				updatedTests.push(test);
-			} else {
-				updatedTests = updatedTests.map((b: Test) =>
-					b.id.toString() === id.toString() ? test : b
-				);
-			}
-
-			window.localStorage.setItem('tests', JSON.stringify(updatedTests));
-
-			return Promise.resolve();
-		}
-
-		return Promise.resolve();
-	}),
 
 	stateProvider: new CallbackStateProvider<Test>(async function (
 		operation,
@@ -189,5 +159,36 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 		}
 
 		return Promise.resolve(null);
-	})
+	}),
+
+	stateProcessor: new CallbackStateProcessor(function (
+		data,
+		operation,
+		requestParameters: RequestParameters = {}
+	) {
+		if (operation.name === 'delete') {
+			const id = (requestParameters.id || '').toString();
+			success(`Deleting Test with id ${id}!`);
+
+			return Promise.resolve();
+		}
+
+		if (operation.name === 'edit' || operation.name === 'new') {
+			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const test = data as Test;
+			test.id = id;
+
+			success((operation.name === 'edit'
+					? `Editing Test with id ${id}!`
+					: `Creating new Test with id ${id}!`)
+				+ "\n"
+				+ "New content:\n"
+				+ JSON.stringify(test, undefined, 4));
+
+			return Promise.resolve();
+		}
+
+		return Promise.resolve();
+	}),
+
 });
