@@ -1,6 +1,7 @@
 <script lang="ts">
 	import 'carbon-components-svelte/css/all.css';
 	import Content from 'carbon-components-svelte/src/UIShell/Content.svelte';
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
 
@@ -28,6 +29,10 @@
 		document.documentElement.setAttribute('theme', theme);
 	});
 </script>
+
+<div id="toast_container">
+	<SvelteToast />
+</div>
 
 <slot name="top_menu">
 	<TopMenu {adminConfig} left_links={top_left_menu_links} right_links={top_right_menu_links} />
