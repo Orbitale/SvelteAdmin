@@ -1,4 +1,4 @@
-import {type CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
+import { type CommonFieldOptions, Field } from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type ToggleOptions = CommonFieldOptions;

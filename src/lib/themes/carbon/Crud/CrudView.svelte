@@ -7,7 +7,7 @@
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type {CommonFieldOptions, FieldInterface} from '$lib/FieldDefinitions/definition';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
 	import type { StateProviderResult } from '$lib/State/Provider';
 	import type { RequestParameters } from '$lib/request';
 

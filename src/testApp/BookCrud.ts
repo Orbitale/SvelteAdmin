@@ -13,7 +13,7 @@ import {
 	View,
 	TextFilter,
 	PaginatedResults,
-	CallbackAction,
+	CallbackAction
 } from '$lib';
 import type { RequestParameters } from '$lib/request';
 
@@ -56,11 +56,16 @@ export const bookCrud = new CrudDefinition<Book>('books', {
 			],
 			{
 				globalActions: [
-					new CallbackAction('Reset memory data', TrashCan, () => {
-						window.localStorage.removeItem('books');
-						window.location.reload();
-					}, {buttonKind: 'ghost'}),
-					new UrlAction('New', '/admin/books/new', Pen),
+					new CallbackAction(
+						'Reset memory data',
+						TrashCan,
+						() => {
+							window.localStorage.removeItem('books');
+							window.location.reload();
+						},
+						{ buttonKind: 'ghost' }
+					),
+					new UrlAction('New', '/admin/books/new', Pen)
 				],
 				pagination: {
 					enabled: true,

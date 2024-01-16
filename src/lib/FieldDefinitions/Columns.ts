@@ -1,4 +1,4 @@
-import type {FieldInterface, FieldOptions} from '$lib/FieldDefinitions/definition';
+import type { FieldInterface, FieldOptions } from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 /**

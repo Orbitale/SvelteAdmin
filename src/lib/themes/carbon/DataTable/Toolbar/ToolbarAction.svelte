@@ -14,7 +14,11 @@
 		{$_(action.label)}
 	</Button>
 {:else if action instanceof CallbackAction}
-	<Button on:click={async () => await action.call()} icon={action.icon} kind={action.options?.buttonKind}>
+	<Button
+		on:click={async () => await action.call()}
+		icon={action.icon}
+		kind={action.options?.buttonKind}
+	>
 		{$_(action.label)}
 	</Button>
 {:else}

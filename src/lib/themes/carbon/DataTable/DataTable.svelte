@@ -10,7 +10,7 @@
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Row, Rows } from '$lib/DataTable/DataTable';
 	import type { Action } from '$lib/actions';
-	import type { FilterInterface, FilterOptions} from '$lib/Filter';
+	import type { FilterInterface, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 	import { type SubmittedData } from '$lib/Crud/form';
 
@@ -22,7 +22,7 @@
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
 	export let sortable: boolean;
-	export let onSort: () => unknown|undefined;
+	export let onSort: () => unknown | undefined;
 
 	let resolvedRows: Rows = [];
 

@@ -26,7 +26,7 @@ const dictionary: Dictionary = {
 	'datatable.filters.submit_filters': 'Filtrer les résultats',
 	'datatable.filters.reset_filters': 'Réinitialiser les filtres',
 	'filters.date.from': 'À partir de cette date',
-	'filters.date.to': 'Jusqu\'à cette date',
+	'filters.date.to': "Jusqu'à cette date"
 };
 
 export default dictionary;

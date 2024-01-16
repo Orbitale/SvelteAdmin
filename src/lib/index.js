@@ -35,7 +35,7 @@ export { Submenu, Divider } from './Menu/MenuLinks';
 export { CallbackStateProcessor } from './State/Processor';
 export { CallbackStateProvider } from './State/Provider';
 
-export {default as message, success, error, warning, info, Toast} from './messages/messages';
+export { default as message, success, error, warning, info, Toast } from './messages/messages';
 
 export { getRequestParams } from './request';
 

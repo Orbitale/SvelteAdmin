@@ -5,23 +5,31 @@
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import CheckboxIndeterminate from 'carbon-icons-svelte/lib/CheckboxIndeterminate.svelte';
 	import type { TextFilter } from '$lib/Filter';
-	import FilterContainer from "$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte";
+	import FilterContainer from '$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	export let filter: TextFilter;
 	let value: boolean | null = null;
 
 	const style = 'padding: 0.5rem;';
 
-	function checkboxStyle(currentValue: boolean|null, expectedValue: boolean|null, activeColor: string): string {
+	function checkboxStyle(
+		currentValue: boolean | null,
+		expectedValue: boolean | null,
+		activeColor: string
+	): string {
 		if (currentValue === expectedValue) {
 			return `color: ${activeColor}; border-color: #aaa;`;
 		}
-		return `color: #aaa; border-color: ${activeColor};`
+		return `color: #aaa; border-color: ${activeColor};`;
 	}
 
-	function buttonStyle(currentValue: boolean|null, expectedValue: boolean|null, activeColor: string): string {
+	function buttonStyle(
+		currentValue: boolean | null,
+		expectedValue: boolean | null,
+		activeColor: string
+	): string {
 		if (currentValue === expectedValue) {
-			return `${style};border-color: ${activeColor};`
+			return `${style};border-color: ${activeColor};`;
 		}
 		return `${style};border-color: transparent;`;
 	}
@@ -32,10 +40,7 @@
 <input type="hidden" name={filter.field} value={inputValue} />
 
 <FilterContainer {filter}>
-	<RadioButtonGroup
-		name={filter.field}
-		labelPosition="right"
-	>
+	<RadioButtonGroup name={filter.field} labelPosition="right">
 		<Button
 			value={true}
 			disabled={value === true}

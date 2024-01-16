@@ -41,7 +41,7 @@
 			if (data[key] === '') {
 				delete data[key];
 			}
-		})
+		});
 		dispatchEvent('submitFilters', data);
 	}
 

@@ -4,7 +4,7 @@ import type {
 } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
 import type { CrudOperation } from '$lib/Crud/Operations';
-import type {CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
+import type { CommonFieldOptions, Field } from '$lib/FieldDefinitions/definition';
 import type { KeyValueObject } from '$lib/genericTypes';
 
 export type Header = DataTableHeader;

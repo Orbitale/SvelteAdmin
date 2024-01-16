@@ -1,22 +1,22 @@
 <script lang="ts">
-	import {_} from 'svelte-i18n';
-	import {onMount} from 'svelte';
+	import { _ } from 'svelte-i18n';
+	import { onMount } from 'svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
-	import {createEmptyRow, type Header, type Headers} from '$lib/DataTable/DataTable';
-	import type {Field, FieldOptions} from '$lib/FieldDefinitions/definition';
-	import type {CrudDefinition} from '$lib/Crud/definition';
+	import { createEmptyRow, type Header, type Headers } from '$lib/DataTable/DataTable';
+	import type { Field, FieldOptions } from '$lib/FieldDefinitions/definition';
+	import type { CrudDefinition } from '$lib/Crud/definition';
 
-	import {List} from '$lib/Crud/Operations';
+	import { List } from '$lib/Crud/Operations';
 
-	import type {Action} from '$lib/actions';
+	import type { Action } from '$lib/actions';
 
-	import {type DashboardDefinition} from '$lib/Dashboard/definition';
-	import type {StateProviderResult} from '$lib/State/Provider';
-	import {PaginatedResults} from '$lib/DataTable/Pagination';
-	import type {SubmittedData} from '$lib/Crud/form';
-	import type {RequestParameters} from '$lib/request';
-	import type {DataTableNonEmptyHeader} from "carbon-components-svelte/types/DataTable/DataTable.svelte";
+	import { type DashboardDefinition } from '$lib/Dashboard/definition';
+	import type { StateProviderResult } from '$lib/State/Provider';
+	import { PaginatedResults } from '$lib/DataTable/Pagination';
+	import type { SubmittedData } from '$lib/Crud/form';
+	import type { RequestParameters } from '$lib/request';
+	import type { DataTableNonEmptyHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: typeof List;
@@ -27,13 +27,14 @@
 
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
-	const sortableDataTable = operation.fields.filter((field: Field<FieldOptions>) => !field.options?.sortable).length > 0;
+	const sortableDataTable =
+		operation.fields.filter((field: Field<FieldOptions>) => !field.options?.sortable).length > 0;
 	const headers: Headers = operation.fields.map((field: Field<FieldOptions>): Header => {
 		return {
 			key: field.name,
 			value: field.label,
 			// Carbon needs the "sort" property to be a callback, else it does not display the sorting.
-			sort: field.options?.sortable ? (() => {}) : false
+			sort: field.options?.sortable ? () => {} : false
 		};
 	});
 
@@ -53,7 +54,10 @@
 	}
 
 	// Extracted from Carbon's DataTable
-	type SortEvent = {header: DataTableNonEmptyHeader, sortDirection?: "none"|"ascending"|"descending"};
+	type SortEvent = {
+		header: DataTableNonEmptyHeader;
+		sortDirection?: 'none' | 'ascending' | 'descending';
+	};
 
 	fetchResultsFromProvider();
 
@@ -124,7 +128,7 @@
 	}
 
 	async function onSort(event: CustomEvent<SortEvent>) {
-		const {header, sortDirection} = event.detail;
+		const { header, sortDirection } = event.detail;
 		if (sortDirection === undefined || !header.sort) {
 			// Non-sortable field
 			return;

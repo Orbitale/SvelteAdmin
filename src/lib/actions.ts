@@ -43,7 +43,7 @@ export class CallbackAction extends DefaultAction {
 		label: string,
 		icon: Optional<ActionIcon>,
 		callback: (item?: object | undefined) => void,
-		options?: ActionOptions,
+		options?: ActionOptions
 	) {
 		super(label, icon, options);
 		this._callback = callback;

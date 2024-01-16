@@ -1,4 +1,4 @@
-import {Field, type InputFieldOptions} from '$lib/FieldDefinitions/definition';
+import { Field, type InputFieldOptions } from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type NumberOptions = InputFieldOptions & {

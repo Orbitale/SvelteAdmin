@@ -19,4 +19,5 @@
 	helperText={field.options.help}
 	min={field.options.min}
 	max={field.options.max}
+	{value}
 />

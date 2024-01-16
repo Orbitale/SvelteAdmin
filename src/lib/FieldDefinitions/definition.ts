@@ -1,4 +1,4 @@
-import type {FormFieldTheme, ViewFieldTheme} from '$lib/themes/ThemeConfig';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type FieldOptions = {
 	disableOnOperations?: Array<string>;

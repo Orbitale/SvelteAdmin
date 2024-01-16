@@ -10,7 +10,7 @@
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { SubmitButtonType } from '$lib/config/types';
-	import type {CommonFieldOptions, FieldInterface} from '$lib/FieldDefinitions/definition';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
 	import { getSubmittedFormData } from '$lib/Crud/form';
 	import type { SubmittedData } from '$lib/Crud/form';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';

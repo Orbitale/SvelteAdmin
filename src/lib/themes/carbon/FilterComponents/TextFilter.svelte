@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TextInput from 'carbon-components-svelte/src/TextInput/TextInput.svelte';
 	import type { TextFilter } from '$lib/Filter';
-	import FilterContainer from "$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte";
+	import FilterContainer from '$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	export let filter: TextFilter;
 	export let value: string;

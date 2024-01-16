@@ -30,7 +30,7 @@ import {
 	ToggleField,
 	UrlAction,
 	UrlField,
-	View,
+	View
 } from '$lib';
 import type { FieldInterface, FieldOptions } from '$lib/FieldDefinitions/definition';
 import type { RequestParameters } from '$lib/request';
@@ -99,11 +99,16 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 			],
 			{
 				globalActions: [
-					new CallbackAction('Reset memory data', TrashCan, () => {
-						window.localStorage.removeItem('tests');
-						window.location.reload();
-					}, {buttonKind: 'ghost'}),
-					new UrlAction('New', '/admin/tests/new', Pen),
+					new CallbackAction(
+						'Reset memory data',
+						TrashCan,
+						() => {
+							window.localStorage.removeItem('tests');
+							window.location.reload();
+						},
+						{ buttonKind: 'ghost' }
+					),
+					new UrlAction('New', '/admin/tests/new', Pen)
 				],
 				filters: [
 					new TextFilter('text_field', 'Filter text'),
@@ -174,21 +179,23 @@ export const testCrud = new CrudDefinition<Test>('tests', {
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const id =
+				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const test = data as Test;
 			test.id = id;
 
-			success((operation.name === 'edit'
+			success(
+				(operation.name === 'edit'
 					? `Editing Test with id ${id}!`
-					: `Creating new Test with id ${id}!`)
-				+ "\n"
-				+ "New content:\n"
-				+ JSON.stringify(test, undefined, 4));
+					: `Creating new Test with id ${id}!`) +
+					'\n' +
+					'New content:\n' +
+					JSON.stringify(test, undefined, 4)
+			);
 
 			return Promise.resolve();
 		}
 
 		return Promise.resolve();
-	}),
-
+	})
 });

@@ -24,7 +24,7 @@ const baseTests: Array<Test> = Array(10)
 			text_field: faker.music.songName(),
 			textarea_field: faker.lorem.lines(2),
 			checkbox_field: faker.datatype.boolean(),
-			number_field: faker.number.int({min: -10000, max: 10000}),
+			number_field: faker.number.int({ min: -10000, max: 10000 }),
 			toggle_field: faker.datatype.boolean(),
 			url_field: faker.internet.url(),
 			path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/'),

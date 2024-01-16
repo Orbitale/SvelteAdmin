@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TextInput from 'carbon-components-svelte/src/TextInput/TextInput.svelte';
-	import type {CommonFieldOptions, Field} from '$lib/FieldDefinitions/definition';
+	import type { CommonFieldOptions, Field } from '$lib/FieldDefinitions/definition';
 
 	export let field: Field<CommonFieldOptions>;
 	export let value: object | undefined;
