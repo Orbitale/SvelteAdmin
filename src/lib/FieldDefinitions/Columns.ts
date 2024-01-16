@@ -11,7 +11,7 @@ export type ColumnOptions = FieldOptions & {
 	label?: string;
 };
 
-export type ColumnedFields<T = FieldInterface<ColumnOptions>> = Array<{
+export type ColumnedFields<T = FieldInterface<FieldOptions>> = Array<{
 	name?: string;
 	label?: string;
 	size?: number;

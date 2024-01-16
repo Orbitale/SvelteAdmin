@@ -6,7 +6,7 @@ export type TabOptions = FieldOptions & {
 	label?: string;
 };
 
-export type TabbedFields<T = FieldInterface<TabOptions>> = Array<{
+export type TabbedFields<T = FieldInterface<FieldOptions>> = Array<{
 	name: string;
 	label?: string;
 	fields: Array<T>;
