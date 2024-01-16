@@ -2,18 +2,25 @@ import type { ComponentType, SvelteComponent } from 'svelte';
 import type { KeyValueObject, Optional } from '$lib/genericTypes';
 
 export type ActionIcon = string | SvelteComponent | ComponentType;
+export type ActionOptions = {
+	buttonKind?: string;
+};
 
 export interface Action {
 	get label(): string;
+	get icon(): ActionIcon | null | undefined;
+	get options(): ActionOptions;
 }
 
 export abstract class DefaultAction implements Action {
 	protected readonly _label: string;
 	protected readonly _icon?: Optional<ActionIcon>;
+	protected readonly _options: ActionOptions;
 
-	protected constructor(label: string, icon?: Optional<ActionIcon>) {
+	protected constructor(label: string, icon?: Optional<ActionIcon>, options?: ActionOptions) {
 		this._label = label;
 		this._icon = icon;
+		this._options = options || {};
 	}
 
 	get label(): string {
@@ -23,6 +30,10 @@ export abstract class DefaultAction implements Action {
 	get icon(): ActionIcon | null | undefined {
 		return this._icon;
 	}
+
+	get options(): ActionOptions {
+		return this._options;
+	}
 }
 
 export class CallbackAction extends DefaultAction {
@@ -31,9 +42,10 @@ export class CallbackAction extends DefaultAction {
 	constructor(
 		label: string,
 		icon: Optional<ActionIcon>,
-		callback: (item?: object | undefined) => void
+		callback: (item?: object | undefined) => void,
+		options?: ActionOptions,
 	) {
-		super(label, icon);
+		super(label, icon, options);
 		this._callback = callback;
 	}
 
@@ -45,8 +57,8 @@ export class CallbackAction extends DefaultAction {
 export class UrlAction extends DefaultAction {
 	private readonly _url: string;
 
-	constructor(label: string, url: string, icon?: ActionIcon) {
-		super(label, icon);
+	constructor(label: string, url: string, icon?: ActionIcon, options?: ActionOptions) {
+		super(label, icon, options);
 		this._url = url;
 	}
 
