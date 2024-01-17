@@ -2,7 +2,7 @@ import { Field, type InputFieldOptions } from '$lib/FieldDefinitions/definition'
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
 export type DateOptions = InputFieldOptions & {
-	formFormat: 'Y-m-d';
+	formFormat?: string; // Default: 'Y-m-d'
 };
 
 export class DateField extends Field<DateOptions> {

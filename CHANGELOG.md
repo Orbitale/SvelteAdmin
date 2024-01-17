@@ -1,3 +1,7 @@
+# v0.11.1
+
+- Fix `formFormat` option in Date field
+
 # v0.11.0
 
 - Add Date field
