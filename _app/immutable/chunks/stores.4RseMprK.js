@@ -1,0 +1,1 @@
+import"./Component.YS-fSRxt.js";import{s as e}from"./entry.wPFUvv_8.js";const r=()=>{const s=e;return{page:{subscribe:s.page.subscribe},navigating:{subscribe:s.navigating.subscribe},updated:s.updated}},b={subscribe(s){return r().page.subscribe(s)}};export{b as p};
