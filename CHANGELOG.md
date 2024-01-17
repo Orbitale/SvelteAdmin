@@ -1,3 +1,13 @@
+# v0.11.0
+
+- Add Date field
+- Add "button kind" option to all Action objects, to customize button style
+- Add popup message system based on @zerodevx/svelte-toast
+- Normalize "test" crud fields
+- Fix Columns and Tabs incorrect options types
+- Fix text fields templates names
+- Update "books" and "tests" cruds with latest updates
+
 # v0.10.1
 
 - Fix expandable DataTable that was only here for testing
