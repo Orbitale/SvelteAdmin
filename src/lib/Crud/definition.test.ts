@@ -11,7 +11,8 @@ describe(
 	'Crud definition',
 	() => {
 		it('can be instantiated with simple config', () => {
-			const crud = new CrudDefinition<Book>('books', {
+			const crud = new CrudDefinition<Book>({
+				name: 'books',
 				label: { singular: '', plural: '' },
 				operations: [new List([])],
 				stateProvider: new CallbackStateProvider<Book>(async () => null),
@@ -21,7 +22,8 @@ describe(
 			expect(crud).toBeDefined();
 		});
 		it('can be instantiated with simple config containing existing default operation name', () => {
-			const crud = new CrudDefinition<Book>('books', {
+			const crud = new CrudDefinition<Book>({
+				name: 'books',
 				label: { singular: '', plural: '' },
 				operations: [new List([])],
 				defaultOperationName: 'list',
@@ -34,7 +36,8 @@ describe(
 
 		it('cannot be instantiated without operations', () => {
 			const construct = () => {
-				new CrudDefinition<Book>('books', {
+				new CrudDefinition<Book>({
+					name: 'books',
 					label: { singular: '', plural: '' },
 					operations: [],
 					stateProvider: new CallbackStateProvider<Book>(async () => null),
@@ -49,7 +52,8 @@ describe(
 			const construct = () => {
 				const operations = Array(2);
 				operations[1] = new List([]);
-				new CrudDefinition<Book>('books', {
+				new CrudDefinition<Book>({
+					name: 'books',
 					label: { singular: '', plural: '' },
 					operations: operations,
 					stateProvider: new CallbackStateProvider<Book>(async () => null),
@@ -64,7 +68,8 @@ describe(
 
 		it('cannot be instantiated if default operation name does not exist in operations list', () => {
 			const construct = () => {
-				new CrudDefinition<Book>('books', {
+				new CrudDefinition<Book>({
+					name: 'books',
 					label: { singular: '', plural: '' },
 					operations: [new List([])],
 					defaultOperationName: 'edit',

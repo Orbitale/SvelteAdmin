@@ -3,6 +3,7 @@ import type { StateProvider } from '$lib/State/Provider';
 import type { StateProcessor } from '$lib/State/Processor';
 
 export type CrudDefinitionOptionsArgument<T> = {
+	name: string,
 	label: {
 		singular: string;
 		plural: string;
@@ -22,7 +23,8 @@ export class CrudDefinition<T> {
 	public readonly name: string;
 	public readonly options: CrudDefinitionOptions<T>;
 
-	constructor(name: string, options: CrudDefinitionOptionsArgument<T>) {
+	constructor(options: CrudDefinitionOptionsArgument<T>) {
+		const name = options.name;
 		this.name = name;
 
 		if (!options?.operations.length) {
