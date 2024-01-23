@@ -15,7 +15,6 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/themes/carbon/Layout/AdminLayout.svelte';
-	import { getCrudComponent } from '$lib/Theme';
 	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud/definition';
@@ -38,7 +37,7 @@
 		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
 		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 
-	const themeComponent = getCrudComponent(currentCrudOperation?.displayComponentName || '');
+	const themeComponent = currentCrudOperation?.dashboard.adminConfig.theme.crudActions[currentCrudOperation?.displayComponentName];
 </script>
 
 <AdminLayout
@@ -67,6 +66,13 @@
 				{:else}
 					{$_('error.crud.no_operation_specified', { values: { crud } })}
 				{/if}
+			</InlineNotification>
+		{/if}
+		{#if currentCrud && currentCrudOperation && !themeComponent}
+			<InlineNotification hideCloseButton={true}>
+				{$_('error.crud.could_not_find_component', {
+					values: { crud, operation }
+				})}
 			</InlineNotification>
 		{/if}
 		<svelte:component

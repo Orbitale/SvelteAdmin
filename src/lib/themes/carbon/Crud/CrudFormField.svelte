@@ -2,7 +2,6 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import { getFormFieldComponent } from '$lib/Theme';
 	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let operation: CrudOperation;
@@ -29,7 +28,7 @@
 		});
 	}
 
-	const formComponent = getFormFieldComponent(field.formComponent);
+	const formComponent = operation?.dashboard.adminConfig.theme.formFields[field.formComponent];
 </script>
 
 <svelte:component

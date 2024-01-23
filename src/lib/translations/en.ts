@@ -17,6 +17,7 @@ const dictionary: Dictionary = {
 	'error.crud.no_crud_specified': 'No CRUD name was specified when displaying the Dashboard.',
 	'error.crud.could_not_find_operation_name':
 		'Could not find a CRUD operation named "{operation}" for CRUD definition named "{crud}".',
+	'error.crud.could_not_find_component': 'No template found for operation "{operation}" and CRUD "{crud}".',
 	'error.crud.no_operation_specified':
 		'No CRUD operation was specified when displaying the "{crud}" CRUD.',
 	'error.crud.list.no_elements': 'No elements found.',

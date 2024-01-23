@@ -1,3 +1,10 @@
+# v0.12.0
+
+- **BC Break**: CrudDefinition's `name` is no longer an argument, and set in the options instead.
+- Allow accessing `Dashboard` from `CrudDefinition` instances.
+- Allow accessing `Dashboard` and `CrudDefinition` from `CrudOperation` instances.
+- Remove internal stores and functions to fetch current theme, and use new dashboard accessors instead.
+
 # v0.11.1
 
 - Fix `formFormat` option in Date field

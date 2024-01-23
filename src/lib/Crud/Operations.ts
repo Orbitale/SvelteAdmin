@@ -1,4 +1,3 @@
-import type { ComponentType, SvelteComponent } from 'svelte';
 import type { FieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import type { DashboardDefinition } from '$lib/Dashboard/definition';
@@ -6,18 +5,8 @@ import type { Action } from '$lib/actions';
 import type { CrudTheme } from '$lib/themes/ThemeConfig';
 import { defaultPaginationOptions, type PaginationOptions } from '$lib/DataTable/Pagination';
 import type { FilterInterface, FilterOptions } from '$lib/Filter';
-import type { RequestParameters } from '$lib/request';
 
 export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
-
-export type TemplateComponent = ComponentType<
-	SvelteComponent<{
-		dashboard: DashboardDefinition<unknown>;
-		crud: CrudDefinition<unknown>;
-		operation: CrudOperation;
-		requestParameters: RequestParameters;
-	}>
->;
 
 export interface CrudOperation {
 	readonly name: CrudOperationName;
@@ -26,9 +15,17 @@ export interface CrudOperation {
 	readonly fields: Array<FieldInterface<FieldOptions>>;
 	readonly actions: Array<Action>;
 	readonly options: Record<string, string | unknown>;
+
+	get dashboard(): DashboardDefinition;
+	set dashboard(dashboard: DashboardDefinition);
+	get crud(): CrudDefinition<unknown>;
+	set crud(crud: CrudDefinition<unknown>);
 }
 
 export class BaseCrudOperation implements CrudOperation {
+	private _dashboard: DashboardDefinition|null = null;
+	private _crud: CrudDefinition<unknown>|null = null;
+
 	constructor(
 		public readonly name: CrudOperationName,
 		public readonly label: string,
@@ -37,6 +34,34 @@ export class BaseCrudOperation implements CrudOperation {
 		public readonly actions: Array<Action>,
 		public readonly options: Record<string, string | unknown> = {}
 	) {}
+
+	get dashboard(): DashboardDefinition {
+		if (!this._dashboard) {
+			throw new Error('Dashboard is not set in operation: did you try to bypass Crud setup?');
+		}
+		return this._dashboard;
+	}
+
+	set dashboard(dashboard: DashboardDefinition) {
+		if (this._dashboard) {
+			throw new Error('Cannot set dashboard twice in an operation.');
+		}
+		this._dashboard = dashboard;
+	}
+
+	get crud(): CrudDefinition<unknown> {
+		if (!this._crud) {
+			throw new Error('Crud is not set in operation: did you try to bypass Crud setup?');
+		}
+		return this._crud;
+	}
+
+	set crud(crud: CrudDefinition<unknown>) {
+		if (this._crud) {
+			throw new Error('Cannot set crud twice in an operation.');
+		}
+		this._crud = crud;
+	}
 }
 
 export type FormOperationOptions = object & {

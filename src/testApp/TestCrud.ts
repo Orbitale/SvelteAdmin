@@ -86,7 +86,8 @@ const fullFields = [
 
 const IdField = new TextField('id', 'ID');
 
-export const testCrud = new CrudDefinition<Test>('tests', {
+export const testCrud = new CrudDefinition<Test>({
+	name: 'tests',
 	label: { singular: 'Test', plural: 'Tests' },
 
 	operations: [

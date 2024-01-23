@@ -42,7 +42,8 @@ function randomWait(maxMilliseconds: number) {
 	);
 }
 
-export const bookCrud = new CrudDefinition<Book>('books', {
+export const bookCrud = new CrudDefinition<Book>({
+	name: 'books',
 	label: { singular: 'Book', plural: 'Books' },
 	minStateLoadingTimeMs: 1000,
 

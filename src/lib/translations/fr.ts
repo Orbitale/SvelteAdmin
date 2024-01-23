@@ -18,6 +18,7 @@ const dictionary: Dictionary = {
 		"Aucun nom de CRUD n'a été spécifié pour afficher le tableau de bord.",
 	'error.crud.could_not_find_operation_name':
 		'Opération "{operation}" introuvable pour la configuration de CRUD "{crud}".',
+	'error.crud.could_not_find_component': 'Aucun template trouvé pour l\'opération "{operation}" et le CRUD "{crud}".',
 	'error.crud.no_operation_specified':
 		'Aucune opération n\'a été spécifié pour afficher le CRUD "{crud}".',
 	'error.crud.list.no_elements': 'Aucun élément trouvé.',

@@ -2,7 +2,6 @@ import type { MenuLink } from '$lib/Menu/MenuLinks';
 import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
-import theme from '$lib/stores/theme';
 
 export type DashboardDefinitionOptions = {
 	adminConfig: Partial<AdminConfig>;
@@ -31,7 +30,8 @@ export class DashboardDefinition {
 		this.topLeftMenu = options.topLeftMenu || [];
 		this.topRightMenu = options.topRightMenu || [];
 		this.localeDictionaries = options.localeDictionaries || {};
-		theme.set(this.adminConfig.theme);
+		this.cruds.forEach((crud: CrudDefinition<unknown>) => crud.dashboard = this);
+		this.checkUniqueCruds();
 	}
 
 	public getFirstActionUrl(): string {
@@ -40,5 +40,15 @@ export class DashboardDefinition {
 		const root = this.adminConfig.rootUrl.replace(/(^\/)|(\/$)/gi, '');
 
 		return `/${root}/${firstCrud.name}/${firstOperation.name}`;
+	}
+
+	private checkUniqueCruds() {
+		const existingCruds: Array<string> = [];
+		this.cruds.forEach((crud: CrudDefinition<unknown>) => {
+			if (existingCruds.indexOf(crud.name) >= 0) {
+				throw new Error(`Crud name "${crud.name}" is used in at least two different Crud objects. Crud names must be unique.`);
+			}
+			existingCruds.push(crud.name);
+		});
 	}
 }
