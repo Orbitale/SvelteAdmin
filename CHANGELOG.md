@@ -4,6 +4,7 @@
 - Allow accessing `Dashboard` from `CrudDefinition` instances.
 - Allow accessing `Dashboard` and `CrudDefinition` from `CrudOperation` instances.
 - Remove internal stores and functions to fetch current theme, and use new dashboard accessors instead.
+- Add new `ObjectField` and its templates.
 
 # v0.11.1
 

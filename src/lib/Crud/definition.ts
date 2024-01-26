@@ -68,6 +68,9 @@ export class CrudDefinition<T> {
 	}
 
 	set dashboard(dashboard: DashboardDefinition) {
+		if (this._dashboard === dashboard) {
+			return;
+		}
 		if (this._dashboard) {
 			throw new Error('Cannot set dashboard twice in a Crud definition.');
 		}

@@ -13,6 +13,7 @@ export { Columns } from './FieldDefinitions/Columns';
 export { DateField } from './FieldDefinitions/Date';
 export { Field } from './FieldDefinitions/definition';
 export { NumberField } from './FieldDefinitions/Number';
+export { ObjectField } from './FieldDefinitions/Object';
 export { Tabs } from './FieldDefinitions/Tabs';
 export { TextareaField } from './FieldDefinitions/Textarea';
 export { TextField } from './FieldDefinitions/Text';

@@ -43,6 +43,9 @@ export class BaseCrudOperation implements CrudOperation {
 	}
 
 	set dashboard(dashboard: DashboardDefinition) {
+		if (this._dashboard === dashboard) {
+			return;
+		}
 		if (this._dashboard) {
 			throw new Error('Cannot set dashboard twice in an operation.');
 		}

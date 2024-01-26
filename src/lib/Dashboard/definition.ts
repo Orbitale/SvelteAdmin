@@ -24,7 +24,7 @@ export class DashboardDefinition {
 	public readonly options = {};
 
 	constructor(options: DashboardDefinitionOptions) {
-		this.adminConfig = { ...emptyAdminConfig(), ...options.adminConfig };
+		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig||{}) };
 		this.cruds = options.cruds;
 		this.sideMenu = options.sideMenu || [];
 		this.topLeftMenu = options.topLeftMenu || [];
