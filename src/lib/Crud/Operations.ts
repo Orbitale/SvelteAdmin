@@ -23,8 +23,8 @@ export interface CrudOperation {
 }
 
 export class BaseCrudOperation implements CrudOperation {
-	private _dashboard: DashboardDefinition|null = null;
-	private _crud: CrudDefinition<unknown>|null = null;
+	private _dashboard: DashboardDefinition | null = null;
+	private _crud: CrudDefinition<unknown> | null = null;
 
 	constructor(
 		public readonly name: CrudOperationName,

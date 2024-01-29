@@ -24,13 +24,13 @@ export class DashboardDefinition {
 	public readonly options = {};
 
 	constructor(options: DashboardDefinitionOptions) {
-		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig||{}) };
+		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig || {}) };
 		this.cruds = options.cruds;
 		this.sideMenu = options.sideMenu || [];
 		this.topLeftMenu = options.topLeftMenu || [];
 		this.topRightMenu = options.topRightMenu || [];
 		this.localeDictionaries = options.localeDictionaries || {};
-		this.cruds.forEach((crud: CrudDefinition<unknown>) => crud.dashboard = this);
+		this.cruds.forEach((crud: CrudDefinition<unknown>) => (crud.dashboard = this));
 		this.checkUniqueCruds();
 	}
 
@@ -46,7 +46,9 @@ export class DashboardDefinition {
 		const existingCruds: Array<string> = [];
 		this.cruds.forEach((crud: CrudDefinition<unknown>) => {
 			if (existingCruds.indexOf(crud.name) >= 0) {
-				throw new Error(`Crud name "${crud.name}" is used in at least two different Crud objects. Crud names must be unique.`);
+				throw new Error(
+					`Crud name "${crud.name}" is used in at least two different Crud objects. Crud names must be unique.`
+				);
 			}
 			existingCruds.push(crud.name);
 		});

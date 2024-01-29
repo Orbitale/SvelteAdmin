@@ -37,7 +37,10 @@
 		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
 		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 
-	const themeComponent = currentCrudOperation?.dashboard.adminConfig.theme.crudActions[currentCrudOperation?.displayComponentName];
+	const themeComponent =
+		currentCrudOperation?.dashboard.adminConfig.theme.crudActions[
+			currentCrudOperation?.displayComponentName
+		];
 </script>
 
 <AdminLayout

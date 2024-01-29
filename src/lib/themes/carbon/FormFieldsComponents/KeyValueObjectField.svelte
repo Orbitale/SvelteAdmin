@@ -50,14 +50,14 @@
 			{@const key = entry[0]}
 			{@const entryValue = entry[1]}
 			{@const inputId = field.name + '_' + key.replace(/[^a-z0-9_-]/gi, '_')}
-			{@const inputName = field.name + "[" + key + "]"}
+			{@const inputName = field.name + '[' + key + ']'}
 			<Row>
 				<Column sm={0} md={1} lg={1} xlg={1} max={1}>
 					<Button kind="ghost" size="small" disabled style="cursor: default;">
 						<label for={inputId}>{i}</label>
 					</Button>
 					{#if key.length}
-						<input type="hidden" id={inputId} name="{inputName}" value={entryValue} />
+						<input type="hidden" id={inputId} name={inputName} value={entryValue} />
 					{/if}
 				</Column>
 				<Column sm={1} md={2} lg={6} xlg={6} max={6}>

@@ -1,10 +1,10 @@
 import type { CrudOperation } from '$lib/Crud/Operations';
 import type { StateProvider } from '$lib/State/Provider';
 import type { StateProcessor } from '$lib/State/Processor';
-import {type DashboardDefinition} from "$lib/Dashboard/definition";
+import { type DashboardDefinition } from '$lib/Dashboard/definition';
 
 export type CrudDefinitionOptionsArgument<T> = {
-	name: string,
+	name: string;
 	label: {
 		singular: string;
 		plural: string;
@@ -23,7 +23,7 @@ export type CrudDefinitionOptions<T> = Required<CrudDefinitionOptionsArgument<T>
 export class CrudDefinition<T> {
 	public readonly name: string;
 	public readonly options: CrudDefinitionOptions<T>;
-	private _dashboard: DashboardDefinition|null = null;
+	private _dashboard: DashboardDefinition | null = null;
 
 	constructor(options: CrudDefinitionOptionsArgument<T>) {
 		const name = options.name;
@@ -52,7 +52,7 @@ export class CrudDefinition<T> {
 					.join(', ')}.`
 			);
 		}
-		options.operations.forEach((operation: CrudOperation) => operation.crud = this);
+		options.operations.forEach((operation: CrudOperation) => (operation.crud = this));
 
 		options.defaultOperationName = defaultOperation.name;
 		options.identifierFieldName ??= 'id';
