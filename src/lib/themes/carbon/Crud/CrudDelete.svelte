@@ -6,10 +6,8 @@
 	import type { CrudDefinition } from '$lib/Crud/definition';
 	import { CallbackAction, UrlAction } from '$lib/actions';
 	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
-	import type { DashboardDefinition } from '$lib/Dashboard/definition';
 	import type { RequestParameters } from '$lib/request';
 
-	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
