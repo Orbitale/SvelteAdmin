@@ -22,7 +22,7 @@ export type ThemeConfig = {
 		default: ComponentType;
 		label: ComponentType;
 		number: ComponentType;
-		object: ComponentType;
+		key_value_object: ComponentType;
 		tabs: ComponentType;
 		textarea: ComponentType;
 		text: ComponentType;
@@ -36,7 +36,7 @@ export type ThemeConfig = {
 		date: ComponentType;
 		default: ComponentType;
 		number: ComponentType;
-		object: ComponentType;
+		key_value_object: ComponentType;
 		tabs: ComponentType;
 		textarea: ComponentType;
 		text: ComponentType;

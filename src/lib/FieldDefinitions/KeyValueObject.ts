@@ -5,9 +5,9 @@ export type ObjectOptions = InputFieldOptions & {
 	// maxDepth?: number, // TODO: check if we can create an input with nested key=>value pairs with a max depth
 };
 
-export class ObjectField extends Field<ObjectOptions> {
-	readonly formComponent: FormFieldTheme = 'object';
-	readonly viewComponent: ViewFieldTheme = 'object';
+export class KeyValueObjectField extends Field<ObjectOptions> {
+	readonly formComponent: FormFieldTheme = 'key_value_object';
+	readonly viewComponent: ViewFieldTheme = 'key_value_object';
 
 	public readonly propertyPath: string;
 

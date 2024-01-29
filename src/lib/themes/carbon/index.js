@@ -16,6 +16,7 @@ import ColumnsFormField from './FormFieldsComponents/ColumnsField.svelte';
 import DateFormField from './FormFieldsComponents/DateField.svelte';
 import DefaultFormField from './FormFieldsComponents/DefaultField.svelte';
 import NumberFormField from './FormFieldsComponents/NumberField.svelte';
+import KeyValueObjectFormField from './FormFieldsComponents/KeyValueObjectField.svelte';
 import TabsFormField from './FormFieldsComponents/TabsField.svelte';
 import TextareaFormField from './FormFieldsComponents/TextareaField.svelte';
 import TextFormField from './FormFieldsComponents/TextField.svelte';
@@ -34,7 +35,7 @@ import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
 import DateViewField from './ViewFieldsComponents/DateField.svelte';
 import DefaultViewField from './ViewFieldsComponents/DefaultField.svelte';
 import NumberViewField from './ViewFieldsComponents/NumberField.svelte';
-import ObjectViewField from './ViewFieldsComponents/ObjectField.svelte';
+import KeyValueObjectViewField from './ViewFieldsComponents/KeyValueObjectField.svelte';
 import TabsViewField from './ViewFieldsComponents/TabsField.svelte';
 import TextareaViewField from './ViewFieldsComponents/DefaultField.svelte';
 import TextViewField from './ViewFieldsComponents/DefaultField.svelte';
@@ -72,7 +73,7 @@ const theme = {
 		default: DefaultViewField,
 		label: ViewLabel,
 		number: NumberViewField,
-		object: ObjectViewField,
+		key_value_object: KeyValueObjectViewField,
 		tabs: TabsViewField,
 		text: TextViewField,
 		textarea: TextareaViewField,
@@ -85,7 +86,7 @@ const theme = {
 		date: DateFormField,
 		default: DefaultFormField,
 		number: NumberFormField,
-		object: TextFormField, // FIXME
+		key_value_object: KeyValueObjectFormField,
 		tabs: TabsFormField,
 		text: TextFormField,
 		textarea: TextareaFormField,

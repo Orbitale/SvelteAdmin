@@ -21,7 +21,7 @@ import {
 	New,
 	NumberField,
 	NumericFilter,
-	ObjectField,
+	KeyValueObjectField,
 	PaginatedResults,
 	success,
 	Tabs,
@@ -55,7 +55,7 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
 	new DateField('date_field', 'Date field'),
-	new ObjectField('object_field', 'Object field', 'data1'),
+	new KeyValueObjectField('key_value_object_field', 'Key Value Object field', 'data1')
 ];
 
 const fullFields = [

@@ -1,10 +1,10 @@
-# v0.12.0
+# v0.12.0 (upcoming)
 
 - **BC Break**: CrudDefinition's `name` is no longer an argument, and set in the options instead.
 - Allow accessing `Dashboard` from `CrudDefinition` instances.
 - Allow accessing `Dashboard` and `CrudDefinition` from `CrudOperation` instances.
 - Remove internal stores and functions to fetch current theme, and use new dashboard accessors instead.
-- Add new `ObjectField` and its templates.
+- Add new `KeyValueObjectFied` and its templates.
 
 # v0.11.1
 

@@ -10,16 +10,14 @@ export type Test = {
 	url_field: string;
 	path_field: string;
 	date_field: Date;
-	object_field: object;
+	key_value_object_field: object;
 	[key: string]: unknown;
 };
 
-function fakeObject(): object|string {
+function fakeObject(): object | string {
 	return {
 		data1: faker.lorem.words(faker.number.int({ min: 1, max: 4 })),
-		data2: {
-			nested: faker.lorem.words(faker.number.int({ min: 1, max: 4 })),
-		},
+		data2: faker.lorem.words(faker.number.int({ min: 1, max: 4 }))
 	};
 }
 
@@ -39,7 +37,7 @@ const baseTests: Array<Test> = Array(10)
 			url_field: faker.internet.url(),
 			path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/'),
 			date_field: date,
-			object_field: fakeObject() as object
+			key_value_object_field: fakeObject() as object
 		};
 	});
 
