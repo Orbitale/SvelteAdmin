@@ -23,6 +23,7 @@ const dictionary: Dictionary = {
 	'error.crud.no_operation_specified':
 		'No CRUD operation was specified when displaying the "{crud}" CRUD.',
 	'error.crud.list.no_elements': 'No elements found.',
+	'error.crud.list.load_error': 'An error occured when loading data.',
 	'error.crud.entity.not_found': 'No element found with this identifier.',
 	'datatable.filters.menu_title': 'Filters',
 	'datatable.filters.submit_filters': 'Filter results',

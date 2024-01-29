@@ -26,7 +26,7 @@ export function getMemoryBooks(): Array<Book> {
 	}
 
 	let memory = window.localStorage.getItem('books');
-	if (memory === null || memory === undefined || memory === '' || memory === '[]') {
+	if (memory === null || memory === undefined || memory === '') {
 		memory = JSON.stringify(baseBooks);
 		window.localStorage.setItem('books', memory);
 	}

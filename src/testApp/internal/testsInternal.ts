@@ -49,7 +49,7 @@ export function getMemoryTests(): Array<Test> {
 	}
 
 	let memory = window.localStorage.getItem('tests');
-	if (memory === null || memory === undefined || memory === '' || memory === '[]') {
+	if (memory === null || memory === undefined || memory === '') {
 		memory = JSON.stringify(baseTests);
 		window.localStorage.setItem('tests', memory);
 	}

@@ -24,11 +24,7 @@
 	export let sortable: boolean;
 	export let onSort: () => unknown | undefined;
 
-	let resolvedRows: Rows = [];
-
 	let actionsCellIndex = -1;
-
-	$: rows.then((r) => (resolvedRows = r));
 
 	if (actions.length) {
 		headers.push({
@@ -77,9 +73,9 @@
 	}
 </script>
 
-{#if !resolvedRows || !resolvedRows.length}
+{#await rows}
 	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
-{:else}
+{:then resolvedRows}
 	<DataTable
 		{headers}
 		{page}
@@ -131,4 +127,27 @@
 			{/if}
 		</div>
 	</DataTable>
-{/if}
+{:catch error}
+	<DataTable
+		{headers}
+		{page}
+		{sortable}
+		zebra
+		rows={[]}
+		size="short"
+		on:click:header={onSort}
+		{...$$restProps}
+	>
+		<svelte:fragment slot="title">
+			<slot name="title" />
+		</svelte:fragment>
+		<svelte:fragment slot="description">
+			<slot name="description" />
+		</svelte:fragment>
+
+		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
+			{$_('error.crud.list.load_error')}<br>
+			{error.toString()}
+		</InlineNotification>
+	</DataTable>
+{/await}

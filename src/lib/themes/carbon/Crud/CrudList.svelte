@@ -93,7 +93,7 @@
 			paginator = responseResults instanceof PaginatedResults ? responseResults : undefined;
 
 			if (!finalRows || !finalRows?.length) {
-				finalRows = [createEmptyRow(operation)];
+				finalRows = [];
 			}
 
 			// Make sure final results always have the "id" field,
