@@ -18,6 +18,7 @@ export type ThemeConfig = {
 	viewFields: {
 		checkbox: ComponentType;
 		column: ComponentType;
+		crud_entity: ComponentType;
 		date: ComponentType;
 		default: ComponentType;
 		label: ComponentType;
@@ -33,6 +34,7 @@ export type ThemeConfig = {
 	formFields: {
 		checkbox: ComponentType;
 		column: ComponentType;
+		crud_entity: ComponentType;
 		date: ComponentType;
 		default: ComponentType;
 		number: ComponentType;

@@ -1,5 +1,4 @@
 import { describe, it, expect, type TestOptions } from 'vitest';
-import { createEmptyRow } from '$lib/DataTable/DataTable';
 import {
 	List,
 	CheckboxField,
@@ -20,43 +19,10 @@ const testOpts: TestOptions = {
 describe(
 	'DataTable',
 	() => {
-		it('can create an empty row from empty CrudOperation', () => {
-			const row = createEmptyRow(new List([]));
-
-			expect(row).toBeDefined();
-			expect(row).toStrictEqual({
-				id: 0
-			});
-		});
-
-		it('can create an empty row from CrudOperation with many text-based fields', () => {
-			const fields = [
-				new CheckboxField('field_1'),
-				new Field('field_2'),
-				new NumberField('field_3'),
-				new TextareaField('field_4'),
-				new TextField('field_5'),
-				new ToggleField('field_6'),
-				new UrlField('field_7')
-			];
-			const row = createEmptyRow(new List(fields));
-
-			expect(row).toBeDefined();
-			expect(row).toStrictEqual({
-				id: 0,
-				field_1: '-',
-				field_2: '-',
-				field_3: '-',
-				field_4: '-',
-				field_5: '-',
-				field_6: '-',
-				field_7: '-'
-			});
-		});
 
 		it('can create a Tabs configuration with 1 level of nested fields', () => {
 			const fields = [
-				new Tabs([
+				new Tabs('', '', [
 					{ name: 'tab_1', fields: [new CheckboxField('field_1')] },
 					{ name: 'tab_2', fields: [new Field('field_2')] },
 					{ name: 'tab_3', fields: [new NumberField('field_3')] },
@@ -73,7 +39,7 @@ describe(
 
 		it('can create a Columns configuration with 1 level of nested fields', () => {
 			const fields = [
-				new Columns([
+				new Columns('', '', [
 					{ name: 'column_1', fields: [new CheckboxField('field_1')] },
 					{ name: 'column_2', fields: [new Field('field_2')] },
 					{ name: 'column_3', fields: [new NumberField('field_3')] },

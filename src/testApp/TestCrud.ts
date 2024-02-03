@@ -37,6 +37,8 @@ import type { FieldInterface, FieldOptions } from '$lib/FieldDefinitions/definit
 import type { RequestParameters } from '$lib/request';
 
 import { type Test, getMemoryTests } from './internal/testsInternal';
+import {CrudEntityField} from "$lib/FieldDefinitions/CrudEntity";
+import type {KeyValueObject} from "$lib/genericTypes";
 
 const itemsPerPage = 10;
 
@@ -45,21 +47,27 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 		placeholder: 'This is a placeholder',
 		help: 'This is a help message!'
 	}),
-	new TextareaField('textarea_field', 'Textarea description', {
-		placeholder: 'This is also a placeholder',
-		help: 'This is a help message!'
-	}),
 	new CheckboxField('checkbox_field', 'Checkbox field'),
 	new NumberField('number_field', 'Number field'),
 	new ToggleField('toggle_field', 'Toggle field'),
 	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
 	new DateField('date_field', 'Date field'),
+	new CrudEntityField('crud_entity_field', 'Crud entity field (book)', {
+		crud_name: 'books',
+		get_provider_operation: {
+			entity_field: 'title',
+		},
+	}),
 	new KeyValueObjectField('key_value_object_field', 'Key Value Object field', 'data1')
 ];
 
 const fullFields = [
 	...baseFields,
+	new TextareaField('textarea_field', 'Textarea description', {
+		placeholder: 'This is also a placeholder',
+		help: 'This is a help message!'
+	}),
 	new Columns('columns_field', 'Columns field', [
 		{
 			name: 'column_1',
@@ -154,7 +162,7 @@ export const testCrud = new CrudDefinition<Test>({
 			);
 		}
 
-		if (requestParameters.id !== undefined) {
+		if (operation.name === 'edit' || operation.name === 'view') {
 			const ret = tests.filter(
 				(test: { id: string | number }) => test.id && test.id.toString() === requestParameters.id
 			);
@@ -162,9 +170,7 @@ export const testCrud = new CrudDefinition<Test>({
 			return Promise.resolve(ret[0] || null);
 		}
 
-		if (operation.name !== 'edit' && operation.name !== 'view' && operation.name !== 'delete') {
-			console.warn('StateProvider error: Unsupported Tests Crud action "' + operation.name + '".');
-		}
+		console.error('StateProvider error: Unsupported Tests Crud action "' + operation.name + '".');
 
 		return Promise.resolve(null);
 	}),

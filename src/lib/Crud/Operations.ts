@@ -6,7 +6,7 @@ import type { CrudTheme } from '$lib/themes/ThemeConfig';
 import { defaultPaginationOptions, type PaginationOptions } from '$lib/DataTable/Pagination';
 import type { FilterInterface, FilterOptions } from '$lib/Filter';
 
-export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | string;
+export type CrudOperationName = 'new' | 'edit' | 'view' | 'list' | 'delete' | 'entity_view' | 'entity_list' | string;
 
 export interface CrudOperation {
 	readonly name: CrudOperationName;
@@ -124,5 +124,14 @@ export class Delete extends BaseCrudOperation {
 export class View extends BaseCrudOperation {
 	constructor(fields: Array<FieldInterface<FieldOptions>>) {
 		super('view', 'crud.view.label', 'view', fields, []);
+	}
+}
+
+export class Field extends BaseCrudOperation {
+	constructor(
+		name: CrudOperationName = 'field',
+		options: Record<string, string | unknown> = {}
+	) {
+		super(name, '', 'field', [], [], options);
 	}
 }

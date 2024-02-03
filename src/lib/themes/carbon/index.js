@@ -13,6 +13,7 @@ import DataTable from './DataTable/DataTable.svelte';
 
 import CheckboxFormField from './FormFieldsComponents/CheckboxField.svelte';
 import ColumnsFormField from './FormFieldsComponents/ColumnsField.svelte';
+import CrudEntityFormField from './FormFieldsComponents/CrudEntityField.svelte';
 import DateFormField from './FormFieldsComponents/DateField.svelte';
 import DefaultFormField from './FormFieldsComponents/DefaultField.svelte';
 import NumberFormField from './FormFieldsComponents/NumberField.svelte';
@@ -32,6 +33,7 @@ import TopRightMenu from './Menu/TopRightMenu.svelte';
 
 import CheckboxViewField from './ViewFieldsComponents/CheckboxField.svelte';
 import ColumnsViewField from './ViewFieldsComponents/ColumnsField.svelte';
+import CrudEntityViewField from './ViewFieldsComponents/CrudEntityField.svelte';
 import DateViewField from './ViewFieldsComponents/DateField.svelte';
 import DefaultViewField from './ViewFieldsComponents/DefaultField.svelte';
 import NumberViewField from './ViewFieldsComponents/NumberField.svelte';
@@ -69,6 +71,7 @@ const theme = {
 	viewFields: {
 		checkbox: CheckboxViewField,
 		column: ColumnsViewField,
+		crud_entity: CrudEntityViewField,
 		date: DateViewField,
 		default: DefaultViewField,
 		label: ViewLabel,
@@ -83,6 +86,7 @@ const theme = {
 	formFields: {
 		checkbox: CheckboxFormField,
 		column: ColumnsFormField,
+		crud_entity: CrudEntityFormField,
 		date: DateFormField,
 		default: DefaultFormField,
 		number: NumberFormField,

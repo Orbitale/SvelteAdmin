@@ -8,17 +8,19 @@ export type Book = {
 	publishedAt: string;
 };
 
-const baseBooks: Array<Book> = Array(25)
-	.fill(undefined)
-	.map((_, i) => {
-		return {
-			id: faker.string.uuid(),
-			title: i + 1 + ' ' + faker.music.songName(),
-			description: faker.lorem.lines(3),
-			numberOfPages: faker.number.int({ min: 50, max: 800 }),
-			publishedAt: faker.date.anytime().toISOString()
-		};
-	});
+function getBaseBooks(): Array<Book> {
+	return Array(25)
+		.fill(undefined)
+		.map((_, i) => {
+			return {
+				id: faker.string.uuid(),
+				title: i + 1 + ' ' + faker.music.songName(),
+				description: faker.lorem.lines(3),
+				numberOfPages: faker.number.int({ min: 50, max: 800 }),
+				publishedAt: faker.date.anytime().toISOString()
+			};
+		});
+}
 
 export function getMemoryBooks(): Array<Book> {
 	if (typeof window === 'undefined') {
@@ -27,7 +29,7 @@ export function getMemoryBooks(): Array<Book> {
 
 	let memory = window.localStorage.getItem('books');
 	if (memory === null || memory === undefined || memory === '') {
-		memory = JSON.stringify(baseBooks);
+		memory = JSON.stringify(getBaseBooks());
 		window.localStorage.setItem('books', memory);
 	}
 

@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
-	import { createEmptyRow, type Header, type Headers } from '$lib/DataTable/DataTable';
+	import { type Header, type Headers } from '$lib/DataTable/DataTable';
 	import type { Field, FieldOptions } from '$lib/FieldDefinitions/definition';
 	import type { CrudDefinition } from '$lib/Crud/definition';
 

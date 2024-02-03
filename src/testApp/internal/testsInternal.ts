@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import {getMemoryBooks} from "./booksInternal";
 
 export type Test = {
 	id: string;
@@ -21,25 +22,29 @@ function fakeObject(): object | string {
 	};
 }
 
-const baseTests: Array<Test> = Array(10)
-	.fill(undefined)
-	.map((): Test => {
-		const date = faker.date.anytime();
-		date.setHours(0, 0, 0);
-		date.setUTCSeconds(0, 0);
-		return {
-			id: faker.string.uuid(),
-			text_field: faker.music.songName(),
-			textarea_field: faker.lorem.lines(2),
-			checkbox_field: faker.datatype.boolean(),
-			number_field: faker.number.int({ min: -10000, max: 10000 }),
-			toggle_field: faker.datatype.boolean(),
-			url_field: faker.internet.url(),
-			path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/'),
-			date_field: date,
-			key_value_object_field: fakeObject() as object
-		};
-	});
+function getBaseTests(): Array<Test> {
+	const books = getMemoryBooks();
+	return Array(10)
+		.fill(undefined)
+		.map((): Test => {
+			const date = faker.date.anytime();
+			date.setHours(0, 0, 0);
+			date.setUTCSeconds(0, 0);
+			return {
+				id: faker.string.uuid(),
+				text_field: faker.music.songName(),
+				textarea_field: faker.lorem.lines(2),
+				checkbox_field: faker.datatype.boolean(),
+				number_field: faker.number.int({ min: -10000, max: 10000 }),
+				toggle_field: faker.datatype.boolean(),
+				url_field: faker.internet.url(),
+				path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/'),
+				date_field: date,
+				key_value_object_field: fakeObject() as object,
+				crud_entity_field: books[Math.floor(Math.random() * books.length)].id ?? undefined
+			};
+		});
+}
 
 export function getMemoryTests(): Array<Test> {
 	//return [];
@@ -50,7 +55,7 @@ export function getMemoryTests(): Array<Test> {
 
 	let memory = window.localStorage.getItem('tests');
 	if (memory === null || memory === undefined || memory === '') {
-		memory = JSON.stringify(baseTests);
+		memory = JSON.stringify(getBaseTests());
 		window.localStorage.setItem('tests', memory);
 	}
 
