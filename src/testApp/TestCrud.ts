@@ -38,7 +38,6 @@ import type { RequestParameters } from '$lib/request';
 
 import { type Test, getMemoryTests } from './internal/testsInternal';
 import {CrudEntityField} from "$lib/FieldDefinitions/CrudEntity";
-import type {KeyValueObject} from "$lib/genericTypes";
 
 const itemsPerPage = 10;
 
