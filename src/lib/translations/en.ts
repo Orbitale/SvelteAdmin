@@ -13,8 +13,10 @@ const dictionary: Dictionary = {
 	'crud.delete.cancel': 'No, cancel',
 	'crud.delete.yes_delete': 'Yes, delete',
 	'data_table.items.unsupported_action': 'Action type "{action}" not supported.',
-	'error.crud.form.entity_field_list_fetch_error': "An error occurred while fetching a list of elements:\n{message}",
-	'error.crud.form.entity_field_view_fetch_error': "An error occurred while fetching an element:\n{message}",
+	'error.crud.form.entity_field_list_fetch_error':
+		'An error occurred while fetching a list of elements:\n{message}',
+	'error.crud.form.entity_field_view_fetch_error':
+		'An error occurred while fetching an element:\n{message}',
 	'error.crud.form.object.duplicate_key': '⚠ Key already exists!',
 	'error.crud.could_not_find_crud_name': 'Could not find a CRUD config with name "{crud}".',
 	'error.crud.no_crud_specified': 'No CRUD name was specified when displaying the Dashboard.',

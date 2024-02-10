@@ -19,7 +19,6 @@ const testOpts: TestOptions = {
 describe(
 	'DataTable',
 	() => {
-
 		it('can create a Tabs configuration with 1 level of nested fields', () => {
 			const fields = [
 				new Tabs('', '', [

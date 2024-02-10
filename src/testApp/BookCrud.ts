@@ -175,7 +175,8 @@ export const bookCrud = new CrudDefinition<Book>({
 
 		if (operation.name === 'entity_view') {
 			const ret = books.filter(
-				(book: { id: string | number }) => book.id && book.id.toString() === requestParameters.field_value
+				(book: { id: string | number }) =>
+					book.id && book.id.toString() === requestParameters.field_value
 			);
 
 			return Promise.resolve(ret[0] || null);

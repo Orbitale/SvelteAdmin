@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import {getMemoryBooks} from "./booksInternal";
+import { getMemoryBooks } from './booksInternal';
 
 export type Test = {
 	id: string;

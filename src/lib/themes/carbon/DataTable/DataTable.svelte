@@ -147,7 +147,7 @@
 		</svelte:fragment>
 
 		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
-			{$_('error.crud.list.load_error')}<br>
+			{$_('error.crud.list.load_error')}<br />
 			{error.toString()}
 		</InlineNotification>
 	</DataTable>

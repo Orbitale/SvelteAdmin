@@ -13,8 +13,10 @@ const dictionary: Dictionary = {
 	'crud.delete.cancel': 'Non, annuler',
 	'crud.delete.yes_delete': 'Oui, supprimer',
 	'data_table.items.unsupported_action': 'Type d\'action "{operation}" non prise en charge.',
-	'error.crud.form.entity_field_list_fetch_error': "Une erreur est survenue lors de la récupération d'une liste d'élements:\n{message}",
-	'error.crud.form.entity_field_view_fetch_error': "Une erreur est survenue lors de la récupération d'un élement:\n{message}",
+	'error.crud.form.entity_field_list_fetch_error':
+		"Une erreur est survenue lors de la récupération d'une liste d'élements:\n{message}",
+	'error.crud.form.entity_field_view_fetch_error':
+		"Une erreur est survenue lors de la récupération d'un élement:\n{message}",
 	'error.crud.form.object.duplicate_key': '⚠ Clé déjà présente !',
 	'error.crud.could_not_find_crud_name': 'Configuration de CRUD "{crud}" introuvable.',
 	'error.crud.no_crud_specified':

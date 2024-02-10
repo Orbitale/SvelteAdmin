@@ -20,7 +20,7 @@
 		throw new Error('Value was expected to be an object, but "' + typeof value + '" given.');
 	}
 	if (!value) {
-		value = {'': ''};
+		value = { '': '' };
 	}
 
 	let valueEntries = Object.entries(value);
