@@ -3,11 +3,11 @@
     import SelectSkeleton from "carbon-components-svelte/src/Select/SelectSkeleton.svelte";
     import Select from "carbon-components-svelte/src/Select/Select.svelte";
     import SelectItem from "carbon-components-svelte/src/Select/SelectItem.svelte";
+    import {_} from "svelte-i18n";
 
     import {type CrudOperation, Field} from "$lib/Crud/Operations";
     import type {CrudEntityField} from "$lib/FieldDefinitions/CrudEntity";
     import {CrudDefinition} from "$lib/Crud/definition";
-    import {_} from "svelte-i18n";
 
     export let field: CrudEntityField;
     export let operation: CrudOperation;
@@ -30,8 +30,7 @@
 
 {#if !crud}
     <InlineNotification kind="error" hideCloseButton>
-        <!-- TODO: translate this -->
-        Crud not found: {field.options.crud_name}
+        {$_('error.crud.could_not_find_crud_name', { values: { crud: field.options.crud_name } })}
     </InlineNotification>
 {:else}
     {#await fetchList()}
@@ -48,7 +47,8 @@
             {/each}
         </Select>
     {:catch error}
-        <!-- TODO: translate this -->
-        Error!? {error.message}
+        <InlineNotification kind="error" hideCloseButton>
+            {$_('error.crud.form.entity_field_list_fetch_error', { values: { message: error.message } })}
+        </InlineNotification>
     {/await}
 {/if}

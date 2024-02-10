@@ -1,6 +1,7 @@
 <script lang="ts">
     import InlineNotification from "carbon-components-svelte/src/Notification/InlineNotification.svelte";
     import SkeletonText from "carbon-components-svelte/src/SkeletonText/SkeletonText.svelte";
+    import {_} from "svelte-i18n";
 
     import {type CrudOperation, Field} from "$lib/Crud/Operations";
     import type {CrudEntityField} from "$lib/FieldDefinitions/CrudEntity";
@@ -20,6 +21,7 @@
         const fieldOperation = new Field(field.options.get_provider_operation?.name ?? 'entity_view', field.options.get_provider_operation?.options ?? {});
         fieldOperation.crud = crud;
         fieldOperation.dashboard = operation.dashboard;
+
         return crud.options.stateProvider.provide(fieldOperation, {
             field_value: value,
         });
@@ -28,8 +30,7 @@
 
 {#if !crud}
     <InlineNotification kind="error" hideCloseButton>
-        <!-- TODO: translate this -->
-        Crud not found: {field.options.crud_name}
+        {$_('error.crud.could_not_find_crud_name', { values: { crud: field.options.crud_name } })}
     </InlineNotification>
 {:else}
     {#await fetchData()}
@@ -37,7 +38,8 @@
     {:then data}
         {data[field.options.get_provider_operation.entity_field]}
     {:catch error}
-        <!-- TODO: translate this -->
-        Error!? {error.message}
+        <InlineNotification kind="error" hideCloseButton>
+            {$_('error.crud.form.entity_field_view_fetch_error', { values: { message: error.message } })}
+        </InlineNotification>
     {/await}
 {/if}
