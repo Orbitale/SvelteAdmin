@@ -1,6 +1,6 @@
-# upcoming…
+# v0.13.0
 
-- ...
+- Add support for external entities
 
 # v0.12.0
 
