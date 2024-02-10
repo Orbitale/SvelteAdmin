@@ -45,7 +45,7 @@ describe(
 describe(
 	'Callback actions',
 	() => {
-		it('executes function with item as argument', () => {
+		it('calls function', () => {
 			let called = false;
 			const callback = () => {
 				called = true;
@@ -57,7 +57,7 @@ describe(
 			expect(called).toBe(true);
 		});
 
-		it('executes function', () => {
+		it('calls function with item as argument', () => {
 			let called = false;
 			const baseItem = {
 				field: 'value',

@@ -5,13 +5,15 @@ import type {KeyValueObject} from "$lib/genericTypes";
 export type CrudEntityOptions = InputFieldOptions & {
     crud_name: string,
     list_provider_operation?: {
-        name: 'entity_list'|string;
+        name?: 'entity_list'|string;
         options?: KeyValueObject;
+        label_field: string;
+        value_field?: 'id'|string;
     };
     get_provider_operation: {
         name?: 'entity_view'|string;
         options?: KeyValueObject;
-        entity_field: string,
+        entity_field: string;
     };
 };
 

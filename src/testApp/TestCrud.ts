@@ -57,6 +57,10 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 		get_provider_operation: {
 			entity_field: 'title',
 		},
+		list_provider_operation: {
+			label_field: 'title',
+			value_field: 'id',
+		},
 	}),
 	new KeyValueObjectField('key_value_object_field', 'Key Value Object field', 'data1')
 ];

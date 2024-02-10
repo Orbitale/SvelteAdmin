@@ -1,26 +1,16 @@
 <script lang="ts">
+    import InlineNotification from "carbon-components-svelte/src/Notification/InlineNotification.svelte";
+    import SkeletonText from "carbon-components-svelte/src/SkeletonText/SkeletonText.svelte";
+
     import {type CrudOperation, Field} from "$lib/Crud/Operations";
     import type {CrudEntityField} from "$lib/FieldDefinitions/CrudEntity";
     import {CrudDefinition} from "$lib/Crud/definition";
-    import InlineNotification from "carbon-components-svelte/src/Notification/InlineNotification.svelte";
-    import {onMount} from "svelte";
 
     export let field: CrudEntityField;
     export let operation: CrudOperation;
     export let value: unknown;
 
-    let dataPromise: Promise<unknown> = Promise.resolve(null);
-
     const crud: CrudDefinition<unknown>|undefined = operation.dashboard.cruds.filter((def: CrudDefinition<unknown>) => def.name === field.options.crud_name)[0] ?? undefined;
-
-    fetchData();
-
-    onMount(async () => {
-        const resolved = await dataPromise;
-        if (!resolved) {
-            await fetchData();
-        }
-    });
 
     async function fetchData() {
         if (!crud) {
@@ -30,7 +20,7 @@
         const fieldOperation = new Field(field.options.get_provider_operation?.name ?? 'entity_view', field.options.get_provider_operation?.options ?? {});
         fieldOperation.crud = crud;
         fieldOperation.dashboard = operation.dashboard;
-        dataPromise = crud.options.stateProvider.provide(fieldOperation, {
+        return crud.options.stateProvider.provide(fieldOperation, {
             field_value: value,
         });
     }
@@ -42,9 +32,8 @@
         Crud not found: {field.options.crud_name}
     </InlineNotification>
 {:else}
-    {#await dataPromise}
-        <!-- TODO: translate this -->
-        Loading...
+    {#await fetchData()}
+        <SkeletonText />
     {:then data}
         {data[field.options.get_provider_operation.entity_field]}
     {:catch error}

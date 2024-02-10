@@ -181,6 +181,10 @@ export const bookCrud = new CrudDefinition<Book>({
 			return Promise.resolve(ret[0] || null);
 		}
 
+		if (operation.name === 'entity_list') {
+			return Promise.resolve(books);
+		}
+
 		console.error('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');
 
 		return Promise.resolve(null);
