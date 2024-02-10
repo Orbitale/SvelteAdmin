@@ -1,3 +1,7 @@
+# v0.13.0
+
+- Add support for external entities
+
 # v0.12.0
 
 - **BC Break**: CrudDefinition's `name` is no longer an argument, and set in the options instead.

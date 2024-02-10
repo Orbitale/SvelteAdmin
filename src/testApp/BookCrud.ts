@@ -89,10 +89,12 @@ export const bookCrud = new CrudDefinition<Book>({
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
+		const books = getMemoryBooks();
+
 		if (operation.name === 'delete') {
 			const id = (requestParameters.id || '').toString();
 			getBook(id);
-			const updatedBooks = getMemoryBooks().filter((b) => b.id.toString() !== id);
+			const updatedBooks = books.filter((b) => b.id.toString() !== id);
 			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
 
 			return Promise.resolve();
@@ -103,7 +105,7 @@ export const bookCrud = new CrudDefinition<Book>({
 				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const book = data as Book;
 			book.id = id;
-			let updatedBooks = getMemoryBooks();
+			let updatedBooks = books;
 
 			if (operation.name === 'new') {
 				updatedBooks.push(book);
@@ -115,6 +117,8 @@ export const bookCrud = new CrudDefinition<Book>({
 
 			return Promise.resolve();
 		}
+
+		console.error('StateProcessor error: Unsupported Books Crud action "' + operation.name + '".');
 
 		return Promise.resolve();
 	}),
@@ -161,7 +165,7 @@ export const bookCrud = new CrudDefinition<Book>({
 			);
 		}
 
-		if (requestParameters.id !== undefined) {
+		if (operation.name === 'edit' || operation.name === 'view') {
 			const ret = books.filter(
 				(book: { id: string | number }) => book.id && book.id.toString() === requestParameters.id
 			);
@@ -169,9 +173,20 @@ export const bookCrud = new CrudDefinition<Book>({
 			return Promise.resolve(ret[0] || null);
 		}
 
-		if (operation.name !== 'edit' && operation.name !== 'view' && operation.name !== 'delete') {
-			console.warn('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');
+		if (operation.name === 'entity_view') {
+			const ret = books.filter(
+				(book: { id: string | number }) =>
+					book.id && book.id.toString() === requestParameters.field_value
+			);
+
+			return Promise.resolve(ret[0] || null);
 		}
+
+		if (operation.name === 'entity_list') {
+			return Promise.resolve(books);
+		}
+
+		console.error('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');
 
 		return Promise.resolve(null);
 	})

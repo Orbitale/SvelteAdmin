@@ -120,6 +120,7 @@
 					field={getFieldFromRow(cell.key, row)}
 					value={cell.display ? cell.display(cell.value) : cell.value}
 					operation={$$restProps.operation}
+					entityObject={row}
 					{theme}
 				>
 					{cell.display ? cell.display(cell.value) : cell.value}
@@ -146,7 +147,7 @@
 		</svelte:fragment>
 
 		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
-			{$_('error.crud.list.load_error')}<br>
+			{$_('error.crud.list.load_error')}<br />
 			{error.toString()}
 		</InlineNotification>
 	</DataTable>

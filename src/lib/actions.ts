@@ -49,7 +49,7 @@ export class CallbackAction extends DefaultAction {
 		this._callback = callback;
 	}
 
-	public call(item?: object | undefined): void {
+	public call(item?: object | undefined): unknown {
 		return this._callback.call(null, item);
 	}
 }
