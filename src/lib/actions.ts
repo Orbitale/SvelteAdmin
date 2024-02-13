@@ -1,11 +1,13 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
 import type { KeyValueObject, Optional } from '$lib/genericTypes';
+import type {HTMLAnchorAttributes, HTMLButtonAttributes} from "svelte/elements";
 
 /** */
 export type ActionIcon = string | SvelteComponent | ComponentType;
 /** */
 export type ActionOptions = {
 	buttonKind?: string;
+	htmlAttributes?: HTMLAnchorAttributes|HTMLButtonAttributes;
 };
 
 /**

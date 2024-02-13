@@ -24,17 +24,17 @@
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}
-							<HeaderPanelLink href={subLink.url()}>
+							<HeaderPanelLink href={subLink.url()} {...link.options.htmlAttributes}>
 								{subLink.icon ? subLink.icon : ''}
 								{subLink.label ? $_(subLink.label) : ''}
 							</HeaderPanelLink>
 						{:else if subLink instanceof CallbackAction}
-							<HeaderPanelLink on:click={() => subLink.call()}>
+							<HeaderPanelLink on:click={() => subLink.call()} {...link.options.htmlAttributes}>
 								{subLink.icon ? subLink.icon : ''}
 								{subLink.label ? $_(subLink.label) : ''}
 							</HeaderPanelLink>
 						{:else}
-							<HeaderPanelLink icon={subLink.icon || Link}>
+							<HeaderPanelLink icon={subLink.icon || Link} {...link.options.htmlAttributes}>
 								{subLink.label ? $_(subLink.label) : ''}
 							</HeaderPanelLink>
 						{/if}
@@ -42,17 +42,17 @@
 				{:else if link instanceof Divider}
 					<HeaderPanelDivider>{link.label ? $_(link.label) : ''}</HeaderPanelDivider>
 				{:else if link instanceof UrlAction}
-					<HeaderPanelLink href={link.url()}>
+					<HeaderPanelLink href={link.url()} {...link.options.htmlAttributes}>
 						{link.icon ? link.icon : ''}
 						{link.label ? $_(link.label) : ''}
 					</HeaderPanelLink>
 				{:else if link instanceof CallbackAction}
-					<HeaderPanelLink on:click={() => link.call()}>
+					<HeaderPanelLink on:click={() => link.call()} {...link.options.htmlAttributes}>
 						{link.icon ? link.icon : ''}
 						{link.label ? $_(link.label) : ''}
 					</HeaderPanelLink>
 				{:else}
-					<HeaderPanelLink>
+					<HeaderPanelLink {...link.options.htmlAttributes}>
 						{link.icon ? link.icon : ''}
 						{link.label ? $_(link.label) : ''}
 					</HeaderPanelLink>

@@ -12,11 +12,11 @@
 </script>
 
 {#if action instanceof UrlAction}
-	<Link href={action.url(item)} icon={action.icon}>
+	<Link href={action.url(item)} icon={action.icon} {...action.options.htmlAttributes}>
 		{$_(action.label)}
 	</Link>
 {:else if action instanceof CallbackAction}
-	<Button on:click={async () => await action.call(item)} icon={action.icon}>
+	<Button on:click={async () => await action.call(item)} icon={action.icon} {...action.options.htmlAttributes}>
 		{$_(action.label)}
 	</Button>
 {:else}

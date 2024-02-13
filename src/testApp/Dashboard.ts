@@ -31,7 +31,7 @@ export const dashboard = new DashboardDefinition({
 		])
 	],
 	topLeftMenu: [
-		new UrlAction('Docs', '/docs', Document),
+		new UrlAction('Docs', '/docs', Document, {htmlAttributes: {rel: 'external'}}),
 	],
 	localeDictionaries: {
 		fr: fr

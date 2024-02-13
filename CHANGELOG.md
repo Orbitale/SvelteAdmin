@@ -1,3 +1,7 @@
+# to be released...
+
+- Add `htmlAttributes` option to `Action` url/button types.
+
 # v0.13.0
 
 - Add support for external entities

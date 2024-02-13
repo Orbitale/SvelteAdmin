@@ -30,17 +30,17 @@
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}
-							<SideNavMenuItem href={subLink.url()}>
+							<SideNavMenuItem href={subLink.url()} {...link.options.htmlAttributes}>
 								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
 						{:else if subLink instanceof CallbackAction}
-							<SideNavMenuItem on:click={() => subLink.call()}>
+							<SideNavMenuItem on:click={() => subLink.call()} {...link.options.htmlAttributes}>
 								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
 						{:else}
-							<SideNavMenuItem>
+							<SideNavMenuItem {...link.options.htmlAttributes}>
 								<Icon icon={subLink.icon} />
 								{subLink.label ? $_(subLink.label) : ''}
 							</SideNavMenuItem>
@@ -50,15 +50,15 @@
 			{:else if link instanceof Divider}
 				<SideNavDivider />
 			{:else if link instanceof UrlAction}
-				<SideNavLink icon={link.icon || Link} href={link.url()}>
+				<SideNavLink icon={link.icon || Link} href={link.url()} {...link.options.htmlAttributes}>
 					{link.label ? $_(link.label) : ''}
 				</SideNavLink>
 			{:else if link instanceof CallbackAction}
-				<SideNavLink icon={link.icon || Link} on:click={() => link.call()}>
+				<SideNavLink icon={link.icon || Link} on:click={() => link.call()} {...link.options.htmlAttributes}>
 					{link.label ? $_(link.label) : ''}
 				</SideNavLink>
 			{:else}
-				<SideNavLink icon={link.icon || Link}>
+				<SideNavLink icon={link.icon || Link} {...link.options.htmlAttributes}>
 					{link.label ? $_(link.label) : ''}
 				</SideNavLink>
 			{/if}
