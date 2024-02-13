@@ -1,8 +1,10 @@
 import type { KeyValueObject } from '$lib/genericTypes';
 import type { FilterTheme } from '$lib/themes/ThemeConfig';
 
+/** */
 export type FilterOptions = KeyValueObject;
 
+/** */
 export interface FilterInterface<T extends FilterOptions> {
 	readonly field: string;
 	readonly label: string;
@@ -10,6 +12,7 @@ export interface FilterInterface<T extends FilterOptions> {
 	readonly componentName: FilterTheme;
 }
 
+/** */
 export abstract class Filter<T extends FilterOptions> implements FilterInterface<T> {
 	public readonly field: string;
 	public readonly label: string;
@@ -23,22 +26,27 @@ export abstract class Filter<T extends FilterOptions> implements FilterInterface
 	}
 }
 
+/** */
 export class TextFilter extends Filter<FilterOptions> {
 	public readonly componentName: FilterTheme = 'text';
 }
 
+/** */
 export class BooleanFilter extends Filter<FilterOptions> {
 	public readonly componentName: FilterTheme = 'boolean';
 }
 
+/** */
 export class DateFilter extends Filter<FilterOptions> {
 	public readonly componentName: FilterTheme = 'date';
 }
 
+/** */
 export class ExistsFilter extends Filter<FilterOptions> {
 	public readonly componentName: FilterTheme = 'boolean';
 }
 
+/** */
 export class NumericFilter extends Filter<FilterOptions> {
 	public readonly componentName: FilterTheme = 'numeric';
 }

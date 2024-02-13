@@ -1,17 +1,23 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
 import type { KeyValueObject, Optional } from '$lib/genericTypes';
 
+/** */
 export type ActionIcon = string | SvelteComponent | ComponentType;
+/** */
 export type ActionOptions = {
 	buttonKind?: string;
 };
 
+/**
+ * @interface
+ **/
 export interface Action {
 	get label(): string;
 	get icon(): ActionIcon | null | undefined;
 	get options(): ActionOptions;
 }
 
+/** */
 export abstract class DefaultAction implements Action {
 	protected readonly _label: string;
 	protected readonly _icon?: Optional<ActionIcon>;
@@ -36,6 +42,7 @@ export abstract class DefaultAction implements Action {
 	}
 }
 
+/** */
 export class CallbackAction extends DefaultAction {
 	private readonly _callback: (item?: object | undefined) => void;
 
@@ -54,6 +61,7 @@ export class CallbackAction extends DefaultAction {
 	}
 }
 
+/** */
 export class UrlAction extends DefaultAction {
 	private readonly _url: string;
 

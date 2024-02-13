@@ -1,6 +1,7 @@
 import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 import carbon from '$lib/themes/carbon';
 
+/** */
 export type AdminConfig = {
 	theme: ThemeConfig;
 	defaultLocale: string;

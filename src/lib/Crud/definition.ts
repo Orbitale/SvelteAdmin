@@ -3,7 +3,8 @@ import type { StateProvider } from '$lib/State/Provider';
 import type { StateProcessor } from '$lib/State/Processor';
 import { type DashboardDefinition } from '$lib/Dashboard/definition';
 
-export type CrudDefinitionOptionsArgument<T> = {
+/** */
+export type CrudDefinitionOptionsArgument<EntityType> = {
 	name: string;
 	label: {
 		singular: string;
@@ -11,21 +12,53 @@ export type CrudDefinitionOptionsArgument<T> = {
 	};
 	defaultOperationName?: string;
 	identifierFieldName?: 'id' | string;
+
+	/**
+	 * Will apply a default minimum timeout (in milliseconds) when running a {@link StateProvider} or {@link StateProcessor}.
+	 * If this option is defined, and the provider or processor call's duration is below this value, it will still wait this amount of time before returning the actual provider/processor value.
+	 *
+	 * The goal of this is to avoid epilepsy-like issues if providers or processors respond too quickly, especially when dealing with List operations and filters.
+	 * This will create a "wait time" for the end user, so that the screen does not blink too much and there eyes (and brain) will not be stressed too much.
+	 */
 	minStateLoadingTimeMs?: number;
 
 	operations: Array<CrudOperation>;
-	stateProvider: StateProvider<T>;
-	stateProcessor: StateProcessor<T>;
+	stateProvider: StateProvider<EntityType>;
+	stateProcessor: StateProcessor<EntityType>;
 };
 
-export type CrudDefinitionOptions<T> = Required<CrudDefinitionOptionsArgument<T>>;
+export type CrudDefinitionOptions<EntityType> = Required<CrudDefinitionOptionsArgument<EntityType>>;
 
-export class CrudDefinition<T> {
-	public readonly name: string;
-	public readonly options: CrudDefinitionOptions<T>;
+/**
+ * Crud definition, object used to create an abstract Crud.
+ *
+ * @remarks
+ * Crud objects are related to a single Entity type,
+ * and contain several Crud Operations, as well as the main
+ * objects that care about persistence: state providers and processors.
+ *
+ * @example
+ * type Book = {id: number, title: string, description: string};
+ *
+ * const BooksCrud = new CrudDefinition<Book>({
+ *     name: 'books',
+ *     label: {singular: 'Book', plural: 'Books'},
+ *     operations: [],
+ *     stateProvider: ...,
+ *     stateProcessor: ...,
+ * });
+ *
+ * @typeParam EntityType - The object type that will be used by providers and processors.
+ */
+export class CrudDefinition<EntityType> {
+	/** */ public readonly name: string;
+	/** */ public readonly options: CrudDefinitionOptions<EntityType>;
 	private _dashboard: DashboardDefinition | null = null;
 
-	constructor(options: CrudDefinitionOptionsArgument<T>) {
+	/**
+	 * @param {CrudDefinitionOptionsArgument} options
+	 **/
+	constructor(options: CrudDefinitionOptionsArgument<EntityType>) {
 		const name = options.name;
 		this.name = name;
 
@@ -57,9 +90,10 @@ export class CrudDefinition<T> {
 		options.defaultOperationName = defaultOperation.name;
 		options.identifierFieldName ??= 'id';
 
-		this.options = options as CrudDefinitionOptions<T>;
+		this.options = options as CrudDefinitionOptions<EntityType>;
 	}
 
+	/** */
 	get dashboard(): DashboardDefinition {
 		if (!this._dashboard) {
 			throw new Error('Dashboard is not set in Crud definition: did you try to bypass Crud setup?');

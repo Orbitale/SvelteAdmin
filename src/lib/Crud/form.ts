@@ -1,5 +1,8 @@
 export type SubmittedData = Record<string, FormDataEntryValue>;
 
+/**
+ * Function to get an record of {@link FormDataEntryValue} items from an "onSubmit" form {@link SubmitEvent} object.
+ */
 export function getSubmittedFormData(event: SubmitEvent): SubmittedData {
 	const normalizedData: SubmittedData = {};
 

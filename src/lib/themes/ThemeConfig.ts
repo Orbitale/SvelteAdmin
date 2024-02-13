@@ -1,5 +1,6 @@
 import type { ComponentType } from 'svelte';
 
+/** */
 export type ThemeConfig = {
 	dashboard: ComponentType;
 	dataTable: ComponentType;
@@ -61,8 +62,8 @@ export type ThemeConfig = {
 	};
 };
 
-export type CrudTheme = keyof ThemeConfig['crudActions'];
-export type ViewFieldTheme = keyof ThemeConfig['viewFields'];
-export type FormFieldTheme = keyof ThemeConfig['formFields'];
-export type FilterTheme = keyof ThemeConfig['filters'];
-export type MenuTheme = keyof ThemeConfig['menu'];
+/** */ export type CrudTheme = keyof ThemeConfig['crudActions'];
+/** */ export type ViewFieldTheme = keyof ThemeConfig['viewFields'];
+/** */ export type FormFieldTheme = keyof ThemeConfig['formFields'];
+/** */ export type FilterTheme = keyof ThemeConfig['filters'];
+/** */ export type MenuTheme = keyof ThemeConfig['menu'];

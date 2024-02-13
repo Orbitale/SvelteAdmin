@@ -5,7 +5,10 @@ import type { KeyValueObject } from '$lib/genericTypes';
 import en from '$lib/translations/en';
 import fr from '$lib/translations/fr';
 
+/** */
 export type Dictionary = KeyValueObject;
+
+/** */
 export type Dictionaries = { [key: string]: Dictionary };
 
 const adminDictionaries: Dictionaries = {
@@ -13,6 +16,7 @@ const adminDictionaries: Dictionaries = {
 	fr: fr
 };
 
+/** */
 export function initLocale(locale: Intl.Locale | string, dictionaries: Dictionaries = {}) {
 	locale = locale.toString();
 
