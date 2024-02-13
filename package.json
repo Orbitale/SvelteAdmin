@@ -16,7 +16,8 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin=prettier-plugin-svelte . --check . && eslint src",
 		"format": "prettier --plugin=prettier-plugin-svelte --write .",
-		"test:unit": "vitest"
+		"test:unit": "vitest",
+		"typedoc": "typedoc --options typedoc.json --readme none"
 	},
 	"exports": {
 		".": {
@@ -47,7 +48,8 @@
 		"carbon-icons-svelte": "^12.0.0",
 		"luxon": "^3.4.4",
 		"svelte": "^4.0.0",
-		"svelte-i18n": "^4.0.0"
+		"svelte-i18n": "^4.0.0",
+		"typedoc": "^0.25.8"
 	},
 	"devDependencies": {
 		"@faker-js/faker": "^8.3.1",
@@ -56,6 +58,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/package": "^2.2.3",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@types/node": "^20.11.17",
 		"@types/uuid": "^9.0.7",
 		"@typescript-eslint/eslint-plugin": "^6.13.2",
 		"@typescript-eslint/parser": "^6.13.2",
@@ -71,6 +74,7 @@
 		"sass": "^1.69.5",
 		"svelte-check": "^3.6.2",
 		"tslib": "^2.4.1",
+		"typedoc-plugin-mdn-links": "^3.1.16",
 		"typescript": "^5.3.3",
 		"vite": "^5.0.7",
 		"vitest": "^1.0.4"

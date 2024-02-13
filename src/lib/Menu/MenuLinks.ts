@@ -1,8 +1,10 @@
 import {type Action, type ActionIcon, DefaultAction} from '$lib/actions';
 import type { Optional } from '$lib/genericTypes';
 
+/** */
 export type MenuLink = Action;
 
+/** */
 export class Submenu extends DefaultAction {
 	private readonly _links: Array<MenuLink>;
 
@@ -16,6 +18,7 @@ export class Submenu extends DefaultAction {
 	}
 }
 
+/** */
 export class Divider extends DefaultAction {
 	constructor() {
 		super('divider', undefined, {});

@@ -1,10 +1,12 @@
 import { Field, type InputFieldOptions } from '$lib/FieldDefinitions/definition';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/themes/ThemeConfig';
 
+/** */
 export type ObjectOptions = InputFieldOptions & {
 	// maxDepth?: number, // TODO: check if we can create an input with nested key=>value pairs with a max depth
 };
 
+/** */
 export class KeyValueObjectField extends Field<ObjectOptions> {
 	readonly formComponent: FormFieldTheme = 'key_value_object';
 	readonly viewComponent: ViewFieldTheme = 'key_value_object';

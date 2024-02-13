@@ -1,5 +1,6 @@
 import Book from 'carbon-icons-svelte/lib/Book.svelte';
 import Home from 'carbon-icons-svelte/lib/Home.svelte';
+import Document from 'carbon-icons-svelte/lib/Document.svelte';
 
 import { DashboardDefinition, CallbackAction, UrlAction, Submenu, themes } from '$lib';
 
@@ -28,6 +29,9 @@ export const dashboard = new DashboardDefinition({
 			new UrlAction('Submenu 1', '#', Book),
 			new UrlAction('Submenu 2', '#', Book)
 		])
+	],
+	topLeftMenu: [
+		new UrlAction('Docs', '/docs', Document),
 	],
 	localeDictionaries: {
 		fr: fr

@@ -3,6 +3,8 @@ import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
 
+/**
+ */
 export type DashboardDefinitionOptions = {
 	adminConfig: Partial<AdminConfig>;
 	cruds: Array<CrudDefinition<unknown>>;
@@ -13,16 +15,34 @@ export type DashboardDefinitionOptions = {
 	localeDictionaries?: Dictionaries;
 };
 
+/**
+ * @example
+ * export const dashboard = new DashboardDefinition({
+ *    admin: ..., // see AdminConfig
+ *
+ *    // The main menu on the left side of the page
+ *    sideMenu: [
+ *        new UrlAction('Homepage', '/', Home),
+ *        new UrlAction('Book', '/admin/books/list', Book)
+ *    ],
+ *
+ *    // Here you set all the Crud configurations of your admin panel
+ *    // For organization purposes, we recommend you to define your Crud configs
+ *    //   in separate typescript files, it makes it easier to read and maintain.
+ *    cruds: [booksCrud]
+ * });
+ */
 export class DashboardDefinition {
-	public readonly adminConfig: AdminConfig;
-	public readonly cruds: Array<CrudDefinition<unknown>>;
-	public readonly sideMenu: Array<MenuLink> = [];
-	public readonly topLeftMenu: Array<MenuLink> = [];
-	public readonly topRightMenu: Array<MenuLink> = [];
-	public readonly localeDictionaries: Dictionaries = {};
+	/** */ public readonly adminConfig: AdminConfig;
+	/** */ public readonly cruds: Array<CrudDefinition<unknown>>;
+	/** */ public readonly sideMenu: Array<MenuLink> = [];
+	/** */ public readonly topLeftMenu: Array<MenuLink> = [];
+	/** */ public readonly topRightMenu: Array<MenuLink> = [];
+	/** */ public readonly localeDictionaries: Dictionaries = {};
 
 	public readonly options = {};
 
+	/** */
 	constructor(options: DashboardDefinitionOptions) {
 		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig || {}) };
 		this.cruds = options.cruds;
@@ -34,6 +54,7 @@ export class DashboardDefinition {
 		this.checkUniqueCruds();
 	}
 
+	/** */
 	public getFirstActionUrl(): string {
 		const firstCrud = this.cruds[0];
 		const firstOperation = firstCrud.options.operations[0];

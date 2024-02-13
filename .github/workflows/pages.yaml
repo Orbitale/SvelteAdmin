@@ -31,20 +31,25 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: 🟢 Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
-      - run: yarn install --frozen-lockfile
+      - name: 🧰 Install dependencies
+        run: yarn install --frozen-lockfile
 
-      - run: yarn run build
+      - name: 🔨 Build demo app
+        run: yarn run build
 
-      - name: Prepare Github Pages
+      - name: 📄 Build types documentation
+        run: yarn run typedoc
+
+      - name: 🌐 Configure Github Pages domain
         run: echo "svelte-admin-demo.orbitale.io" > build/CNAME
 
-      - name: Deploy
+      - name: 🚀 Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
