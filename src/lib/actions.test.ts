@@ -62,8 +62,9 @@ describe(
 			const baseItem = {
 				field: 'value'
 			};
-			const callback = (item: typeof baseItem): boolean => {
+			const callback = (item?: object | undefined): boolean => {
 				called = true;
+				// @ts-ignore
 				item.field = 'newValue';
 				return called;
 			};

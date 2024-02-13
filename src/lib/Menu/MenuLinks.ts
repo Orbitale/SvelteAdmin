@@ -1,4 +1,4 @@
-import { type Action, type ActionIcon, DefaultAction } from '$lib/actions';
+import {type Action, type ActionIcon, DefaultAction} from '$lib/actions';
 import type { Optional } from '$lib/genericTypes';
 
 export type MenuLink = Action;
@@ -16,8 +16,8 @@ export class Submenu extends DefaultAction {
 	}
 }
 
-export class Divider implements Action {
-	get label(): string {
-		return 'divider';
+export class Divider extends DefaultAction {
+	constructor() {
+		super('divider', undefined, {});
 	}
 }

@@ -9,7 +9,7 @@ export default defineConfig({
 		exclude: [...configDefaults.exclude, '**/build/**', '**/.svelte-kit/**', '**/dist/**'],
 		coverage: {
 			exclude: [
-				...(configDefaults?.coverage?.exclude ?? {}),
+				...(configDefaults?.coverage?.exclude ?? []),
 				'**/build/**',
 				'**/.svelte-kit/**',
 				'**/dist/**'
