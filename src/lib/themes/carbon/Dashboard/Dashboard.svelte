@@ -21,7 +21,7 @@
 
 	import type { RequestParameters } from '$lib/request';
 
-	export let dashboard: DashboardDefinition<unknown>;
+	export let dashboard: DashboardDefinition;
 	export let crud: string | undefined = undefined;
 	export let operation: string | undefined = undefined;
 	export let requestParameters: RequestParameters = {};
