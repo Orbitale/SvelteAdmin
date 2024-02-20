@@ -41,14 +41,18 @@
 		currentCrudOperation?.dashboard.adminConfig.theme.crudActions[
 			currentCrudOperation?.displayComponentName
 		];
+
+	const sideMenu = dashboard.stores.sideMenu;
+	const topLeftMenu = dashboard.stores.topLeftMenu;
+	const topRightMenu = dashboard.stores.topRightMenu;
 </script>
 
 <AdminLayout
 	adminConfig={dashboard.adminConfig}
 	translations={dashboard.localeDictionaries}
-	side_menu_links={dashboard.sideMenu}
-	top_left_menu_links={dashboard.topLeftMenu}
-	top_right_menu_links={dashboard.topRightMenu}
+	side_menu_links={$sideMenu}
+	top_left_menu_links={$topLeftMenu}
+	top_right_menu_links={$topRightMenu}
 >
 	<slot>
 		{#if !currentCrud}

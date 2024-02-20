@@ -8,6 +8,8 @@ import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
 import { testCrud } from './TestCrud';
 
+let newLinkIndex = 1;
+
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
 		defaultLocale: 'en',
@@ -30,8 +32,14 @@ export const dashboard = new DashboardDefinition({
 			new UrlAction('Submenu 2', '#', Book)
 		])
 	],
-	topLeftMenu: [
-		new UrlAction('Docs', '/docs', Document, {htmlAttributes: {rel: 'external'}}),
+	topLeftMenu: [new UrlAction('Docs', '/docs', Document, { htmlAttributes: { rel: 'external' } })],
+	topRightMenu: [
+		new CallbackAction('Add a new link to the menu', null, () => {
+			dashboard.stores.topRightMenu.update((links) => [
+				...links,
+				new UrlAction('Custom link' + newLinkIndex++, '#')
+			]);
+		})
 	],
 	localeDictionaries: {
 		fr: fr

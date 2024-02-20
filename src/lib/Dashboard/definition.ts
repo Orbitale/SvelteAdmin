@@ -1,7 +1,16 @@
+import { get, writable, type Writable } from 'svelte/store';
+
 import type { MenuLink } from '$lib/Menu/MenuLinks';
 import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
+
+/** */
+export type DashboardStores = {
+	sideMenu: Writable<Array<MenuLink>>;
+	topLeftMenu: Writable<Array<MenuLink>>;
+	topRightMenu: Writable<Array<MenuLink>>;
+};
 
 /**
  */
@@ -35,10 +44,8 @@ export type DashboardDefinitionOptions = {
 export class DashboardDefinition {
 	/** */ public readonly adminConfig: AdminConfig;
 	/** */ public readonly cruds: Array<CrudDefinition<unknown>>;
-	/** */ public readonly sideMenu: Array<MenuLink> = [];
-	/** */ public readonly topLeftMenu: Array<MenuLink> = [];
-	/** */ public readonly topRightMenu: Array<MenuLink> = [];
 	/** */ public readonly localeDictionaries: Dictionaries = {};
+	/** */ public readonly stores: DashboardStores;
 
 	public readonly options = {};
 
@@ -46,12 +53,29 @@ export class DashboardDefinition {
 	constructor(options: DashboardDefinitionOptions) {
 		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig || {}) };
 		this.cruds = options.cruds;
-		this.sideMenu = options.sideMenu || [];
-		this.topLeftMenu = options.topLeftMenu || [];
-		this.topRightMenu = options.topRightMenu || [];
 		this.localeDictionaries = options.localeDictionaries || {};
 		this.cruds.forEach((crud: CrudDefinition<unknown>) => (crud.dashboard = this));
+		this.stores = {
+			sideMenu: writable(options.sideMenu || []),
+			topLeftMenu: writable(options.topLeftMenu || []),
+			topRightMenu: writable(options.topRightMenu || [])
+		};
 		this.checkUniqueCruds();
+	}
+
+	/** @deprecated Use builtin Dashboard stores instead */
+	get sideMenu(): Array<MenuLink> {
+		return get(this.stores.sideMenu);
+	}
+
+	/** @deprecated Use builtin Dashboard stores instead */
+	get topLeftMenu(): Array<MenuLink> {
+		return get(this.stores.topLeftMenu);
+	}
+
+	/** @deprecated Use builtin Dashboard stores instead */
+	get topRightMenu(): Array<MenuLink> {
+		return get(this.stores.topRightMenu);
 	}
 
 	/** */
