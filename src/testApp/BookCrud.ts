@@ -75,7 +75,8 @@ export const bookCrud = new CrudDefinition<Book>({
 				filters: [
 					new TextFilter('title', 'Title contains'),
 					new TextFilter('description', 'Description contains')
-				]
+				],
+				batchSelection: true
 			}
 		),
 		new View([IdField, ...fields]),

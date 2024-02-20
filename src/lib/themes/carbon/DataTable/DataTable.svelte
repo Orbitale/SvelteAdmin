@@ -20,6 +20,8 @@
 	export let globalActions: Array<Action> = [];
 	export let filters: Array<FilterInterface<FilterOptions>> = [];
 	export let page: number | undefined;
+	export let batchSelection: string;
+	export let selectedRowIds: any;
 	export let theme: ThemeConfig;
 	export let sortable: boolean;
 	export let onSort: () => unknown | undefined;
@@ -83,6 +85,8 @@
 		zebra
 		rows={resolvedRows}
 		size="short"
+		{batchSelection}
+		bind:selectedRowIds
 		on:click:header={onSort}
 		{...$$restProps}
 	>
