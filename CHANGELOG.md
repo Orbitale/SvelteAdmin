@@ -1,4 +1,4 @@
-# to be released...
+# v0.14.0
 
 - **BC Break:** `Dashboard` attributes `sideMenu`, `topRightMenu` and `topLeftMenu` are now **deprecated**. They are moved to the `stores.*` property.
 - Add `Dashboard.stores` property, to allow dynamic configuration of the dashboard, especially when updating menus _after_ the dashboard is loaded.
