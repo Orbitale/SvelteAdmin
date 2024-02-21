@@ -7,6 +7,7 @@ import { DashboardDefinition, CallbackAction, UrlAction, Submenu, themes } from 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
 import { testCrud } from './TestCrud';
+import { Help, UserAvatarFilledAlt } from 'carbon-icons-svelte';
 
 let newLinkIndex = 1;
 
@@ -34,12 +35,27 @@ export const dashboard = new DashboardDefinition({
 	],
 	topLeftMenu: [new UrlAction('Docs', '/docs', Document, { htmlAttributes: { rel: 'external' } })],
 	topRightMenu: [
-		new CallbackAction('Add a new link to the menu', null, () => {
-			dashboard.stores.topRightMenu.update((links) => [
-				...links,
-				new UrlAction('Custom link' + newLinkIndex++, '#')
-			]);
-		})
+		{
+			icon: Help,
+			links: [
+				new CallbackAction('Add a new link to the menu', null, () => {})
+			]
+		},
+		{
+			icon: UserAvatarFilledAlt,
+			links: [
+				new CallbackAction('Add a new link to the menu', null, () => {}),
+				new CallbackAction('Add a new link to the menu', null, () => {}),
+			]
+		},
+		{
+			icon: null,
+			links: [
+				new CallbackAction('Add a new link to the menu', null, () => {}),
+				new CallbackAction('Add a new link to the menu', null, () => {}),
+				new CallbackAction('Add a new link to the menu', null, () => {})
+			]
+		}
 	],
 	localeDictionaries: {
 		fr: fr

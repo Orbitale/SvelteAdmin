@@ -7,7 +7,7 @@
 
 	import TopMenu from '../Menu/TopMenu.svelte';
 	import SideMenu from '../Menu/SideMenu.svelte';
-	import type { MenuLink } from '$lib/Menu/MenuLinks';
+	import type { itemMenuLinks, MenuLink } from '$lib/Menu/MenuLinks';
 
 	import { type Dictionaries, initLocale } from '$lib/admin_i18n';
 	import type { AdminConfig } from '$lib/config/adminConfig';
@@ -21,7 +21,7 @@
 
 	export let side_menu_links: Array<MenuLink> = [];
 	export let top_left_menu_links: Array<MenuLink> = [];
-	export let top_right_menu_links: Array<MenuLink> = [];
+	export let top_right_menu_links: Array<itemMenuLinks> = [];
 
 	initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
 

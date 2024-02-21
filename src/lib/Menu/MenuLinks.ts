@@ -1,8 +1,15 @@
 import {type Action, type ActionIcon, DefaultAction} from '$lib/actions';
 import type { Optional } from '$lib/genericTypes';
+import type { CarbonIcon } from 'carbon-icons-svelte/lib/CarbonIcon';
 
 /** */
 export type MenuLink = Action;
+
+/** */
+export type itemMenuLinks = {
+	icon?: CarbonIcon|null,
+	links: Array<MenuLink>
+}
 
 /** */
 export class Submenu extends DefaultAction {

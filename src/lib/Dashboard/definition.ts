@@ -1,6 +1,6 @@
 import { get, writable, type Writable } from 'svelte/store';
 
-import type { MenuLink } from '$lib/Menu/MenuLinks';
+import type { itemMenuLinks, MenuLink } from '$lib/Menu/MenuLinks';
 import type { Dictionaries } from '$lib/admin_i18n';
 import type { CrudDefinition } from '$lib/Crud/definition';
 import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
@@ -9,7 +9,7 @@ import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
 export type DashboardStores = {
 	sideMenu: Writable<Array<MenuLink>>;
 	topLeftMenu: Writable<Array<MenuLink>>;
-	topRightMenu: Writable<Array<MenuLink>>;
+	topRightMenu: Writable<Array<itemMenuLinks>>;
 };
 
 /**
@@ -20,7 +20,7 @@ export type DashboardDefinitionOptions = {
 	rootUrl?: string;
 	sideMenu?: Array<MenuLink>;
 	topLeftMenu?: Array<MenuLink>;
-	topRightMenu?: Array<MenuLink>;
+	topRightMenu?: Array<itemMenuLinks>;
 	localeDictionaries?: Dictionaries;
 };
 
@@ -74,7 +74,7 @@ export class DashboardDefinition {
 	}
 
 	/** @deprecated Use builtin Dashboard stores instead */
-	get topRightMenu(): Array<MenuLink> {
+	get topRightMenu(): Array<itemMenuLinks> {
 		return get(this.stores.topRightMenu);
 	}
 
