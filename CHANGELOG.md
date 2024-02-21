@@ -1,6 +1,7 @@
 # v0.14.1
 
 - Fix DataTable types so they don't rely on Carbon types.
+- Allow Submenu links/actions to have options.
 
 # v0.14.0
 
