@@ -2,6 +2,7 @@
 
 - Fix DataTable types so they don't rely on Carbon types.
 - Allow Submenu links/actions to have options.
+- Allow Action options to use arbitrary key/value pairs.
 
 # v0.14.0
 
