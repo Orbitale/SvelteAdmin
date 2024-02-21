@@ -13,7 +13,6 @@
 	import { Help, Switcher } from 'carbon-icons-svelte';
 
 	export let items: Array<itemMenuLinks> = [];
-	console.log(items);
 	for (let i = 0; i < items.length; i++) {
 		items[i].isOpen = false;
 	}
