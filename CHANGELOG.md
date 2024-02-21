@@ -1,3 +1,7 @@
+# v0.14.1
+
+- Fix DataTable types so they don't rely on Carbon types.
+
 # v0.14.0
 
 - **BC Break:** `Dashboard` attributes `sideMenu`, `topRightMenu` and `topLeftMenu` are now **deprecated**. They are moved to the `stores.*` property.
