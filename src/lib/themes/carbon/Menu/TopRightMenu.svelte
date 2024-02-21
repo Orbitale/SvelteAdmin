@@ -15,7 +15,6 @@
 	export let items: Array<itemMenuLinks> = [];
 	console.log(items);
 	for (let i = 0; i < items.length; i++) {
-		// Ajoutez un nouvel attribut à chaque objet
 		items[i].isOpen = false;
 	}
 
