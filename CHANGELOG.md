@@ -3,6 +3,7 @@
 - Fix DataTable types so they don't rely on Carbon types.
 - Allow Submenu links/actions to have options.
 - Allow Action options to use arbitrary key/value pairs.
+- Revamp TopRightMenu to avoid having one single submenu, and to allow multiple submenus.<br><small>(Note: this can be considered as BC break, but technically it's just a UI fix because it was previously impossible to have "normal" links, so it was decided to not flag it as BC break)</small>
 
 # v0.14.0
 

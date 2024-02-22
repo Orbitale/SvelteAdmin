@@ -16,7 +16,7 @@
 </script>
 
 {#if icon instanceof SvelteComponent || typeof icon === 'function' || typeof icon?.$$render !== 'undefined'}
-	<svelte:component this={icon} />
+	<svelte:component this={icon} {...$$restProps} />
 {:else if typeof icon === 'string'}
 	{icon}
 {:else}
