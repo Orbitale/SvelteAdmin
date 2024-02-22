@@ -25,6 +25,7 @@
 
 	let page: number | undefined;
 
+	const batchSelection = operation.options?.batchSelection ? 'batchSelection' : undefined;
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
 	const sortableDataTable =
@@ -159,6 +160,7 @@
 	{actions}
 	{globalActions}
 	{page}
+	{batchSelection}
 	{operation}
 	{onSort}
 	sortable={sortableDataTable}

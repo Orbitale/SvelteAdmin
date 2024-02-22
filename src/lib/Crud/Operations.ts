@@ -153,6 +153,7 @@ export type ListOperationOptions = object & {
 	globalActions?: Array<Action>;
 	pagination?: Partial<PaginationOptions>;
 	filters?: FilterInterface<FilterOptions>[];
+	batchSelection?: boolean;
 };
 
 /**
