@@ -1,14 +1,12 @@
 {
-    "entryPoints": ["src/lib/*.ts", "src/lib/**/*.ts"],
-    "out": "build/docs",
-    "exclude": ["**/*+(index|.spec|.e2e).ts"],
-    "disableGit": true,
-    "disableSources": true,
-    "excludeExternals": false,
-    "excludeNotDocumented": true,
-    "excludePrivate": true,
-    "excludeReferences": true,
-    "plugin": [
-        "typedoc-plugin-mdn-links"
-    ]
+	"entryPoints": ["src/lib/*.ts", "src/lib/**/*.ts"],
+	"out": "build/apidocs",
+	"exclude": ["**/*+(index|.spec|.e2e).ts"],
+	"disableGit": true,
+	"disableSources": true,
+	"excludeExternals": false,
+	"excludeNotDocumented": true,
+	"excludePrivate": true,
+	"excludeReferences": true,
+	"plugin": ["typedoc-plugin-mdn-links"]
 }

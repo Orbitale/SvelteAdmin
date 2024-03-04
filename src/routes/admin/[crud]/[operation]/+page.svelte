@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 
 	import { dashboard } from '../../../../testApp/Dashboard';
-	import { getRequestParams } from '$lib/request';
+	import { getRequestParams } from '$lib';
 
 	$: crud = $page.params.crud;
 	$: operation = $page.params.operation;

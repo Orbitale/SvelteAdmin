@@ -10,12 +10,12 @@
 	import FilterIcon from 'carbon-icons-svelte/lib/Filter.svelte';
 	import FilterReset from 'carbon-icons-svelte/lib/FilterReset.svelte';
 
-	import type { Action } from '$lib/actions';
+	import type { Action } from '$lib/Actions';
 	import ActionComponent from '$lib/themes/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 	import FilterComponent from '$lib/themes/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
 	import type { Filter, FilterOptions } from '$lib/Filter';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
-	import { getSubmittedFormData } from '$lib';
+	import type { ThemeConfig } from '$lib/types';
+	import { getSubmittedFormData } from '$lib/Crud/Form';
 
 	export let actions: Array<Action> = [];
 	export let filters: Array<Filter<FilterOptions>> = [];

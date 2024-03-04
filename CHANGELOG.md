@@ -1,3 +1,8 @@
+# (upcoming) v0.15.0
+
+- `docs` path was changed for `apidocs`
+- **BC Break** all internal code structure has been changed.<br>This will **not** concern paths like `import {...} from '@orbitale/svelte-admin';`, as all library imports are still the same. However, you will have to update the loading of all the Typescript types from other files/directories.<br>The main reason for this change is to make sure the lib is better organized, but also the API docs are more readable just because of the code's structure.
+
 # v0.14.1
 
 - Fix DataTable types so they don't rely on Carbon types.
@@ -47,7 +52,7 @@
 
 # v0.9.0
 
-- **BC Break**: Definition options types have been renamed and merged in the `$lib/FieldDefinitions/definition.ts` file.
+- **BC Break**: Definition options types have been renamed and merged in the `$lib/Fields/index.ts` file.
 - Add `DateFilter` as a range of dates.
 - Add `BooleanFilter` with radio inputs.
 - Remove empty values from submitted filters.

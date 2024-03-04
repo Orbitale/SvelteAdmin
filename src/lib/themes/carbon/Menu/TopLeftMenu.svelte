@@ -6,8 +6,8 @@
 	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
 	import Link from 'carbon-icons-svelte/lib/Link.svelte';
 
-	import { Divider, type MenuLink, Submenu } from '$lib/Menu/MenuLinks';
-	import { CallbackAction, UrlAction } from '$lib/actions';
+	import { Divider, type MenuLink, Submenu } from '$lib/Menu';
+	import { CallbackAction, UrlAction } from '$lib/Actions';
 
 	export let links: Array<MenuLink> = [];
 </script>
@@ -20,11 +20,19 @@
 					{#if subLink instanceof Divider}
 						<br />
 					{:else if subLink instanceof UrlAction}
-						<HeaderNavItem icon={subLink.icon || Link} href={subLink.url()} {...link.options.htmlAttributes}>
+						<HeaderNavItem
+							icon={subLink.icon || Link}
+							href={subLink.url()}
+							{...link.options.htmlAttributes}
+						>
 							{subLink.label ? $_(subLink.label) : ''}
 						</HeaderNavItem>
 					{:else if subLink instanceof CallbackAction}
-						<HeaderNavItem icon={subLink.icon || Link} on:click={() => subLink.call()} {...link.options.htmlAttributes}>
+						<HeaderNavItem
+							icon={subLink.icon || Link}
+							on:click={() => subLink.call()}
+							{...link.options.htmlAttributes}
+						>
 							{subLink.label ? $_(subLink.label) : ''}
 						</HeaderNavItem>
 					{:else}
@@ -41,7 +49,11 @@
 				{link.label ? $_(link.label) : ''}
 			</HeaderNavItem>
 		{:else if link instanceof CallbackAction}
-			<HeaderNavItem icon={link.icon || Link} on:click={() => link.call()} {...link.options.htmlAttributes}>
+			<HeaderNavItem
+				icon={link.icon || Link}
+				on:click={() => link.call()}
+				{...link.options.htmlAttributes}
+			>
 				{link.label ? $_(link.label) : ''}
 			</HeaderNavItem>
 		{:else}

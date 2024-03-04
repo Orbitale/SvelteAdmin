@@ -13,9 +13,9 @@
 
 	import { _ } from 'svelte-i18n';
 
-	import { Divider, Submenu } from '$lib/Menu/MenuLinks';
-	import { sideMenuOpen } from '$lib/Menu/stores';
-	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
+	import { Divider, Submenu } from '$lib/Menu';
+	import { sideMenuOpen } from '$lib/stores';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 	import Icon from '$lib/Layout/Icon.svelte';
 
 	export let links: Array<Action> = [];
@@ -54,7 +54,11 @@
 					{link.label ? $_(link.label) : ''}
 				</SideNavLink>
 			{:else if link instanceof CallbackAction}
-				<SideNavLink icon={link.icon || Link} on:click={() => link.call()} {...link.options.htmlAttributes}>
+				<SideNavLink
+					icon={link.icon || Link}
+					on:click={() => link.call()}
+					{...link.options.htmlAttributes}
+				>
 					{link.label ? $_(link.label) : ''}
 				</SideNavLink>
 			{:else}

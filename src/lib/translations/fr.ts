@@ -1,4 +1,4 @@
-import type { Dictionary } from '$lib/admin_i18n';
+import type { Dictionary } from '$lib/i18n';
 
 const dictionary: Dictionary = {
 	'crud.header.edit': 'Modifier',

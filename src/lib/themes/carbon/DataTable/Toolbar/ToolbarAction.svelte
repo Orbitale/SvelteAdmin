@@ -4,7 +4,7 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import ToastNotification from 'carbon-components-svelte/src/Notification/ToastNotification.svelte';
 
-	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 
 	export let action: Action;
 </script>

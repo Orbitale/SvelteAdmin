@@ -4,7 +4,7 @@
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
 	import SingleAction from '$lib/themes/carbon/DataTable/actions/SingleAction.svelte';
-	import type { Action } from '$lib/actions';
+	import type { Action } from '$lib/Actions';
 
 	export let actions: Action[] = [];
 	export let item: object | undefined = undefined;

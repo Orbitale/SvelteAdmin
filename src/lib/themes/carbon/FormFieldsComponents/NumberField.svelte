@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NumberInput from 'carbon-components-svelte/src/NumberInput/NumberInput.svelte';
-	import type { NumberField } from '$lib/FieldDefinitions/Number';
+	import type { NumberField } from '$lib/Fields/Number';
 
 	export let field: NumberField;
 	export let value: unknown;

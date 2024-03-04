@@ -8,11 +8,11 @@
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/definition';
+	import type { CrudDefinition } from '$lib/Crud';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { DashboardDefinition } from '$lib/Dashboard/definition';
-	import type { StateProviderResult } from '$lib/State/Provider';
-	import type { RequestParameters } from '$lib/request';
+	import type { DashboardDefinition } from '$lib/Dashboard';
+	import type { StateProviderResult } from '$lib/StateProvider';
+	import type { RequestParameters } from '$lib/Request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;

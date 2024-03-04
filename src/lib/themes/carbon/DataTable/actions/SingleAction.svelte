@@ -5,7 +5,7 @@
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import ToastNotification from 'carbon-components-svelte/src/Notification/ToastNotification.svelte';
 
-	import { type Action, CallbackAction, UrlAction } from '$lib/actions';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 
 	export let action: Action;
 	export let item: object | undefined = undefined;
@@ -16,7 +16,11 @@
 		{$_(action.label)}
 	</Link>
 {:else if action instanceof CallbackAction}
-	<Button on:click={async () => await action.call(item)} icon={action.icon} {...action.options.htmlAttributes}>
+	<Button
+		on:click={async () => await action.call(item)}
+		icon={action.icon}
+		{...action.options.htmlAttributes}
+	>
 		{$_(action.label)}
 	</Button>
 {:else}

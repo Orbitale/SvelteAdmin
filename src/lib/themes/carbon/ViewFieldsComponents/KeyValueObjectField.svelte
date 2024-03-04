@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { KeyValueObjectField } from '$lib/FieldDefinitions/KeyValueObject';
+	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject';
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
 	export let field: KeyValueObjectField;

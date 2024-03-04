@@ -3,12 +3,12 @@
  * @module
  */
 
-import type { FieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
-import type { CrudDefinition } from '$lib/Crud/definition';
-import type { DashboardDefinition } from '$lib/Dashboard/definition';
-import type { Action } from '$lib/actions';
-import type { CrudTheme } from '$lib/themes/ThemeConfig';
-import { defaultPaginationOptions, type PaginationOptions } from '$lib/DataTable/Pagination';
+import type { FieldOptions, FieldInterface } from '$lib/Fields';
+import type { CrudDefinition } from '$lib/Crud/index';
+import type { DashboardDefinition } from '$lib/Dashboard';
+import type { Action } from '$lib/Actions';
+import type { CrudTheme } from '$lib/types';
+import { defaultPaginationOptions, type PaginationOptions } from '$lib/Pagination';
 import type { FilterInterface, FilterOptions } from '$lib/Filter';
 
 /** */
@@ -33,10 +33,12 @@ export interface CrudOperation {
 
 	/** */
 	get dashboard(): DashboardDefinition;
+
 	set dashboard(dashboard: DashboardDefinition);
 
 	/** */
 	get crud(): CrudDefinition<unknown>;
+
 	set crud(crud: CrudDefinition<unknown>);
 }
 

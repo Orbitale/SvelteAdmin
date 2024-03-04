@@ -8,11 +8,11 @@
 
 	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
-	import type { Headers, Row, Rows } from '$lib/DataTable/DataTable';
-	import type { Action } from '$lib/actions';
+	import type { Headers, Row, Rows } from '$lib/DataTable';
+	import type { Action } from '$lib/Actions';
 	import type { FilterInterface, FilterOptions } from '$lib/Filter';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
-	import { type SubmittedData } from '$lib/Crud/form';
+	import type { ThemeConfig } from '$lib/types';
+	import type { SubmittedData } from '$lib/Crud/Form';
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;

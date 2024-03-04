@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
-	import { UrlField } from '$lib/FieldDefinitions/Url';
+	import { UrlField } from '$lib/Fields/Url';
 
 	export let value: string | undefined;
 	export let field: UrlField;

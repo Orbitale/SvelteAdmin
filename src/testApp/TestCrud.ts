@@ -33,11 +33,11 @@ import {
 	UrlField,
 	View
 } from '$lib';
-import type { FieldInterface, FieldOptions } from '$lib/FieldDefinitions/definition';
-import type { RequestParameters } from '$lib/request';
+import type { FieldInterface, FieldOptions } from '$lib/Fields';
+import type { RequestParameters } from '$lib/Request';
 
 import { type Test, getMemoryTests } from './internal/testsInternal';
-import { CrudEntityField } from '$lib/FieldDefinitions/CrudEntity';
+import { CrudEntityField } from '$lib/Fields/CrudEntity';
 
 const itemsPerPage = 10;
 

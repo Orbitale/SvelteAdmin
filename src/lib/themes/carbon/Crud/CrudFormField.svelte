@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
+	import type { ThemeConfig } from '$lib/types';
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<CommonFieldOptions>;

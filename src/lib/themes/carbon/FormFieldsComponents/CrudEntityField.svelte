@@ -6,8 +6,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import { type CrudOperation, Field } from '$lib/Crud/Operations';
-	import type { CrudEntityField } from '$lib/FieldDefinitions/CrudEntity';
-	import { CrudDefinition } from '$lib/Crud/definition';
+	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
+	import { CrudDefinition } from '$lib/Crud';
 
 	export let field: CrudEntityField;
 	export let operation: CrudOperation;

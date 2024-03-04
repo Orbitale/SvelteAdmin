@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ActionIcon } from '$lib/actions';
+	import type { ActionIcon } from '$lib/Actions';
 	import { SvelteComponent } from 'svelte';
 
 	export let icon: ActionIcon;

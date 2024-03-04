@@ -5,15 +5,13 @@
 	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { Tabs } from '$lib/FieldDefinitions/Tabs';
-	import { Columns } from '$lib/FieldDefinitions/Columns';
+	import { Tabs } from '$lib/Fields/Tabs';
+	import { Columns } from '$lib/Fields/Columns';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { SubmitButtonType } from '$lib/config/types';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
-	import { getSubmittedFormData } from '$lib/Crud/form';
-	import type { SubmittedData } from '$lib/Crud/form';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
+	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
+	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form';
 	import { themes } from '$lib';
 
 	export let submitButtonType: SubmitButtonType = 'primary';

@@ -4,12 +4,12 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/definition';
-	import type { DashboardDefinition } from '$lib/Dashboard/definition';
+	import type { CrudDefinition } from '$lib/Crud';
+	import type { DashboardDefinition } from '$lib/Dashboard';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
-	import type { StateProviderResult } from '$lib/State/Provider';
-	import type { RequestParameters } from '$lib/request';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
+	import type { StateProviderResult } from '$lib/StateProvider';
+	import type { RequestParameters } from '$lib/Request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;

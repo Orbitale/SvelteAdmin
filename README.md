@@ -3,7 +3,7 @@
 This package is an **admin generator** for your JS/TS/Svelte projects. It can consume a distant API, a localStorage, or even an RPC-based data storage (like when using [Tauri](https://tauri.app/)).
 
 | List                                                           | View                                                           | Edit                                                           |
-|----------------------------------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------|
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
 | ![SvelteAdmin Backoffice List](./docs-src/backoffice_list.png) | ![SvelteAdmin Backoffice View](./docs-src/backoffice_view.png) | ![SvelteAdmin Backoffice Edit](./docs-src/backoffice_edit.png) |
 
 There is a [roadmap](#roadmap) at the end of this documentation to know what features are soon coming!

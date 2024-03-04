@@ -7,10 +7,9 @@
 
 	import TopMenu from '../Menu/TopMenu.svelte';
 	import SideMenu from '../Menu/SideMenu.svelte';
-	import type { MenuLink } from '$lib/Menu/MenuLinks';
-
-	import { type Dictionaries, initLocale } from '$lib/admin_i18n';
-	import type { AdminConfig } from '$lib/config/adminConfig';
+	import type { MenuLink } from '$lib/Menu';
+	import { type Dictionaries, initLocale } from '$lib/i18n';
+	import type { AdminConfig } from '$lib/Config';
 
 	// Available Carbon themes: "white" | "g10" | "g80" | "g90" | "g100"
 	export let theme = 'g10';

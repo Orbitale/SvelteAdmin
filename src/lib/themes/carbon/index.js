@@ -52,7 +52,7 @@ import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
 /**
- * @type import("../ThemeConfig").ThemeConfig
+ * @type import("../../types").ThemeConfig
  */
 const theme = {
 	adminLayout: AdminLayout,

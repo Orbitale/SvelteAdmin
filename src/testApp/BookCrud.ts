@@ -15,7 +15,7 @@ import {
 	PaginatedResults,
 	CallbackAction
 } from '$lib';
-import type { RequestParameters } from '$lib/request';
+import type { RequestParameters } from '$lib/Request';
 
 import { faker } from '@faker-js/faker';
 

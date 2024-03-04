@@ -2,7 +2,7 @@
 	import DatePickerInput from 'carbon-components-svelte/src/DatePicker/DatePickerInput.svelte';
 	import DatePicker from 'carbon-components-svelte/src/DatePicker/DatePicker.svelte';
 	import { _ } from 'svelte-i18n';
-	import type { DateField } from '$lib/FieldDefinitions/Date';
+	import type { DateField } from '$lib/Fields/Date';
 
 	export let field: DateField;
 	export let value: Date | string | undefined;

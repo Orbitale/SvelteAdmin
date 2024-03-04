@@ -3,10 +3,11 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import type { CommonFieldOptions, FieldInterface } from '$lib/FieldDefinitions/definition';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
 	import type { CrudOperation } from '$lib/Crud/Operations';
+	import type { ThemeConfig } from '$lib/types';
+
 	import DefaultField from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<CommonFieldOptions>;

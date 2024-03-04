@@ -12,6 +12,15 @@ import { testCrud } from './TestCrud';
 
 let newLinkIndex = 1;
 
+const dynamicallyCustomizable: Submenu = new Submenu('Dynamic menu', Switcher, [
+	new CallbackAction('Add a new link to the menu', null, () => {
+		dashboard.stores.topRightMenu.update((links) => {
+			dynamicallyCustomizable.links.push(new UrlAction('Custom link' + newLinkIndex++, '/'));
+			return [...links];
+		});
+	})
+]);
+
 export const dashboard = new DashboardDefinition({
 	adminConfig: {
 		defaultLocale: 'en',
@@ -34,7 +43,9 @@ export const dashboard = new DashboardDefinition({
 			new UrlAction('Submenu 2', '#', Book)
 		])
 	],
-	topLeftMenu: [new UrlAction('Docs', '/docs', Document, { htmlAttributes: { rel: 'external' } })],
+	topLeftMenu: [
+		new UrlAction('API Docs', '/apidocs', Document, { htmlAttributes: { rel: 'external' } })
+	],
 	topRightMenu: [
 		new UrlAction('Single menu link', '/'),
 		new CallbackAction('Single menu callback', null, () => {
@@ -45,14 +56,7 @@ export const dashboard = new DashboardDefinition({
 			new UrlAction('Submenu item 1', '/', Book),
 			new UrlAction('Submenu item 2', '/', Book)
 		]),
-		new Submenu('Custom menu', Switcher, [
-			new CallbackAction('Add a new link to the menu', null, () => {
-				dashboard.stores.topRightMenu.update((links) => {
-					links[links.length - 1].links.push(new UrlAction('Custom link' + newLinkIndex++, '/'));
-					return [...links];
-				});
-			})
-		])
+		dynamicallyCustomizable
 	],
 	localeDictionaries: {
 		fr: fr

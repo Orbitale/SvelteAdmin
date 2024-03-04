@@ -6,8 +6,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { Columns as ColumnField } from '$lib/FieldDefinitions/Columns';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
+	import type { Columns as ColumnField } from '$lib/Fields/Columns';
+	import type { ThemeConfig } from '$lib/types';
 
 	export let FieldComponent: ComponentType;
 

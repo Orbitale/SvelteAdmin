@@ -6,8 +6,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { Tabs as TabsField } from '$lib/FieldDefinitions/Tabs';
-	import type { ThemeConfig } from '$lib/themes/ThemeConfig';
+	import type { Tabs as TabsField } from '$lib/Fields/Tabs';
+	import type { ThemeConfig } from '$lib/types';
 
 	export let FieldComponent: ComponentType;
 	export let field: TabsField;

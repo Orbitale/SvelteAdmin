@@ -3,9 +3,9 @@
 
 	import CrudForm from './CrudForm.svelte';
 	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CrudDefinition } from '$lib/Crud/definition';
-	import type { DashboardDefinition } from '$lib/Dashboard/definition';
-	import type { RequestParameters } from '$lib/request';
+	import type { CrudDefinition } from '$lib/Crud';
+	import type { DashboardDefinition } from '$lib/Dashboard';
+	import type { RequestParameters } from '$lib/Request';
 
 	export let dashboard: DashboardDefinition<unknown>;
 	export let operation: CrudOperation;

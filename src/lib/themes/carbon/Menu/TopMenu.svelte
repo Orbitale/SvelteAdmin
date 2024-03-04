@@ -4,15 +4,14 @@
 
 	import TopLeftMenu from '$lib/themes/carbon/Menu/TopLeftMenu.svelte';
 	import TopRightMenu from '$lib/themes/carbon/Menu/TopRightMenu.svelte';
-	import type { MenuLink } from '$lib/Menu/MenuLinks';
-	import { type AdminConfig, emptyAdminConfig } from '$lib/config/adminConfig';
+	import type { MenuLink } from '$lib/Menu';
+	import { type AdminConfig, emptyAdminConfig } from '$lib/Config';
+	import { sideMenuOpen } from '$lib/stores';
 
 	export let left_links: Array<MenuLink> = [];
 	export let right_links: Array<MenuLink> = [];
 
 	export let adminConfig: AdminConfig = emptyAdminConfig();
-
-	import { sideMenuOpen } from '$lib/Menu/stores';
 </script>
 
 <Header

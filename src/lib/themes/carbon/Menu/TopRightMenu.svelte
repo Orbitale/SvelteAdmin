@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import { _ } from 'svelte-i18n';
 	import HeaderAction from 'carbon-components-svelte/src/UIShell/HeaderAction.svelte';
 	import HeaderPanelDivider from 'carbon-components-svelte/src/UIShell/HeaderPanelDivider.svelte';
@@ -14,8 +14,8 @@
 
 	import Icon from '$lib/Layout/Icon.svelte';
 
-	import { Divider, type MenuLink, Submenu } from '$lib/Menu/MenuLinks';
-	import { CallbackAction, UrlAction } from '$lib/actions';
+	import { Divider, type MenuLink, Submenu } from '$lib/Menu';
+	import { CallbackAction, UrlAction } from '$lib/Actions';
 
 	export let links: Array<MenuLink> = [];
 </script>
@@ -27,7 +27,7 @@
 				icon={link.icon ?? Menu}
 				text={link.options.isOpen ? link.label : null}
 				bind:isOpen={link.options.isOpen}
-				on:open={() => links.filter(s => s !== link).forEach(s=>s.options.isOpen=false)}
+				on:open={() => links.filter((s) => s !== link).forEach((s) => (s.options.isOpen = false))}
 			>
 				<HeaderPanelLinks>
 					{#each link.links as subLink}
@@ -51,44 +51,41 @@
 					{/each}
 				</HeaderPanelLinks>
 			</HeaderAction>
-
 		{:else if link instanceof Divider}
 			<HeaderPanelDivider>{link.label ? $_(link.label) : ''}</HeaderPanelDivider>
-
 		{:else if link instanceof UrlAction}
-			<TooltipDefinition tooltipText="{link.label ? $_(link.label) : ''}">
+			<TooltipDefinition tooltipText={link.label ? $_(link.label) : ''}>
 				<HeaderGlobalAction
-					on:click={function () { this.querySelector('a').click(); }}
-					on:mouseenter={() => link.options.isOpen = true}
-					on:mouseleave={() => link.options.isOpen = false}
+					on:click={function () {
+						this.querySelector('a').click();
+					}}
+					on:mouseenter={() => (link.options.isOpen = true)}
+					on:mouseleave={() => (link.options.isOpen = false)}
 					{...link.options.htmlAttributes}
 				>
-					<a href='{link.url()}' style='color: var(--cds-icon-on-color);'>
-						<Icon icon={link.icon || Link} size={20} style='fill: var(--cds-icon-on-color);' />
+					<a href={link.url()} style="color: var(--cds-icon-on-color);">
+						<Icon icon={link.icon || Link} size={20} style="fill: var(--cds-icon-on-color);" />
 					</a>
 				</HeaderGlobalAction>
 			</TooltipDefinition>
-
 		{:else if link instanceof CallbackAction}
-			<TooltipDefinition tooltipText="{link.label ? $_(link.label) : ''}">
+			<TooltipDefinition tooltipText={link.label ? $_(link.label) : ''}>
 				<HeaderGlobalAction
 					on:click={() => link.call()}
-					on:mouseenter={() => link.options.isOpen = true}
-					on:mouseleave={() => link.options.isOpen = false}
+					on:mouseenter={() => (link.options.isOpen = true)}
+					on:mouseleave={() => (link.options.isOpen = false)}
 					{...link.options.htmlAttributes}
 				>
-					<Icon icon={link.icon || Link} size={20} style='fill: var(--cds-icon-on-color);' />
+					<Icon icon={link.icon || Link} size={20} style="fill: var(--cds-icon-on-color);" />
 				</HeaderGlobalAction>
 			</TooltipDefinition>
-
 		{:else}
-			<TooltipDefinition tooltipText="{link.label ? $_(link.label) : ''}">
+			<TooltipDefinition tooltipText={link.label ? $_(link.label) : ''}>
 				<HeaderGlobalAction
-					on:mouseenter={() => link.options.isOpen = true}
-					on:mouseleave={() => link.options.isOpen = false}
+					on:mouseenter={() => (link.options.isOpen = true)}
+					on:mouseleave={() => (link.options.isOpen = false)}
 					{...link.options.htmlAttributes}
-				>
-				</HeaderGlobalAction>
+				></HeaderGlobalAction>
 			</TooltipDefinition>
 		{/if}
 	{/each}
