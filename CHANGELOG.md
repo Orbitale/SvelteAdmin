@@ -1,4 +1,4 @@
-# (upcoming) v0.15.0
+# v0.15.0
 
 - `docs` path was changed for `apidocs`
 - **BC Break** all internal code structure has been changed.<br>This will **not** concern paths like `import {...} from '@orbitale/svelte-admin';`, as all library imports are still the same. However, you will have to update the loading of all the Typescript types from other files/directories.<br>The main reason for this change is to make sure the lib is better organized, but also the API docs are more readable just because of the code's structure.
