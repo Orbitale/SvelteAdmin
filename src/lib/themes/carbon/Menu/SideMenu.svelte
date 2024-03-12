@@ -8,20 +8,20 @@
 
 	import Folder from 'carbon-icons-svelte/lib/Folder.svelte';
 	import Link from 'carbon-icons-svelte/lib/Link.svelte';
-
-	export let autoClose = true;
-
+	import type { Writable } from 'svelte/store';
 	import { _ } from 'svelte-i18n';
 
 	import { Divider, Submenu } from '$lib/Menu';
-	import { sideMenuOpen } from '$lib/stores';
 	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 	import Icon from '$lib/Layout/Icon.svelte';
+
+	export let autoClose = true;
+	export let is_side_menu_open: Writable<boolean>;
 
 	export let links: Array<Action> = [];
 </script>
 
-<SideNav rail={autoClose} isOpen={$sideMenuOpen}>
+<SideNav rail={autoClose} bind:isOpen={$is_side_menu_open}>
 	<SideNavItems>
 		{#each links as link}
 			{#if link instanceof Submenu}

@@ -10,6 +10,7 @@
 	import type { MenuLink } from '$lib/Menu';
 	import { type Dictionaries, initLocale } from '$lib/i18n';
 	import type { AdminConfig } from '$lib/Config';
+	import { writable, type Writable } from 'svelte/store';
 
 	// Available Carbon themes: "white" | "g10" | "g80" | "g90" | "g100"
 	export let theme = 'g10';
@@ -21,6 +22,8 @@
 	export let side_menu_links: Array<MenuLink> = [];
 	export let top_left_menu_links: Array<MenuLink> = [];
 	export let top_right_menu_links: Array<MenuLink> = [];
+
+	const is_side_menu_open: Writable<boolean> = writable(false);
 
 	initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
 
@@ -34,12 +37,17 @@
 </div>
 
 <slot name="top_menu">
-	<TopMenu {adminConfig} left_links={top_left_menu_links} right_links={top_right_menu_links} />
+	<TopMenu
+		{is_side_menu_open}
+		{adminConfig}
+		left_links={top_left_menu_links}
+		right_links={top_right_menu_links}
+	/>
 </slot>
 
 <slot name="side_menu">
 	{#if side_menu_links.length}
-		<SideMenu links={side_menu_links} />
+		<SideMenu links={side_menu_links} {is_side_menu_open} />
 	{/if}
 </slot>
 

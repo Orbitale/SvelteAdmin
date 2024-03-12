@@ -5,19 +5,20 @@
 	import TopLeftMenu from '$lib/themes/carbon/Menu/TopLeftMenu.svelte';
 	import TopRightMenu from '$lib/themes/carbon/Menu/TopRightMenu.svelte';
 	import type { MenuLink } from '$lib/Menu';
-	import { type AdminConfig, emptyAdminConfig } from '$lib/Config';
-	import { sideMenuOpen } from '$lib/stores';
+	import { type AdminConfig, defaultAdminConfig } from '$lib/Config';
+	import type { Writable } from 'svelte/store';
 
 	export let left_links: Array<MenuLink> = [];
 	export let right_links: Array<MenuLink> = [];
+	export let is_side_menu_open: Writable<boolean>;
 
-	export let adminConfig: AdminConfig = emptyAdminConfig();
+	export let adminConfig: AdminConfig = defaultAdminConfig();
 </script>
 
 <Header
 	company={adminConfig?.head?.brandName || ''}
 	platformName={adminConfig?.head?.appName || ''}
-	bind:isSideNavOpen={$sideMenuOpen}
+	bind:isSideNavOpen={$is_side_menu_open}
 >
 	<svelte:fragment slot="skip-to-content">
 		<SkipToContent />

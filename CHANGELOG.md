@@ -1,3 +1,7 @@
+# upcoming...
+
+- Remove "sideMenu" store and put it in Carbon's components. It wasn't exported to the end-user anyway, but was still available through other kind of imports. For now, it's useless for the end-user, and needs not be exported, so it was removed.
+
 # v0.15.0
 
 - `docs` path was changed for `apidocs`
