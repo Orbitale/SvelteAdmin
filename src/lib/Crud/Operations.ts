@@ -196,7 +196,7 @@ export class View extends BaseCrudOperation {
 
 /**
  */
-export class Field extends BaseCrudOperation {
+export class SingleField extends BaseCrudOperation {
 	/** */
 	constructor(name: CrudOperationName = 'field', options: Record<string, string | unknown> = {}) {
 		super(name, '', 'field', [], [], options);

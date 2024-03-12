@@ -1,5 +1,6 @@
 # upcoming...
 
+- **BC Break**: Rename Crud operation `Field` into `SingleField` to avoid mistyping with the `Field` class in the eponym directory.
 - Remove "sideMenu" store and put it in Carbon's components. It wasn't exported to the end-user anyway, but was still available through other kind of imports. For now, it's useless for the end-user, and needs not be exported, so it was removed.
 
 # v0.15.0
