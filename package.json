@@ -8,6 +8,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"build:library": "vite -c vite.lib.config.ts build",
 		"build:webcomponents": "vite -c ./vite.webcomponents.config.ts build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
