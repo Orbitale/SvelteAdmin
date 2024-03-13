@@ -4,7 +4,7 @@
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
 	import { type Header, type Headers } from '$lib/DataTable';
-	import type { Field, FieldOptions } from '$lib/Fields';
+	import type { BaseField, FieldOptions } from '$lib/Fields';
 	import type { CrudDefinition } from '$lib/Crud';
 
 	import { List } from '$lib/Crud/Operations';
@@ -28,8 +28,8 @@
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
 	const sortableDataTable =
-		operation.fields.filter((field: Field<FieldOptions>) => !field.options?.sortable).length > 0;
-	const headers: Headers = operation.fields.map((field: Field<FieldOptions>): Header => {
+		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length > 0;
+	const headers: Headers = operation.fields.map((field: BaseField<FieldOptions>): Header => {
 		return {
 			key: field.name,
 			value: field.label,

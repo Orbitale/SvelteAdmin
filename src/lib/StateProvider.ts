@@ -1,6 +1,4 @@
-import type { PaginatedResults } from '$lib/Pagination';
-import type { CrudOperation } from '$lib/Crud/Operations';
-import type { RequestParameters } from '$lib/Request';
+import type { PaginatedResults, CrudOperation, RequestParameters } from '$lib';
 
 /** */
 export type StateProviderResult<T> = Promise<T | PaginatedResults<T> | Array<T> | null>;

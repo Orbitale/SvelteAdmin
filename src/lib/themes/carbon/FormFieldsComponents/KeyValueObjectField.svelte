@@ -9,7 +9,7 @@
 	import AddFilled from 'carbon-icons-svelte/lib/AddFilled.svelte';
 	import ArrowRight from 'carbon-icons-svelte/lib/ArrowRight.svelte';
 
-	import type { KeyValueObjectField } from '$lib/Fields/KeyValueObject';
+	import type { KeyValueObjectField } from '$lib';
 	import { _ } from 'svelte-i18n';
 
 	export let field: KeyValueObjectField;

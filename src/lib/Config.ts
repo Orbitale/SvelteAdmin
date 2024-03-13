@@ -1,5 +1,5 @@
-import type { ThemeConfig } from '$lib/types';
-import carbon from '$lib/themes/carbon';
+import type { ThemeConfig } from '$lib';
+import {carbon} from '$lib/themes';
 
 /** */
 export type AdminConfig = {
@@ -13,7 +13,7 @@ export type AdminConfig = {
 	};
 };
 
-export function emptyAdminConfig(): AdminConfig {
+export function defaultAdminConfig(): AdminConfig {
 	return {
 		theme: carbon,
 		defaultLocale: 'en',

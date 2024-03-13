@@ -3,13 +3,18 @@
  * @module
  */
 
-import type { FieldOptions, FieldInterface } from '$lib/Fields';
-import type { CrudDefinition } from '$lib/Crud/index';
-import type { DashboardDefinition } from '$lib/Dashboard';
-import type { Action } from '$lib/Actions';
-import type { CrudTheme } from '$lib/types';
-import { defaultPaginationOptions, type PaginationOptions } from '$lib/Pagination';
-import type { FilterInterface, FilterOptions } from '$lib/Filter';
+import  {
+	type FieldOptions,
+	type FieldInterface,
+	type CrudDefinition,
+	type DashboardDefinition,
+	type Action,
+	type CrudTheme,
+	type FilterInterface,
+	type FilterOptions,
+	type PaginationOptions,
+	defaultPaginationOptions
+} from '$lib';
 
 /** */
 export type CrudOperationName =

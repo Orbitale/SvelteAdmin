@@ -1,5 +1,5 @@
-import { Field, type InputFieldOptions } from '$lib/Fields';
-import type { FormFieldTheme, ViewFieldTheme } from '$lib/types';
+import type{InputFieldOptions, FormFieldTheme, ViewFieldTheme} from '$lib';
+import {BaseField} from '$lib/Fields';
 
 /** */
 export type ObjectOptions = InputFieldOptions & {
@@ -7,7 +7,7 @@ export type ObjectOptions = InputFieldOptions & {
 };
 
 /** */
-export class KeyValueObjectField extends Field<ObjectOptions> {
+export class KeyValueObjectField extends BaseField<ObjectOptions> {
 	readonly formComponent: FormFieldTheme = 'key_value_object';
 	readonly viewComponent: ViewFieldTheme = 'key_value_object';
 

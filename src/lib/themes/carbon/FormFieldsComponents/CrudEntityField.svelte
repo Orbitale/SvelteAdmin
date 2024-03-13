@@ -5,7 +5,7 @@
 	import SelectItem from 'carbon-components-svelte/src/Select/SelectItem.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { type CrudOperation, Field } from '$lib/Crud/Operations';
+	import { type CrudOperation, SingleField } from '$lib/Crud/Operations';
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
 	import { CrudDefinition } from '$lib/Crud';
 
@@ -23,7 +23,7 @@
 			return;
 		}
 
-		const fieldOperation = new Field(
+		const fieldOperation = new SingleField(
 			field.options.list_provider_operation?.name ?? 'entity_list',
 			field.options.list_provider_operation?.options ?? {}
 		);

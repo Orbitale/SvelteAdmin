@@ -13,9 +13,9 @@ import {
 	View,
 	TextFilter,
 	PaginatedResults,
-	CallbackAction
+	CallbackAction,
+	type RequestParameters,
 } from '$lib';
-import type { RequestParameters } from '$lib/Request';
 
 import { faker } from '@faker-js/faker';
 

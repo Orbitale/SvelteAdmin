@@ -24,10 +24,7 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
-		"./dist/": {
-			"types": "./dist/index.d.ts",
-			"svelte": "./dist/index.js"
-		},
+		"./dist/": "./dist/index.js",
 		"./themes/carbon": {
 			"types": "./dist/themes/carbon/index.d.ts",
 			"svelte": "./dist/themes/carbon/index.js"

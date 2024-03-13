@@ -12,13 +12,13 @@
 	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
 	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
 	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form';
-	import { themes } from '$lib';
+	import { carbon } from '$lib/themes';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';
 	export let operation: CrudOperation;
 	export let defaultData: undefined | null | Record<string, unknown> = {};
-	export let theme: ThemeConfig = themes.carbon;
+	export let theme: ThemeConfig = carbon;
 
 	const CrudFormField = theme.formField;
 

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
 	List,
 	CheckboxField,
-	Field,
+	BaseField,
 	NumberField,
 	Tabs,
 	TextareaField,
@@ -20,7 +20,7 @@ describe(
 			const fields = [
 				new Tabs('', '', [
 					{ name: 'tab_1', fields: [new CheckboxField('field_1')] },
-					{ name: 'tab_2', fields: [new Field('field_2')] },
+					{ name: 'tab_2', fields: [new BaseField('field_2')] },
 					{ name: 'tab_3', fields: [new NumberField('field_3')] },
 					{ name: 'tab_4', fields: [new TextareaField('field_4')] },
 					{ name: 'tab_5', fields: [new TextField('field_5')] },
@@ -37,7 +37,7 @@ describe(
 			const fields = [
 				new Columns('', '', [
 					{ name: 'column_1', fields: [new CheckboxField('field_1')] },
-					{ name: 'column_2', fields: [new Field('field_2')] },
+					{ name: 'column_2', fields: [new BaseField('field_2')] },
 					{ name: 'column_3', fields: [new NumberField('field_3')] },
 					{ name: 'column_4', fields: [new TextareaField('field_4')] },
 					{ name: 'column_5', fields: [new TextField('field_5')] },

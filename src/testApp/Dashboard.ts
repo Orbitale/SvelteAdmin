@@ -4,7 +4,8 @@ import Document from 'carbon-icons-svelte/lib/Document.svelte';
 import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 
-import { DashboardDefinition, CallbackAction, UrlAction, Submenu, themes } from '$lib';
+import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
+import { carbon } from '$lib/themes';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
@@ -30,7 +31,7 @@ export const dashboard = new DashboardDefinition({
 			brandName: 'Svelte Admin',
 			appName: 'Demo'
 		},
-		theme: themes.carbon
+		theme: carbon
 	},
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),

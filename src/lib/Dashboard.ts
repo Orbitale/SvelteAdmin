@@ -1,8 +1,5 @@
 import { get, writable, type Writable } from 'svelte/store';
-import type { MenuLink } from '$lib/Menu';
-import type { CrudDefinition } from '$lib/Crud';
-import type { Dictionaries } from '$lib/i18n';
-import { type AdminConfig, emptyAdminConfig } from '$lib/Config';
+import {type AdminConfig,type MenuLink,type CrudDefinition,type Dictionaries, defaultAdminConfig} from '$lib';
 
 /** */
 export type DashboardStores = {
@@ -10,6 +7,7 @@ export type DashboardStores = {
 	topLeftMenu: Writable<Array<MenuLink>>;
 	topRightMenu: Writable<Array<MenuLink>>;
 };
+
 /**
  */
 export type DashboardDefinitionOptions = {
@@ -49,7 +47,7 @@ export class DashboardDefinition {
 
 	/** */
 	constructor(options: DashboardDefinitionOptions) {
-		this.adminConfig = { ...emptyAdminConfig(), ...(options.adminConfig || {}) };
+		this.adminConfig = { ...defaultAdminConfig(), ...(options.adminConfig || {}) };
 		this.cruds = options.cruds;
 		this.localeDictionaries = options.localeDictionaries || {};
 		this.cruds.forEach((crud: CrudDefinition<unknown>) => (crud.dashboard = this));

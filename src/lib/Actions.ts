@@ -1,9 +1,11 @@
 import type { ComponentType, SvelteComponent } from 'svelte';
 import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
-import type { KeyValueObject, Optional } from '$lib/types';
+
+type Optional<T> = T | null | undefined;
 
 /** */
 export type ActionIcon = string | SvelteComponent | ComponentType;
+
 /** */
 export type ActionOptions = {
 	buttonKind?: string;
@@ -73,7 +75,7 @@ export class UrlAction extends DefaultAction {
 		this._url = url;
 	}
 
-	public url(item: object & KeyValueObject = {}, identifierFieldName: string = 'id'): string {
+	public url(item: object & { [key: string]: string|number|boolean } = {}, identifierFieldName: string = 'id'): string {
 		let url = this._url || '';
 
 		const mightNeedId = item[identifierFieldName] !== undefined;

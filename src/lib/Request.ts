@@ -1,5 +1,6 @@
 import type { Page } from '@sveltejs/kit';
-import type { Optional } from '$lib/types';
+
+type Optional<T> = T | null | undefined;
 
 /** */
 export type RequestParameters = {

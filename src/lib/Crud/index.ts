@@ -1,7 +1,4 @@
-import type { CrudOperation } from '$lib/Crud/Operations';
-import type { StateProvider } from '$lib/StateProvider';
-import type { StateProcessor } from '$lib/StateProcessor';
-import { type DashboardDefinition } from '$lib/Dashboard';
+import { type CrudOperation, type StateProvider, type StateProcessor, type DashboardDefinition } from '$lib';
 
 /** */
 export type CrudDefinitionOptionsArgument<EntityType> = {

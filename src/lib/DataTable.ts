@@ -1,4 +1,4 @@
-import type { CrudOperation } from '$lib/Crud/Operations';
+import type { CrudOperation } from '$lib';
 
 export type DataTableKey = string;
 

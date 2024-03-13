@@ -1,4 +1,4 @@
-import type { FormFieldTheme, ViewFieldTheme } from '$lib/types';
+import type { FormFieldTheme, ViewFieldTheme } from '../types';
 
 /** */
 export type FieldOptions = {
@@ -31,7 +31,7 @@ export interface FieldInterface<OptionsType extends FieldOptions> {
 /**
  * @abstract
  **/
-export class Field<OptionsType extends FieldOptions> implements FieldInterface<OptionsType> {
+export class BaseField<OptionsType extends FieldOptions> implements FieldInterface<OptionsType> {
 	public readonly formComponent: FormFieldTheme = 'default';
 	public readonly viewComponent: ViewFieldTheme = 'default';
 

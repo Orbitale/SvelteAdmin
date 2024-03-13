@@ -51,10 +51,9 @@ import DateFilter from './FilterComponents/DateFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
-/**
- * @type import("../../types").ThemeConfig
- */
-const theme = {
+import type {ThemeConfig} from "$lib";
+
+const theme: ThemeConfig = {
 	adminLayout: AdminLayout,
 	dashboard: Dashboard,
 	dataTable: DataTable,

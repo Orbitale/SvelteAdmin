@@ -1,7 +1,7 @@
-import type { FilterTheme, KeyValueObject } from '$lib/types';
+import type { FilterTheme } from '$lib';
 
 /** */
-export type FilterOptions = KeyValueObject;
+export type FilterOptions = { [key: string]: string };
 
 /** */
 export interface FilterInterface<T extends FilterOptions> {

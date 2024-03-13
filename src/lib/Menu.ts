@@ -1,5 +1,6 @@
-import { type Action, type ActionIcon, type ActionOptions, DefaultAction } from '$lib/Actions';
-import type { Optional } from '$lib/types';
+import { type Action, type ActionIcon, type ActionOptions, DefaultAction } from '$lib';
+
+type Optional<T> = T | null | undefined;
 
 /** */
 export type MenuLink = Action;

@@ -1,12 +1,10 @@
 import { init, addMessages } from 'svelte-i18n';
 
-import type { KeyValueObject } from '$lib/types';
-
-import en from '$lib/translations/en';
-import fr from '$lib/translations/fr';
+import en from './translations/en';
+import fr from './translations/fr';
 
 /** */
-export type Dictionary = KeyValueObject;
+export type Dictionary = { [key: string]: string };
 
 /** */
 export type Dictionaries = { [key: string]: Dictionary };

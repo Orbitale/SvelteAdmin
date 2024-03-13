@@ -1,5 +1,4 @@
-import type { CrudOperation } from '$lib/Crud/Operations';
-import type { RequestParameters } from '$lib/Request';
+import type { CrudOperation, RequestParameters } from '$lib';
 
 /** */
 export type StateProcessorInput<T> = T | Array<T> | null;

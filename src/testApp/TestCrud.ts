@@ -31,13 +31,14 @@ import {
 	ToggleField,
 	UrlAction,
 	UrlField,
-	View
+	View,
+	CrudEntityField,
+	type RequestParameters,
+	type FieldInterface,
+	type FieldOptions
 } from '$lib';
-import type { FieldInterface, FieldOptions } from '$lib/Fields';
-import type { RequestParameters } from '$lib/Request';
 
 import { type Test, getMemoryTests } from './internal/testsInternal';
-import { CrudEntityField } from '$lib/Fields/CrudEntity';
 
 const itemsPerPage = 10;
 

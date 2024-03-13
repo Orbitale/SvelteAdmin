@@ -1,6 +1,9 @@
-# upcoming...
+# v0.16.0
 
 - **BC Break**: Rename Crud operation `Field` into `SingleField` to avoid mistyping with the `Field` class in the eponym directory.
+- **BC Break**: Remove some internal types to avoid circular dependencies with generic types (like `Optional` and `KeyValueObject`).
+- The project is now fully built with Typescript instead of using JS files as "intermediate".
+- Reorganized index files to have more "automatic" imports. This avoid forgetting to import some types that were newly imported. Not perfect because it needs manual import of certain files, but works nonetheless.
 - Remove "sideMenu" store and put it in Carbon's components. It wasn't exported to the end-user anyway, but was still available through other kind of imports. For now, it's useless for the end-user, and needs not be exported, so it was removed.
 
 # v0.15.0

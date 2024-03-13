@@ -1,12 +1,11 @@
-import { type CommonFieldOptions, Field } from '$lib/Fields';
-
-import type { FormFieldTheme, ViewFieldTheme } from '$lib/types';
+import type { CommonFieldOptions, FormFieldTheme, ViewFieldTheme} from '$lib';
+import {BaseField} from '$lib/Fields';
 
 /** */
 export type CheckboxOptions = CommonFieldOptions;
 
 /** */
-export class CheckboxField extends Field<CheckboxOptions> {
+export class CheckboxField extends BaseField<CheckboxOptions> {
 	readonly formComponent: FormFieldTheme = 'checkbox';
 	readonly viewComponent: ViewFieldTheme = 'checkbox';
 }

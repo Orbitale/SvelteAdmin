@@ -11,12 +11,6 @@ export type SubmitButtonType =
 	| 'danger-ghost';
 
 /** */
-export type Optional<T> = T | null | undefined;
-
-/** */
-export type KeyValueObject = { [key: string]: string };
-
-/** */
 export type ThemeConfig = {
 	dashboard: ComponentType;
 	dataTable: ComponentType;
