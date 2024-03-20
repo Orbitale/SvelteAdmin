@@ -1,3 +1,7 @@
+# upcoming...
+
+- Create small internal CLI package to make it easier to create new fields.
+
 # v0.16.0
 
 - **BC Break**: Rename Crud operation `Field` into `SingleField` to avoid mistyping with the `Field` class in the eponym directory.

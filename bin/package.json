@@ -1,0 +1,13 @@
+{
+	"name": "svelte-admin-bin",
+	"version": "0.1.0",
+	"main": "create_field.cjs",
+	"license": "proprietary",
+	"scripts": {
+		"create": "node create_field.cjs"
+	},
+	"devDependencies": {
+		"chalk": "^4.1.2",
+		"prompts": "^2.4.2"
+	}
+}
