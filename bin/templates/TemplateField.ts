@@ -7,7 +7,7 @@ export type __fullPascalCase__Options = InputFieldOptions & {
 };
 
 /** */
-export class __fullPascalCase__Field extends BaseField<__fullPascalCase__Options> {
+export class __fullPascalCase__ extends BaseField<__fullPascalCase__Options> {
 	readonly formComponent: FormFieldTheme = '__baseSnakeCase__';
 	readonly viewComponent: ViewFieldTheme = '__baseSnakeCase__';
 }
