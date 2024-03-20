@@ -35,7 +35,7 @@ import {
 	CrudEntityField,
 	type RequestParameters,
 	type FieldInterface,
-	type FieldOptions
+	type FieldOptions, ArrayField
 } from '$lib';
 
 import { type Test, getMemoryTests } from './internal/testsInternal';
@@ -53,6 +53,7 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 	new UrlField('url_field', 'Url field', { openInNewTab: true }),
 	new UrlField('path_field', 'Path-URL field'),
 	new DateField('date_field', 'Date field'),
+	new ArrayField('array_field', 'Array field', new TextField('', '')),
 	new CrudEntityField('crud_entity_field', 'Crud entity field (book)', {
 		crud_name: 'books',
 		get_provider_operation: {
@@ -63,6 +64,7 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 			value_field: 'id'
 		}
 	}),
+	new ArrayField('entities_array_field', 'Entities array field', new KeyValueObjectField('', '', 'title')),
 	new KeyValueObjectField('key_value_object_field', 'Key Value Object field', 'data1')
 ];
 

@@ -40,6 +40,7 @@ export type ThemeConfig = {
 		text: ComponentType;
 		toggle: ComponentType;
 		url: ComponentType;
+		array: ComponentType;
 		[key: string]: ComponentType;
 	};
 	formFields: {
@@ -55,6 +56,7 @@ export type ThemeConfig = {
 		text: ComponentType;
 		toggle: ComponentType;
 		url: ComponentType;
+		array: ComponentType;
 		[key: string]: ComponentType;
 	};
 	filters: {

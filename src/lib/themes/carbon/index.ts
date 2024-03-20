@@ -23,6 +23,7 @@ import TextareaFormField from './FormFieldsComponents/TextareaField.svelte';
 import TextFormField from './FormFieldsComponents/TextField.svelte';
 import ToggleFormField from './FormFieldsComponents/ToggleField.svelte';
 import UrlFormField from './FormFieldsComponents/UrlField.svelte';
+import ArrayFormField from './FormFieldsComponents/ArrayField.svelte';
 
 import AdminLayout from './Layout/AdminLayout.svelte';
 
@@ -43,6 +44,7 @@ import TextareaViewField from './ViewFieldsComponents/DefaultField.svelte';
 import TextViewField from './ViewFieldsComponents/DefaultField.svelte';
 import ToggleViewField from './ViewFieldsComponents/ToggleField.svelte';
 import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
+import ArrayViewField from './ViewFieldsComponents/ArrayField.svelte';
 
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 
@@ -51,7 +53,7 @@ import DateFilter from './FilterComponents/DateFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
-import type {ThemeConfig} from "$lib";
+import type { ThemeConfig } from '$lib';
 
 const theme: ThemeConfig = {
 	adminLayout: AdminLayout,
@@ -80,7 +82,8 @@ const theme: ThemeConfig = {
 		text: TextViewField,
 		textarea: TextareaViewField,
 		toggle: ToggleViewField,
-		url: UrlViewField
+		url: UrlViewField,
+		array: ArrayViewField
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
@@ -94,7 +97,8 @@ const theme: ThemeConfig = {
 		text: TextFormField,
 		textarea: TextareaFormField,
 		toggle: ToggleFormField,
-		url: UrlFormField
+		url: UrlFormField,
+		array: ArrayFormField
 	},
 	filters: {
 		boolean: BooleanFilter,

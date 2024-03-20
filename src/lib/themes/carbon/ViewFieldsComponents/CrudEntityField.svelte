@@ -16,17 +16,23 @@
 			(def: CrudDefinition<unknown>) => def.name === field.options.crud_name
 		)[0] ?? undefined;
 
+	console.info('CrudEntityField created with params: ', {field, operation, value});
+
 	async function fetchData() {
 		if (!crud) {
+			console.error('No CRUD to fetch data from.');
 			return;
 		}
 
+		console.info('Fetching...');
 		const fieldOperation = new SingleField(
 			field.options.get_provider_operation?.name ?? 'entity_view',
 			field.options.get_provider_operation?.options ?? {}
 		);
 		fieldOperation.crud = crud;
 		fieldOperation.dashboard = operation.dashboard;
+		console.info('Shallow field: ', fieldOperation);
+		console.info('value: ', value);
 
 		return crud.options.stateProvider.provide(fieldOperation, {
 			field_value: value
@@ -42,7 +48,14 @@
 	{#await fetchData()}
 		<SkeletonText />
 	{:then data}
-		{data[field.options.get_provider_operation.entity_field]}
+		{@const item = data[field.options.get_provider_operation.entity_field] ?? undefined}
+		{#if !item}
+			<InlineNotification kind="error" hideCloseButton>
+				{$_('error.crud.form.entity_field_view_fetch_error', { values: { message: 'Field not found' } })}
+			</InlineNotification>
+		{:else}
+			{item}
+		{/if}
 	{:catch error}
 		<InlineNotification kind="error" hideCloseButton>
 			{$_('error.crud.form.entity_field_view_fetch_error', { values: { message: error.message } })}

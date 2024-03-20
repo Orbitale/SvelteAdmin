@@ -22,6 +22,7 @@ export * from './Fields/Textarea';
 export * from './Fields/Text';
 export * from './Fields/Toggle';
 export * from './Fields/Url';
+export * from './Fields/Array';
 
 export * from './i18n';
 export * from './Menu';
