@@ -8,6 +8,7 @@ const projectDir = path.resolve(__dirname + '/../');
 const templatesPath = path.resolve(__dirname + '/templates');
 const libDir = path.resolve(projectDir + '/src/lib/');
 const fieldsDir = path.resolve(libDir + '/Fields/');
+const libIndexFile = path.resolve(libDir + '/index.ts');
 const typesFile = path.resolve(libDir + '/types.ts');
 const carbonDir = path.resolve(libDir + '/themes/carbon/');
 const carbonIndexFile = path.resolve(carbonDir + '/index.ts');
@@ -32,26 +33,39 @@ const fieldName = {
 
 	process.stdout.write(
 		'\n'
-		+'Base (snake_case): ' + chalk.black.bgGreen(' ' + fieldName.baseSnakeCase + ' ') + '\n'
-		+'Base (PascalCase): ' + chalk.black.bgGreen(' ' + fieldName.basePascalCase + ' ') + '\n'
-		+'Full (snake_case): ' + chalk.black.bgGreen(' ' + fieldName.fullPascalCase + ' ') + '\n'
-		+'Full (PascalCase): ' + chalk.black.bgGreen(' ' + fieldName.fullSnakeCase + ' ') + '\n'
+		+'Base (snake_case): ' + chalk.green(fieldName.baseSnakeCase) + '\n'
+		+'Base (PascalCase): ' + chalk.green(fieldName.basePascalCase) + '\n'
+		+'Full (snake_case): ' + chalk.green(fieldName.fullPascalCase) + '\n'
+		+'Full (PascalCase): ' + chalk.green(fieldName.fullSnakeCase) + '\n'
 	);
 
-	// const answer = await prompts({
-	// 	type: 'confirm',
-	// 	name: 'answer',
-	// 	message: 'Do you confirm?',
-	// 	initial: true
-	// });
-	// if (!answer.answer) {
-	// 	process.exit(0);
-	// }
+	process.stdout.write(
+		'\n'
+		+'This command will:\n'
+		+`> Create:\t\t\t\t${chalk.green(getFieldDefinitionFile().replace(projectDir+path.sep, ''))}\n`
+		+`> Create:\t\t\t\t${chalk.green(getViewComponentFile().replace(projectDir+path.sep, ''))}\n`
+		+`> Add a new type to:\t\t\t${chalk.green(typesFile.replace(projectDir+path.sep, ''))}\n`
+		+`> Add a new Field export to:\t\t${chalk.green(libIndexFile.replace(projectDir+path.sep, ''))}\n`
+		+`> Add 2 component exports to:\t\t${chalk.green(carbonIndexFile.replace(projectDir+path.sep, ''))}\n`
+		+`> Reformat these files:\t\t\t${chalk.green(filesToFormat.map(f => f.replace(projectDir+path.sep, '')).join('\n\t\t\t\t\t'))}\n`
+	);
+
+	const answer = await prompts({
+		type: 'confirm',
+		name: 'answer',
+		message: 'Proceed?',
+		initial: true
+	});
+	if (!answer.answer) {
+		process.exit(0);
+		return;
+	}
 
 	await Promise.all([
 		createFieldFile(),
 		createViewFiles(),
 		updateThemeConfigType(),
+		updateLibIndexFile(),
 		updateCarbonThemeFile(),
 	]);
 
@@ -93,11 +107,15 @@ async function configureNewFieldName() {
 	fieldName.basePascalCase = fieldName.fullPascalCase.replace(/Field$/g, '');
 }
 
+function getFieldDefinitionFile() {
+	return path.resolve(fieldsDir+'/'+fieldName.basePascalCase+'.ts');
+}
+
 async function createFieldFile() {
 	process.stdout.write(" > Creating Field definition file...\n");
 
 	const templateFile = templatesPath+'/TemplateField.ts';
-	const fieldFile = path.resolve(fieldsDir+'/'+fieldName.basePascalCase+'.ts');
+	const fieldFile = getFieldDefinitionFile();
 
 	const cnt = (await fs.readFile(templateFile, 'utf8'))
 		.replace(/__baseSnakeCase__/g, fieldName.baseSnakeCase)
@@ -109,17 +127,24 @@ async function createFieldFile() {
 	await fs.writeFile(fieldFile, cnt);
 }
 
+function getViewComponentFile() {
+	return path.resolve(carbonDir+'/ViewFieldsComponents/'+fieldName.fullPascalCase+'.svelte');
+}
+function getFormComponentFile() {
+	return path.resolve(carbonDir+'/FormFieldsComponents/'+fieldName.fullPascalCase+'.svelte');
+}
+
 async function createViewFiles() {
 	process.stdout.write(" > Creating Svelte views for field...\n");
 
 	await fs.copyFile(
 		templatesPath+'/carbonViewField.svelte',
-		path.resolve(carbonDir+'/ViewFieldsComponents/'+fieldName.fullPascalCase+'.svelte')
+		path.resolve(getViewComponentFile())
 	);
 
 	await fs.copyFile(
 		templatesPath+'/carbonFormField.svelte',
-		path.resolve(carbonDir+'/FormFieldsComponents/'+fieldName.fullPascalCase+'.svelte')
+		path.resolve(getFormComponentFile())
 	);
 }
 
@@ -131,6 +156,16 @@ async function updateThemeConfigType() {
 		.replace(/(formFields:[^}]+)(\[key: string]: ComponentType;)$/gm, `$1${fieldName.baseSnakeCase}: ComponentType;\n\t\t$2`);
 
 	await fs.writeFile(typesFile, typesConfig);
+}
+
+async function updateLibIndexFile() {
+	process.stdout.write(" > Adding field to global lib file...\n");
+
+	const indexFile = (await fs.readFile(libIndexFile, 'utf8'))
+		.replace(/(\s+export \* from '.\/i18n';)$/gm, `\nexport * from './Fields/${fieldName.basePascalCase}';$1`
+		);
+
+	await fs.writeFile(libIndexFile, indexFile);
 }
 
 async function updateCarbonThemeFile() {
