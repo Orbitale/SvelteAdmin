@@ -97,7 +97,7 @@ async function createFieldFile() {
 	process.stdout.write(" > Creating Field definition file...\n");
 
 	const templateFile = templatesPath+'/TemplateField.ts';
-	const fieldFile = path.resolve(fieldsDir+'/'+fieldName.fullPascalCase+'.ts');
+	const fieldFile = path.resolve(fieldsDir+'/'+fieldName.basePascalCase+'.ts');
 
 	const cnt = (await fs.readFile(templateFile, 'utf8'))
 		.replace(/__baseSnakeCase__/g, fieldName.baseSnakeCase)
