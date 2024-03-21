@@ -1,5 +1,6 @@
 # upcoming...
 
+- Fix an issue with null values in `KeyValueObject.svelte` view template.
 - Create small internal CLI package to make it easier to create new fields.
 
 # v0.16.0

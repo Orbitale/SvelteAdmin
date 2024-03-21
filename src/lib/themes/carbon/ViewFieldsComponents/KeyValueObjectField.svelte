@@ -5,11 +5,11 @@
 	export let field: KeyValueObjectField;
 	export let value: object;
 
-	let displayValue = null;
+	let displayValue: unknown = null;
 
-	field.propertyPath.split('.').forEach((key) => {
-		displayValue = value[key] ?? undefined;
-	});
+	if (value) {
+		field.propertyPath.split('.').forEach((key) => displayValue = value[key] ?? undefined);
+	}
 </script>
 
 {#if displayValue === undefined}
