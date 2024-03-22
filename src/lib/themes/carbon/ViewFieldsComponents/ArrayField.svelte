@@ -7,7 +7,7 @@
     import CrudViewField from "$lib/themes/carbon/Crud/CrudViewField.svelte";
 
     export let field: ArrayField<FieldInterface<FieldOptions>>;
-	export let value: Array<unknown> | undefined;
+    export let value: Array<unknown> | undefined;
     export let operation: CrudOperation;
     export let entityObject: Record<string, unknown> = {};
     export let theme: ThemeConfig;

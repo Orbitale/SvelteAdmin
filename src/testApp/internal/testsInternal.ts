@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import {type Book, getMemoryBooks} from './booksInternal';
+import { type Book, getMemoryBooks } from './booksInternal';
 
 export type Test = {
 	id: string;
@@ -43,9 +43,14 @@ function getBaseTests(): Array<Test> {
 				path_field: faker.system.filePath().replace(/^\/[^/]+\//g, '/'),
 				date_field: date,
 				key_value_object_field: fakeObject() as object,
-				crud_entity_field: books[faker.number.int({min: 0, max: books.length})].id ?? undefined,
-				entities_array_field: Array(faker.number.int({min: 2, max: 5})).fill(undefined).map(() => books[faker.number.int({min: 0, max: books.length})]),
-				array_field: Array(faker.number.int({min: 2, max: 10})).fill(undefined).map(() => faker.person.zodiacSign()),
+				crud_entity_field:
+					books[faker.number.int({ min: 0, max: books.length - 1 })].id ?? undefined,
+				entities_array_field: Array(faker.number.int({ min: 2, max: 5 }))
+					.fill(undefined)
+					.map(() => books[faker.number.int({ min: 0, max: books.length - 1 })]),
+				array_field: Array(faker.number.int({ min: 2, max: 10 }))
+					.fill(undefined)
+					.map(() => faker.person.zodiacSign())
 			};
 		});
 }
