@@ -1,7 +1,10 @@
-# upcoming...
+# v0.16.1
 
+- Implement the base features of a new `ArrayField`.
 - Fix an issue with null values in `KeyValueObject.svelte` view template.
 - Create small internal CLI package to make it easier to create new fields.
+- Convert error throw with error log when setting Crud or Dashboard twice in an Operation or Crud object. This was really annoying when using HMR in development, because the server had to be restarted for **any** update in the Typescript code of the Dashboard object, or any Crud object, or even the internal memory implementations, both when developing SvelteAdmin, but also when it was used as a library, where it was really inconvenient and confusing.
+- (internal) Refactor internal providers to use a common memory-based storage.
 
 # v0.16.0
 
