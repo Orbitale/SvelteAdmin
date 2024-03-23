@@ -38,7 +38,8 @@ import {
 	type FieldOptions, ArrayField
 } from '$lib';
 
-import { type Test, getMemoryTests } from './internal/testsInternal';
+import { type Test, getStorage } from './internal/testsInternal';
+import type {Book} from "./internal/booksInternal";
 
 const itemsPerPage = 10;
 
@@ -120,7 +121,7 @@ export const testCrud = new CrudDefinition<Test>({
 						'Reset memory data',
 						TrashCan,
 						() => {
-							window.localStorage.removeItem('tests');
+							window.localStorage.removeItem(getStorage().localStorageName);
 							window.location.reload();
 						},
 						{ buttonKind: 'ghost' }
@@ -150,7 +151,7 @@ export const testCrud = new CrudDefinition<Test>({
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
-		const tests = getMemoryTests();
+		console.info('Provider called', { operation: operation.name, requestParameters });
 
 		if (operation.name === 'list') {
 			const page = parseInt((requestParameters.page || '1').toString());
@@ -158,25 +159,25 @@ export const testCrud = new CrudDefinition<Test>({
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
 
-			const listTests = tests.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+			let entities = getStorage().all();
+
+			const listEntities = entities.slice(itemsPerPage * (page - 1), itemsPerPage * page);
 
 			return new PaginatedResults(
 				page,
-				Math.ceil(tests.length / itemsPerPage),
-				tests.length,
-				listTests
+				Math.ceil(entities.length / itemsPerPage),
+				entities.length,
+				listEntities
 			);
 		}
 
 		if (operation.name === 'edit' || operation.name === 'view') {
-			const ret = tests.filter(
-				(test: { id: string | number }) => test.id && test.id.toString() === requestParameters.id
-			);
+			const ret = getStorage().get((requestParameters?.id||'0').toString());
 
-			return Promise.resolve(ret[0] || null);
+			return Promise.resolve(ret || null);
 		}
 
-		console.error('StateProvider error: Unsupported Tests Crud action "' + operation.name + '".');
+		console.error(`StateProvider error: Unsupported ${operation.crud.options.label.singular} Crud action "${operation.name}".`);
 
 		return Promise.resolve(null);
 	}),
@@ -188,24 +189,23 @@ export const testCrud = new CrudDefinition<Test>({
 	) {
 		if (operation.name === 'delete') {
 			const id = (requestParameters.id || '').toString();
-			success(`Deleting Test with id ${id}!`);
+			success(`Deleting ${operation.crud.options.label.singular} with id ${id}!`);
 
 			return Promise.resolve();
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id =
-				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
-			const test = data as Test;
-			test.id = id;
+			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const entity = data as Test;
+			entity.id = id;
 
 			success(
 				(operation.name === 'edit'
-					? `Editing Test with id ${id}!`
-					: `Creating new Test with id ${id}!`) +
+					? `Editing ${operation.crud.options.label.singular} with id ${id}!`
+					: `Creating new ${operation.crud.options.label.singular} with id ${id}!`) +
 					'\n' +
 					'New content:\n' +
-					JSON.stringify(test, undefined, 4)
+					JSON.stringify(entity, undefined, 4)
 			);
 
 			return Promise.resolve();

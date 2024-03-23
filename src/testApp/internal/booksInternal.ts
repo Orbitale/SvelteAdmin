@@ -1,4 +1,7 @@
 import { faker } from '@faker-js/faker';
+import {InMemoryStorage} from "./memoryStorage";
+
+let storage: null|InMemoryStorage<Book> = null;
 
 export type Book = {
 	id: number | string;
@@ -8,10 +11,18 @@ export type Book = {
 	publishedAt: string;
 };
 
-function getBaseBooks(): Array<Book> {
+export function getStorage(): InMemoryStorage<Book> {
+	if (!storage) {
+		storage = new InMemoryStorage<Book>('Book', getBase);
+	}
+
+	return storage;
+}
+
+function getBase(): Array<Book> {
 	return Array(25)
 		.fill(undefined)
-		.map((_, i) => {
+		.map((_: undefined, i: number) => {
 			return {
 				id: faker.string.uuid(),
 				title: i + 1 + ' ' + faker.music.songName(),
@@ -20,32 +31,4 @@ function getBaseBooks(): Array<Book> {
 				publishedAt: faker.date.anytime().toISOString()
 			};
 		});
-}
-
-export function getMemoryBooks(): Array<Book> {
-	if (typeof window === 'undefined') {
-		return [];
-	}
-
-	let memory = window.localStorage.getItem('books');
-	if (memory === null || memory === undefined || memory === '') {
-		memory = JSON.stringify(getBaseBooks());
-		window.localStorage.setItem('books', memory);
-	}
-
-	return JSON.parse(memory);
-}
-
-export function getBook(id: string | number): Book {
-	const foundBooks = getMemoryBooks().filter((b) => b.id.toString() === id.toString());
-
-	if (foundBooks.length === 0) {
-		throw new Error(`Book with id "${id}" was not found.`);
-	}
-
-	if (foundBooks.length !== 1) {
-		throw new Error(`Error: Found multiple books with id "${id}".`);
-	}
-
-	return foundBooks[0];
 }

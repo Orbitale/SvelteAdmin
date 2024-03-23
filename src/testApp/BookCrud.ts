@@ -22,7 +22,7 @@ import { faker } from '@faker-js/faker';
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
-import { type Book, getBook, getMemoryBooks } from './internal/booksInternal';
+import { type Book, getStorage } from './internal/booksInternal';
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title", sortable: true }),
@@ -89,31 +89,23 @@ export const bookCrud = new CrudDefinition<Book>({
 		operation,
 		requestParameters: RequestParameters = {}
 	) {
-		const books = getMemoryBooks();
-
 		if (operation.name === 'delete') {
 			const id = (requestParameters.id || '').toString();
-			getBook(id);
-			const updatedBooks = books.filter((b) => b.id.toString() !== id);
-			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
+			getStorage().remove(id);
 
 			return Promise.resolve();
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id =
-				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
-			const book = data as Book;
-			book.id = id;
-			let updatedBooks = books;
+			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const entity = data as Book;
+			entity.id = id;
 
 			if (operation.name === 'new') {
-				updatedBooks.push(book);
+				getStorage().add(entity);
 			} else {
-				updatedBooks = updatedBooks.map((b) => (b.id.toString() === id.toString() ? book : b));
+				getStorage().update(entity);
 			}
-
-			window.localStorage.setItem('books', JSON.stringify(updatedBooks));
 
 			return Promise.resolve();
 		}
@@ -128,7 +120,6 @@ export const bookCrud = new CrudDefinition<Book>({
 		requestParameters: RequestParameters = {}
 	) {
 		console.info('Books provider called', { operation: operation.name, requestParameters });
-		let books = getMemoryBooks();
 
 		if (operation.name === 'list') {
 			const page = parseInt((requestParameters.page || '1').toString());
@@ -136,15 +127,16 @@ export const bookCrud = new CrudDefinition<Book>({
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
 
+			let entities = getStorage().all();
 			const filters = requestParameters.filters;
 			if (filters) {
-				books = books.filter((book: Book) => {
-					if (filters.title && !book.title.match(new RegExp(filters.title.toString(), 'gi'))) {
+				entities = entities.filter((entity) => {
+					if (filters.title && !entity.title.match(new RegExp(filters.title.toString(), 'gi'))) {
 						return false;
 					}
 					if (
 						filters.description &&
-						!book.description.match(new RegExp(filters.description.toString(), 'gi'))
+						!entity.description.match(new RegExp(filters.description.toString(), 'gi'))
 					) {
 						return false;
 					}
@@ -153,37 +145,28 @@ export const bookCrud = new CrudDefinition<Book>({
 				});
 			}
 
-			const listBooks = books.slice(itemsPerPage * (page - 1), itemsPerPage * page);
+			const listEntities = entities.slice(itemsPerPage * (page - 1), itemsPerPage * page);
 
 			await randomWait(500);
 
 			return new PaginatedResults(
 				page,
-				Math.ceil(books.length / itemsPerPage),
-				books.length,
-				listBooks
+				Math.ceil(entities.length / itemsPerPage),
+				entities.length,
+				listEntities
 			);
 		}
 
 		if (operation.name === 'edit' || operation.name === 'view') {
-			const ret = books.filter(
-				(book: { id: string | number }) => book.id && book.id.toString() === requestParameters.id
-			);
-
-			return Promise.resolve(ret[0] || null);
+			return Promise.resolve(getStorage().get((requestParameters?.id||'').toString()));
 		}
 
 		if (operation.name === 'entity_view') {
-			const ret = books.filter(
-				(book: { id: string | number }) =>
-					book.id && book.id.toString() === requestParameters.field_value
-			);
-
-			return Promise.resolve(ret[0] || null);
+			return Promise.resolve(getStorage().get((requestParameters?.field_value||'').toString()));
 		}
 
 		if (operation.name === 'entity_list') {
-			return Promise.resolve(books);
+			return Promise.resolve(getStorage().all());
 		}
 
 		console.error('StateProvider error: Unsupported Books Crud action "' + operation.name + '".');

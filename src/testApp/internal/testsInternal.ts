@@ -1,5 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { type Book, getMemoryBooks } from './booksInternal';
+import { type Book, getStorage as getBookStorage } from './booksInternal';
+import {InMemoryStorage} from "./memoryStorage";
+
+let storage: null|InMemoryStorage<Test> = null;
 
 export type Test = {
 	id: string;
@@ -17,15 +20,17 @@ export type Test = {
 	[key: string]: unknown;
 };
 
-function fakeObject(): object | string {
-	return {
-		data1: faker.lorem.words(faker.number.int({ min: 1, max: 4 })),
-		data2: faker.lorem.words(faker.number.int({ min: 1, max: 4 }))
-	};
+export function getStorage(): InMemoryStorage<Test> {
+	if (!storage) {
+		storage = new InMemoryStorage<Test>('Test', getBase);
+	}
+
+	return storage;
 }
 
-function getBaseTests(): Array<Test> {
-	const books = getMemoryBooks();
+function getBase(): Array<Test> {
+	const books = getBookStorage().all();
+
 	return Array(10)
 		.fill(undefined)
 		.map((): Test => {
@@ -55,36 +60,9 @@ function getBaseTests(): Array<Test> {
 		});
 }
 
-export function getMemoryTests(): Array<Test> {
-	//return [];
-	//*
-	if (typeof window === 'undefined') {
-		return [];
-	}
-
-	let memory = window.localStorage.getItem('tests');
-	if (memory === null || memory === undefined || memory === '') {
-		memory = JSON.stringify(getBaseTests());
-		window.localStorage.setItem('tests', memory);
-	}
-
-	return JSON.parse(memory).map((test: Test) => {
-		test.date_field = new Date(test.date_field.toString());
-		return test;
-	});
-	//*/
-}
-
-export function getTest(id: string | number): Test {
-	const foundTests = getMemoryTests().filter((b) => b.id.toString() === id.toString());
-
-	if (foundTests.length === 0) {
-		throw new Error(`Test with id "${id}" was not found.`);
-	}
-
-	if (foundTests.length !== 1) {
-		throw new Error(`Error: Found multiple tests with id "${id}".`);
-	}
-
-	return foundTests[0];
+function fakeObject(): object | string {
+	return {
+		data1: faker.lorem.words(faker.number.int({ min: 1, max: 4 })),
+		data2: faker.lorem.words(faker.number.int({ min: 1, max: 4 }))
+	};
 }
