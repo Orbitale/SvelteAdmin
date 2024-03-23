@@ -92,7 +92,7 @@ export abstract class BaseCrudOperation implements CrudOperation {
 			return;
 		}
 		if (this._dashboard) {
-			throw new Error('Cannot set dashboard twice in an operation.');
+			console.error('Dashboard was set twice in an operation. If you are using HMR in development, you can ignore this issue.');
 		}
 		this._dashboard = dashboard;
 	}
@@ -107,7 +107,7 @@ export abstract class BaseCrudOperation implements CrudOperation {
 
 	set crud(crud: CrudDefinition<unknown>) {
 		if (this._crud) {
-			throw new Error('Cannot set crud twice in an operation.');
+			console.error('Crud was set twice in an operation. If you are using HMR in development, you can ignore this issue.');
 		}
 		this._crud = crud;
 	}

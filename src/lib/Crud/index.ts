@@ -103,7 +103,7 @@ export class CrudDefinition<EntityType> {
 			return;
 		}
 		if (this._dashboard) {
-			throw new Error('Cannot set dashboard twice in a Crud definition.');
+			console.error('Dashboard was set twice in a Crud definition. If you are using HMR in development, you can ignore this issue.');
 		}
 		this.options.operations.forEach((operation) => {
 			operation.dashboard = dashboard;
