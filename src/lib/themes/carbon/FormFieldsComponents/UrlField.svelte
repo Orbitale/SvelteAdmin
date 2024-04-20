@@ -21,5 +21,6 @@
 	helperText={field.options.help ? $_(field.options.help) : ''}
 	placeholder={field.options?.placeholder || ''}
 	maxCount={maxLength}
+	disabled={field.options.disabled}
 	{value}
 />

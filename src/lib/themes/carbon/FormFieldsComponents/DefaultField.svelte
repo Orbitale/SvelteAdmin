@@ -11,5 +11,6 @@
 	labelText={field.label}
 	placeholder={field.options?.placeholder ?? ''}
 	required={field.options.required ?? true}
+	disabled={field.options.disabled}
 	{value}
 />

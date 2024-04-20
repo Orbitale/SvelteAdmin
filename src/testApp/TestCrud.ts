@@ -35,11 +35,12 @@ import {
 	CrudEntityField,
 	type RequestParameters,
 	type FieldInterface,
-	type FieldOptions, ArrayField
+	type FieldOptions,
+	ArrayField
 } from '$lib';
 
 import { type Test, getStorage } from './internal/testsInternal';
-import type {Book} from "./internal/booksInternal";
+import type { Book } from './internal/booksInternal';
 
 const itemsPerPage = 10;
 
@@ -65,7 +66,11 @@ const baseFields: Array<FieldInterface<FieldOptions>> = [
 			value_field: 'id'
 		}
 	}),
-	new ArrayField('entities_array_field', 'Entities array field', new KeyValueObjectField('', '', 'title')),
+	new ArrayField(
+		'entities_array_field',
+		'Entities array field',
+		new KeyValueObjectField('', '', 'title')
+	),
 	new KeyValueObjectField('key_value_object_field', 'Key Value Object field', 'data1')
 ];
 
@@ -172,12 +177,14 @@ export const testCrud = new CrudDefinition<Test>({
 		}
 
 		if (operation.name === 'edit' || operation.name === 'view') {
-			const ret = getStorage().get((requestParameters?.id||'0').toString());
+			const ret = getStorage().get((requestParameters?.id || '0').toString());
 
 			return Promise.resolve(ret || null);
 		}
 
-		console.error(`StateProvider error: Unsupported ${operation.crud.options.label.singular} Crud action "${operation.name}".`);
+		console.error(
+			`StateProvider error: Unsupported ${operation.crud.options.label.singular} Crud action "${operation.name}".`
+		);
 
 		return Promise.resolve(null);
 	}),
@@ -195,7 +202,8 @@ export const testCrud = new CrudDefinition<Test>({
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const id =
+				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const entity = data as Test;
 			entity.id = id;
 

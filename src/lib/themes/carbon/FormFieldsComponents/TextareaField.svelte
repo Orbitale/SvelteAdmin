@@ -19,6 +19,7 @@
 	helperText={field.options.help}
 	placeholder={field.options.placeholder}
 	rows={field.options.rows}
+	disabled={field.options.disabled}
 	{value}
 	on:change={onChangeStripTags}
 />

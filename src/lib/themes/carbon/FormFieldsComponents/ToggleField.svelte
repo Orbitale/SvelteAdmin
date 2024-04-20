@@ -25,6 +25,7 @@
 	name={field.name}
 	labelText={field.label}
 	helperText={field.options.help}
+	disabled={field.options.disabled}
 	on:change={onChange}
 	bind:toggled={is_checked}
 />

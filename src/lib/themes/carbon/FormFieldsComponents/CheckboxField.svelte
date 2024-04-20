@@ -25,6 +25,7 @@
 	name={field.name}
 	labelText={field.label}
 	required={field.options.required ?? true}
+	disabled={field.options.disabled}
 	on:change={onChange}
 	bind:checked={is_checked}
 />

@@ -44,6 +44,7 @@
 		labelText={$_(field.label || field.name)}
 		helperText={field.options.help ? $_(field.options.help) : ''}
 		placeholder={field.options?.placeholder || 'yyyy-mm-dd'}
+		disabled={field.options.disabled}
 		pattern={dateFormatToRegex(field.options.formFormat || 'Y-m-d')}
 	/>
 </DatePicker>
