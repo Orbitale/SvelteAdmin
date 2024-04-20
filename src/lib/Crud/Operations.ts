@@ -3,7 +3,7 @@
  * @module
  */
 
-import  {
+import {
 	type FieldOptions,
 	type FieldInterface,
 	type CrudDefinition,
@@ -92,7 +92,9 @@ export abstract class BaseCrudOperation implements CrudOperation {
 			return;
 		}
 		if (this._dashboard) {
-			console.error('Dashboard was set twice in an operation. If you are using HMR in development, you can ignore this issue.');
+			console.error(
+				'Dashboard was set twice in an operation. If you are using HMR in development, you can ignore this issue.'
+			);
 		}
 		this._dashboard = dashboard;
 	}
@@ -107,7 +109,9 @@ export abstract class BaseCrudOperation implements CrudOperation {
 
 	set crud(crud: CrudDefinition<unknown>) {
 		if (this._crud) {
-			console.error('Crud was set twice in an operation. If you are using HMR in development, you can ignore this issue.');
+			console.error(
+				'Crud was set twice in an operation. If you are using HMR in development, you can ignore this issue.'
+			);
 		}
 		this._crud = crud;
 	}

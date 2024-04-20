@@ -1,5 +1,11 @@
 import { get, writable, type Writable } from 'svelte/store';
-import {type AdminConfig,type MenuLink,type CrudDefinition,type Dictionaries, defaultAdminConfig} from '$lib';
+import {
+	type AdminConfig,
+	type MenuLink,
+	type CrudDefinition,
+	type Dictionaries,
+	defaultAdminConfig
+} from '$lib';
 
 /** */
 export type DashboardStores = {

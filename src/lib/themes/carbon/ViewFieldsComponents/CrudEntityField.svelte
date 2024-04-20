@@ -16,7 +16,7 @@
 			(def: CrudDefinition<unknown>) => def.name === field.options.crud_name
 		)[0] ?? undefined;
 
-	console.info('CrudEntityField created with params: ', {field, operation, value});
+	console.info('CrudEntityField created with params: ', { field, operation, value });
 
 	async function fetchData() {
 		if (!crud) {
@@ -51,7 +51,9 @@
 		{@const item = data[field.options.get_provider_operation.entity_field] ?? undefined}
 		{#if !item}
 			<InlineNotification kind="error" hideCloseButton>
-				{$_('error.crud.form.entity_field_view_fetch_error', { values: { message: 'Field not found' } })}
+				{$_('error.crud.form.entity_field_view_fetch_error', {
+					values: { message: 'Field not found' }
+				})}
 			</InlineNotification>
 		{:else}
 			{item}

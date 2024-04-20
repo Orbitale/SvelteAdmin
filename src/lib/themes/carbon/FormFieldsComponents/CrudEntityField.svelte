@@ -43,7 +43,12 @@
 		<SelectSkeleton labelText={$_(field.label)} />
 	{:then data}
 		{@const values = data}
-		<Select name={field.name} labelText={$_(field.label)} selected={value} disabled={field.options.disabled}>
+		<Select
+			name={field.name}
+			labelText={$_(field.label)}
+			selected={value}
+			disabled={field.options.disabled}
+		>
 			{#each values as itemValue}
 				{@const val =
 					itemValue[field.options.list_provider_operation.value_field ?? 'id'] ?? undefined}

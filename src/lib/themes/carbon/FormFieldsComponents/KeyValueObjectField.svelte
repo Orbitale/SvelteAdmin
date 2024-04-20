@@ -78,7 +78,12 @@
 					<ArrowRight size="24" style="margin-top: 5px;" />
 				</Column>
 				<Column sm={1} md={2} lg={6} xlg={6} max={6}>
-					<TextInput size="sm" data-value={i} disabled={field.options.disabled} bind:value={valueEntries[i][1]} />
+					<TextInput
+						size="sm"
+						data-value={i}
+						disabled={field.options.disabled}
+						bind:value={valueEntries[i][1]}
+					/>
 				</Column>
 				{#if !field.options.disabled}
 					<Column sm={1} md={1} lg={1} xlg={1} max={1} style="text-align: left;">

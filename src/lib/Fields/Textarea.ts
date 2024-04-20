@@ -1,5 +1,5 @@
-import type{TextOptions, FormFieldTheme, ViewFieldTheme} from '$lib';
-import {BaseField} from '$lib/Fields';
+import type { TextOptions, FormFieldTheme, ViewFieldTheme } from '$lib';
+import { BaseField } from '$lib/Fields';
 
 /** */
 export type TextareaOptions = TextOptions & {

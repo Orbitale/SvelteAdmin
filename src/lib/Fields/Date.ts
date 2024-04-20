@@ -1,5 +1,5 @@
-import type {  InputFieldOptions,  FormFieldTheme,  ViewFieldTheme } from '$lib';
-import {BaseField} from '$lib/Fields';
+import type { InputFieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib';
+import { BaseField } from '$lib/Fields';
 
 /** */
 export type DateOptions = InputFieldOptions & {

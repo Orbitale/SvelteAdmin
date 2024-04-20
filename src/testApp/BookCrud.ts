@@ -14,7 +14,7 @@ import {
 	TextFilter,
 	PaginatedResults,
 	CallbackAction,
-	type RequestParameters,
+	type RequestParameters
 } from '$lib';
 
 import { faker } from '@faker-js/faker';
@@ -97,7 +97,8 @@ export const bookCrud = new CrudDefinition<Book>({
 		}
 
 		if (operation.name === 'edit' || operation.name === 'new') {
-			const id = operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
+			const id =
+				operation.name === 'edit' ? (requestParameters.id || '').toString() : faker.string.uuid();
 			const entity = data as Book;
 			entity.id = id;
 
@@ -158,11 +159,11 @@ export const bookCrud = new CrudDefinition<Book>({
 		}
 
 		if (operation.name === 'edit' || operation.name === 'view') {
-			return Promise.resolve(getStorage().get((requestParameters?.id||'').toString()));
+			return Promise.resolve(getStorage().get((requestParameters?.id || '').toString()));
 		}
 
 		if (operation.name === 'entity_view') {
-			return Promise.resolve(getStorage().get((requestParameters?.field_value||'').toString()));
+			return Promise.resolve(getStorage().get((requestParameters?.field_value || '').toString()));
 		}
 
 		if (operation.name === 'entity_list') {

@@ -28,7 +28,8 @@
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.actions;
 	const sortableDataTable =
-		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length > 0;
+		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length >
+		0;
 	const headers: Headers = operation.fields.map((field: BaseField<FieldOptions>): Header => {
 		return {
 			key: field.name,

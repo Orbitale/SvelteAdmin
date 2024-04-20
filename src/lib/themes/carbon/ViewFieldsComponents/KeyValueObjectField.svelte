@@ -8,7 +8,7 @@
 	let displayValue: unknown = null;
 
 	if (value) {
-		field.propertyPath.split('.').forEach((key) => displayValue = value[key] ?? undefined);
+		field.propertyPath.split('.').forEach((key) => (displayValue = value[key] ?? undefined));
 	}
 </script>
 

@@ -1,4 +1,9 @@
-import { type CrudOperation, type StateProvider, type StateProcessor, type DashboardDefinition } from '$lib';
+import {
+	type CrudOperation,
+	type StateProvider,
+	type StateProcessor,
+	type DashboardDefinition
+} from '$lib';
 
 /** */
 export type CrudDefinitionOptionsArgument<EntityType> = {
@@ -103,7 +108,9 @@ export class CrudDefinition<EntityType> {
 			return;
 		}
 		if (this._dashboard) {
-			console.error('Dashboard was set twice in a Crud definition. If you are using HMR in development, you can ignore this issue.');
+			console.error(
+				'Dashboard was set twice in a Crud definition. If you are using HMR in development, you can ignore this issue.'
+			);
 		}
 		this.options.operations.forEach((operation) => {
 			operation.dashboard = dashboard;

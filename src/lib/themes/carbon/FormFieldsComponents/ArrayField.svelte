@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 	import Grid from 'carbon-components-svelte/src/Grid/Grid.svelte';
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
@@ -27,14 +27,14 @@
 	<Row>
 		<Column>
 			<Grid>
-				{#each (value || []) as itemValue}
+				{#each value || [] as itemValue}
 					<Row>
 						<Column>
 							<CrudFormField
 								{operation}
 								field={field.innerField}
 								{entityObject}
-								theme={theme}
+								{theme}
 								value={itemValue}
 							/>
 						</Column>
@@ -46,7 +46,7 @@
 								{operation}
 								field={field.innerField}
 								{entityObject}
-								theme={theme}
+								{theme}
 								value={null}
 							/>
 						</Column>

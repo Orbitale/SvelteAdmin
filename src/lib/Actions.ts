@@ -75,7 +75,10 @@ export class UrlAction extends DefaultAction {
 		this._url = url;
 	}
 
-	public url(item: object & { [key: string]: string|number|boolean } = {}, identifierFieldName: string = 'id'): string {
+	public url(
+		item: object & { [key: string]: string | number | boolean } = {},
+		identifierFieldName: string = 'id'
+	): string {
 		let url = this._url || '';
 
 		const mightNeedId = item[identifierFieldName] !== undefined;

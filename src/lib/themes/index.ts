@@ -1,1 +1,1 @@
-export {default as carbon} from './carbon';
+export { default as carbon } from './carbon';
