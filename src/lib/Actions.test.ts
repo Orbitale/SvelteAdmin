@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { CallbackAction, UrlAction } from '$lib/Actions';
 import { testOptions } from '$lib/TestOptions';
+import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 describe(
 	'URL actions',
@@ -34,6 +35,20 @@ describe(
 			};
 
 			expect(action.url(item, 'customId')).toBe('/test/val1?id=custom_identifier');
+		});
+
+		it('can contain main options', () => {
+			const icon = TrashCan;
+			const action = new UrlAction('Some label', '/', icon, {
+				htmlAttributes: { class: 'some-class' },
+				buttonKind: 'some-kind'
+			});
+
+			expect(action.icon).toBe(icon);
+			expect(action.options).toStrictEqual({
+				htmlAttributes: { class: 'some-class' },
+				buttonKind: 'some-kind'
+			});
 		});
 	},
 	testOptions
