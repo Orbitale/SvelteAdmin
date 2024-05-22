@@ -1,3 +1,7 @@
+# v0.16.2
+
+- Add support for `disabled` fields.
+
 # v0.16.1
 
 - Implement the base features of a new `ArrayField`.
