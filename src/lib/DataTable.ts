@@ -23,7 +23,7 @@ export type Header = DataTableHeader;
 export type Headers = Array<Header>;
 
 export type Row = {
-	__operation: CrudOperation;
+	__crud_operation: CrudOperation;
 	id: number | string;
 	[key: string]: DataTableValue;
 };

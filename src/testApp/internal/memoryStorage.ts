@@ -75,7 +75,7 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 
 		let memory = window.localStorage.getItem(this.localStorageName);
 		if (memory === null || memory === undefined || memory === '') {
-			memory = JSON.stringify(this.baseInitializer());
+			memory = JSON.stringify(this.baseInitializer(), this.serializeReplacer);
 			window.localStorage.setItem(this.localStorageName, memory);
 		}
 
@@ -85,7 +85,15 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 	}
 
 	private saveList(newList: T[]) {
-		const serialized = JSON.stringify(newList);
+		const serialized = JSON.stringify(newList, this.serializeReplacer);
 		window.localStorage.setItem(this.localStorageName, serialized);
+	}
+
+	private serializeReplacer(this: T, key: string, value: unknown): unknown {
+		if (key === '__crud_operation') {
+			return undefined;
+		}
+
+		return value;
 	}
 }

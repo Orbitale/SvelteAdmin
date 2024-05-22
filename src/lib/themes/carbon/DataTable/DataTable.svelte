@@ -35,12 +35,12 @@
 	}
 
 	function getFieldFromRow(fieldName: string, row: Row) {
-		if (!row.__operation) {
-			console.warn('Internal "__operation" field isn\'t properly injected');
+		if (!row.__crud_operation) {
+			console.error('Internal "__crud_operation" property isn\'t properly injected.');
 			return theme.viewFields.default;
 		}
 
-		const matchingFields = row.__operation.fields.filter((f) => f.name === fieldName);
+		const matchingFields = row.__crud_operation.fields.filter((f) => f.name === fieldName);
 
 		if (!matchingFields.length) {
 			console.warn(`Field "${fieldName}" was not found in current operation.`);

@@ -104,7 +104,7 @@
 					result.id = result[crud.options.identifierFieldName];
 				}
 
-				result.__operation = operation;
+				result.__crud_operation = operation;
 
 				return result;
 			});
