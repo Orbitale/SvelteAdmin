@@ -1,3 +1,7 @@
+# v0.16.3
+
+- Fix an issue where StateProcessor's promise is not properly resolved
+
 # v0.16.2
 
 - Add support for `disabled` fields.
