@@ -18,7 +18,7 @@
 	import type { RequestParameters } from '$lib/Request';
 	import type { DataTableNonEmptyHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
-	export let dashboard: DashboardDefinition<unknown>;
+	export let dashboard: DashboardDefinition;
 	export let operation: typeof List;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};

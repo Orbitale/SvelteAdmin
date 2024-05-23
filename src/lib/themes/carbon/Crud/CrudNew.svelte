@@ -7,7 +7,7 @@
 	import type { DashboardDefinition } from '$lib/Dashboard';
 	import type { RequestParameters } from '$lib/Request';
 
-	export let dashboard: DashboardDefinition<unknown>;
+	export let dashboard: DashboardDefinition;
 	export let operation: CrudOperation;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
