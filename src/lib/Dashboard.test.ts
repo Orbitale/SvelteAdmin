@@ -29,6 +29,49 @@ describe(
 
 			expect(dashboard).toBeDefined();
 		});
+
+		it('has a properly defined first action', () => {
+			const dashboard = new DashboardDefinition({
+				adminConfig: {},
+				cruds: [
+					new CrudDefinition<Book>({
+						name: 'books',
+						label: { singular: 'Book', plural: 'Books' },
+						operations: [new List([])],
+						stateProvider: new CallbackStateProvider<Book>(() => Promise.resolve(null)),
+						stateProcessor: new CallbackStateProcessor<Book>(() => {})
+					})
+				]
+			});
+
+			expect(dashboard).toBeDefined();
+			expect(dashboard.getFirstActionUrl()).toBe('/books/list');
+		});
+
+		it('fails when two cruds have the same name', () => {
+			const createDashboard = () => {
+				new DashboardDefinition({
+					adminConfig: {},
+					cruds: [
+						new CrudDefinition<Book>({
+							name: 'books',
+							label: { singular: 'Book', plural: 'Books' },
+							operations: [new List([])],
+							stateProvider: new CallbackStateProvider<Book>(() => Promise.resolve(null)),
+							stateProcessor: new CallbackStateProcessor<Book>(() => {})
+						}),
+						new CrudDefinition<Book>({
+							name: 'books',
+							label: { singular: 'Book', plural: 'Books' },
+							operations: [new List([])],
+							stateProvider: new CallbackStateProvider<Book>(() => Promise.resolve(null)),
+							stateProcessor: new CallbackStateProcessor<Book>(() => {})
+						}),
+					]
+				});
+			};
+			expect(createDashboard).toThrow('Crud name "books" is used in at least two different Crud objects. Crud names must be unique.');
+		});
 	},
 	testOptions
 );

@@ -37,8 +37,8 @@ const IdField = new TextField('id', 'ID');
 const itemsPerPage = 10;
 
 function randomWait(maxMilliseconds: number) {
-	return new Promise((r: (...args: unknown[]) => unknown) =>
-		setTimeout(r, Math.random() * maxMilliseconds)
+	return new Promise((resolve: (...args: unknown[]) => unknown) =>
+		setTimeout(resolve, Math.random() * maxMilliseconds)
 	);
 }
 

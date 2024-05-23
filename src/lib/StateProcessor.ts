@@ -32,9 +32,9 @@ export class CallbackStateProcessor<T> implements StateProcessor<T> {
 		operation: CrudOperation,
 		requestParameters: RequestParameters
 	): Promise<void> {
-		return new Promise((resolver) => {
+		return new Promise((resolve) => {
 			this._callback(data, operation, requestParameters);
-			return resolver;
+			resolve();
 		});
 	}
 }

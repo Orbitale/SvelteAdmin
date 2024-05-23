@@ -71,7 +71,7 @@
 		if (crud.options.minStateLoadingTimeMs && typeof window !== 'undefined') {
 			providerResponse = Promise.all([
 				providerResponse,
-				new Promise((r) => setTimeout(r, crud.options.minStateLoadingTimeMs))
+				new Promise((resolve) => setTimeout(resolve, crud.options.minStateLoadingTimeMs))
 			]).then((results) => results[0]);
 		}
 
