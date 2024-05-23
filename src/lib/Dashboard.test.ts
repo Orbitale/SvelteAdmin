@@ -66,11 +66,13 @@ describe(
 							operations: [new List([])],
 							stateProvider: new CallbackStateProvider<Book>(() => Promise.resolve(null)),
 							stateProcessor: new CallbackStateProcessor<Book>(() => {})
-						}),
+						})
 					]
 				});
 			};
-			expect(createDashboard).toThrow('Crud name "books" is used in at least two different Crud objects. Crud names must be unique.');
+			expect(createDashboard).toThrow(
+				'Crud name "books" is used in at least two different Crud objects. Crud names must be unique.'
+			);
 		});
 	},
 	testOptions

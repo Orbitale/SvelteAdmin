@@ -11,7 +11,7 @@
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
 	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
-	import {getSubmittedFormData, sanitizeFormData, type SubmittedData} from '$lib/Crud/Form';
+	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form';
 	import { carbon } from '$lib/themes';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
@@ -35,7 +35,11 @@
 			event.preventDefault();
 		}
 
-		const normalizedData = sanitizeFormData(getSubmittedFormData(event), defaultData ?? {}, operation);
+		const normalizedData = sanitizeFormData(
+			getSubmittedFormData(event),
+			defaultData ?? {},
+			operation
+		);
 		dispatchEvent('submitData', normalizedData);
 	}
 </script>

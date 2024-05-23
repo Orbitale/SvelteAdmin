@@ -1,4 +1,4 @@
-import type {CrudOperation, FieldInterface, FieldOptions} from "$lib";
+import type { CrudOperation, FieldInterface, FieldOptions } from '$lib';
 
 export type SubmittedData = Record<string, FormDataEntryValue>;
 
@@ -37,7 +37,11 @@ export function getSubmittedFormData(event: SubmitEvent): SubmittedData {
  * then instead of using potentially mischievous input data, we enforce them to be consistent based on the defaults.
  * Kinda makes "hacking" a bit harder.
  */
-export function sanitizeFormData(data: SubmittedData, defaultData: Record<string, unknown>, operation: CrudOperation): SubmittedData {
+export function sanitizeFormData(
+	data: SubmittedData,
+	defaultData: Record<string, unknown>,
+	operation: CrudOperation
+): SubmittedData {
 	operation.fields.forEach((field: FieldInterface<FieldOptions>) => {
 		if (field.options.disabled) {
 			if (typeof defaultData[field.name] !== 'undefined') {

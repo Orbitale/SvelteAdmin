@@ -86,7 +86,7 @@ export class DashboardDefinition {
 		const firstOperation = firstCrud.options.operations[0];
 		const root = this.adminConfig.rootUrl.replace(/(^\/*)|(\/*$)/gi, '') || '';
 
-		return `${root ? ('/'+root) : ''}/${firstCrud.name}/${firstOperation.name}`;
+		return `${root ? '/' + root : ''}/${firstCrud.name}/${firstOperation.name}`;
 	}
 
 	private checkUniqueCruds() {
