@@ -7,6 +7,7 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.ts'],
 		exclude: [...configDefaults.exclude, '**/build/**', '**/.svelte-kit/**', '**/dist/**'],
+    	environment: 'jsdom',
 		coverage: {
 			exclude: [
 				...(configDefaults?.coverage?.exclude ?? []),
