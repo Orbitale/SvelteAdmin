@@ -5,17 +5,18 @@
 	export let field: KeyValueObjectField;
 	export let value: object;
 
-	let displayValue: unknown = null;
+	let displayValue: unknown = undefined;
 
 	if (value) {
-		field.propertyPath.split('.').forEach((key) => (displayValue = value[key] ?? undefined));
+		displayValue = value;
+		field.propertyPath.split('.').forEach((key) => (displayValue = displayValue[key] ?? undefined));
 	}
 </script>
 
-{#if displayValue === undefined}
+{#if value === undefined}
+	<Tag type="red">No value</Tag>
+{:else if displayValue === undefined}
 	<Tag type="red">Not found</Tag>
-{:else if displayValue === null}
-	<Tag type="outline">null</Tag>
 {:else}
-	{displayValue}
+	<Tag type="cool-gray">{displayValue}</Tag>
 {/if}
