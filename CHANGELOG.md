@@ -1,3 +1,10 @@
+# Upcoming...
+
+- Add a setup to unit-test single components, especially fields, and test a lot of them.
+- Fix a date parsing bug in `DateField.svelte` by using the luxon lib.
+- Fix wrongly configured depth display in `KeyValueObjectField.svelte`.
+- Fix `NumberField.svelte`'s inconsistent handling of numbers & enhance visual.
+
 # v0.16.3
 
 - Fix an issue where StateProcessor's promise is not properly resolved
