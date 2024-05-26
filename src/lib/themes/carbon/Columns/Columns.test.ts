@@ -18,7 +18,7 @@ import TextComponent from "../ViewFieldsComponents/DefaultField.svelte";
 describe(
     'Columns component',
     () => {
-        it('can instantiate the component', async () => {
+        it('can be instantiated', async () => {
             const props = mockComponentProps(new Columns('columns', 'Columns label', [
                 {
                     name: 'column_1',

@@ -17,7 +17,7 @@ import ComponentToTest from "./ArrayField.svelte";
 describe(
     'ArrayField component',
     () => {
-        it('can instantiate the component', async () => {
+        it('can be instantiated', async () => {
             const props = mockComponentProps(new ArrayField('array', 'Array label', new TextField('text', 'Text field')));
 
             const rendered = render(ComponentToTest, props);

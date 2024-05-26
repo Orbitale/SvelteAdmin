@@ -7,7 +7,7 @@ import ComponentToTest from "./CheckboxField.svelte";
 describe(
     'CheckboxField component',
     () => {
-        it('can instantiate the component with value "true"', async () => {
+        it('can be instantiated with value "true"', async () => {
             const rendered = render(ComponentToTest, {
                 value: true,
             });
@@ -18,7 +18,7 @@ describe(
             expect(svg.style.color).toBe('rgb(0, 170, 0)')
         });
 
-        it('can instantiate the component with value "false"', async () => {
+        it('can be instantiated with value "false"', async () => {
             const rendered = render(ComponentToTest, {
                 value: false,
             });
