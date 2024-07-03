@@ -5,7 +5,7 @@
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import CheckboxIndeterminate from 'carbon-icons-svelte/lib/CheckboxIndeterminate.svelte';
 	import type { TextFilter } from '$lib/Filter';
-	import FilterContainer from '$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
+	import FilterContainer from '$themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	export let filter: TextFilter;
 	let value: boolean | null = null;

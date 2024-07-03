@@ -12,7 +12,7 @@
 	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
 	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
 	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form';
-	import { carbon } from '$lib/themes';
+	import { carbon } from '$themes';
 
 	export let submitButtonType: SubmitButtonType = 'primary';
 	export let method: 'get' | 'post' = 'post';

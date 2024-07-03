@@ -4,7 +4,7 @@
 	import DatePicker from 'carbon-components-svelte/src/DatePicker/DatePicker.svelte';
 
 	import type { DateFilter } from '$lib/Filter';
-	import FilterContainer from '$lib/themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
+	import FilterContainer from '$themes/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	export let filter: DateFilter;
 

@@ -4,7 +4,7 @@
 	import type { FieldInterface } from '$lib/Fields';
 	import type { FieldOptions } from '$lib/Fields';
 	import type { ThemeConfig } from '$lib/types';
-	import CrudViewField from '$lib/themes/carbon/Crud/CrudViewField.svelte';
+	import CrudViewField from '$themes/carbon/Crud/CrudViewField.svelte';
 
 	export let field: ArrayField<FieldInterface<FieldOptions>>;
 	export let value: Array<unknown> | undefined;
