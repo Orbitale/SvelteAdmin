@@ -7,11 +7,10 @@
 	"license": "LGPL-3.0-or-later",
 	"scripts": {
 		"dev": "vite -c vite.config.ts dev",
-		"build": "yarn build:app && yarn build:lib && yarn build:themes && yarn build:webcomponents && yarn typedoc",
+		"build": "yarn build:app && yarn build:lib && yarn build:themes && yarn typedoc",
 		"build:app": "vite -c vite.config.ts build",
 		"build:lib": "vite -c vite.lib.config.ts build",
 		"build:themes": "vite -c vite.themes.config.ts build",
-		"build:webcomponents": "vite -c vite.webcomponents.config.ts build",
 		"create:field": "node bin/create_field.cjs",
 		"preview": "vite -c vite.app.config.ts preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

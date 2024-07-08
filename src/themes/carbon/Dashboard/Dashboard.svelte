@@ -1,14 +1,3 @@
-<svelte:options
-	customElement={{
-		tag: 'sa-cds-dashboard',
-		props: {
-			dashboard: { reflect: false, type: 'Object' },
-			crud: { reflect: true, type: 'String' },
-			action: { reflect: true, type: 'String' }
-		}
-	}}
-/>
-
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 
