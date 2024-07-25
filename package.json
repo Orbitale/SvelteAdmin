@@ -1,35 +1,40 @@
 {
 	"name": "@orbitale/svelte-admin",
-	"version": "0.16.4-beta2",
+	"version": "0.16.4-beta3",
 	"description": "(prototype) Crud base for Svelte projects",
 	"repository": "https://github.com/Orbitale/SvelteAdmin",
 	"author": "Alex \"Pierstoval\" Rock <alex@orbitale.io>",
 	"license": "LGPL-3.0-or-later",
 	"scripts": {
-		"dev": "vite -c vite.config.ts dev",
-		"build": "pnpm build:app && pnpm build:lib && pnpm build:themes && pnpm typedoc",
-		"build:app": "vite -c vite.config.ts build",
-		"build:lib": "vite -c vite.lib.config.ts build",
-		"build:themes": "vite -c vite.themes.config.ts build",
-		"create:field": "node bin/create_field.cjs",
-		"preview": "vite -c vite.app.config.ts preview",
+		"build": "vite build && pnpm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"lint": "prettier --plugin=prettier-plugin-svelte . --check . && eslint src",
+		"create:field": "node bin/create_field.cjs",
+		"dev": "vite dev",
 		"format": "prettier --plugin=prettier-plugin-svelte --write .",
+		"lint": "prettier --plugin=prettier-plugin-svelte . --check . && eslint src",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "pnpm run package",
+		"preview": "vite preview",
+		"svelte-package": "svelte-package",
 		"test:unit": "vitest",
 		"typedoc": "typedoc --options typedoc.json --readme none"
 	},
 	"exports": {
-		".": "./build/lib/index.js",
-		"./themes": "./build/themes/index.js"
+		".": "./dist/index.js",
+		"./themes": "./dist/themes/index.js"
+	},
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"directories": {
+		".": "./dist/",
+		"/themes/": "./dist/themes"
 	},
 	"files": [
-		"build/lib",
-		"build/themes",
-		"build/webcomponents",
-		"src/lib",
-		"src/themes"
+		"./dist/index.d.ts",
+		"./dist/index.js",
+		"./dist/themes/index.d.ts",
+		"./dist/themes/index.js"
 	],
 	"peerDependencies": {
 		"carbon-components-svelte": "^0.80.0",
@@ -75,7 +80,5 @@
 		"vite": "^5.2.11",
 		"vitest": "^1.6.0"
 	},
-	"main": "./build/lib/index.js",
-	"types": "./build/lib/index.d.ts",
 	"type": "module"
 }

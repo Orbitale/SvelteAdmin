@@ -1,5 +1,5 @@
 import type { ThemeConfig } from '$lib';
-import { carbon } from '../themes';
+import { carbon } from '$lib/themes';
 
 /** */
 export type AdminConfig = {

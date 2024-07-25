@@ -11,8 +11,7 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			'$lib': resolve(__dirname, 'src/lib'),
-			'$themes': resolve(__dirname, 'src/themes'),
+			'$lib': resolve(__dirname, 'src/lib')
 		}
 	},
 	test: {
