@@ -1,6 +1,6 @@
 {
 	"name": "@orbitale/svelte-admin",
-	"version": "0.16.3",
+	"version": "0.16.4-beta",
 	"description": "(prototype) Crud base for Svelte projects",
 	"repository": "https://github.com/Orbitale/SvelteAdmin",
 	"author": "Alex \"Pierstoval\" Rock <alex@orbitale.io>",
