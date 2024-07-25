@@ -6,8 +6,8 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import Loading from 'carbon-components-svelte/src/Loading/Loading.svelte';
 
-	import DataTableToolbar from '$lib/themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
-	import ItemActions from '$lib/themes/carbon/DataTable/actions/ItemActions.svelte';
+	import DataTableToolbar from '$themes/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
+	import ItemActions from '$themes/carbon/DataTable/actions/ItemActions.svelte';
 	import type { Headers, Row, Rows } from '$lib/DataTable';
 	import type { Action } from '$lib/Actions';
 	import type { FilterInterface, FilterOptions } from '$lib/Filter';

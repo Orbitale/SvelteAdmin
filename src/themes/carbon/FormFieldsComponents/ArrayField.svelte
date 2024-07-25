@@ -4,7 +4,7 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import CrudFormField from '$lib/themes/carbon/Crud/CrudFormField.svelte';
+	import CrudFormField from '$themes/carbon/Crud/CrudFormField.svelte';
 	import { ArrayField } from '$lib/Fields/Array';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { FieldInterface } from '$lib/Fields';

@@ -2,41 +2,39 @@ import { describe, it, expect } from 'vitest';
 import {render} from '@testing-library/svelte'
 import '@testing-library/jest-dom';
 import { testOptions } from '$lib/TestOptions';
-import ComponentToTest from "./DateField.svelte";
+import ComponentToTest from "./DefaultField.svelte";
 
 describe(
-    'DateField component',
+    'DefaultField component',
     () => {
-        it('can be instantiated with empty value', async () => {
+        it('can be instantiated with undefined', async () => {
             const rendered = render(ComponentToTest, {
                 value: undefined,
             });
 
             const element = rendered.container;
             expect(element).toBeDefined();
-            expect(element.innerHTML).toStrictEqual('<!--<DateField>-->');
+            expect(element.innerHTML).toStrictEqual('');
         });
 
-        it('can be instantiated with Date object', async () => {
-            const date = new Date('2024-01-01');
+        it('can be instantiated empty string', async () => {
             const rendered = render(ComponentToTest, {
-                value: date,
+                value: undefined,
             });
 
             const element = rendered.container;
             expect(element).toBeDefined();
-            expect(element.innerHTML).toStrictEqual(`2024-01-01<!--<DateField>-->`);
+            expect(element.innerHTML).toStrictEqual('');
         });
 
-        it('can be instantiated with string value', async () => {
-            const date = '2024-05-26 00:00:00 GMT+02:00';
+        it('can be instantiated specific value', async () => {
             const rendered = render(ComponentToTest, {
-                value: date,
+                value: 'Some value',
             });
 
             const element = rendered.container;
             expect(element).toBeDefined();
-            expect(element.innerHTML).toStrictEqual('2024-05-26<!--<DateField>-->');
+            expect(element.innerHTML).toStrictEqual('Some value');
         });
     },
     testOptions,

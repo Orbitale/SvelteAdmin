@@ -5,7 +5,7 @@ import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 
 import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
-import { carbon } from '$lib/themes';
+import { carbon } from '../themes';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';

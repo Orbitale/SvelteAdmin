@@ -3,7 +3,7 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import SingleAction from '$lib/themes/carbon/DataTable/actions/SingleAction.svelte';
+	import SingleAction from '$themes/carbon/DataTable/actions/SingleAction.svelte';
 	import type { Action } from '$lib/Actions';
 
 	export let actions: Action[] = [];

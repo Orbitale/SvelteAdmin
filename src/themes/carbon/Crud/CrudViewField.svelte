@@ -7,7 +7,7 @@
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { ThemeConfig } from '$lib/types';
 
-	import DefaultField from '$lib/themes/carbon/ViewFieldsComponents/DefaultField.svelte';
+	import DefaultField from '$themes/carbon/ViewFieldsComponents/DefaultField.svelte';
 
 	export let operation: CrudOperation;
 	export let field: FieldInterface<CommonFieldOptions>;

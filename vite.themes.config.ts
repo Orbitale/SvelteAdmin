@@ -4,10 +4,10 @@ import { resolve } from 'path'
 
 export default defineConfig({
 	build: {
-		outDir: 'build/lib/',
+		outDir: 'build/themes/',
 		lib: {
-			entry: resolve(__dirname, 'src/lib/index.ts'),
-			name: '@orbitale/svelte-admin',
+			entry: resolve(__dirname, 'src/themes/index.ts'),
+			name: '@orbitale/svelte-admin/themes',
 			formats: ['es'],
 			fileName: format => `index.${format}.js`
 		},
@@ -20,6 +20,12 @@ export default defineConfig({
 		}
 	},
 	plugins: [
-		svelte()
-	],
+		svelte({
+			compilerOptions: {
+				customElement: false,
+				dev: false,
+				css: 'injected'
+			}
+		})
+	]
 });

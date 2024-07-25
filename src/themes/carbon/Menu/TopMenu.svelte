@@ -2,8 +2,8 @@
 	import Header from 'carbon-components-svelte/src/UIShell/Header.svelte';
 	import SkipToContent from 'carbon-components-svelte/src/UIShell/SkipToContent.svelte';
 
-	import TopLeftMenu from '$lib/themes/carbon/Menu/TopLeftMenu.svelte';
-	import TopRightMenu from '$lib/themes/carbon/Menu/TopRightMenu.svelte';
+	import TopLeftMenu from '$themes/carbon/Menu/TopLeftMenu.svelte';
+	import TopRightMenu from '$themes/carbon/Menu/TopRightMenu.svelte';
 	import type { MenuLink } from '$lib/Menu';
 	import { type AdminConfig, defaultAdminConfig } from '$lib/Config';
 	import type { Writable } from 'svelte/store';

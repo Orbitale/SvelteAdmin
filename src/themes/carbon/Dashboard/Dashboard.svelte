@@ -1,20 +1,9 @@
-<svelte:options
-	customElement={{
-		tag: 'sa-cds-dashboard',
-		props: {
-			dashboard: { reflect: false, type: 'Object' },
-			crud: { reflect: true, type: 'String' },
-			action: { reflect: true, type: 'String' }
-		}
-	}}
-/>
-
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
 
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
-	import AdminLayout from '$lib/themes/carbon/Layout/AdminLayout.svelte';
+	import AdminLayout from '$themes/carbon/Layout/AdminLayout.svelte';
 	import type { DashboardDefinition } from '$lib/Dashboard';
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { CrudDefinition } from '$lib/Crud';

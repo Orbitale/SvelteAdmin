@@ -11,8 +11,8 @@
 	import FilterReset from 'carbon-icons-svelte/lib/FilterReset.svelte';
 
 	import type { Action } from '$lib/Actions';
-	import ActionComponent from '$lib/themes/carbon/DataTable/Toolbar/ToolbarAction.svelte';
-	import FilterComponent from '$lib/themes/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
+	import ActionComponent from '$themes/carbon/DataTable/Toolbar/ToolbarAction.svelte';
+	import FilterComponent from '$themes/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
 	import { getSubmittedFormData } from '$lib/Crud/Form';
