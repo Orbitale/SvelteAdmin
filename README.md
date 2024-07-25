@@ -13,7 +13,7 @@ There is a [roadmap](#roadmap) at the end of this documentation to know what fea
 You can install SvelteAdmin with one of these commands, depending on your package manager:
 
 ```bash
-yarn add "@orbitale/svelte-admin"
+pnpm add "@orbitale/svelte-admin"
 
 npm install --save "@orbitale/svelte-admin"
 ```
@@ -21,7 +21,7 @@ npm install --save "@orbitale/svelte-admin"
 If you want to use the latest version committed to Github, you can run one of these commands to add it to your project:
 
 ```bash
-yarn add "@orbitale/svelte-admin@git://github.com/Orbitale/SvelteAdmin.git"
+pnpm add "@orbitale/svelte-admin@git://github.com/Orbitale/SvelteAdmin.git"
 
 npm install --save "@orbitale/svelte-admin@git://github.com/Orbitale/SvelteAdmin.git"
 ```

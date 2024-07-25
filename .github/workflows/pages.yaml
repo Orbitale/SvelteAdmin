@@ -35,16 +35,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: 🧰 Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 🔨 Build demo app
-        run: yarn run build
+        run: pnpm run build
 
       - name: 📄 Build types documentation
-        run: yarn run typedoc
+        run: pnpm run typedoc
 
       - name: 🌐 Configure Github Pages domain
         run: echo "svelte-admin-demo.orbitale.io" > build/CNAME
