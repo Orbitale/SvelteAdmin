@@ -1,6 +1,6 @@
 {
 	"name": "@orbitale/svelte-admin",
-	"version": "0.16.4-beta3",
+	"version": "0.16.4-beta4",
 	"description": "(prototype) Crud base for Svelte projects",
 	"repository": "https://github.com/Orbitale/SvelteAdmin",
 	"author": "Alex \"Pierstoval\" Rock <alex@orbitale.io>",
@@ -31,10 +31,8 @@
 		"/themes/": "./dist/themes"
 	},
 	"files": [
-		"./dist/index.d.ts",
-		"./dist/index.js",
-		"./dist/themes/index.d.ts",
-		"./dist/themes/index.js"
+		"./dist/*",
+		"./src/lib/*"
 	],
 	"peerDependencies": {
 		"carbon-components-svelte": "^0.80.0",
