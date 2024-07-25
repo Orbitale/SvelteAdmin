@@ -7,7 +7,7 @@
 	"license": "LGPL-3.0-or-later",
 	"scripts": {
 		"dev": "vite -c vite.config.ts dev",
-		"build": "yarn build:app && yarn build:lib && yarn build:themes && yarn typedoc",
+		"build": "pnpm build:app && pnpm build:lib && pnpm build:themes && pnpm typedoc",
 		"build:app": "vite -c vite.config.ts build",
 		"build:lib": "vite -c vite.lib.config.ts build",
 		"build:themes": "vite -c vite.themes.config.ts build",

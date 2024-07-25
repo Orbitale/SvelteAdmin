@@ -26,9 +26,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
-      - run: yarn install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
       - name: 🛠 Unit tests
-        run: yarn run test:unit --run
+        run: pnpm run test:unit --run
