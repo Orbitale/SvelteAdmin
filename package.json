@@ -34,6 +34,7 @@
 		"./dist/*",
 		"./src/lib/*"
 	],
+	"packageManager": "pnpm",
 	"peerDependencies": {
 		"carbon-components-svelte": "^0.80.0",
 		"carbon-icons-svelte": "^12.0.0"
