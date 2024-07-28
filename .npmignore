@@ -28,7 +28,7 @@ vite.lib.config.ts
 vite.webcomponents.config.ts
 yarn-error.log
 yarn.lock
-dist/app/
+dist/
 src/testApp/*
 src/app.html
 src/app.d.ts

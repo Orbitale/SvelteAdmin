@@ -1,6 +1,6 @@
 {
 	"entryPoints": ["src/lib/*.ts", "src/lib/**/*.ts", "src/themes/*.ts", "src/themes/**/*.ts"],
-	"out": "build/app/apidocs",
+	"out": "build/apidocs",
 	"exclude": ["**/*+(index|.spec|.e2e).ts"],
 	"disableGit": true,
 	"disableSources": true,
