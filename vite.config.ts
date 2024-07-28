@@ -20,12 +20,9 @@ export default defineConfig({
 		globals: true,
     	environment: 'jsdom',
 		coverage: {
-			exclude: [
-				...(configDefaults?.coverage?.exclude ?? []),
-				'**/build/**',
-				'**/.svelte-kit/**',
-				'**/dist/**'
-			]
+			include: [
+				'src/lib/',
+			],
 		}
 	}
 });
