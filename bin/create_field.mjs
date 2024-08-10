@@ -1,8 +1,13 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
-const { spawn } = require('node:child_process');
-const prompts = require('prompts');
-const chalk = require('chalk');
+import chalk from "chalk";
+
+import prompts from "prompts";
+import {spawn} from "node:child_process";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const projectDir = path.resolve(__dirname + '/../');
 const templatesPath = path.resolve(__dirname + '/templates');
@@ -52,6 +57,9 @@ const fieldName = {
 			)}\n` +
 			`> Create:\t\t\t\t${chalk.green(
 				getViewComponentFile().replace(projectDir + path.sep, '')
+			)}\n` +
+			`> Create:\t\t\t\t${chalk.green(
+				getFormComponentFile().replace(projectDir + path.sep, '')
 			)}\n` +
 			`> Add a new type to:\t\t\t${chalk.green(typesFile.replace(projectDir + path.sep, ''))}\n` +
 			`> Add a new Field export to:\t\t${chalk.green(
