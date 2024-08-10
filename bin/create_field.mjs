@@ -230,11 +230,11 @@ async function reformatFiles() {
 	process.stdout.write(' > Adding field to Carbon theme...\n');
 
 	const nodePath = process.argv[0];
-	const yarnPath = process.env['npm_execpath'];
+	const packageManager = process.env['npm_execpath'];
 
 	const command = spawn(
 		nodePath,
-		[yarnPath, 'run', 'prettier', '--plugin=prettier-plugin-svelte', '--write', ...filesToFormat],
+		[packageManager, 'run', 'prettier', '--plugin=prettier-plugin-svelte', '--write', ...filesToFormat],
 		{
 			cwd: projectDir
 		}
