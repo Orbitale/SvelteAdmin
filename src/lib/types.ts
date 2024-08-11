@@ -41,6 +41,7 @@ export type ThemeConfig = {
 		toggle: ComponentType;
 		url: ComponentType;
 		array: ComponentType;
+		email: ComponentType;
 		[key: string]: ComponentType;
 	};
 	formFields: {
@@ -57,6 +58,7 @@ export type ThemeConfig = {
 		toggle: ComponentType;
 		url: ComponentType;
 		array: ComponentType;
+		email: ComponentType;
 		[key: string]: ComponentType;
 	};
 	filters: {

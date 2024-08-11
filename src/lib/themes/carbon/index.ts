@@ -24,6 +24,7 @@ import TextFormField from './FormFieldsComponents/TextField.svelte';
 import ToggleFormField from './FormFieldsComponents/ToggleField.svelte';
 import UrlFormField from './FormFieldsComponents/UrlField.svelte';
 import ArrayFormField from './FormFieldsComponents/ArrayField.svelte';
+import EmailFormField from './FormFieldsComponents/EmailField.svelte';
 
 import AdminLayout from './Layout/AdminLayout.svelte';
 
@@ -45,6 +46,7 @@ import TextViewField from './ViewFieldsComponents/DefaultField.svelte';
 import ToggleViewField from './ViewFieldsComponents/ToggleField.svelte';
 import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
 import ArrayViewField from './ViewFieldsComponents/ArrayField.svelte';
+import EmailViewField from './ViewFieldsComponents/EmailField.svelte';
 
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 
@@ -83,7 +85,8 @@ const theme: ThemeConfig = {
 		textarea: TextareaViewField,
 		toggle: ToggleViewField,
 		url: UrlViewField,
-		array: ArrayViewField
+		array: ArrayViewField,
+		email: EmailViewField
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
@@ -98,7 +101,8 @@ const theme: ThemeConfig = {
 		textarea: TextareaFormField,
 		toggle: ToggleFormField,
 		url: UrlFormField,
-		array: ArrayFormField
+		array: ArrayFormField,
+		email: EmailFormField
 	},
 	filters: {
 		boolean: BooleanFilter,
