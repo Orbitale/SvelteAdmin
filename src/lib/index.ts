@@ -32,5 +32,3 @@ export * from './Pagination';
 export * from './Request';
 export * from './StateProcessor';
 export * from './StateProvider';
-
-export const themes = import('./themes');
