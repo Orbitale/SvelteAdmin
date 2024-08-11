@@ -234,7 +234,14 @@ async function reformatFiles() {
 
 	const command = spawn(
 		nodePath,
-		[packageManager, 'run', 'prettier', '--plugin=prettier-plugin-svelte', '--write', ...filesToFormat],
+		[
+			packageManager,
+			'run',
+			'prettier',
+			'--plugin=prettier-plugin-svelte',
+			'--write',
+			...filesToFormat
+		],
 		{
 			cwd: projectDir
 		}
