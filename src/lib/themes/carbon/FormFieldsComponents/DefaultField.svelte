@@ -3,7 +3,7 @@
 	import type { CommonFieldOptions, BaseField } from '$lib/Fields';
 
 	export let field: BaseField<CommonFieldOptions>;
-	export let value: object | undefined;
+	export let value: string | undefined;
 </script>
 
 <TextInput
