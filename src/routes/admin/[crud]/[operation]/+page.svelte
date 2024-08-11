@@ -12,7 +12,7 @@
 
 {#key $page}
 	<svelte:component
-		this={dashboard.adminConfig.theme.dashboard}
+		this={dashboard.theme.dashboard}
 		{dashboard}
 		{crud}
 		{operation}

@@ -1,9 +1,12 @@
 # Upcoming...
 
+- **BC Break**: Themes are now separate from the lib, and the default Carbon theme was moved to a `themes/svelte/carbon` subdirectory for now. The goal is to be able to use other kind of themes in the future.
+- Add `Email` field.
 - Add a setup to unit-test single components, especially fields, and test a lot of them.
 - Fix a date parsing bug in `DateField.svelte` by using the luxon lib.
 - Fix wrongly configured depth display in `KeyValueObjectField.svelte`.
 - Fix `NumberField.svelte`'s inconsistent handling of numbers & enhance visual.
+- Replace local packager to `pnpm`.
 
 # v0.16.3
 

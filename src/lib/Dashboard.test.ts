@@ -7,6 +7,7 @@ import {
 	List
 } from '$lib';
 import { testOptions } from '$lib/TestOptions';
+import carbon from '$lib/themes/svelte/carbon';
 
 type Book = object;
 
@@ -15,6 +16,7 @@ describe(
 	() => {
 		it('can be instantiated with simple config', () => {
 			const dashboard = new DashboardDefinition({
+				theme: carbon,
 				adminConfig: {},
 				cruds: [
 					new CrudDefinition<Book>({
@@ -32,6 +34,7 @@ describe(
 
 		it('has a properly defined first action', () => {
 			const dashboard = new DashboardDefinition({
+				theme: carbon,
 				adminConfig: {},
 				cruds: [
 					new CrudDefinition<Book>({
@@ -51,6 +54,7 @@ describe(
 		it('fails when two cruds have the same name', () => {
 			const createDashboard = () => {
 				new DashboardDefinition({
+					theme: carbon,
 					adminConfig: {},
 					cruds: [
 						new CrudDefinition<Book>({

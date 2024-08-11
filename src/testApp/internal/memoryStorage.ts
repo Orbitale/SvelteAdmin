@@ -48,7 +48,8 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 		try {
 			item = this.get(object.id);
 		} catch (e) {
-			//
+			console.error('Could not fetch item from storage: ');
+			console.error(e);
 		}
 		if (item) {
 			throw new Error(

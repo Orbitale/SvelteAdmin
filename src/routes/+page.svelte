@@ -10,7 +10,7 @@
 	initLocale('fr', { fr });
 </script>
 
-<svelte:component this={dashboard.adminConfig.theme.dashboard} {dashboard}>
+<svelte:component this={dashboard.theme.dashboard} {dashboard}>
 	<h1>Svelte Admin demo app</h1>
 
 	<p>

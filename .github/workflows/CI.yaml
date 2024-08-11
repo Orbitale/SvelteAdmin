@@ -33,5 +33,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: 🖌 Lint
+        run: pnpm run lint
+
       - name: 🛠 Unit tests
         run: pnpm run test:unit --run

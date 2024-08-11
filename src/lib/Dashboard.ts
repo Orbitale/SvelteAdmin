@@ -4,7 +4,8 @@ import {
 	type MenuLink,
 	type CrudDefinition,
 	type Dictionaries,
-	defaultAdminConfig
+	defaultAdminConfig,
+	type ThemeConfig
 } from '$lib';
 
 /** */
@@ -17,6 +18,7 @@ export type DashboardStores = {
 /**
  */
 export type DashboardDefinitionOptions = {
+	theme: ThemeConfig;
 	adminConfig: Partial<AdminConfig>;
 	cruds: Array<CrudDefinition<unknown>>;
 	rootUrl?: string;
@@ -29,6 +31,7 @@ export type DashboardDefinitionOptions = {
 /**
  * @example
  * export const dashboard = new DashboardDefinition({
+ *    theme: carbon, // Import from the lib's themes
  *    admin: ..., // see AdminConfig
  *
  *    // The main menu on the left side of the page
@@ -44,6 +47,7 @@ export type DashboardDefinitionOptions = {
  * });
  */
 export class DashboardDefinition {
+	/** */ public readonly theme: ThemeConfig;
 	/** */ public readonly adminConfig: AdminConfig;
 	/** */ public readonly cruds: Array<CrudDefinition<unknown>>;
 	/** */ public readonly localeDictionaries: Dictionaries = {};
@@ -53,6 +57,7 @@ export class DashboardDefinition {
 
 	/** */
 	constructor(options: DashboardDefinitionOptions) {
+		this.theme = options.theme;
 		this.adminConfig = { ...defaultAdminConfig(), ...(options.adminConfig || {}) };
 		this.cruds = options.cruds;
 		this.localeDictionaries = options.localeDictionaries || {};

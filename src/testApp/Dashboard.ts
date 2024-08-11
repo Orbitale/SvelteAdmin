@@ -1,11 +1,11 @@
 import Book from 'carbon-icons-svelte/lib/Book.svelte';
-import Home from 'carbon-icons-svelte/lib/Home.svelte';
 import Document from 'carbon-icons-svelte/lib/Document.svelte';
+import Home from 'carbon-icons-svelte/lib/Home.svelte';
 import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 
 import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
-import { carbon } from '$lib/themes';
+import { carbon } from '$lib/themes/svelte';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
@@ -23,6 +23,7 @@ const dynamicallyCustomizable: Submenu = new Submenu('Dynamic menu', Switcher, [
 ]);
 
 export const dashboard = new DashboardDefinition({
+	theme: carbon,
 	adminConfig: {
 		defaultLocale: 'en',
 		autoCloseSideMenu: false,
@@ -30,8 +31,7 @@ export const dashboard = new DashboardDefinition({
 		head: {
 			brandName: 'Svelte Admin',
 			appName: 'Demo'
-		},
-		theme: carbon
+		}
 	},
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),

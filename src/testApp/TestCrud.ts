@@ -40,7 +40,6 @@ import {
 } from '$lib';
 
 import { type Test, getStorage } from './internal/testsInternal';
-import type { Book } from './internal/booksInternal';
 
 const itemsPerPage = 10;
 
@@ -164,7 +163,7 @@ export const testCrud = new CrudDefinition<Test>({
 				throw new Error(`Invalid "page" value: expected a number, got "${page}".`);
 			}
 
-			let entities = getStorage().all();
+			const entities = getStorage().all();
 
 			const listEntities = entities.slice(itemsPerPage * (page - 1), itemsPerPage * page);
 

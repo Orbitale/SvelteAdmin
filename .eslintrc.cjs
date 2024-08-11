@@ -26,5 +26,21 @@ module.exports = {
 				parser: '@typescript-eslint/parser'
 			}
 		}
+	],
+	rules: {
+		'@typescript-eslint/ban-ts-comment': 'off'
+	},
+	ignorePatterns: [
+		'.DS_Store',
+		'node_modules',
+		'/build',
+		'/.svelte-kit',
+		'/package',
+		'.env',
+		'.env.*',
+		'!.env.example',
+		'pnpm-lock.yaml',
+		'package-lock.json',
+		'yarn.lock'
 	]
 };

@@ -223,7 +223,7 @@ which is exactly what we expect when the current web page actually changes!
 -->
 {#key $page}
 <svelte:component
-	this="{dashboard.adminConfig.theme.dashboard}"
+	this="{dashboard.theme.dashboard}"
 	{dashboard}
 	{crud}
 	{operation}
@@ -253,7 +253,7 @@ Here is the \*_shorter version_ with no comments, if you want to copy-paste for 
 
 {#key $page}
 <svelte:component
-	this="{dashboard.adminConfig.theme.dashboard}"
+	this="{dashboard.theme.dashboard}"
 	{dashboard}
 	{crud}
 	{operation}
