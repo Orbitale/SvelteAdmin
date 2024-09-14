@@ -161,23 +161,29 @@ export class Edit extends BaseCrudOperation {
  * @see {@link List}
  **/
 export type ListOperationOptions = object & {
-	globalActions?: Array<Action>;
-	pagination?: Partial<PaginationOptions>;
-	filters?: FilterInterface<FilterOptions>[];
+	globalActions: Array<Action>;
+	batchActions: Array<Action>;
+	pagination: Partial<PaginationOptions>;
+	filters: FilterInterface<FilterOptions>[];
 };
 
 /**
  */
 export class List extends BaseCrudOperation {
+	public readonly options: ListOperationOptions;
+
 	/** */
 	constructor(
 		fields: Array<FieldInterface<FieldOptions>>,
 		actions: Array<Action> = [],
 		options: Partial<ListOperationOptions> = {}
 	) {
+		options.globalActions ??= [];
+		options.batchActions ??= [];
 		options.pagination = { ...defaultPaginationOptions(), ...(options.pagination || {}) };
 		options.filters ??= [];
 		super('list', 'crud.list.label', 'list', fields, actions, options);
+		this.options = options as ListOperationOptions;
 	}
 }
 

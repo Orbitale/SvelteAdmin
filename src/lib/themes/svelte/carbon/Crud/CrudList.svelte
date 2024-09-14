@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
-	import { type Header, type Headers } from '$lib/DataTable';
+	import type { Header, Headers } from '$lib/DataTable';
 	import type { BaseField, FieldOptions } from '$lib/Fields';
 	import type { CrudDefinition } from '$lib/Crud';
 
@@ -11,7 +11,7 @@
 
 	import type { Action } from '$lib/Actions';
 
-	import { type DashboardDefinition } from '$lib/Dashboard';
+	import type { DashboardDefinition } from '$lib/Dashboard';
 	import type { StateProviderResult } from '$lib/StateProvider';
 	import { PaginatedResults } from '$lib/Pagination';
 	import type { SubmittedData } from '$lib/Crud/Form';
@@ -19,7 +19,7 @@
 	import type { DataTableNonEmptyHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
 	export let dashboard: DashboardDefinition;
-	export let operation: typeof List;
+	export let operation: List;
 	export let crud: CrudDefinition<unknown>;
 	export let requestParameters: RequestParameters = {};
 
