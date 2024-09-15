@@ -10,6 +10,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"create:field": "node bin/create_field.mjs",
+		"create:theme": "node bin/create_theme.mjs",
 		"dev": "vite dev",
 		"format": "prettier --plugin=prettier-plugin-svelte --write .",
 		"lint": "prettier --plugin=prettier-plugin-svelte . --check . && eslint -c .eslintrc.cjs src",
