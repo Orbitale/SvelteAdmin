@@ -1,6 +1,7 @@
-# Upcoming...
+# v0.17.0
 
 - **BC Break**: Themes are now separate from the lib, and the default Carbon theme was moved to a `themes/svelte/carbon` subdirectory for now. The goal is to be able to use other kind of themes in the future.
+- Add support for batch actions in CrudList
 - Add `Email` field.
 - Add a setup to unit-test single components, especially fields, and test a lot of them.
 - Fix a date parsing bug in `DateField.svelte` by using the luxon lib.
