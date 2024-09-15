@@ -7,11 +7,12 @@
 	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 
 	export let action: Action;
+	export let action_arguments: Array<unknown> = [];
 </script>
 
 {#if action instanceof UrlAction}
 	<Button
-		href={action.url()}
+		href={action.url(...action_arguments) || ''}
 		icon={action.icon}
 		kind={action.options?.buttonKind}
 		{...action.options.htmlAttributes}
@@ -20,7 +21,7 @@
 	</Button>
 {:else if action instanceof CallbackAction}
 	<Button
-		on:click={async () => await action.call()}
+		on:click={async () => await action.call(...action_arguments)}
 		icon={action.icon}
 		kind={action.options?.buttonKind}
 		{...action.options.htmlAttributes}

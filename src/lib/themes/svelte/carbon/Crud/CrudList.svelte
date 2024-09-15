@@ -26,7 +26,7 @@
 	let page: number | undefined;
 
 	const configuredFilters = operation.options?.filters || [];
-	const actions = operation.actions;
+	const actions = operation.contextActions;
 	const sortableDataTable =
 		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length >
 		0;
@@ -42,13 +42,14 @@
 	let showPagination = operation.options.pagination.enabled;
 	let rows: Promise<unknown>;
 	let paginator: PaginatedResults<unknown> | undefined;
-	let globalActions: Array<Action> = [];
+	let globalActions: Array<Action> = operation.options.globalActions || [];
+	let batchActions: Array<Action> = operation.options.batchActions || [];
 
 	if (!crud.options.stateProvider) {
 		throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
 	}
 
-	if ((!operation) instanceof List) {
+	if (!(operation instanceof List)) {
 		throw new Error(
 			'CrudList view can only accept operations that are instances of the List operation.'
 		);
@@ -113,10 +114,6 @@
 		});
 	}
 
-	if (operation instanceof List<unknown> || operation.options?.globalActions?.length) {
-		globalActions = operation.options.globalActions;
-	}
-
 	function onPaginationUpdate(event: CustomEvent<{ page: number; pageSize: number }>) {
 		page = event.detail.page;
 		requestParameters.page = event.detail.page;
@@ -159,6 +156,7 @@
 	{rows}
 	{actions}
 	{globalActions}
+	{batchActions}
 	{page}
 	{operation}
 	{onSort}

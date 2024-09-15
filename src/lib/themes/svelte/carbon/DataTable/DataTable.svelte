@@ -1,23 +1,31 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
-	import DataTable from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
+	import DataTable, {
+		type DataTableRowId
+	} from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
 	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import Loading from 'carbon-components-svelte/src/Loading/Loading.svelte';
+	import Toolbar from 'carbon-components-svelte/src/DataTable/Toolbar.svelte';
+	import ToolbarBatchActions from 'carbon-components-svelte/src/DataTable/ToolbarBatchActions.svelte';
 
 	import DataTableToolbar from '$lib/themes/svelte/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
 	import ItemActions from '$lib/themes/svelte/carbon/DataTable/actions/ItemActions.svelte';
+
 	import type { Headers, Row, Rows } from '$lib/DataTable';
 	import type { Action } from '$lib/Actions';
 	import type { FilterInterface, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
 	import type { SubmittedData } from '$lib/Crud/Form';
+	import { type FieldInterface, type FieldOptions, TextField } from '$lib';
+	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;
 	export let actions: Action[] = [];
 	export let globalActions: Array<Action> = [];
+	export let batchActions: Action[] = [];
 	export let filters: Array<FilterInterface<FilterOptions>> = [];
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
@@ -25,6 +33,8 @@
 	export let onSort: () => unknown | undefined;
 
 	let actionsCellIndex = -1;
+	let batchSelectionIsActive = false;
+	let selectedRowIds: ReadonlyArray<DataTableRowId> = [];
 
 	if (actions.length) {
 		headers.push({
@@ -34,17 +44,16 @@
 		actionsCellIndex = headers.length - 1;
 	}
 
-	function getFieldFromRow(fieldName: string, row: Row) {
+	function getFieldFromRow(fieldName: string, row: Row): FieldInterface<FieldOptions> {
 		if (!row.__crud_operation) {
-			console.error('Internal "__crud_operation" property isn\'t properly injected.');
-			return theme.viewFields.default;
+			throw new Error('Internal "__crud_operation" property isn\'t properly injected.');
 		}
 
 		const matchingFields = row.__crud_operation.fields.filter((f) => f.name === fieldName);
 
 		if (!matchingFields.length) {
 			console.warn(`Field "${fieldName}" was not found in current operation.`);
-			return theme.viewFields.default;
+			return new TextField(fieldName, fieldName);
 		}
 
 		if (matchingFields.length > 1) {
@@ -71,6 +80,11 @@
 	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
 		dispatchEvent('submitFilters', event.detail);
 	}
+
+	function onCancelSelection(event: CustomEvent<null>) {
+		event.preventDefault();
+		batchSelectionIsActive = false;
+	}
 </script>
 
 {#await rows}
@@ -81,9 +95,12 @@
 		{page}
 		{sortable}
 		zebra
+		selectable={batchActions.length > 0}
+		batchSelection={batchSelectionIsActive}
 		rows={resolvedRows}
 		size="short"
 		on:click:header={onSort}
+		bind:selectedRowIds
 		{...$$restProps}
 	>
 		<svelte:fragment slot="title">
@@ -100,6 +117,19 @@
 				on:submitFilters={onFiltersSubmit}
 			/>
 		{/if}
+		{#if batchActions.length > 0}
+			<Toolbar>
+				<ToolbarBatchActions bind:active={batchSelectionIsActive} on:cancel={onCancelSelection}>
+					{#each batchActions as action}
+						<ToolbarAction {action} action_arguments={[selectedRowIds]} />
+					{/each}
+				</ToolbarBatchActions>
+				<!--<ToolbarContent>-->
+				<!--	<Button on:click={() => (active = true)}>Edit rows</Button>-->
+				<!--</ToolbarContent>-->
+			</Toolbar>
+		{/if}
+
 		{#if !resolvedRows.length}
 			<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
 				{$_('error.crud.list.no_elements')}

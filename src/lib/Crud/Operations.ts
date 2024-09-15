@@ -33,7 +33,7 @@ export interface CrudOperation {
 	/** */ readonly label: string;
 	/** */ readonly displayComponentName: CrudTheme;
 	/** */ readonly fields: Array<FieldInterface<FieldOptions>>;
-	/** */ readonly actions: Array<Action>;
+	/** */ readonly contextActions: Array<Action>;
 	/** */ readonly options: Record<string, string | unknown>;
 
 	/** */
@@ -75,7 +75,7 @@ export abstract class BaseCrudOperation implements CrudOperation {
 		/** */ public readonly label: string,
 		/** */ public readonly displayComponentName: CrudTheme,
 		/** */ public readonly fields: Array<FieldInterface<FieldOptions>>,
-		/** */ public readonly actions: Array<Action>,
+		/** */ public readonly contextActions: Array<Action>,
 		/** */ public readonly options: Record<string, string | unknown> = {}
 	) {}
 
@@ -175,14 +175,14 @@ export class List extends BaseCrudOperation {
 	/** */
 	constructor(
 		fields: Array<FieldInterface<FieldOptions>>,
-		actions: Array<Action> = [],
+		itemsActions: Array<Action> = [],
 		options: Partial<ListOperationOptions> = {}
 	) {
 		options.globalActions ??= [];
 		options.batchActions ??= [];
 		options.pagination = { ...defaultPaginationOptions(), ...(options.pagination || {}) };
 		options.filters ??= [];
-		super('list', 'crud.list.label', 'list', fields, actions, options);
+		super('list', 'crud.list.label', 'list', fields, itemsActions, options);
 		this.options = options as ListOperationOptions;
 	}
 }

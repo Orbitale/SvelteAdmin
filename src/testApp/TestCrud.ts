@@ -132,6 +132,20 @@ export const testCrud = new CrudDefinition<Test>({
 					),
 					new UrlAction('New', '/admin/tests/new', Pen)
 				],
+				batchActions: [
+					new CallbackAction('Testing batch actions', ViewIcon, function (item?: unknown) {
+						if (!Array.isArray(item)) {
+							if (item) {
+								console.warn('Item used for Callback action is not an array.');
+							}
+							item = [];
+						}
+						if (!item) {
+							item = [];
+						}
+						success('Selected IDs to process:\n' + (item as Array<string>).join('\n'));
+					})
+				],
 				filters: [
 					new TextFilter('text_field', 'Filter text'),
 					new BooleanFilter('checkbox_field', 'Filter checkbox'),

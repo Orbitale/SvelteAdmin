@@ -11,7 +11,7 @@
 	import FilterReset from 'carbon-icons-svelte/lib/FilterReset.svelte';
 
 	import type { Action } from '$lib/Actions';
-	import ActionComponent from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
+	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 	import FilterComponent from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
@@ -58,7 +58,7 @@
 	<Toolbar>
 		<ToolbarContent>
 			{#each actions as action}
-				<ActionComponent {action} />
+				<ToolbarAction {action} />
 			{/each}
 		</ToolbarContent>
 	</Toolbar>

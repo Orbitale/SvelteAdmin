@@ -49,19 +49,19 @@ export abstract class DefaultAction implements Action {
 
 /** */
 export class CallbackAction extends DefaultAction {
-	private readonly _callback: (item?: object | undefined) => void;
+	private readonly _callback: (item?: unknown) => void;
 
 	constructor(
 		label: string,
 		icon: Optional<ActionIcon>,
-		callback: (item?: object | undefined) => void,
+		callback: (item?: unknown) => void,
 		options?: ActionOptions
 	) {
 		super(label, icon, options);
 		this._callback = callback;
 	}
 
-	public call(item?: object | undefined): unknown {
+	public call(item?: unknown): unknown {
 		return this._callback.call(null, item);
 	}
 }
@@ -79,6 +79,13 @@ export class UrlAction extends DefaultAction {
 		item: object & { [key: string]: string | number | boolean } = {},
 		identifierFieldName: string = 'id'
 	): string {
+		if (Array.isArray(item)) {
+			console.warn(
+				'Provided item for UrlAction is an array, and arrays are not supported. Using the first item of the array, or an empty object if not set.'
+			);
+			item = item[0] ?? {};
+		}
+
 		let url = this._url || '';
 
 		const mightNeedId = item[identifierFieldName] !== undefined;
