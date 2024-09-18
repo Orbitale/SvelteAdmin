@@ -14,7 +14,8 @@ import {
 	TextFilter,
 	UrlAction,
 	View,
-	type RequestParameters
+	type RequestParameters,
+	DateField
 } from '$lib';
 
 import { faker } from '@faker-js/faker';
@@ -29,7 +30,8 @@ const fields = [
 	new TextareaField('description', 'Description', {
 		placeholder: "Enter the book's descrption",
 		help: "Please don't make a summary of the book, remember to not spoil your readers!"
-	})
+	}),
+	new DateField('publishedAt', 'Published at', { sortable: true })
 ];
 
 const IdField = new TextField('id', 'ID');
@@ -45,7 +47,7 @@ function randomWait(maxMilliseconds: number) {
 export const bookCrud = new CrudDefinition<Book>({
 	name: 'books',
 	label: { singular: 'Book', plural: 'Books' },
-	minStateLoadingTimeMs: 1000,
+	minStateLoadingTimeMs: 400,
 
 	operations: [
 		new List(
@@ -143,6 +145,26 @@ export const bookCrud = new CrudDefinition<Book>({
 					}
 
 					return true;
+				});
+			}
+
+			console.info('Sort: ', requestParameters.sort);
+
+			if (requestParameters.sort) {
+				if (!requestParameters.sort?.title && !requestParameters.sort?.publishedAt) {
+					console.warn('Sorting not supported for these sort parameters:');
+					console.warn(requestParameters.sort);
+				}
+
+				// Apply sorting
+				Object.entries(requestParameters.sort).forEach((sort) => {
+					const field: keyof Book = sort[0] as keyof Book;
+					const order: 'ASC' | 'DESC' = sort[1] as 'ASC' | 'DESC';
+
+					entities = entities.sort(function (a: Book, b: Book) {
+						const inverser = order === 'ASC' ? 1 : -1;
+						return inverser * String(a[field]).localeCompare(String(b[field]));
+					});
 				});
 			}
 

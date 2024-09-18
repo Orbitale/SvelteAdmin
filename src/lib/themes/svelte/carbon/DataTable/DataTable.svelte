@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 	import DataTable, {
+		type DataTableHeader,
 		type DataTableRowId
 	} from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
 	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
@@ -11,15 +12,16 @@
 	import ToolbarBatchActions from 'carbon-components-svelte/src/DataTable/ToolbarBatchActions.svelte';
 
 	import DataTableToolbar from '$lib/themes/svelte/carbon/DataTable/Toolbar/DataTableToolbar.svelte';
+	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 	import ItemActions from '$lib/themes/svelte/carbon/DataTable/actions/ItemActions.svelte';
 
 	import type { Headers, Row, Rows } from '$lib/DataTable';
-	import type { Action } from '$lib/Actions';
+	import { type Action, CallbackAction } from '$lib/Actions';
 	import type { FilterInterface, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
 	import type { SubmittedData } from '$lib/Crud/Form';
 	import { type FieldInterface, type FieldOptions, TextField } from '$lib';
-	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
+	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 	export let headers: Headers = [];
 	export let rows: Promise<Rows>;
@@ -30,11 +32,14 @@
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
 	export let sortable: boolean;
-	export let onSort: () => unknown | undefined;
+	export let onSort: (event: CustomEvent<SortEvent>) => void;
 
 	let actionsCellIndex = -1;
 	let batchSelectionIsActive = false;
 	let selectedRowIds: ReadonlyArray<DataTableRowId> = [];
+	let sortKey: string | undefined = undefined;
+	let sortDirection: 'ascending' | 'descending' | 'none' = 'none';
+	let currentFilters: SubmittedData = {};
 
 	if (actions.length) {
 		headers.push({
@@ -75,16 +80,49 @@
 		return theme.viewFields[field.viewComponent] ?? theme.viewFields.default;
 	}
 
+	function resetSorting() {
+		sortKey = undefined;
+		sortDirection = 'none';
+		dispatchEvent('submitFilters', currentFilters);
+	}
+
 	const dispatchEvent = createEventDispatcher<SubmittedData>();
 
 	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
-		dispatchEvent('submitFilters', event.detail);
+		currentFilters = event.detail;
+		dispatchEvent('submitFilters', currentFilters);
 	}
 
 	function onCancelSelection(event: CustomEvent<null>) {
 		event.preventDefault();
 		batchSelectionIsActive = false;
 	}
+
+	// Extracted from Carbon's DataTable
+	type SortEvent = {
+		header: DataTableHeader;
+		sortDirection?: 'none' | 'ascending' | 'descending';
+	};
+
+	function onHeaderClick(event: CustomEvent<SortEvent>) {
+		if (onSort) {
+			onSort(event);
+		}
+	}
+
+	const resetSortingAction = new CallbackAction(
+		'data_table.reset_sorting',
+		TrashCan,
+		resetSorting,
+		{
+			buttonKind: 'secondary'
+		}
+	);
+
+	$: globalActionsDisplay = [
+		...globalActions,
+		...(sortKey && sortDirection !== 'none' ? [resetSortingAction] : [])
+	];
 </script>
 
 {#await rows}
@@ -94,12 +132,14 @@
 		{headers}
 		{page}
 		{sortable}
+		bind:sortKey
+		bind:sortDirection
 		zebra
 		selectable={batchActions.length > 0}
 		batchSelection={batchSelectionIsActive}
 		rows={resolvedRows}
 		size="short"
-		on:click:header={onSort}
+		on:click:header={onHeaderClick}
 		bind:selectedRowIds
 		{...$$restProps}
 	>
@@ -109,10 +149,10 @@
 		<svelte:fragment slot="description">
 			<slot name="description" />
 		</svelte:fragment>
-		{#if globalActions.length || filters.length}
+		{#if globalActionsDisplay.length || filters.length}
 			<DataTableToolbar
 				{theme}
-				actions={globalActions || []}
+				actions={globalActionsDisplay || []}
 				filters={filters || []}
 				on:submitFilters={onFiltersSubmit}
 			/>
@@ -148,27 +188,18 @@
 				<svelte:component
 					this={getViewFieldComponent(cell.key, row)}
 					field={getFieldFromRow(cell.key, row)}
-					value={cell.display ? cell.display(cell.value) : cell.value}
+					value={cell.display ? cell.display(cell.value, row) : cell.value}
 					operation={$$restProps.operation}
 					entityObject={row}
 					{theme}
 				>
-					{cell.display ? cell.display(cell.value) : cell.value}
+					{cell.display ? cell.display(cell.value, row) : cell.value}
 				</svelte:component>
 			{/if}
 		</div>
 	</DataTable>
 {:catch error}
-	<DataTable
-		{headers}
-		{page}
-		{sortable}
-		zebra
-		rows={[]}
-		size="short"
-		on:click:header={onSort}
-		{...$$restProps}
-	>
+	<DataTable {headers} {page} zebra rows={[]} size="short" {...$$restProps}>
 		<svelte:fragment slot="title">
 			<slot name="title" />
 		</svelte:fragment>

@@ -8,13 +8,15 @@
 
 	export let action: Action;
 	export let action_arguments: Array<unknown> = [];
+
+	console.info('Action: ', action);
 </script>
 
 {#if action instanceof UrlAction}
 	<Button
 		href={action.url(...action_arguments) || ''}
 		icon={action.icon}
-		kind={action.options?.buttonKind}
+		kind={action.options?.buttonKind || 'primary'}
 		{...action.options.htmlAttributes}
 	>
 		{$_(action.label)}
@@ -23,7 +25,7 @@
 	<Button
 		on:click={async () => await action.call(...action_arguments)}
 		icon={action.icon}
-		kind={action.options?.buttonKind}
+		kind={action.options?.buttonKind || 'primary'}
 		{...action.options.htmlAttributes}
 	>
 		{$_(action.label)}

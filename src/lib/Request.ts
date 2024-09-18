@@ -1,12 +1,13 @@
 import type { Page } from '@sveltejs/kit';
 
 type Optional<T> = T | null | undefined;
+type FieldName = string;
 
 /** */
 export type RequestParameters = {
 	page?: Optional<string | number>;
 	filters?: Optional<Record<string, unknown>>;
-	sort?: Optional<Record<string, unknown>>;
+	sort?: Optional<Record<FieldName, 'ASC' | 'DESC'>>;
 	[key: string]: unknown;
 };
 

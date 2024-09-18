@@ -13,6 +13,7 @@ const dictionary: Dictionary = {
 	'crud.delete.cancel': 'Non, annuler',
 	'crud.delete.yes_delete': 'Oui, supprimer',
 	'data_table.items.unsupported_action': 'Type d\'action "{operation}" non prise en charge.',
+	'data_table.reset_sorting': 'Réinitialiser le tri',
 	'error.crud.form.entity_field_list_fetch_error':
 		"Une erreur est survenue lors de la récupération d'une liste d'élements:\n{message}",
 	'error.crud.form.entity_field_view_fetch_error':

@@ -24,7 +24,7 @@
 	let filtersValues: Record<string, unknown> = {};
 	const dispatchEvent = createEventDispatcher<SubmitEvent>();
 
-	filters.forEach((filter: Filter) => {
+	filters.forEach((filter: Filter<FilterOptions>) => {
 		filtersValues[filter.field] = undefined;
 	});
 

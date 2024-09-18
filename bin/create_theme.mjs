@@ -17,8 +17,13 @@ const carbonDir = path.resolve(themesDir + '/svelte/carbon');
 // main
 //
 (async () => {
-	let themeType = ((process.argv[2] || '').trim() || await ask('Theme type? (svelte, react, vue)')).toLowerCase();
-	let themeName = ((process.argv[3] || '').trim() || await ask('What is the name of your new theme? (only lowercase letters and underscores)')).toLowerCase();
+	let themeType = (
+		(process.argv[2] || '').trim() || (await ask('Theme type? (svelte, react, vue)'))
+	).toLowerCase();
+	let themeName = (
+		(process.argv[3] || '').trim() ||
+		(await ask('What is the name of your new theme? (only lowercase letters and underscores)'))
+	).toLowerCase();
 
 	if (!themeName) {
 		throw new Error('No theme name provided.');
@@ -31,29 +36,37 @@ const carbonDir = path.resolve(themesDir + '/svelte/carbon');
 		throw new Error('Wrong template type provided. Allowed: svelte, react, vue');
 	}
 
-	const newThemePath = carbonDir.replace(/\\/g, '/').replace(/\/svelte\/carbon$/g, `/${themeType}/${themeName}`).replace(/\//g, path.sep);
+	const newThemePath = carbonDir
+		.replace(/\\/g, '/')
+		.replace(/\/svelte\/carbon$/g, `/${themeType}/${themeName}`)
+		.replace(/\//g, path.sep);
 
-	const files = (await getAllFiles(carbonDir));
+	const files = await getAllFiles(carbonDir);
 
 	for (const file of files) {
 		if (!file.match(/\.svelte$/gi)) {
 			continue;
 		}
 		const newPath = path.resolve(file.replace(carbonDir, newThemePath));
-		const basename = newPath.replace(projectDir + path.sep, '').replace(new RegExp('\\\\', 'g'), '/');
+		const basename = newPath
+			.replace(projectDir + path.sep, '')
+			.replace(new RegExp('\\\\', 'g'), '/');
 		const dir = path.dirname(newPath);
-		await fs.mkdir(dir, {recursive: true});
-		await fs.writeFile(newPath, `TODO: Implement template "${basename}" for "${themeType}/${themeName}" theme.\n`);
+		await fs.mkdir(dir, { recursive: true });
+		await fs.writeFile(
+			newPath,
+			`TODO: Implement template "${basename}" for "${themeType}/${themeName}" theme.\n`
+		);
 	}
 
-	await fs.copyFile(carbonDir+'/index.ts', newThemePath+'/index.ts');
+	await fs.copyFile(carbonDir + '/index.ts', newThemePath + '/index.ts');
 
-	const themesIndex = themesDir+'/'+themeType+'/index.ts';
+	const themesIndex = themesDir + '/' + themeType + '/index.ts';
 	let indexContent = (await fs.readFile(themesIndex)).toString();
 	if (!indexContent.match(new RegExp(`export *\\{ *default as ${themeName}`), 'gi')) {
-		indexContent += `\nexport { default as ${themeName} } from './${themeName}';`
+		indexContent += `\nexport { default as ${themeName} } from './${themeName}';`;
 	}
-	indexContent = indexContent.replace(/\n\n+/, "\n").trim()+"\n";
+	indexContent = indexContent.replace(/\n\n+/, '\n').trim() + '\n';
 	await fs.writeFile(themesIndex, indexContent);
 })();
 
@@ -83,18 +96,18 @@ async function ask(question) {
 }
 
 async function getAllFiles(dirPath, arrayOfFiles = []) {
-	const files = await fs.readdir(dirPath)
+	const files = await fs.readdir(dirPath);
 
-	arrayOfFiles = arrayOfFiles || []
+	arrayOfFiles = arrayOfFiles || [];
 
 	for (const file of files) {
 		const stat = await fs.stat(dirPath + path.sep + file);
 		if (stat.isDirectory()) {
-			arrayOfFiles = await getAllFiles(dirPath + path.sep + file, arrayOfFiles)
+			arrayOfFiles = await getAllFiles(dirPath + path.sep + file, arrayOfFiles);
 		} else {
-			arrayOfFiles.push(path.join(dirPath, path.sep, file))
+			arrayOfFiles.push(path.join(dirPath, path.sep, file));
 		}
 	}
 
-	return arrayOfFiles
+	return arrayOfFiles;
 }
