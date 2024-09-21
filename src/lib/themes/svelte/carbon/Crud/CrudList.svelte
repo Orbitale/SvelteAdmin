@@ -7,7 +7,7 @@
 	import type { BaseField, FieldOptions } from '$lib/Fields';
 	import type { CrudDefinition } from '$lib/Crud';
 
-	import { List } from '$lib/Crud/Operations';
+	import { type CrudOperation, List } from '$lib/Crud/Operations';
 
 	import type { Action } from '$lib/Actions';
 
@@ -76,7 +76,9 @@
 			]).then((results) => results[0]);
 		}
 
-		rows = providerResponse.then((responseResults) => {
+		type Item = {id?: null|string|number, __crud_operation?: CrudOperation, [key: string]: unknown};
+
+		rows = providerResponse.then((responseResults): Item[] => {
 			if (
 				responseResults &&
 				!Array.isArray(responseResults) &&
@@ -87,10 +89,10 @@
 				);
 			}
 
-			let finalRows =
-				responseResults instanceof PaginatedResults
+			let finalRows: Array<Item> =
+				(responseResults instanceof PaginatedResults
 					? responseResults.currentItems
-					: responseResults;
+					: responseResults) as Array<Item>;
 
 			paginator = responseResults instanceof PaginatedResults ? responseResults : undefined;
 
@@ -100,9 +102,9 @@
 
 			// Make sure final results always have the "id" field,
 			// which is mandatory for Carbon's DataTable.
-			finalRows = finalRows.map((result: object) => {
+			finalRows = finalRows.map((result: Item) => {
 				if (!result.id && crud.options.identifierFieldName !== 'id') {
-					result.id = result[crud.options.identifierFieldName];
+					result.id = String(result[crud.options.identifierFieldName] || '');
 				}
 
 				result.__crud_operation = operation;
@@ -162,6 +164,7 @@
 	{onSort}
 	sortable={sortableDataTable}
 	filters={configuredFilters}
+	filtersValues={requestParameters.filters}
 	theme={dashboard.theme}
 	on:submitFilters={onFiltersSubmit}
 >

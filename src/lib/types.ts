@@ -64,7 +64,7 @@ export type ThemeConfig = {
 	filters: {
 		boolean: ComponentType;
 		text: ComponentType;
-		date: ComponentType;
+		date_range: ComponentType;
 		numeric: ComponentType;
 		[key: string]: ComponentType;
 	};

@@ -13,7 +13,7 @@ import {
 	Columns,
 	CrudDefinition,
 	DateField,
-	DateFilter,
+	DateRangeFilter,
 	Delete,
 	Edit,
 	ExistsFilter,
@@ -149,7 +149,7 @@ export const testCrud = new CrudDefinition<Test>({
 				filters: [
 					new TextFilter('text_field', 'Filter text'),
 					new BooleanFilter('checkbox_field', 'Filter checkbox'),
-					new DateFilter('date_field', 'Filter date'),
+					new DateRangeFilter('date_field', 'Filter date'),
 					new ExistsFilter('toggle_field', 'Filter toggle'),
 					new NumericFilter('number_field', 'Filter number')
 				],

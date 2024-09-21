@@ -29,6 +29,7 @@
 	export let globalActions: Array<Action> = [];
 	export let batchActions: Action[] = [];
 	export let filters: Array<FilterInterface<FilterOptions>> = [];
+	export let filtersValues: {[key: string]: string|Array<string>|undefined} = {};
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
 	export let sortable: boolean;
@@ -154,6 +155,7 @@
 				{theme}
 				actions={globalActionsDisplay || []}
 				filters={filters || []}
+				filtersValues={filtersValues || {}}
 				on:submitFilters={onFiltersSubmit}
 			/>
 		{/if}

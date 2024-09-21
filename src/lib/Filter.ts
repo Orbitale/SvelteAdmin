@@ -36,8 +36,8 @@ export class BooleanFilter extends Filter<FilterOptions> {
 }
 
 /** */
-export class DateFilter extends Filter<FilterOptions> {
-	public readonly componentName: FilterTheme = 'date';
+export class DateRangeFilter extends Filter<FilterOptions> {
+	public readonly componentName: FilterTheme = 'date_range';
 }
 
 /** */

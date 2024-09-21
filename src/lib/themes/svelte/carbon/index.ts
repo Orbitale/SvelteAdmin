@@ -51,7 +51,7 @@ import EmailViewField from './ViewFieldsComponents/EmailField.svelte';
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 
 import BooleanFilter from './FilterComponents/BooleanFilter.svelte';
-import DateFilter from './FilterComponents/DateFilter.svelte';
+import DateRangeFilter from './FilterComponents/DateRangeFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
@@ -106,7 +106,7 @@ const theme: ThemeConfig = {
 	},
 	filters: {
 		boolean: BooleanFilter,
-		date: DateFilter,
+		date_range: DateRangeFilter,
 		numeric: NumericFilter,
 		text: TextFilter
 	},

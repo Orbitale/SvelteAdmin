@@ -4,6 +4,8 @@ import {
 	CallbackStateProcessor,
 	CallbackStateProvider,
 	CrudDefinition,
+	DateField,
+	DateRangeFilter,
 	Delete,
 	Edit,
 	List,
@@ -12,10 +14,9 @@ import {
 	TextareaField,
 	TextField,
 	TextFilter,
-	UrlAction,
-	View,
 	type RequestParameters,
-	DateField
+	UrlAction,
+	View
 } from '$lib';
 
 import { faker } from '@faker-js/faker';
@@ -76,7 +77,8 @@ export const bookCrud = new CrudDefinition<Book>({
 				},
 				filters: [
 					new TextFilter('title', 'Title contains'),
-					new TextFilter('description', 'Description contains')
+					new TextFilter('description', 'Description contains'),
+					new DateRangeFilter('publishedAt', 'Publication between')
 				]
 			}
 		),
@@ -142,6 +144,10 @@ export const bookCrud = new CrudDefinition<Book>({
 						!entity.description.match(new RegExp(filters.description.toString(), 'gi'))
 					) {
 						return false;
+					}
+					if (filters.publishedAt) {
+						console.info('PUBLISHED AT', filters, filters.publishedAt);
+						return true;
 					}
 
 					return true;

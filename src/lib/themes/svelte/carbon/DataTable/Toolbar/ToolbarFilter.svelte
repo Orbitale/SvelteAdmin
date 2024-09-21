@@ -4,8 +4,9 @@
 
 	export let filter: FilterInterface<FilterOptions>;
 	export let theme: ThemeConfig;
+	export let value: undefined|string|Array<string>;
 
 	const component = theme.filters[filter.componentName];
 </script>
 
-<svelte:component this={component} {filter} />
+<svelte:component this={component} {filter} {value} />

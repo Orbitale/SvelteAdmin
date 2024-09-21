@@ -19,17 +19,18 @@
 
 	export let actions: Array<Action> = [];
 	export let filters: Array<Filter<FilterOptions>> = [];
+	export let filtersValues: {[key: string]: string|Array<string>|undefined} = {};
 	export let theme: ThemeConfig;
 
-	let filtersValues: Record<string, unknown> = {};
-	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmitEvent }>();
+	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmittedData }>();
 
 	filters.forEach((filter: Filter<FilterOptions>) => {
-		filtersValues[filter.field] = undefined;
+		filtersValues[filter.field] ??= undefined;
 	});
 
 	function onFiltersSubmit(event: SubmitEvent) {
 		event.preventDefault();
+		event.stopPropagation();
 		if (!event.target) {
 			throw new Error(
 				'No target when submitted filters. Did you forget to attach the event to a Form?'
@@ -42,6 +43,7 @@
 				delete data[key];
 			}
 		});
+		console.info('submitted filters', data);
 		dispatchEvent('submitFilters', data);
 	}
 
@@ -65,16 +67,16 @@
 {/if}
 
 {#if filters.length}
-	<Accordion>
+	<Accordion open={Object.keys(filtersValues).length > 0}>
 		<AccordionItem>
 			<slot slot="title">
 				<FilterIcon />
 				{$_('datatable.filters.menu_title')}
 			</slot>
-			<Form action="#!" on:submit={onFiltersSubmit}>
+			<Form on:submit={onFiltersSubmit}>
 				{#each filters as filter}
 					<br />
-					<FilterComponent {filter} {theme} bind:value={filtersValues[filter.field]} />
+					<FilterComponent {filter} {theme} value={filtersValues[filter.field]} />
 				{/each}
 				<br />
 				<Button type="submit" kind="secondary" size="field">
