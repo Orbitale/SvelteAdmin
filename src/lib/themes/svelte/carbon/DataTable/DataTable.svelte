@@ -29,7 +29,7 @@
 	export let globalActions: Array<Action> = [];
 	export let batchActions: Action[] = [];
 	export let filters: Array<FilterInterface<FilterOptions>> = [];
-	export let filtersValues: {[key: string]: string|Array<string>|undefined} = {};
+	export let filtersValues: { [key: string]: string | Array<string> | undefined } = {};
 	export let page: number | undefined;
 	export let theme: ThemeConfig;
 	export let sortable: boolean;

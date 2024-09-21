@@ -7,10 +7,10 @@
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	export let filter: DateRangeFilter;
-	export let value: undefined|string|Array<string>;
+	export let value: undefined | string | Array<string>;
 
-	let from: string = ''  ;
-	let to: string = ''  ;
+	let from: string = '';
+	let to: string = '';
 
 	if (value && Array.isArray(value)) {
 		if (value[0]) {

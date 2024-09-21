@@ -146,11 +146,20 @@ export const bookCrud = new CrudDefinition<Book>({
 						return false;
 					}
 					if (filters.publishedAt) {
-						const publishedAtFilter = filters.publishedAt as unknown as [string|undefined, string|undefined];
-						if (publishedAtFilter[0] && new Date(entity.publishedAt) < new Date(publishedAtFilter[0])) {
+						const publishedAtFilter = filters.publishedAt as unknown as [
+							string | undefined,
+							string | undefined
+						];
+						if (
+							publishedAtFilter[0] &&
+							new Date(entity.publishedAt) < new Date(publishedAtFilter[0])
+						) {
 							return false;
 						}
-						if (publishedAtFilter[1] && new Date(entity.publishedAt) > new Date(publishedAtFilter[1])) {
+						if (
+							publishedAtFilter[1] &&
+							new Date(entity.publishedAt) > new Date(publishedAtFilter[1])
+						) {
 							return false;
 						}
 					}

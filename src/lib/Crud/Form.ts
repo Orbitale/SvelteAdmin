@@ -1,6 +1,6 @@
 import type { CrudOperation, FieldInterface, FieldOptions } from '$lib';
 
-export type SubmittedData = Record<string, FormDataEntryValue|Array<FormDataEntryValue>>;
+export type SubmittedData = Record<string, FormDataEntryValue | Array<FormDataEntryValue>>;
 
 /**
  * Function to get an record of {@link FormDataEntryValue} items from an "onSubmit" form {@link SubmitEvent} object.

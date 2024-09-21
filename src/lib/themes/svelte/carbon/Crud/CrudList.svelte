@@ -76,7 +76,11 @@
 			]).then((results) => results[0]);
 		}
 
-		type Item = {id?: null|string|number, __crud_operation?: CrudOperation, [key: string]: unknown};
+		type Item = {
+			id?: null | string | number;
+			__crud_operation?: CrudOperation;
+			[key: string]: unknown;
+		};
 
 		rows = providerResponse.then((responseResults): Item[] => {
 			if (
@@ -89,10 +93,9 @@
 				);
 			}
 
-			let finalRows: Array<Item> =
-				(responseResults instanceof PaginatedResults
-					? responseResults.currentItems
-					: responseResults) as Array<Item>;
+			let finalRows: Array<Item> = (
+				responseResults instanceof PaginatedResults ? responseResults.currentItems : responseResults
+			) as Array<Item>;
 
 			paginator = responseResults instanceof PaginatedResults ? responseResults : undefined;
 

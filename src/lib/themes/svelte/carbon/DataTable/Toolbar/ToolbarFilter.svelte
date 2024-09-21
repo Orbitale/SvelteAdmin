@@ -4,7 +4,7 @@
 
 	export let filter: FilterInterface<FilterOptions>;
 	export let theme: ThemeConfig;
-	export let value: undefined|string|Array<string>;
+	export let value: undefined | string | Array<string>;
 
 	const component = theme.filters[filter.componentName];
 </script>

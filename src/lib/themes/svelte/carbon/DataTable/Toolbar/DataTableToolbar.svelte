@@ -19,7 +19,7 @@
 
 	export let actions: Array<Action> = [];
 	export let filters: Array<Filter<FilterOptions>> = [];
-	export let filtersValues: {[key: string]: string|Array<string>|undefined} = {};
+	export let filtersValues: { [key: string]: string | Array<string> | undefined } = {};
 	export let theme: ThemeConfig;
 
 	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmittedData }>();
@@ -67,7 +67,7 @@
 
 {#if filters.length}
 	<Accordion>
-		<AccordionItem open={Object.values(filtersValues).filter(i => !!i).length > 0}>
+		<AccordionItem open={Object.values(filtersValues).filter((i) => !!i).length > 0}>
 			<slot slot="title">
 				<FilterIcon />
 				{$_('datatable.filters.menu_title')}
