@@ -29,7 +29,6 @@ describe(
 			expect(label).toBeDefined();
 			expect(label?.innerHTML).toStrictEqual('Text field');
 			const valueElement = label?.parentElement?.nextElementSibling;
-			console.info('+=====================+');
 			expect(valueElement).toBeDefined();
 			expect(valueElement?.childNodes).toBeDefined();
 			expect(valueElement?.childNodes[0]).toBeInstanceOf(Text);

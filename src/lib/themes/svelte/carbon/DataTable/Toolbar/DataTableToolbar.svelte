@@ -43,7 +43,6 @@
 				delete data[key];
 			}
 		});
-		console.info('submitted filters', data);
 		dispatchEvent('submitFilters', data);
 	}
 
@@ -67,8 +66,8 @@
 {/if}
 
 {#if filters.length}
-	<Accordion open={Object.keys(filtersValues).length > 0}>
-		<AccordionItem>
+	<Accordion>
+		<AccordionItem open={Object.values(filtersValues).filter(i => !!i).length > 0}>
 			<slot slot="title">
 				<FilterIcon />
 				{$_('datatable.filters.menu_title')}

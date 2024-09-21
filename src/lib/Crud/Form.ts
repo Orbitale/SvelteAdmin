@@ -1,6 +1,6 @@
 import type { CrudOperation, FieldInterface, FieldOptions } from '$lib';
 
-export type SubmittedData = Record<string, FormDataEntryValue>;
+export type SubmittedData = Record<string, FormDataEntryValue|Array<FormDataEntryValue>>;
 
 /**
  * Function to get an record of {@link FormDataEntryValue} items from an "onSubmit" form {@link SubmitEvent} object.
@@ -18,8 +18,15 @@ export function getSubmittedFormData(event: SubmitEvent): SubmittedData {
 		return {};
 	}
 
-	new FormData(target as HTMLFormElement, event.submitter).forEach((value, key) => {
-		normalizedData[key] = value;
+	const formData = new FormData(target as HTMLFormElement, event.submitter);
+
+	formData.forEach((value, key) => {
+		if (normalizedData[key] && !Array.isArray(normalizedData[key])) {
+			normalizedData[key] = [normalizedData[key]];
+			normalizedData[key].push(value);
+		} else {
+			normalizedData[key] = value;
+		}
 	});
 
 	return normalizedData;

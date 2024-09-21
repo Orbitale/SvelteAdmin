@@ -8,8 +8,6 @@
 
 	export let action: Action;
 	export let action_arguments: Array<unknown> = [];
-
-	console.info('Action: ', action);
 </script>
 
 {#if action instanceof UrlAction}
