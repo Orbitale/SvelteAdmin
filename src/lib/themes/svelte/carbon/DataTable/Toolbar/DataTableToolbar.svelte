@@ -15,14 +15,14 @@
 	import FilterComponent from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
 	import type { Filter, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
-	import { getSubmittedFormData } from '$lib/Crud/Form';
+	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form';
 
 	export let actions: Array<Action> = [];
 	export let filters: Array<Filter<FilterOptions>> = [];
 	export let theme: ThemeConfig;
 
 	let filtersValues: Record<string, unknown> = {};
-	const dispatchEvent = createEventDispatcher<SubmitEvent>();
+	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmitEvent }>();
 
 	filters.forEach((filter: Filter<FilterOptions>) => {
 		filtersValues[filter.field] = undefined;
@@ -47,10 +47,10 @@
 
 	function resetFilters() {
 		filtersValues = {};
-		filters.forEach((filter: Filter) => {
+		filters.forEach((filter: Filter<FilterOptions>) => {
 			filtersValues[filter.field] = undefined;
 		});
-		dispatchEvent('submitFilters', {});
+		dispatchEvent('submitFilters', {} as SubmittedData);
 	}
 </script>
 

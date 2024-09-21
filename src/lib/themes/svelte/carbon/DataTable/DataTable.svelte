@@ -86,7 +86,7 @@
 		dispatchEvent('submitFilters', currentFilters);
 	}
 
-	const dispatchEvent = createEventDispatcher<SubmittedData>();
+	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmittedData }>();
 
 	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
 		currentFilters = event.detail;
