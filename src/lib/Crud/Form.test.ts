@@ -46,6 +46,23 @@ describe('Submitted form data', () => {
 		},
 		testOptions
 	);
+
+	it(
+		'can handle input containing the same key more than once',
+		() => {
+			const submitted = getSubmittedFormData(
+				mockSubmitEvent([
+					['title', 'First title'],
+					['title', 'Second title'],
+				])
+			);
+
+			expect(submitted).toStrictEqual({
+				title: ['First title', 'Second title'],
+			});
+		},
+		testOptions
+	);
 });
 
 function mockSubmitEvent(submittedData: Array<[string, string]> = []) {
