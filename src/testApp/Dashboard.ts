@@ -3,12 +3,14 @@ import Document from 'carbon-icons-svelte/lib/Document.svelte';
 import Home from 'carbon-icons-svelte/lib/Home.svelte';
 import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
+import User from 'carbon-icons-svelte/lib/User.svelte';
 
 import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
 import { carbon } from '$lib/themes/svelte';
 
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
+import { authorCrud } from './AuthorCrud';
 import { testCrud } from './TestCrud';
 import { ThemeChangerAction } from '$lib/themes/svelte/carbon';
 
@@ -37,6 +39,7 @@ export const dashboard = new DashboardDefinition({
 	sideMenu: [
 		new UrlAction('Homepage', '/', Home),
 		new UrlAction('Books', '/admin/books/list', Book),
+		new UrlAction('Authors', '/admin/authors/list', User),
 		new CallbackAction('Callback link', null, () => {
 			alert('Hey, this link is called with Javascript!');
 		}),
@@ -64,5 +67,5 @@ export const dashboard = new DashboardDefinition({
 	localeDictionaries: {
 		fr: fr
 	},
-	cruds: [bookCrud, testCrud]
+	cruds: [bookCrud, authorCrud, testCrud]
 });

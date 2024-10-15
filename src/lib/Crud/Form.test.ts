@@ -53,12 +53,12 @@ describe('Submitted form data', () => {
 			const submitted = getSubmittedFormData(
 				mockSubmitEvent([
 					['title', 'First title'],
-					['title', 'Second title'],
+					['title', 'Second title']
 				])
 			);
 
 			expect(submitted).toStrictEqual({
-				title: ['First title', 'Second title'],
+				title: ['First title', 'Second title']
 			});
 		},
 		testOptions

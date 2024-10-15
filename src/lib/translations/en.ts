@@ -40,7 +40,7 @@ const dictionary: Dictionary = {
 	'carbon.theme.g10': 'Light gray (g10)',
 	'carbon.theme.g80': 'Gray (g80)',
 	'carbon.theme.g90': 'Dark gray (g90)',
-	'carbon.theme.g100': 'Dark (g100)',
+	'carbon.theme.g100': 'Dark (g100)'
 };
 
 export default dictionary;
