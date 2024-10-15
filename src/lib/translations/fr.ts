@@ -35,7 +35,13 @@ const dictionary: Dictionary = {
 	'datatable.filters.submit_filters': 'Filtrer les résultats',
 	'datatable.filters.reset_filters': 'Réinitialiser les filtres',
 	'filters.date.from': 'À partir de cette date',
-	'filters.date.to': "Jusqu'à cette date"
+	'filters.date.to': "Jusqu'à cette date",
+	'carbon.theme.change_action': 'Changer le thème',
+	'carbon.theme.white': 'Blanc',
+	'carbon.theme.g10': 'Gris clair (g10)',
+	'carbon.theme.g80': 'Gris (g80)',
+	'carbon.theme.g90': 'Gris foncé (g90)',
+	'carbon.theme.g100': 'Sombre (g100)',
 };
 
 export default dictionary;

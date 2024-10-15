@@ -119,3 +119,5 @@ const theme: ThemeConfig = {
 };
 
 export default theme;
+
+export { default as ThemeChangerAction } from './lib/ThemeChangeMenu';

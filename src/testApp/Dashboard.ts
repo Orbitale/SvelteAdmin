@@ -10,6 +10,7 @@ import { carbon } from '$lib/themes/svelte';
 import fr from './translations/fr';
 import { bookCrud } from './BookCrud';
 import { testCrud } from './TestCrud';
+import { ThemeChangerAction } from '$lib/themes/svelte/carbon';
 
 let newLinkIndex = 1;
 
@@ -45,6 +46,7 @@ export const dashboard = new DashboardDefinition({
 		])
 	],
 	topLeftMenu: [
+		new ThemeChangerAction(),
 		new UrlAction('API Docs', '/apidocs', Document, { htmlAttributes: { rel: 'external' } })
 	],
 	topRightMenu: [
