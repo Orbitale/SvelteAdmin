@@ -74,15 +74,18 @@ describe(
 			const baseItem = {
 				field: 'value'
 			};
-			const callback = (item?: object | undefined): boolean => {
+			const callback = (item?: unknown): void => {
 				called = true;
 				// @ts-ignore
 				item.field = 'newValue';
-				return called;
 			};
 			const action = new CallbackAction('', null, callback);
 
-			expect(action.call(baseItem)).toBe(true);
+			expect(called).toBe(false);
+
+			action.call(baseItem);
+
+			expect(called).toBe(true);
 			expect(baseItem.field).toBe('newValue');
 		});
 	},
