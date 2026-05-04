@@ -1,3 +1,11 @@
+# Unreleased
+
+- Add 20 new field types to match EasyAdmin and React-admin coverage:
+  - Primitives: `Password`, `Tel`, `Time`, `DateTime`, `Color`, `Integer`, `Percent`, `Money`, `Slug`, `Hidden`.
+  - Choice-based: `Choice`, `MultiChoice`, `Radio`.
+  - Locale/Geo pickers: `Country`, `Language`, `Locale`, `Timezone` (use the runtime `Intl.DisplayNames` API for localized labels).
+  - Rich content: `Markdown`, `Image`, `File`.
+
 # v0.18.0
 
 - **BC Break**: Rename `Date` filter to `DateRange`. A text filter can be used for precise dates.

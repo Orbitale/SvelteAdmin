@@ -25,6 +25,26 @@ import ToggleFormField from './FormFieldsComponents/ToggleField.svelte';
 import UrlFormField from './FormFieldsComponents/UrlField.svelte';
 import ArrayFormField from './FormFieldsComponents/ArrayField.svelte';
 import EmailFormField from './FormFieldsComponents/EmailField.svelte';
+import PasswordFormField from './FormFieldsComponents/PasswordField.svelte';
+import TelFormField from './FormFieldsComponents/TelField.svelte';
+import TimeFormField from './FormFieldsComponents/TimeField.svelte';
+import DateTimeFormField from './FormFieldsComponents/DateTimeField.svelte';
+import ColorFormField from './FormFieldsComponents/ColorField.svelte';
+import IntegerFormField from './FormFieldsComponents/IntegerField.svelte';
+import PercentFormField from './FormFieldsComponents/PercentField.svelte';
+import MoneyFormField from './FormFieldsComponents/MoneyField.svelte';
+import SlugFormField from './FormFieldsComponents/SlugField.svelte';
+import HiddenFormField from './FormFieldsComponents/HiddenField.svelte';
+import ChoiceFormField from './FormFieldsComponents/ChoiceField.svelte';
+import MultiChoiceFormField from './FormFieldsComponents/MultiChoiceField.svelte';
+import RadioFormField from './FormFieldsComponents/RadioField.svelte';
+import CountryFormField from './FormFieldsComponents/CountryField.svelte';
+import LanguageFormField from './FormFieldsComponents/LanguageField.svelte';
+import LocaleFormField from './FormFieldsComponents/LocaleField.svelte';
+import TimezoneFormField from './FormFieldsComponents/TimezoneField.svelte';
+import MarkdownFormField from './FormFieldsComponents/MarkdownField.svelte';
+import ImageFormField from './FormFieldsComponents/ImageField.svelte';
+import FileFormField from './FormFieldsComponents/FileField.svelte';
 
 import AdminLayout from './Layout/AdminLayout.svelte';
 
@@ -47,6 +67,26 @@ import ToggleViewField from './ViewFieldsComponents/ToggleField.svelte';
 import UrlViewField from './ViewFieldsComponents/UrlField.svelte';
 import ArrayViewField from './ViewFieldsComponents/ArrayField.svelte';
 import EmailViewField from './ViewFieldsComponents/EmailField.svelte';
+import PasswordViewField from './ViewFieldsComponents/PasswordField.svelte';
+import TelViewField from './ViewFieldsComponents/TelField.svelte';
+import TimeViewField from './ViewFieldsComponents/TimeField.svelte';
+import DateTimeViewField from './ViewFieldsComponents/DateTimeField.svelte';
+import ColorViewField from './ViewFieldsComponents/ColorField.svelte';
+import IntegerViewField from './ViewFieldsComponents/IntegerField.svelte';
+import PercentViewField from './ViewFieldsComponents/PercentField.svelte';
+import MoneyViewField from './ViewFieldsComponents/MoneyField.svelte';
+import SlugViewField from './ViewFieldsComponents/SlugField.svelte';
+import HiddenViewField from './ViewFieldsComponents/HiddenField.svelte';
+import ChoiceViewField from './ViewFieldsComponents/ChoiceField.svelte';
+import MultiChoiceViewField from './ViewFieldsComponents/MultiChoiceField.svelte';
+import RadioViewField from './ViewFieldsComponents/RadioField.svelte';
+import CountryViewField from './ViewFieldsComponents/CountryField.svelte';
+import LanguageViewField from './ViewFieldsComponents/LanguageField.svelte';
+import LocaleViewField from './ViewFieldsComponents/LocaleField.svelte';
+import TimezoneViewField from './ViewFieldsComponents/TimezoneField.svelte';
+import MarkdownViewField from './ViewFieldsComponents/MarkdownField.svelte';
+import ImageViewField from './ViewFieldsComponents/ImageField.svelte';
+import FileViewField from './ViewFieldsComponents/FileField.svelte';
 
 import ViewLabel from './ViewFieldsComponents/ViewLabel.svelte';
 
@@ -86,7 +126,27 @@ const theme: ThemeConfig = {
 		toggle: ToggleViewField,
 		url: UrlViewField,
 		array: ArrayViewField,
-		email: EmailViewField
+		email: EmailViewField,
+		password: PasswordViewField,
+		tel: TelViewField,
+		time: TimeViewField,
+		date_time: DateTimeViewField,
+		color: ColorViewField,
+		integer: IntegerViewField,
+		percent: PercentViewField,
+		money: MoneyViewField,
+		slug: SlugViewField,
+		hidden: HiddenViewField,
+		choice: ChoiceViewField,
+		multi_choice: MultiChoiceViewField,
+		radio: RadioViewField,
+		country: CountryViewField,
+		language: LanguageViewField,
+		locale: LocaleViewField,
+		timezone: TimezoneViewField,
+		markdown: MarkdownViewField,
+		image: ImageViewField,
+		file: FileViewField
 	},
 	formFields: {
 		checkbox: CheckboxFormField,
@@ -102,7 +162,27 @@ const theme: ThemeConfig = {
 		toggle: ToggleFormField,
 		url: UrlFormField,
 		array: ArrayFormField,
-		email: EmailFormField
+		email: EmailFormField,
+		password: PasswordFormField,
+		tel: TelFormField,
+		time: TimeFormField,
+		date_time: DateTimeFormField,
+		color: ColorFormField,
+		integer: IntegerFormField,
+		percent: PercentFormField,
+		money: MoneyFormField,
+		slug: SlugFormField,
+		hidden: HiddenFormField,
+		choice: ChoiceFormField,
+		multi_choice: MultiChoiceFormField,
+		radio: RadioFormField,
+		country: CountryFormField,
+		language: LanguageFormField,
+		locale: LocaleFormField,
+		timezone: TimezoneFormField,
+		markdown: MarkdownFormField,
+		image: ImageFormField,
+		file: FileFormField
 	},
 	filters: {
 		boolean: BooleanFilter,
