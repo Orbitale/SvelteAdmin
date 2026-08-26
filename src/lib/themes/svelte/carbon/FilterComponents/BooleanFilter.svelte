@@ -7,8 +7,11 @@
 	import type { TextFilter } from '$lib/Filter';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	export let filter: TextFilter;
-	let value: boolean | null = null;
+	let { filter }: {
+		filter: TextFilter;
+	} = $props();
+
+	let value: boolean | null = $state(null);
 
 	const style = 'padding: 0.5rem;';
 
@@ -34,7 +37,7 @@
 		return `${style};border-color: transparent;`;
 	}
 
-	$: inputValue = value === true ? 1 : value === false ? 0 : '';
+	let inputValue = $derived(value === true ? 1 : value === false ? 0 : '');
 </script>
 
 <input type="hidden" name={filter.field} value={inputValue} />

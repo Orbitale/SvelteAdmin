@@ -1,19 +1,30 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
+	import type { Snippet } from 'svelte';
 	import { type FilterInterface, type FilterOptions } from '$lib/Filter';
 
-	export let filter: FilterInterface<FilterOptions>;
+	let {
+		filter,
+		label = null,
+	  children,
+	}: {
+		filter: FilterInterface<FilterOptions>;
+		label?: Snippet;
+		children?: Snippet;
+	} = $props();
 </script>
 
 <section>
 	<aside class="label">
-		<slot name="label">
+		{#if label}
+			{@render label()}
+		{:else}
 			{$_(filter.label || filter.field)}
-		</slot>
+		{/if}
 	</aside>
 
 	<aside class="content">
-		<slot />
+		{@render children?.()}
 	</aside>
 </section>
 

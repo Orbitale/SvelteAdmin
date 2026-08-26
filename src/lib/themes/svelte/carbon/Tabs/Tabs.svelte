@@ -9,33 +9,41 @@
 	import type { Tabs as TabsField } from '$lib/Fields/Tabs';
 	import type { ThemeConfig } from '$lib/types';
 
-	export let FieldComponent: ComponentType;
-	export let field: TabsField;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		FieldComponent,
+		field,
+		operation,
+		entityObject = {},
+		value,
+		theme
+	}: {
+		FieldComponent: ComponentType;
+		field: TabsField;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		value: unknown;
+		theme: ThemeConfig;
+	} = $props();
 </script>
 
 <Tabs>
 	{#each field.fields as tab, i}
 		<Tab label={$_(tab.label || tab.name)} tabindex={i.toString()} />
 	{/each}
-	<svelte:fragment slot="content">
-		{#each field.fields as tab}
-			<TabContent>
-				{#each tab.fields as tabbedField}
-					<svelte:component
-						this={FieldComponent}
-						{operation}
-						{entityObject}
-						{value}
-						{theme}
-						field={tabbedField}
-						on:fieldChange
-					/>
-				{/each}
-			</TabContent>
-		{/each}
-	</svelte:fragment>
+	{#snippet content()}
+			{#each field.fields as tab}
+				<TabContent>
+					{#each tab.fields as tabbedField}
+						<FieldComponent
+							{operation}
+							{entityObject}
+							{value}
+							{theme}
+							field={tabbedField}
+							on:fieldChange
+						/>
+					{/each}
+				</TabContent>
+			{/each}
+	{/snippet}
 </Tabs>

@@ -4,8 +4,10 @@
 	import { _ } from 'svelte-i18n';
 	import type { DateField } from '$lib/Fields/Date';
 
-	export let field: DateField;
-	export let value: Date | string | undefined;
+	let { field, value = $bindable() }: {
+		field: DateField;
+		value: Date | string | undefined;
+	} = $props();
 
 	if (value instanceof Date) {
 		value.setHours(0, 0, 0);

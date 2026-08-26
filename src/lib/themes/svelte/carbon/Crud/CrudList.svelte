@@ -18,12 +18,19 @@
 	import type { RequestParameters } from '$lib/Request';
 	import type { DataTableNonEmptyHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
-	export let dashboard: DashboardDefinition;
-	export let operation: List;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	let {
+		dashboard,
+		operation,
+		crud,
+		requestParameters = $bindable({})
+	}: {
+		dashboard: DashboardDefinition;
+		operation: List;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	} = $props();
 
-	let page: number | undefined;
+	let page: number | undefined = $state();
 
 	const configuredFilters = operation.options?.filters || [];
 	const actions = operation.contextActions;
@@ -39,9 +46,11 @@
 		};
 	});
 
+	const DataTableComponent = dashboard.theme.dataTable;
+
 	let showPagination = operation.options.pagination.enabled;
-	let rows: Promise<unknown>;
-	let paginator: PaginatedResults<unknown> | undefined;
+	let rows: Promise<unknown> = $state();
+	let paginator: PaginatedResults<unknown> | undefined = $state();
 	let globalActions: Array<Action> = operation.options.globalActions || [];
 	let batchActions: Array<Action> = operation.options.batchActions || [];
 
@@ -155,14 +164,14 @@
 	});
 </script>
 
-<svelte:component
-	this={dashboard.theme.dataTable}
+<DataTableComponent
 	{headers}
 	{rows}
 	{actions}
 	{globalActions}
 	{batchActions}
 	{page}
+	title={$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
 	{operation}
 	{onSort}
 	sortable={sortableDataTable}
@@ -171,10 +180,8 @@
 	theme={dashboard.theme}
 	on:submitFilters={onFiltersSubmit}
 >
-	<h2 slot="title">
-		{$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
-	</h2>
-</svelte:component>
+</DataTableComponent>
+
 {#if showPagination && paginator}
 	<Pagination
 		pageSize={operation.options.pagination?.itemsPerPage}

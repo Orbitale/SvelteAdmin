@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import { _ } from 'svelte-i18n';
 	import DataTable, {
 		type DataTableHeader,
@@ -23,23 +23,47 @@
 	import { type FieldInterface, type FieldOptions, TextField } from '$lib';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
-	export let headers: Headers = [];
-	export let rows: Promise<Rows>;
-	export let actions: Action[] = [];
-	export let globalActions: Array<Action> = [];
-	export let batchActions: Action[] = [];
-	export let filters: Array<FilterInterface<FilterOptions>> = [];
-	export let filtersValues: { [key: string]: string | Array<string> | undefined } = {};
-	export let page: number | undefined;
-	export let theme: ThemeConfig;
-	export let sortable: boolean;
-	export let onSort: (event: CustomEvent<SortEvent>) => void;
+	let {
+		headers = [],
+		rows,
+		actions = [],
+		globalActions = [],
+		batchActions = [],
+		filters = [],
+		filtersValues = {},
+		page,
+		theme,
+		sortable,
+		onSort,
+		title,
+		description,
+		children,
+		onFiltersSubmit = () => {},
+		...rest
+	}: {
+		headers?: Headers;
+		rows: Promise<Rows>;
+		actions?: Action[];
+		globalActions?: Array<Action>;
+		batchActions?: Action[];
+		filters?: Array<FilterInterface<FilterOptions>>;
+		filtersValues?: { [key: string]: string | Array<string> | undefined };
+		page: number | undefined;
+		theme: ThemeConfig;
+		sortable: boolean;
+		onSort: (event: CustomEvent<SortEvent>) => void;
+		title?: Snippet;
+		description?: Snippet;
+		children?: Snippet;
+		onFiltersSubmit?: (data: SubmittedData) => void;
+		[key: string]: unknown;
+	} = $props();
 
-	let actionsCellIndex = -1;
-	let batchSelectionIsActive = false;
-	let selectedRowIds: ReadonlyArray<DataTableRowId> = [];
-	let sortKey: string | undefined = undefined;
-	let sortDirection: 'ascending' | 'descending' | 'none' = 'none';
+	let actionsCellIndex = $state(-1);
+	let batchSelectionIsActive = $state(false);
+	let selectedRowIds: ReadonlyArray<DataTableRowId> = $state([]);
+	let sortKey: string | undefined = $state();
+	let sortDirection: 'ascending' | 'descending' | 'none' = $state('none');
 	let currentFilters: SubmittedData = {};
 
 	if (actions.length) {
@@ -84,18 +108,16 @@
 	function resetSorting() {
 		sortKey = undefined;
 		sortDirection = 'none';
-		dispatchEvent('submitFilters', currentFilters);
+		onFiltersSubmit(currentFilters);
 	}
 
-	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmittedData }>();
-
-	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
-		currentFilters = event.detail;
-		dispatchEvent('submitFilters', currentFilters);
+	function submitFilters(data: SubmittedData) {
+		currentFilters = data;
+		onFiltersSubmit(currentFilters);
 	}
 
-	function onCancelSelection(event: CustomEvent<null>) {
-		event.preventDefault();
+	function onCancelSelection(e: CustomEvent<null>) {
+		e.preventDefault();
 		batchSelectionIsActive = false;
 	}
 
@@ -105,9 +127,9 @@
 		sortDirection?: 'none' | 'ascending' | 'descending';
 	};
 
-	function onHeaderClick(event: CustomEvent<SortEvent>) {
+	function onHeaderClick(e: CustomEvent<SortEvent>) {
 		if (onSort) {
-			onSort(event);
+			onSort(e);
 		}
 	}
 
@@ -120,19 +142,21 @@
 		}
 	);
 
-	$: globalActionsDisplay = [
+	let globalActionsDisplay = $derived([
 		...globalActions,
 		...(sortKey && sortDirection !== 'none' ? [resetSortingAction] : [])
-	];
+	]);
 </script>
 
 {#await rows}
-	<DataTableSkeleton {headers} size="short" zebra={true} {...$$restProps} />
+	<DataTableSkeleton {headers} size="short" zebra={true} {...rest} />
 {:then resolvedRows}
 	<DataTable
 		{headers}
 		{page}
 		{sortable}
+		{title}
+		{description}
 		bind:sortKey
 		bind:sortDirection
 		zebra
@@ -142,23 +166,18 @@
 		size="short"
 		on:click:header={onHeaderClick}
 		bind:selectedRowIds
-		{...$$restProps}
+		{...rest}
 	>
-		<svelte:fragment slot="title">
-			<slot name="title" />
-		</svelte:fragment>
-		<svelte:fragment slot="description">
-			<slot name="description" />
-		</svelte:fragment>
 		{#if globalActionsDisplay.length || filters.length}
 			<DataTableToolbar
 				{theme}
 				actions={globalActionsDisplay || []}
 				filters={filters || []}
 				filtersValues={filtersValues || {}}
-				on:submitFilters={onFiltersSubmit}
+				onFiltersSubmit={submitFilters}
 			/>
 		{/if}
+
 		{#if batchActions.length > 0}
 			<Toolbar>
 				<ToolbarBatchActions bind:active={batchSelectionIsActive} on:cancel={onCancelSelection}>
@@ -177,38 +196,43 @@
 				{$_('error.crud.list.no_elements')}
 			</InlineNotification>
 		{/if}
-		{#if $$slots.default}
-			<slot />
-		{/if}
+
+		{@render children?.()}
+
 		{#await rows}
 			<Loading />
 		{/await}
-		<div slot="cell" let:cell let:row let:cellIndex>
-			{#if cellIndex === actionsCellIndex}
-				<ItemActions {actions} item={row} />
-			{:else}
-				<svelte:component
-					this={getViewFieldComponent(cell.key, row)}
-					field={getFieldFromRow(cell.key, row)}
-					value={cell.display ? cell.display(cell.value, row) : cell.value}
-					operation={$$restProps.operation}
-					entityObject={row}
-					{theme}
-				>
-					{cell.display ? cell.display(cell.value, row) : cell.value}
-				</svelte:component>
-			{/if}
-		</div>
+
+		{#snippet cell({ cell, row, cellIndex })}
+				<div>
+				{#if cellIndex === actionsCellIndex}
+					<ItemActions {actions} item={row} />
+				{:else}
+					{@const ViewFieldComponent = getViewFieldComponent(cell.key, row)}
+					<ViewFieldComponent
+						field={getFieldFromRow(cell.key, row)}
+						value={cell.display ? cell.display(cell.value, row) : cell.value}
+						operation={rest.operation}
+						entityObject={row}
+						{theme}
+					>
+						{cell.display ? cell.display(cell.value, row) : cell.value}
+					</ViewFieldComponent>
+				{/if}
+			</div>
+			{/snippet}
 	</DataTable>
 {:catch error}
-	<DataTable {headers} {page} zebra rows={[]} size="short" {...$$restProps}>
-		<svelte:fragment slot="title">
-			<slot name="title" />
-		</svelte:fragment>
-		<svelte:fragment slot="description">
-			<slot name="description" />
-		</svelte:fragment>
-
+	<DataTable
+		{headers}
+		{page}
+		{title}
+		{description}
+		zebra
+		rows={[]}
+		size="short"
+		{...rest}
+	>
 		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
 			{$_('error.crud.list.load_error')}<br />
 			{error.toString()}

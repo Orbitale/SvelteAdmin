@@ -7,8 +7,13 @@
 
 	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 
-	export let action: Action;
-	export let item: object | undefined = undefined;
+	let {
+		action,
+		item = undefined,
+	}: {
+		action: Action;
+		item?: object | undefined;
+	} = $props();
 </script>
 
 {#if action instanceof UrlAction}

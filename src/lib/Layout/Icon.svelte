@@ -1,21 +1,24 @@
 <script lang="ts">
 	import type { ActionIcon } from '$lib/Actions';
-	import { SvelteComponent } from 'svelte';
 
-	export let icon: ActionIcon;
+	let { icon, ...rest }: {
+		icon: ActionIcon;
+		[key: string]: unknown;
+	} = $props();
 
 	if (
 		icon &&
-		!(icon instanceof SvelteComponent) &&
 		typeof icon !== 'function' &&
 		typeof icon !== 'string'
 	) {
 		console.error(`Wrong icon type: ${typeof icon}`, icon);
 	}
+
+	const IconComponent = icon;
 </script>
 
-{#if icon instanceof SvelteComponent || typeof icon === 'function'}
-	<svelte:component this={icon} {...$$restProps} />
+{#if typeof icon === 'function'}
+	<IconComponent {...rest} />
 {:else if typeof icon === 'string'}
 	{icon}
 {:else}

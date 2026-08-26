@@ -11,19 +11,28 @@
 	import type { StateProviderResult } from '$lib/StateProvider';
 	import type { RequestParameters } from '$lib/Request';
 
-	export let dashboard: DashboardDefinition;
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	interface Props {
+		dashboard: DashboardDefinition;
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	}
+
+	let {
+		dashboard,
+		operation,
+		crud,
+		requestParameters = {}
+	}: Props = $props();
 
 	const CrudViewField = dashboard.theme.viewField;
 
 	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
 
-	let providerResultPromise: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+	let providerResultPromise: StateProviderResult<unknown> = $state(crud.options.stateProvider.provide(
 		operation,
 		requestParameters
-	);
+	));
 
 	onMount(async () => {
 		const data = await providerResultPromise;

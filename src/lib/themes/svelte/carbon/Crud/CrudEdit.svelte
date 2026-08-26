@@ -13,18 +13,26 @@
 	import type { DashboardDefinition } from '$lib/Dashboard';
 	import type { StateProviderResult } from '$lib/StateProvider';
 	import type { RequestParameters } from '$lib/Request';
+	import type { SubmittedData } from '$lib/Crud/Form';
 
-	export let dashboard: DashboardDefinition;
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	let {
+		dashboard,
+		operation,
+		crud,
+		requestParameters = {}
+	}: {
+		dashboard: DashboardDefinition;
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	} = $props();
 
 	const CrudForm = dashboard.theme.form;
 
-	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+	let defaultData: StateProviderResult<unknown> = $state(crud.options.stateProvider.provide(
 		operation,
 		requestParameters
-	);
+	));
 
 	onMount(async () => {
 		const data = await defaultData;
@@ -33,9 +41,7 @@
 		}
 	});
 
-	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
-		const data = event.detail;
-
+	async function onSubmitData(data: SubmittedData) {
 		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
 		window.location.href = document.referrer || dashboard.getFirstActionUrl();
@@ -56,6 +62,7 @@
 		<CrudForm
 			theme={dashboard.theme}
 			{operation}
+			{onSubmitData}
 			defaultData={data}
 			on:click
 			on:keydown
@@ -63,12 +70,10 @@
 			on:mouseenter
 			on:mouseleave
 			on:submit
-			on:submitData
-			on:submitData={onSubmitData}
 		>
-			<svelte:fragment slot="form-header">
+			{#snippet formHeader()}
 				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
-			</svelte:fragment>
+			{/snippet}
 		</CrudForm>
 	{/if}
 {/await}

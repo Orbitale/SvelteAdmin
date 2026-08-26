@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	import type { Snippet } from 'svelte';
 	import { _ } from 'svelte-i18n';
 	import Toolbar from 'carbon-components-svelte/src/DataTable/Toolbar.svelte';
 	import ToolbarContent from 'carbon-components-svelte/src/DataTable/ToolbarContent.svelte';
@@ -17,33 +17,42 @@
 	import type { ThemeConfig } from '$lib/types';
 	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form';
 
-	export let actions: Array<Action> = [];
-	export let filters: Array<Filter<FilterOptions>> = [];
-	export let filtersValues: { [key: string]: string | Array<string> | undefined } = {};
-	export let theme: ThemeConfig;
-
-	const dispatchEvent = createEventDispatcher<{ submitFilters: SubmittedData }>();
+	let {
+		actions = [],
+		filters = [],
+		filtersValues = $bindable({}),
+		onFiltersSubmit = () => {},
+		theme,
+		children
+	}: {
+		actions?: Array<Action>;
+		filters?: Array<Filter<FilterOptions>>;
+		filtersValues?: { [key: string]: string | Array<string> | undefined };
+		onFiltersSubmit?: (data: SubmittedData) => void;
+		theme: ThemeConfig;
+		children?: Snippet;
+	} = $props();
 
 	filters.forEach((filter: Filter<FilterOptions>) => {
 		filtersValues[filter.field] ??= undefined;
 	});
 
-	function onFiltersSubmit(event: SubmitEvent) {
-		event.preventDefault();
-		event.stopPropagation();
-		if (!event.target) {
+	function submitFilters(e: SubmitEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		if (!e.target) {
 			throw new Error(
 				'No target when submitted filters. Did you forget to attach the event to a Form?'
 			);
 		}
-		const data = getSubmittedFormData(event);
+		const data = getSubmittedFormData(e);
 		// Remove empty values from data
 		Object.keys(data).forEach((key: string) => {
 			if (data[key] === '') {
 				delete data[key];
 			}
 		});
-		dispatchEvent('submitFilters', data);
+		onFiltersSubmit(data);
 	}
 
 	function resetFilters() {
@@ -51,7 +60,7 @@
 		filters.forEach((filter: Filter<FilterOptions>) => {
 			filtersValues[filter.field] = undefined;
 		});
-		dispatchEvent('submitFilters', {} as SubmittedData);
+		onFiltersSubmit({});
 	}
 </script>
 
@@ -68,25 +77,36 @@
 {#if filters.length}
 	<Accordion>
 		<AccordionItem open={Object.values(filtersValues).filter((i) => !!i).length > 0}>
-			<slot slot="title">
-				<FilterIcon />
-				{$_('datatable.filters.menu_title')}
-			</slot>
-			<Form on:submit={onFiltersSubmit}>
+			{#snippet title()}
+				{#if children}
+					{@render children()}
+				{:else}
+					<FilterIcon />
+					{$_('datatable.filters.menu_title')}
+				{/if}
+			{/snippet}
+
+			<Form on:submit={submitFilters}>
+
 				{#each filters as filter}
 					<br />
 					<FilterComponent {filter} {theme} value={filtersValues[filter.field]} />
 				{/each}
+
 				<br />
+
 				<Button type="submit" kind="secondary" size="field">
 					<FilterIcon />
 					{$_('datatable.filters.submit_filters')}
 				</Button>
+
 				<Button type="reset" kind="ghost" size="field" on:click={resetFilters}>
 					<FilterReset />
 					{$_('datatable.filters.reset_filters')}
 				</Button>
+
 			</Form>
+
 		</AccordionItem>
 	</Accordion>
 {/if}

@@ -11,11 +11,19 @@
 	import type { FieldOptions } from '$lib/Fields';
 	import type { ThemeConfig } from '$lib/types';
 
-	export let field: ArrayField<FieldInterface<FieldOptions>>;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown[];
-	export let theme: ThemeConfig;
+	let {
+		field,
+		operation,
+		entityObject = {},
+		value,
+		theme
+	}: {
+		field: ArrayField<FieldInterface<FieldOptions>>;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		value: unknown[];
+		theme: ThemeConfig;
+	} = $props();
 </script>
 
 <Grid fullWidth>

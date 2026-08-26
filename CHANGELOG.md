@@ -1,3 +1,13 @@
+# v0.19.0
+
+- **BC Break**: Slots in `CrudForm` were renamed (previous names were invalid on regards to how snippets are now implemented):
+  - former `form-header` slot is now the `formHeader()` snippet.
+  - former `form-footer` slot is now the `formFooter()` snippet.
+- **BC Break**: the `submitData` event in `CrudForm` was removed and replaced with the `onSubmitData` prop. When called, it receives the submitted data as first argument.
+- **BC Break**: the `fieldChange` event in `CrudFormField` was removed and replaced with the `onFieldChange` prop. When called, it receives a plain object with the `key` value containing the field name, and the `value` with the new field value.
+- **BC Break**: the `change` event in `CheckboxField` was removed and replaced with the `onChange` prop. When called, it receives a boolean argument based on whether the checkbox is checked.
+- **BC Break**: the `maxLength` constant in the `UrlField` is changed from 2083 to 2000, to round it and avoid picky questions about the "why". And added more details about "why", for the occasion.
+
 # v0.18.0
 
 - **BC Break**: Rename `Date` filter to `DateRange`. A text filter can be used for precise dates.

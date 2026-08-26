@@ -9,13 +9,24 @@
 	import type { CrudDefinition } from '$lib/Crud';
 	import type { RequestParameters } from '$lib/Request';
 
-	export let dashboard: DashboardDefinition;
-	export let crud: string | undefined = undefined;
-	export let operation: string | undefined = undefined;
-	export let requestParameters: RequestParameters = {};
+	import type { Snippet } from 'svelte';
 
-	let currentCrud: CrudDefinition<unknown> | undefined;
-	let currentCrudOperation: CrudOperation | undefined;
+	let {
+		dashboard,
+		crud = undefined,
+		operation = undefined,
+		requestParameters = {},
+		children
+	}: {
+		dashboard: DashboardDefinition;
+		crud?: string | undefined;
+		operation?: string | undefined;
+		requestParameters?: RequestParameters;
+		children?: Snippet;
+	} = $props();
+
+	let currentCrud: CrudDefinition<unknown> | undefined = $state();
+	let currentCrudOperation: CrudOperation | undefined = $state();
 
 	dashboard.cruds
 		.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
@@ -25,7 +36,7 @@
 		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
 		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 
-	const themeComponent =
+	const ThemeComponent =
 		currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName];
 
 	const sideMenu = dashboard.stores.sideMenu;
@@ -40,7 +51,9 @@
 	top_left_menu_links={$topLeftMenu}
 	top_right_menu_links={$topRightMenu}
 >
-	<slot>
+	{#if children}
+		{@render children()}
+	{:else}
 		{#if !currentCrud}
 			<InlineNotification hideCloseButton={true}>
 				{#if crud}
@@ -61,19 +74,18 @@
 				{/if}
 			</InlineNotification>
 		{/if}
-		{#if currentCrud && currentCrudOperation && !themeComponent}
+		{#if currentCrud && currentCrudOperation && !ThemeComponent}
 			<InlineNotification hideCloseButton={true}>
 				{$_('error.crud.could_not_find_component', {
 					values: { crud, operation }
 				})}
 			</InlineNotification>
 		{/if}
-		<svelte:component
-			this={themeComponent}
+		<ThemeComponent
 			{dashboard}
 			crud={currentCrud}
 			operation={currentCrudOperation}
 			{requestParameters}
 		/>
-	</slot>
+	{/if}
 </AdminLayout>

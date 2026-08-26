@@ -8,11 +8,17 @@
 	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
 	import type { RequestParameters } from '$lib/Request';
 
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	let {
+		operation,
+		crud,
+		requestParameters = {},
+	}: {
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	} = $props();
 
-	const data = crud.options.stateProvider.provide(operation, requestParameters);
+	const data = $derived(crud.options.stateProvider.provide(operation, requestParameters));
 
 	function clickCancel() {
 		// TODO: check if it's the best method

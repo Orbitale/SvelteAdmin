@@ -2,7 +2,6 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
-	import { createEventDispatcher } from 'svelte';
 	import { _ } from 'svelte-i18n';
 
 	import { Tabs } from '$lib/Fields/Tabs';
@@ -14,33 +13,38 @@
 	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form';
 	import { carbon } from '$lib/themes/svelte';
 
-	export let submitButtonType: SubmitButtonType = 'primary';
-	export let method: 'get' | 'post' = 'post';
-	export let operation: CrudOperation;
-	export let defaultData: undefined | null | Record<string, unknown> = {};
-	export let theme: ThemeConfig = carbon;
+	let {
+		formHeader,
+		formFooter,
+		operation,
+		submitButtonType = 'primary',
+		method = 'post',
+		defaultData = {},
+		onSubmitData = () => {},
+		theme = carbon,
+	}: {
+		operation: CrudOperation;
+		submitButtonType: SubmitButtonType;
+		method: 'get' | 'post';
+		defaultData: undefined | null | Record<string, unknown>;
+		theme: ThemeConfig;
+		onSubmitData?: (data: SubmittedData) => void;
+	} = $props();
 
 	const CrudFormField = theme.formField;
 
 	const data: Record<string, unknown> = defaultData ?? {};
 
-	export let htmlFormElement: HTMLFormElement | null | undefined;
+	let htmlFormElement: HTMLFormElement | null | undefined;
 
-	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
+	let fields: Array<FieldInterface<CommonFieldOptions>> = operation.fields;
 
-	const dispatchEvent = createEventDispatcher<{ submitData: SubmittedData }>();
-
-	function onSubmit(event: SubmitEvent) {
+	function onSubmit(e: SubmitEvent) {
 		if (operation.options?.preventHttpFormSubmit ?? true) {
-			event.preventDefault();
+			e.preventDefault();
 		}
 
-		const normalizedData = sanitizeFormData(
-			getSubmittedFormData(event),
-			defaultData ?? {},
-			operation
-		);
-		dispatchEvent('submitData', normalizedData);
+		onSubmitData(sanitizeFormData(getSubmittedFormData(e), defaultData ?? {}, operation));
 	}
 </script>
 
@@ -55,7 +59,7 @@
 	on:submit={onSubmit}
 	on:submit
 >
-	<slot name="form-header" />
+	{@render formHeader?.()}
 
 	{#each fields as field}
 		{#if field instanceof Tabs || field instanceof Columns}
@@ -69,5 +73,5 @@
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>
 
-	<slot name="form-footer" />
+	{@render formFooter?.()}
 </Form>
