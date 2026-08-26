@@ -13,7 +13,7 @@
 - **BC Break**: Rename `Date` filter to `DateRange`. A text filter can be used for precise dates.
 - Fix an issue with top right header where icons and tooltips were not using the proper API and props.
 - Fix the fuzzy behavior of the `DateRange` filter, making it more explicit.
-- Fixed/changed the `getSubmittedFormData()` function's behavior: it now supports cases when you have the same `name` several times in Form data (via `<input name="...">` for instance), so that the processed data is properly converted to an array.<br>Check the `src/lib/Crud/Form.test.ts` file for more details about how it works.
+- Fixed/changed the `getSubmittedFormData()` function's behavior: it now supports cases when you have the same `name` several times in Form data (via `<input name="...">` for instance), so that the processed data is properly converted to an array.<br>Check the `src/lib/Crud/Form.browser.test.ts` file for more details about how it works.
 - Create script to create new theme based on Carbon (for future theming, again).
 
 # v0.17.0

@@ -24,12 +24,16 @@ export default defineConfig({
 				extends: './vite.config.ts',
 				test: {
 					name: 'client',
+					environment: 'jsdom',
 					browser: {
 						enabled: true,
 						provider: playwright(),
 						instances: [{ browser: 'chromium', headless: true }]
 					},
-					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+					include: [
+						'src/**/*.svelte.{test,spec}.{js,ts}',
+						'src/**/*.browser.test.{js,ts}',
+					],
 					exclude: ['src/lib/server/**']
 				}
 			},

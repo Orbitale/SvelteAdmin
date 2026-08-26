@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './NumberField.svelte';
 import { faker } from '@faker-js/faker';
 
@@ -15,7 +13,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('No value');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('No value');
 		});
 
 		it('displays error with empty string', async () => {
@@ -25,7 +23,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('No value');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('No value');
 		});
 
 		it.each([
@@ -42,7 +40,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('NaN');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('NaN');
 		});
 
 		it.each(
@@ -56,7 +54,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual(value.toString());
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual(value.toString());
 		});
 
 		it.each(
@@ -70,7 +68,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual(value.toString());
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual(value.toString());
 		});
 
 		it.each(
@@ -89,8 +87,7 @@ describe(
 
 			const child = rendered.container.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual(value.toString().replace(/n$/gi, ''));
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual(value.toString().replace(/n$/gi, ''));
 		});
-	},
-	testOptions
+	}
 );

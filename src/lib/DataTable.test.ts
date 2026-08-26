@@ -11,7 +11,6 @@ import {
 	UrlField
 } from '$lib';
 import { Columns } from '$lib/Fields/Columns';
-import { testOptions } from '$lib/TestOptions';
 
 describe(
 	'DataTable',
@@ -49,6 +48,5 @@ describe(
 
 			expect(list).toBeDefined();
 		});
-	},
-	testOptions
+	}
 );

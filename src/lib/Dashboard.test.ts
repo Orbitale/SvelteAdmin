@@ -6,7 +6,6 @@ import {
 	DashboardDefinition,
 	List
 } from '$lib';
-import { testOptions } from '$lib/TestOptions';
 import carbon from '$lib/themes/svelte/carbon';
 
 type Book = object;
@@ -78,6 +77,5 @@ describe(
 				'Crud name "books" is used in at least two different Crud objects. Crud names must be unique.'
 			);
 		});
-	},
-	testOptions
+	}
 );

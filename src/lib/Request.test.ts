@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { testOptions } from '$lib/TestOptions';
 import { getRequestParams } from '$lib/Request';
 import type { Page } from '@sveltejs/kit';
 
@@ -23,8 +22,7 @@ describe(
 
 			expect(getRequestParams(page, false)).toStrictEqual({});
 		});
-	},
-	testOptions
+	}
 );
 
 function mockPage(url: string): Page {
