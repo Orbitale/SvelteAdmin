@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let value: string | undefined;
+	let { value = $bindable() }: {
+		value: string | undefined;
+	} = $props();
 
 	if (value === undefined) {
 		value = '';

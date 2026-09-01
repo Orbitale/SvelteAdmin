@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './DateField.svelte';
 
 describe(
@@ -14,7 +12,7 @@ describe(
 
 			const element = rendered.container;
 			expect(element).toBeDefined();
-			expect(element.innerHTML).toStrictEqual('');
+			expect(element.innerHTML.replace('<!---->', '')).toStrictEqual('');
 		});
 
 		it('can be instantiated with Date object', async () => {
@@ -25,7 +23,7 @@ describe(
 
 			const element = rendered.container;
 			expect(element).toBeDefined();
-			expect(element.innerHTML).toStrictEqual(`2024-01-01`);
+			expect(element.innerHTML.replace('<!---->', '')).toStrictEqual(`2024-01-01`);
 		});
 
 		it('can be instantiated with string value', async () => {
@@ -36,8 +34,7 @@ describe(
 
 			const element = rendered.container;
 			expect(element).toBeDefined();
-			expect(element.innerHTML).toStrictEqual('2024-05-26');
+			expect(element.innerHTML.replace('<!---->', '')).toStrictEqual('2024-05-26');
 		});
-	},
-	testOptions
+	}
 );

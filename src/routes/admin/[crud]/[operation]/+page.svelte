@@ -1,18 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { browser } from '$app/environment';
 
 	import { dashboard } from '../../../../testApp/Dashboard';
 	import { getRequestParams } from '$lib';
 
-	$: crud = $page.params.crud;
-	$: operation = $page.params.operation;
-	$: requestParameters = getRequestParams($page, browser);
+	let crud = $derived(page.params.crud);
+	let operation = $derived(page.params.operation);
+	let requestParameters = $derived(getRequestParams(page, browser));
 </script>
 
-{#key $page}
-	<svelte:component
-		this={dashboard.theme.dashboard}
+{#key page}
+	<dashboard.theme.dashboard
 		{dashboard}
 		{crud}
 		{operation}

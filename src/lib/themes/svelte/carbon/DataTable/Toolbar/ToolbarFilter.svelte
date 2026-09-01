@@ -2,11 +2,13 @@
 	import type { FilterInterface, FilterOptions } from '$lib/Filter';
 	import type { ThemeConfig } from '$lib/types';
 
-	export let filter: FilterInterface<FilterOptions>;
-	export let theme: ThemeConfig;
-	export let value: undefined | string | Array<string>;
+	let { filter, theme, value }: {
+		filter: FilterInterface<FilterOptions>;
+		theme: ThemeConfig;
+		value: undefined | string | Array<string>;
+	} = $props();
 
-	const component = theme.filters[filter.componentName];
+	const FilterComponent = $derived(theme.filters[filter.componentName]);
 </script>
 
-<svelte:component this={component} {filter} {value} />
+<FilterComponent {filter} {value} />

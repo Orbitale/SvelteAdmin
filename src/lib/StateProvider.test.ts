@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { testOptions } from '$lib/TestOptions';
 import { CallbackStateProvider, BaseCrudOperation, type CrudOperation } from '$lib';
 
 describe(
@@ -13,11 +12,9 @@ describe(
 				const value = await provider.provide(mockOperation(), {});
 
 				expect(value).toBe(true);
-			},
-			testOptions
+			}
 		);
-	},
-	testOptions
+	}
 );
 
 function mockOperation(): CrudOperation {

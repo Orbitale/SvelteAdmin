@@ -1,0 +1,4 @@
+allowBuilds:
+  carbon-components-svelte: true
+  es5-ext: true
+  esbuild: true

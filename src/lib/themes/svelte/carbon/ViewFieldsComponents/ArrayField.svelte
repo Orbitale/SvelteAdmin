@@ -6,11 +6,19 @@
 	import type { ThemeConfig } from '$lib/types';
 	import CrudViewField from '$lib/themes/svelte/carbon/Crud/CrudViewField.svelte';
 
-	export let field: ArrayField<FieldInterface<FieldOptions>>;
-	export let value: Array<unknown> | undefined;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let theme: ThemeConfig;
+	let {
+		field,
+		value = $bindable(),
+		operation,
+		entityObject = {},
+		theme
+	}: {
+		field: ArrayField<FieldInterface<FieldOptions>>;
+		value: Array<unknown> | undefined;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		theme: ThemeConfig;
+	} = $props();
 
 	if (!value) {
 		value = [];

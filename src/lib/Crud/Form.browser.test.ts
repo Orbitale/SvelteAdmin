@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { testOptions } from '$lib/TestOptions';
 import { getSubmittedFormData } from '$lib';
+import { JSDOM } from 'jsdom';
 
 describe('Submitted form data', () => {
 	it(
@@ -15,8 +15,7 @@ describe('Submitted form data', () => {
 			expect(consoleError).toHaveBeenLastCalledWith(
 				'No form target specified. Did you forget to inject the proper SubmitEvent to the function?'
 			);
-		},
-		testOptions
+		}
 	);
 
 	it(
@@ -25,8 +24,7 @@ describe('Submitted form data', () => {
 			const submitted = getSubmittedFormData(mockSubmitEvent());
 
 			expect(submitted).toStrictEqual({});
-		},
-		testOptions
+		}
 	);
 
 	it(
@@ -43,8 +41,7 @@ describe('Submitted form data', () => {
 				title: 'Some title',
 				description: 'Some description'
 			});
-		},
-		testOptions
+		}
 	);
 
 	it(
@@ -60,12 +57,13 @@ describe('Submitted form data', () => {
 			expect(submitted).toStrictEqual({
 				title: ['First title', 'Second title']
 			});
-		},
-		testOptions
+		}
 	);
 });
 
 function mockSubmitEvent(submittedData: Array<[string, string]> = []) {
+	const { document } = new JSDOM(`...`).window;
+
 	const form = document.createElement('form');
 
 	const submitter = document.createElement('button');

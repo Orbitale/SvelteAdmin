@@ -2,8 +2,10 @@
 	import TextArea from 'carbon-components-svelte/src/TextArea/TextArea.svelte';
 	import type { TextareaField } from '$lib/Fields/Textarea';
 
-	export let field: TextareaField;
-	export let value: string | undefined;
+	let { field, value = $bindable() }: {
+		field: TextareaField;
+		value: string | undefined;
+	} = $props();
 
 	function onChangeStripTags() {
 		if (!field.options.stripTags) {

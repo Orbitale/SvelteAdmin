@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './CheckboxField.svelte';
 
 describe(
@@ -28,6 +26,5 @@ describe(
 			expect(svg).toBeInstanceOf(SVGSVGElement);
 			expect(svg.style.color).toBe('rgb(170, 0, 0)');
 		});
-	},
-	testOptions
+	}
 );

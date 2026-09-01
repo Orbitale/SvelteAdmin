@@ -1,5 +1,4 @@
 import { describe, it, expect } from 'vitest';
-import { testOptions } from '$lib/TestOptions';
 import {
 	CallbackStateProcessor,
 	BaseCrudOperation,
@@ -25,11 +24,9 @@ describe(
 				await processor.process(false, mockOperation(), {});
 
 				expect(callbackCalled).toStrictEqual(true);
-			},
-			testOptions
+			}
 		);
-	},
-	testOptions
+	}
 );
 
 function mockOperation(): CrudOperation {

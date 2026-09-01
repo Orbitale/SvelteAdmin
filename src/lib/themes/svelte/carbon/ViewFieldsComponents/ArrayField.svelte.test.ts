@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import {
 	CallbackStateProcessor,
 	CallbackStateProvider,
@@ -35,8 +33,7 @@ describe(
 			const textNode: Text = valueElement?.childNodes[0] as Text;
 			expect(textNode.wholeText).toStrictEqual('default_value');
 		});
-	},
-	testOptions
+	}
 );
 
 function mockComponentProps(field: ArrayField<TextField>) {

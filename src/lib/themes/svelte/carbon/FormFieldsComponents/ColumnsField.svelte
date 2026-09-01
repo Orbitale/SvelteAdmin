@@ -4,11 +4,17 @@
 	import type { CrudOperation } from '$lib/Crud/Operations';
 	import type { ThemeConfig } from '$lib/types';
 
-	export let field: ColumnsField;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		field,
+		operation,
+		entityObject = {},
+		theme
+	}: {
+		field: ColumnsField;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		theme: ThemeConfig;
+	} = $props();
 </script>
 
-<Columns FieldComponent={theme.formField} {field} {operation} {entityObject} {theme} {value} />
+<Columns FieldComponent={theme.formField} {field} {operation} {entityObject} {theme} />

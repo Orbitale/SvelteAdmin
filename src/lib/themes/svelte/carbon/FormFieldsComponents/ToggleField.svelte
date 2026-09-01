@@ -1,31 +1,30 @@
 <script lang="ts">
 	import Toggle from 'carbon-components-svelte/src/Toggle/Toggle.svelte';
-	import { createEventDispatcher } from 'svelte';
 	import type { ToggleField } from '$lib/Fields/Toggle';
 
-	export let field: ToggleField;
-	export let value: boolean | undefined;
+	let {
+		field,
+		value = $bindable(),
+		onChange = () => {},
+	}: {
+		field: ToggleField;
+		value: boolean | undefined;
+		onChange: (is_checked: boolean) => void
+	} = $props();
 
 	if (value === undefined) {
 		value = false;
 	}
 
-	const dispatchEvent = createEventDispatcher<{
-		change: boolean;
-	}>();
-
-	$: is_checked = value;
-
-	function onChange() {
-		dispatchEvent('change', !!is_checked);
-	}
+	let is_checked = $derived(!!value);
 </script>
 
 <Toggle
 	name={field.name}
 	labelText={field.label}
-	helperText={field.options.help}
+	required={field.options.required ?? true}
 	disabled={field.options.disabled}
+	helperText={field.options.help}
 	on:change={onChange}
 	bind:toggled={is_checked}
 />

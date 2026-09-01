@@ -6,11 +6,13 @@
 	import type { DateRangeFilter } from '$lib/Filter';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	export let filter: DateRangeFilter;
-	export let value: undefined | string | Array<string>;
+	let { filter, value }: {
+		filter: DateRangeFilter;
+		value: undefined | string | Array<string>;
+	} = $props();
 
-	let from: string = '';
-	let to: string = '';
+	let from: string = $state('');
+	let to: string = $state('');
 
 	if (value && Array.isArray(value)) {
 		if (value[0]) {

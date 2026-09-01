@@ -9,7 +9,9 @@
 	import { Divider, type MenuLink, Submenu } from '$lib/Menu';
 	import { CallbackAction, UrlAction } from '$lib/Actions';
 
-	export let links: Array<MenuLink> = [];
+	let { links = [] }: {
+		links?: Array<MenuLink>;
+	} = $props();
 </script>
 
 <HeaderNav>

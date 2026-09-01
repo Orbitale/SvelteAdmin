@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
+import { render } from 'vitest-browser-svelte';
 import { carbon } from '$lib/themes/svelte';
-import { testOptions } from '$lib/TestOptions';
 import {
 	CallbackStateProcessor,
 	CallbackStateProvider,
@@ -37,7 +35,6 @@ describe(
 			expect(h2?.innerHTML).toStrictEqual('Column 1');
 		});
 	},
-	testOptions
 );
 
 function mockComponentProps(field: Columns) {

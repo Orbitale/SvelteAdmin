@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { CallbackAction, UrlAction } from '$lib/Actions';
-import { testOptions } from '$lib/TestOptions';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 describe(
@@ -50,8 +49,7 @@ describe(
 				buttonKind: 'some-kind'
 			});
 		});
-	},
-	testOptions
+	}
 );
 
 describe(
@@ -88,6 +86,5 @@ describe(
 			expect(called).toBe(true);
 			expect(baseItem.field).toBe('newValue');
 		});
-	},
-	testOptions
+	}
 );

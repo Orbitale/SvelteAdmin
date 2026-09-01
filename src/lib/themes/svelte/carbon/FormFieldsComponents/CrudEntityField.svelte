@@ -9,9 +9,11 @@
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
 	import { CrudDefinition } from '$lib/Crud';
 
-	export let field: CrudEntityField;
-	export let operation: CrudOperation;
-	export let value: unknown;
+	let { field, operation, value }: {
+		field: CrudEntityField;
+		operation: CrudOperation;
+		value: unknown;
+	} = $props();
 
 	const crud: CrudDefinition<unknown> | undefined =
 		operation.dashboard.cruds.filter(

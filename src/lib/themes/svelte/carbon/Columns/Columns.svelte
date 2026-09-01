@@ -9,12 +9,20 @@
 	import type { Columns as ColumnField } from '$lib/Fields/Columns';
 	import type { ThemeConfig } from '$lib/types';
 
-	export let FieldComponent: ComponentType;
 
-	export let field: ColumnField;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let theme: ThemeConfig;
+	let {
+		FieldComponent,
+		field,
+		operation,
+		theme,
+		entityObject = {}
+	}: {
+		FieldComponent: ComponentType;
+		field: ColumnField;
+		operation: CrudOperation;
+		theme: ThemeConfig;
+		entityObject?: Record<string, unknown>;
+	} = $props();
 </script>
 
 <Grid fullWidth>
@@ -35,8 +43,7 @@
 					{/if}
 				{/if}
 				{#each column.fields as columnedField}
-					<svelte:component
-						this={FieldComponent}
+					<FieldComponent
 						{operation}
 						{entityObject}
 						{theme}

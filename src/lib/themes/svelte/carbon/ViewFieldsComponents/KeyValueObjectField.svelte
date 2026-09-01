@@ -2,10 +2,9 @@
 	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject';
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
-	export let field: KeyValueObjectField;
-	export let value: object;
+	let { field, value }: { field: KeyValueObjectField; value: object; } = $props();
 
-	let displayValue: unknown = undefined;
+	let displayValue: unknown = $state();
 
 	if (value) {
 		displayValue = value;

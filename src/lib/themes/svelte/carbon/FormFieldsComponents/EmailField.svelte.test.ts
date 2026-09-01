@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './EmailField.svelte';
 import { EmailField } from '$lib';
 
@@ -44,6 +42,5 @@ describe(
 			expect(input).toBeDefined();
 			expect(input?.value).toStrictEqual('test@dummy.localhost');
 		});
-	},
-	testOptions
+	}
 );

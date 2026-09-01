@@ -15,10 +15,15 @@
 	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 	import Icon from '$lib/Layout/Icon.svelte';
 
-	export let autoClose = true;
-	export let is_side_menu_open: Writable<boolean>;
-
-	export let links: Array<Action> = [];
+	let {
+		autoClose = true,
+		is_side_menu_open,
+		links = [],
+	}: {
+		autoClose?: boolean;
+		is_side_menu_open: Writable<boolean>;
+		links?: Array<Action>;
+	} = $props();
 </script>
 
 <SideNav rail={autoClose} bind:isOpen={$is_side_menu_open}>

@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './KeyValueObjectField.svelte';
 import { KeyValueObjectField } from '$lib';
 
@@ -19,7 +17,7 @@ describe(
 			expect(element).toBeDefined();
 			const child = element.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('No value');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('No value');
 		});
 
 		it('displays error with empty object', async () => {
@@ -32,7 +30,7 @@ describe(
 			expect(element).toBeDefined();
 			const child = element.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('Not found');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('Not found');
 		});
 
 		it('displays value with object and single-depth property tree', async () => {
@@ -45,7 +43,7 @@ describe(
 			expect(element).toBeDefined();
 			const child = element.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('Found!');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('Found!');
 		});
 
 		it('displays value with object and more-depth property tree', async () => {
@@ -58,8 +56,7 @@ describe(
 			expect(element).toBeDefined();
 			const child = element.querySelector('span');
 			expect(child).toBeDefined();
-			expect(child?.innerHTML).toStrictEqual('Found!');
+			expect(child?.innerHTML.replace('<!---->', '')).toStrictEqual('Found!');
 		});
-	},
-	testOptions
+	}
 );

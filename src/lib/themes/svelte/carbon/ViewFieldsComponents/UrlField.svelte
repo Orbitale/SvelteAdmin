@@ -3,11 +3,13 @@
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
 	import { UrlField } from '$lib/Fields/Url';
 
-	export let value: string | undefined;
-	export let field: UrlField;
+	let { value, field }: {
+		value: string | undefined;
+		field: UrlField;
+	} = $props();
 
 	// URL will be validated if not empty
-	let valid = false;
+	let valid = $state(false);
 
 	if (value?.length > 0) {
 		try {
@@ -25,7 +27,7 @@
 		return (w || {})?.location?.origin;
 	}
 
-	const attrs = {};
+	const attrs = $state({});
 	if (field.options.openInNewTab) {
 		attrs['target'] = '_blank';
 		attrs['rel'] = 'noopener';

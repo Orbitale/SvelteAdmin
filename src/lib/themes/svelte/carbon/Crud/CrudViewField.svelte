@@ -9,13 +9,22 @@
 
 	import DefaultField from '$lib/themes/svelte/carbon/ViewFieldsComponents/DefaultField.svelte';
 
-	export let operation: CrudOperation;
-	export let field: FieldInterface<CommonFieldOptions>;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		operation,
+		field,
+		entityObject = {},
+		value = $bindable(),
+		theme
+	}: {
+		operation: CrudOperation;
+		field: FieldInterface<CommonFieldOptions>;
+		entityObject?: Record<string, unknown>;
+		value: unknown;
+		theme: ThemeConfig;
+	} = $props();
 
-	const viewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
+	const ViewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
+	const ViewLabelComponent = theme?.viewFields?.label;
 
 	if (value === undefined && entityObject) {
 		value = entityObject[field.name];
@@ -25,15 +34,15 @@
 </script>
 
 {#if fullSize}
-	<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
+	<ViewComponent {field} {operation} {theme} {entityObject} {value} />
 {:else}
 	<Grid>
 		<Row padding noGutterLeft noGutterRight narrow condensed>
 			<Column sm={2} md={3} lg={4}>
-				<svelte:component this={theme?.viewFields?.label} {field} />
+				<ViewLabelComponent {field} />
 			</Column>
 			<Column sm={2} md={5} lg={12}>
-				<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
+				<ViewComponent {field} {operation} {theme} {entityObject} {value} />
 			</Column>
 		</Row>
 	</Grid>

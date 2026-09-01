@@ -8,11 +8,17 @@
 	import { type AdminConfig, defaultAdminConfig } from '$lib/Config';
 	import type { Writable } from 'svelte/store';
 
-	export let left_links: Array<MenuLink> = [];
-	export let right_links: Array<MenuLink> = [];
-	export let is_side_menu_open: Writable<boolean>;
-
-	export let adminConfig: AdminConfig = defaultAdminConfig();
+	let {
+		left_links = [],
+		right_links = [],
+		is_side_menu_open,
+		adminConfig = defaultAdminConfig()
+	}: {
+		left_links?: Array<MenuLink>;
+		right_links?: Array<MenuLink>;
+		is_side_menu_open: Writable<boolean>;
+		adminConfig?: AdminConfig;
+	} = $props();
 </script>
 
 <Header
@@ -20,9 +26,9 @@
 	platformName={adminConfig?.head?.appName || ''}
 	bind:isSideNavOpen={$is_side_menu_open}
 >
-	<svelte:fragment slot="skip-to-content">
+	{#snippet skipToContent()}
 		<SkipToContent />
-	</svelte:fragment>
+	{/snippet}
 
 	<TopLeftMenu links={left_links} />
 	{#if right_links.length}

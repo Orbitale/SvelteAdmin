@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/svelte';
-import '@testing-library/jest-dom';
-import { testOptions } from '$lib/TestOptions';
+import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './EmailField.svelte';
 
 describe(
@@ -14,7 +12,7 @@ describe(
 
 			const element = rendered.container;
 			expect(element).toBeDefined();
-			expect(element.innerHTML).toStrictEqual('-');
+			expect(element.innerHTML.replace('<!---->', '')).toStrictEqual('-');
 		});
 
 		it('can be instantiated empty string', async () => {
@@ -24,7 +22,7 @@ describe(
 
 			const element = rendered.container;
 			expect(element).toBeDefined();
-			expect(element.innerHTML).toStrictEqual('-');
+			expect(element.innerHTML.replace('<!---->', '')).toStrictEqual('-');
 		});
 
 		it('can be instantiated specific value', async () => {
@@ -36,8 +34,7 @@ describe(
 			expect(element).toBeDefined();
 			const tagInner = element.querySelector('span');
 			expect(tagInner).toBeDefined();
-			expect(tagInner?.innerHTML).toStrictEqual('test@dummy.localhost');
+			expect(tagInner?.innerHTML.replace('<!---->', '')).toStrictEqual('test@dummy.localhost');
 		});
-	},
-	testOptions
+	}
 );

@@ -2,8 +2,10 @@
 	import NumberInput from 'carbon-components-svelte/src/NumberInput/NumberInput.svelte';
 	import type { NumberField } from '$lib/Fields/Number';
 
-	export let field: NumberField;
-	export let value: unknown;
+	let { field, value = $bindable() }: {
+		field: NumberField;
+		value: unknown;
+	} = $props();
 
 	if (typeof value === 'string') {
 		value = parseInt(value);

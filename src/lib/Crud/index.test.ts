@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { CallbackStateProcessor, CallbackStateProvider, CrudDefinition, List } from '$lib';
-import { testOptions } from '$lib/TestOptions';
 
 type Book = object;
 
@@ -79,6 +78,5 @@ describe(
 				/^Crud definition "books" has no default operation named "edit"\./g
 			);
 		});
-	},
-	testOptions
+	}
 );

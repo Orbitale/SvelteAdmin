@@ -6,8 +6,13 @@
 
 	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
 
-	export let action: Action;
-	export let action_arguments: Array<unknown> = [];
+	let {
+		action,
+		action_arguments = [],
+	}: {
+		action: Action;
+		action_arguments?: Array<unknown>;
+	} = $props();
 </script>
 
 {#if action instanceof UrlAction}

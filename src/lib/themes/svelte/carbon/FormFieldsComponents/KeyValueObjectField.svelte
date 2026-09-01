@@ -12,9 +12,11 @@
 	import type { KeyValueObjectField } from '$lib';
 	import { _ } from 'svelte-i18n';
 
-	export let field: KeyValueObjectField;
-	export let value: unknown;
-	let gridWrapper: HTMLElement;
+	let { field, value = $bindable() }: {
+		field: KeyValueObjectField;
+		value: unknown;
+	} = $props();
+	let gridWrapper: HTMLElement = $state();
 
 	if (value && value?.constructor !== Object) {
 		throw new Error('Value was expected to be an object, but "' + typeof value + '" given.');
@@ -23,7 +25,9 @@
 		value = { '': '' };
 	}
 
-	let valueEntries = Object.entries(value);
+	let valueEntries = $state(Object.entries(value));
+
+	let existingKeys = $derived(getDuplicateKeys(valueEntries));
 
 	function removeKey(key: number) {
 		valueEntries = [...valueEntries.filter((k, v) => v !== key)];
@@ -43,8 +47,6 @@
 		});
 		return duplicates;
 	}
-
-	$: existingKeys = getDuplicateKeys(valueEntries);
 </script>
 
 <div bind:this={gridWrapper}>

@@ -8,9 +8,11 @@
 	import fr from '../testApp/translations/fr';
 
 	initLocale('fr', { fr });
+
+	const DashboardComponent = dashboard.theme.dashboard;
 </script>
 
-<svelte:component this={dashboard.theme.dashboard} {dashboard}>
+<DashboardComponent {dashboard}>
 	<h1>Svelte Admin demo app</h1>
 
 	<p>
@@ -34,7 +36,7 @@
 			</li>
 		{/each}
 	</UnorderedList>
-</svelte:component>
+</DashboardComponent>
 
 <style>
 	li {
