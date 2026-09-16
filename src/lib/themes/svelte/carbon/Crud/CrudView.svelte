@@ -4,12 +4,12 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { StateProviderResult } from '$lib/StateProvider';
-	import type { RequestParameters } from '$lib/Request';
+	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { StateProviderResult } from '$lib/StateProvider.js';
+	import type { RequestParameters } from '$lib/Request.js';
 
 	interface Props {
 		dashboard: DashboardDefinition;
@@ -25,11 +25,11 @@
 		requestParameters = {}
 	}: Props = $props();
 
-	const CrudViewField = dashboard.theme.viewField;
+	const CrudViewField = $derived(dashboard.theme.viewField);
 
-	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
+	let fields: FieldInterface<CommonFieldOptions>[] = $derived(operation.fields);
 
-	let providerResultPromise: StateProviderResult<unknown> = $state(crud.options.stateProvider.provide(
+	let providerResultPromise: StateProviderResult<unknown> = $derived(crud.options.stateProvider.provide(
 		operation,
 		requestParameters
 	));

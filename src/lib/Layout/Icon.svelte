@@ -6,15 +6,16 @@
 		[key: string]: unknown;
 	} = $props();
 
-	if (
-		icon &&
-		typeof icon !== 'function' &&
-		typeof icon !== 'string'
-	) {
-		console.error(`Wrong icon type: ${typeof icon}`, icon);
-	}
-
-	const IconComponent = icon;
+	const IconComponent = $derived.by(() => {
+		if (
+			icon &&
+			typeof icon !== 'function' &&
+			typeof icon !== 'string'
+		) {
+			console.error(`Wrong icon type: ${typeof icon}`, icon);
+		}
+		return icon;
+	});
 </script>
 
 {#if typeof icon === 'function'}

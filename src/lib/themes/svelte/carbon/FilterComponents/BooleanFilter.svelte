@@ -1,10 +1,11 @@
 <script lang="ts">
 	import RadioButtonGroup from 'carbon-components-svelte/src/RadioButtonGroup/RadioButtonGroup.svelte';
+	import RadioButton from 'carbon-components-svelte/src/RadioButton/RadioButton.svelte';
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import CheckboxChecked from 'carbon-icons-svelte/lib/CheckboxChecked.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import CheckboxIndeterminate from 'carbon-icons-svelte/lib/CheckboxIndeterminate.svelte';
-	import type { TextFilter } from '$lib/Filter';
+	import type { TextFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	let { filter }: {
@@ -44,38 +45,35 @@
 
 <FilterContainer {filter}>
 	<RadioButtonGroup name={filter.field} labelPosition="right">
-		<Button
-			value={true}
+		<RadioButton
 			disabled={value === true}
-			on:click={() => (value = true)}
+			onclick={() => (value = true)}
 			size="small"
 			kind="tertiary"
 			style={buttonStyle(value, true, '#0a0')}
 		>
 			<CheckboxChecked size={24} style={checkboxStyle(value, true, '#0a0')} />
-		</Button>
+		</RadioButton>
 
-		<Button
-			value={false}
+		<RadioButton
 			disabled={value === false}
-			on:click={() => (value = false)}
+			onclick={() => (value = false)}
 			size="small"
 			kind="tertiary"
 			style={buttonStyle(value, false, '#a00')}
 		>
 			<Close size={24} style={checkboxStyle(value, false, '#a00')} />
-		</Button>
+		</RadioButton>
 
-		<Button
+		<RadioButton
 			labelText="null"
-			value={null}
 			disabled={value === null}
-			on:click={() => (value = null)}
+			onclick={() => (value = null)}
 			size="small"
 			kind="tertiary"
 			style={buttonStyle(value, null, '#333')}
 		>
 			<CheckboxIndeterminate size={24} style={checkboxStyle(value, null, '#333')} />
-		</Button>
+		</RadioButton>
 	</RadioButtonGroup>
 </FilterContainer>

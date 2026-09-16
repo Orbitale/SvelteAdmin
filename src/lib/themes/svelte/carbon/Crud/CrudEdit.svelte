@@ -8,12 +8,12 @@
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { StateProviderResult } from '$lib/StateProvider';
-	import type { RequestParameters } from '$lib/Request';
-	import type { SubmittedData } from '$lib/Crud/Form';
+	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { StateProviderResult } from '$lib/StateProvider.js';
+	import type { RequestParameters } from '$lib/Request.js';
+	import type { SubmittedData } from '$lib/Crud/Form.js';
 
 	let {
 		dashboard,
@@ -27,9 +27,9 @@
 		requestParameters?: RequestParameters;
 	} = $props();
 
-	const CrudForm = dashboard.theme.form;
+	const CrudForm = $derived(dashboard.theme.form);
 
-	let defaultData: StateProviderResult<unknown> = $state(crud.options.stateProvider.provide(
+	let defaultData: StateProviderResult<unknown> = $derived(crud.options.stateProvider.provide(
 		operation,
 		requestParameters
 	));

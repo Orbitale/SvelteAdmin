@@ -3,7 +3,7 @@
 	import DatePickerInput from 'carbon-components-svelte/src/DatePicker/DatePickerInput.svelte';
 	import DatePicker from 'carbon-components-svelte/src/DatePicker/DatePicker.svelte';
 
-	import type { DateRangeFilter } from '$lib/Filter';
+	import type { DateRangeFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
 	let { filter, value }: {

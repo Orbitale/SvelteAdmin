@@ -1,17 +1,18 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
+
 	import { _ } from 'svelte-i18n';
+	import { Tabs } from '$lib/Fields/Tabs.js';
 
-	import { Tabs } from '$lib/Fields/Tabs';
-	import { Columns } from '$lib/Fields/Columns';
-
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
-	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form';
-	import { carbon } from '$lib/themes/svelte';
+	import { Columns } from '$lib/Fields/Columns.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { SubmitButtonType, ThemeConfig } from '$lib/types.js';
+	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form.js';
+	import { carbon } from '$lib/themes/svelte/index.js';
 
 	let {
 		formHeader,
@@ -23,21 +24,23 @@
 		onSubmitData = () => {},
 		theme = carbon,
 	}: {
+		formHeader?: Snippet,
+		formFooter?: Snippet,
 		operation: CrudOperation;
-		submitButtonType: SubmitButtonType;
-		method: 'get' | 'post';
-		defaultData: undefined | null | Record<string, unknown>;
-		theme: ThemeConfig;
+		submitButtonType?: SubmitButtonType;
+		method?: 'get' | 'post';
+		defaultData?: undefined | null | Record<string, unknown>;
+		theme?: ThemeConfig;
 		onSubmitData?: (data: SubmittedData) => void;
 	} = $props();
 
-	const CrudFormField = theme.formField;
+	const CrudFormField = $derived(theme.formField);
 
-	const data: Record<string, unknown> = defaultData ?? {};
+	const data: Record<string, unknown> = $derived(defaultData ?? {});
 
-	let htmlFormElement: HTMLFormElement | null | undefined;
+	let htmlFormElement: HTMLFormElement | null | undefined = $state();
 
-	let fields: Array<FieldInterface<CommonFieldOptions>> = operation.fields;
+	let fields: Array<FieldInterface<CommonFieldOptions>> = $derived(operation.fields);
 
 	function onSubmit(e: SubmitEvent) {
 		if (operation.options?.preventHttpFormSubmit ?? true) {
@@ -56,8 +59,7 @@
 	on:mouseover
 	on:mouseenter
 	on:mouseleave
-	on:submit={onSubmit}
-	on:submit
+	onsubmit={onSubmit}
 >
 	{@render formHeader?.()}
 

@@ -10,12 +10,12 @@
 	import FilterIcon from 'carbon-icons-svelte/lib/Filter.svelte';
 	import FilterReset from 'carbon-icons-svelte/lib/FilterReset.svelte';
 
-	import type { Action } from '$lib/Actions';
+	import type { Action } from '$lib/Actions.js';
 	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 	import FilterComponent from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarFilter.svelte';
-	import type { Filter, FilterOptions } from '$lib/Filter';
-	import type { ThemeConfig } from '$lib/types';
-	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form';
+	import type { Filter, FilterOptions } from '$lib/Filter.js';
+	import type { ThemeConfig } from '$lib/types.js';
+	import { getSubmittedFormData, type SubmittedData } from '$lib/Crud/Form.js';
 
 	let {
 		actions = [],
@@ -33,8 +33,10 @@
 		children?: Snippet;
 	} = $props();
 
-	filters.forEach((filter: Filter<FilterOptions>) => {
-		filtersValues[filter.field] ??= undefined;
+	$effect(() => {
+		filters.forEach((filter: Filter<FilterOptions>) => {
+			filtersValues[filter.field] ??= undefined;
+		});
 	});
 
 	function submitFilters(e: SubmitEvent) {

@@ -5,6 +5,7 @@ type FieldName = string;
 
 /** */
 export type RequestParameters = {
+	id?: Optional<string>;
 	page?: Optional<string | number>;
 	filters?: Optional<Record<string, unknown>>;
 	sort?: Optional<Record<FieldName, 'ASC' | 'DESC'>>;

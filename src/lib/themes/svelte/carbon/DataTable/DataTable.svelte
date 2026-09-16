@@ -3,7 +3,7 @@
 	import { _ } from 'svelte-i18n';
 	import DataTable, {
 		type DataTableHeader,
-		type DataTableRowId
+		type DataTableKey
 	} from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
 	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
@@ -15,12 +15,12 @@
 	import ToolbarAction from '$lib/themes/svelte/carbon/DataTable/Toolbar/ToolbarAction.svelte';
 	import ItemActions from '$lib/themes/svelte/carbon/DataTable/actions/ItemActions.svelte';
 
-	import type { Headers, Row, Rows } from '$lib/DataTable';
-	import { type Action, CallbackAction } from '$lib/Actions';
-	import type { FilterInterface, FilterOptions } from '$lib/Filter';
-	import type { ThemeConfig } from '$lib/types';
-	import type { SubmittedData } from '$lib/Crud/Form';
-	import { type FieldInterface, type FieldOptions, TextField } from '$lib';
+	import type { Headers, Row, Rows } from '$lib/DataTable.js';
+	import { type Action, CallbackAction } from '$lib/Actions.js';
+	import type { FilterInterface, FilterOptions } from '$lib/Filter.js';
+	import type { ThemeConfig } from '$lib/types.js';
+	import type { SubmittedData } from '$lib/Crud/Form.js';
+	import { type FieldInterface, type FieldOptions, TextField } from '$lib/index.js';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 	let {
@@ -52,8 +52,8 @@
 		theme: ThemeConfig;
 		sortable: boolean;
 		onSort: (event: CustomEvent<SortEvent>) => void;
-		title?: Snippet;
-		description?: Snippet;
+		title?: string;
+		description?: string;
 		children?: Snippet;
 		onFiltersSubmit?: (data: SubmittedData) => void;
 		[key: string]: unknown;
@@ -61,25 +61,29 @@
 
 	let actionsCellIndex = $state(-1);
 	let batchSelectionIsActive = $state(false);
-	let selectedRowIds: ReadonlyArray<DataTableRowId> = $state([]);
-	let sortKey: string | undefined = $state();
+	let selectedRowIds: ReadonlyArray<DataTableKey> = $state([]);
+	let sortKey: DataTableKey | string | undefined = $state();
 	let sortDirection: 'ascending' | 'descending' | 'none' = $state('none');
 	let currentFilters: SubmittedData = {};
 
-	if (actions.length) {
-		headers.push({
-			key: '__item_actions',
-			empty: true
-		});
-		actionsCellIndex = headers.length - 1;
-	}
+	let storedHeaders: Readonly<Headers> = $derived.by(() => {
+		  let baseHeaders = headers;
+			if (actions.length) {
+				baseHeaders.push({
+					key: '__item_actions',
+					empty: true
+				});
+				actionsCellIndex = baseHeaders.length - 1;
+			}
+			return baseHeaders;
+	});
 
 	function getFieldFromRow(fieldName: string, row: Row): FieldInterface<FieldOptions> {
 		if (!row.__crud_operation) {
 			throw new Error('Internal "__crud_operation" property isn\'t properly injected.');
 		}
 
-		const matchingFields = row.__crud_operation.fields.filter((f) => f.name === fieldName);
+		const matchingFields = row.__crud_operation.fields.filter((f: FieldInterface<FieldOptions>) => f.name === fieldName);
 
 		if (!matchingFields.length) {
 			console.warn(`Field "${fieldName}" was not found in current operation.`);
@@ -149,10 +153,10 @@
 </script>
 
 {#await rows}
-	<DataTableSkeleton {headers} size="short" zebra={true} {...rest} />
+	<DataTableSkeleton headers={storedHeaders} size="short" zebra={true} {...rest} />
 {:then resolvedRows}
 	<DataTable
-		{headers}
+		headers={storedHeaders}
 		{page}
 		{sortable}
 		{title}
@@ -224,7 +228,7 @@
 	</DataTable>
 {:catch error}
 	<DataTable
-		{headers}
+		headers={storedHeaders}
 		{page}
 		{title}
 		{description}

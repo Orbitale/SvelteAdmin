@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	let {
 		operation,
@@ -19,15 +19,18 @@
 		data?: Record<string, unknown>;
 	} = $props();
 
-	if (value === undefined && data) {
-		value = data[field.name];
-	}
+	let storedValue = $derived.by(() => {
+		if (value === undefined && data) {
+			value = data[field.name];
+		}
+		return value;
+	});
 
 	function propagateFieldChange(e: InputEvent) {
 		onFieldChange({key: field.name, value: e.detail});
 	}
 
-	const formComponent = operation?.dashboard.theme.formFields[field.formComponent];
+	const formComponent = $derived(operation?.dashboard.theme.formFields[field.formComponent]);
 
 	const SvelteComponent = $derived(formComponent);
 </script>
@@ -35,7 +38,7 @@
 <SvelteComponent
 	{field}
 	{operation}
-	{value}
+	value={storedValue}
 	{data}
 	{theme}
 	on:change={propagateFieldChange}

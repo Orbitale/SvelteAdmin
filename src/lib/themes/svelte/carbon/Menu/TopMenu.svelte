@@ -4,8 +4,8 @@
 
 	import TopLeftMenu from '$lib/themes/svelte/carbon/Menu/TopLeftMenu.svelte';
 	import TopRightMenu from '$lib/themes/svelte/carbon/Menu/TopRightMenu.svelte';
-	import type { MenuLink } from '$lib/Menu';
-	import { type AdminConfig, defaultAdminConfig } from '$lib/Config';
+	import type { MenuLink } from '$lib/Menu.js';
+	import { type AdminConfig, defaultAdminConfig } from '$lib/Config.js';
 	import type { Writable } from 'svelte/store';
 
 	let {
@@ -22,7 +22,7 @@
 </script>
 
 <Header
-	company={adminConfig?.head?.brandName || ''}
+	companyName={adminConfig?.head?.brandName || ''}
 	platformName={adminConfig?.head?.appName || ''}
 	bind:isSideNavOpen={$is_side_menu_open}
 >

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { FilterInterface, FilterOptions } from '$lib/Filter';
-	import type { ThemeConfig } from '$lib/types';
+	import type { FilterInterface, FilterOptions } from '$lib/Filter.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	let { filter, theme, value }: {
 		filter: FilterInterface<FilterOptions>;

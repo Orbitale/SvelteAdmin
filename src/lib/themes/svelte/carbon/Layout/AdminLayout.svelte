@@ -8,14 +8,14 @@
 
 	import TopMenu from '../Menu/TopMenu.svelte';
 	import SideMenu from '../Menu/SideMenu.svelte';
-	import type { MenuLink } from '$lib/Menu';
-	import { type Dictionaries, initLocale } from '$lib/i18n';
-	import type { AdminConfig } from '$lib/Config';
+	import type { MenuLink } from '$lib/Menu.js';
+	import { type Dictionaries, initLocale } from '$lib/i18n.js';
+	import type { AdminConfig } from '$lib/Config.js';
 	import { writable, type Writable } from 'svelte/store';
 
 	let {
 		theme = 'g10',
-		adminConfig = {},
+		adminConfig,
 		translations = {},
 		side_menu_links = [],
 		top_left_menu_links = [],
@@ -38,7 +38,9 @@
 
 	const is_side_menu_open: Writable<boolean> = writable(false);
 
-	initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
+	$effect(() => {
+		initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
+	});
 
 	onMount(() => {
 		document.documentElement.setAttribute('theme', theme);
@@ -46,7 +48,7 @@
 </script>
 
 <div id="toast_container">
-	<SvelteToast />
+<!--	<SvelteToast />-->
 </div>
 
 {#if top_menu}

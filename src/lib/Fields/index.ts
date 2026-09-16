@@ -1,4 +1,4 @@
-import type { FormFieldTheme, ViewFieldTheme } from '../types';
+import type { FormFieldTheme, ViewFieldTheme } from '../types.js';
 
 /** */
 export type FieldOptions = {
@@ -35,7 +35,7 @@ export class BaseField<OptionsType extends FieldOptions> implements FieldInterfa
 	public readonly formComponent: FormFieldTheme = 'default';
 	public readonly viewComponent: ViewFieldTheme = 'default';
 
-	constructor(
+	public constructor(
 		public readonly name: string,
 		public readonly label: string = '',
 		public readonly options: OptionsType = {} as OptionsType

@@ -4,10 +4,10 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/themes/svelte/carbon/Layout/AdminLayout.svelte';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { RequestParameters } from '$lib/Request';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { RequestParameters } from '$lib/Request.js';
 
 	import type { Snippet } from 'svelte';
 
@@ -28,20 +28,21 @@
 	let currentCrud: CrudDefinition<unknown> | undefined = $state();
 	let currentCrudOperation: CrudOperation | undefined = $state();
 
-	dashboard.cruds
-		.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
-		.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
+	$effect(() => {
+		dashboard.cruds
+			.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
+			.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
 
-	currentCrud?.options.operations
-		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
-		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
+		currentCrud?.options.operations
+			.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
+			.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
+	});
 
-	const ThemeComponent =
-		currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName];
+	const ThemeComponent = $derived(currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName]);
 
-	const sideMenu = dashboard.stores.sideMenu;
-	const topLeftMenu = dashboard.stores.topLeftMenu;
-	const topRightMenu = dashboard.stores.topRightMenu;
+	const sideMenu = $derived(dashboard.stores.sideMenu);
+	const topLeftMenu = $derived(dashboard.stores.topLeftMenu);
+	const topRightMenu = $derived(dashboard.stores.topRightMenu);
 </script>
 
 <AdminLayout

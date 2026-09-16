@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { carbon } from '$lib/themes/svelte';
+import type { ComponentOptions } from '@testing-library/svelte-core/types';
+import { carbon } from '$lib/themes/svelte/index.js';
 import {
 	CallbackStateProcessor,
 	CallbackStateProvider,
@@ -9,8 +10,8 @@ import {
 	DashboardDefinition,
 	initLocale,
 	TextField
-} from '$lib';
-import { View } from '$lib/Crud/Operations';
+} from '$lib/index.js';
+import { View } from '$lib/Crud/Operations.js';
 import ComponentToTest from './Columns.svelte';
 import TextComponent from '../ViewFieldsComponents/DefaultField.svelte';
 
@@ -37,7 +38,7 @@ describe(
 	},
 );
 
-function mockComponentProps(field: Columns) {
+function mockComponentProps(field: Columns): ComponentOptions {
 	const dashboard = new DashboardDefinition({
 		theme: carbon,
 		adminConfig: {},

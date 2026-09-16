@@ -5,14 +5,14 @@
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import ToastNotification from 'carbon-components-svelte/src/Notification/ToastNotification.svelte';
 
-	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions.js';
 
 	let {
 		action,
 		item = undefined,
 	}: {
 		action: Action;
-		item?: object | undefined;
+		item?: object | Record<string, unknown> | undefined;
 	} = $props();
 </script>
 

@@ -3,9 +3,9 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	import DefaultField from '$lib/themes/svelte/carbon/ViewFieldsComponents/DefaultField.svelte';
 
@@ -23,14 +23,16 @@
 		theme: ThemeConfig;
 	} = $props();
 
-	const ViewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
-	const ViewLabelComponent = theme?.viewFields?.label;
+	const ViewComponent = $derived(theme?.viewFields[field.viewComponent] ?? DefaultField);
+	const ViewLabelComponent = $derived(theme?.viewFields?.label);
 
-	if (value === undefined && entityObject) {
-		value = entityObject[field.name];
-	}
+	$effect(() => {
+		if (value === undefined && entityObject) {
+			value = entityObject[field.name];
+		}
+	});
 
-	const fullSize = !(field.label || field.name);
+	const fullSize = $derived(!(field.label || field.name));
 </script>
 
 {#if fullSize}

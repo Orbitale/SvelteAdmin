@@ -3,19 +3,19 @@
 	import { onMount } from 'svelte';
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
-	import type { Header, Headers } from '$lib/DataTable';
-	import type { BaseField, FieldOptions } from '$lib/Fields';
-	import type { CrudDefinition } from '$lib/Crud';
+	import type { Header, Headers } from '$lib/DataTable.js';
+	import type { BaseField, FieldOptions } from '$lib/Fields/index.js';
+	import type { CrudDefinition } from '$lib/Crud/index.js';
 
-	import { type CrudOperation, List } from '$lib/Crud/Operations';
+	import { type CrudOperation, List } from '$lib/Crud/Operations.js';
 
-	import type { Action } from '$lib/Actions';
+	import type { Action } from '$lib/Actions.js';
 
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { StateProviderResult } from '$lib/StateProvider';
-	import { PaginatedResults } from '$lib/Pagination';
-	import type { SubmittedData } from '$lib/Crud/Form';
-	import type { RequestParameters } from '$lib/Request';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { StateProviderResult } from '$lib/StateProvider.js';
+	import { PaginatedResults } from '$lib/Pagination.js';
+	import type { SubmittedData } from '$lib/Crud/Form.js';
+	import type { RequestParameters } from '$lib/Request.js';
 	import type { DataTableNonEmptyHeader } from 'carbon-components-svelte/types/DataTable/DataTable.svelte';
 
 	let {
@@ -32,37 +32,38 @@
 
 	let page: number | undefined = $state();
 
-	const configuredFilters = operation.options?.filters || [];
-	const actions = operation.contextActions;
-	const sortableDataTable =
-		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length >
-		0;
-	const headers: Headers = operation.fields.map((field: BaseField<FieldOptions>): Header => {
-		return {
-			key: field.name,
-			value: field.label,
-			// Carbon needs the "sort" property to be a callback, else it does not display the sorting.
-			sort: field.options?.sortable ? () => {} : false
-		};
-	});
+	const configuredFilters = $derived(operation.options?.filters || []);
+	const actions = $derived(operation.contextActions);
+	const sortableDataTable = $derived(operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length > 0);
+	const headers: Headers = $derived(
+		operation.fields.map((field: BaseField<FieldOptions>): Header => {
+			return {
+				key: field.name,
+				value: field.label,
+				// Carbon needs the "sort" property to be a callback, else it does not display the sorting.
+				sort: field.options?.sortable ? () => {} : false
+			};
+		})
+	);
 
-	const DataTableComponent = dashboard.theme.dataTable;
+	const DataTableComponent = $derived(dashboard.theme.dataTable);
 
-	let showPagination = operation.options.pagination.enabled;
-	let rows: Promise<unknown> = $state();
+	let showPagination = $derived(operation.options.pagination.enabled);
+	let rows: Promise<unknown> = $state(Promise.resolve(undefined));
 	let paginator: PaginatedResults<unknown> | undefined = $state();
-	let globalActions: Array<Action> = operation.options.globalActions || [];
-	let batchActions: Array<Action> = operation.options.batchActions || [];
+	let globalActions: Array<Action> = $derived(operation.options.globalActions || []);
+	let batchActions: Array<Action> = $derived(operation.options.batchActions || []);
 
-	if (!crud.options.stateProvider) {
-		throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
-	}
-
-	if (!(operation instanceof List)) {
-		throw new Error(
-			'CrudList view can only accept operations that are instances of the List operation.'
-		);
-	}
+	$effect(() => {
+		if (!crud.options.stateProvider) {
+			throw new Error(`No StateProvider was given to the "${crud.name}" CRUD.`);
+		}
+		if (!(operation instanceof List)) {
+			throw new Error(
+				'CrudList view can only accept operations that are instances of the List operation.'
+			);
+		}
+	});
 
 	// Extracted from Carbon's DataTable
 	type SortEvent = {
