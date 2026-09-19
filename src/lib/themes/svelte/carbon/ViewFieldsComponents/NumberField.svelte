@@ -8,7 +8,7 @@
 	}
 </script>
 
-{#if value !== undefined && isNaN(value)}
+{#if value !== undefined && isNaN(Number(value))}
 	<Tag type="red">NaN</Tag>
 {:else if value !== 0 && !value}
 	<Tag type="red">No value</Tag>

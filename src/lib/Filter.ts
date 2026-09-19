@@ -1,4 +1,4 @@
-import type { FilterTheme } from '$lib';
+import type { FilterTheme } from '$lib/index.js';
 
 /** */
 export type FilterOptions = { [key: string]: string };

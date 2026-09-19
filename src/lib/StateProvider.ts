@@ -1,4 +1,4 @@
-import type { PaginatedResults, CrudOperation, RequestParameters } from '$lib';
+import type { PaginatedResults, CrudOperation, RequestParameters } from '$lib/index.js';
 
 /** */
 export type StateProviderResult<T> = Promise<T | PaginatedResults<T> | Array<T> | null>;

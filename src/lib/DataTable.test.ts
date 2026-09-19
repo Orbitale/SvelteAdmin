@@ -9,8 +9,8 @@ import {
 	TextField,
 	ToggleField,
 	UrlField
-} from '$lib';
-import { Columns } from '$lib/Fields/Columns';
+} from '$lib/index.js';
+import { Columns } from '$lib/Fields/Columns.js';
 
 describe(
 	'DataTable',

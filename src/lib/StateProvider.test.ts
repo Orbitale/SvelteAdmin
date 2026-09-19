@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CallbackStateProvider, BaseCrudOperation, type CrudOperation } from '$lib';
+import { CallbackStateProvider, BaseCrudOperation, type CrudOperation } from '$lib/index.js';
 
 describe(
 	'Callback State Provider',

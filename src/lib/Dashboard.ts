@@ -6,7 +6,7 @@ import {
 	type Dictionaries,
 	defaultAdminConfig,
 	type ThemeConfig
-} from '$lib';
+} from '$lib/index.js';
 
 /** */
 export type DashboardStores = {

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Columns from '../Columns/Columns.svelte';
-	import type { Columns as ColumnsField } from '$lib/Fields/Columns';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { Columns as ColumnsField } from '$lib/Fields/Columns.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	let {
 		field,

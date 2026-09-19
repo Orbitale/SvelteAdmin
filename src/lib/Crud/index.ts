@@ -3,7 +3,7 @@ import {
 	type StateProvider,
 	type StateProcessor,
 	type DashboardDefinition
-} from '$lib';
+} from '$lib/index.js';
 
 /** */
 export type CrudDefinitionOptionsArgument<EntityType> = {

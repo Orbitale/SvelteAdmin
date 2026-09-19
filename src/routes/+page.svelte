@@ -3,7 +3,7 @@
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { initLocale } from '$lib';
+	import { initLocale } from '$lib/index.js';
 	import { dashboard } from '../testApp/Dashboard';
 	import fr from '../testApp/translations/fr';
 

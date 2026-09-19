@@ -5,7 +5,7 @@ import {
 	CrudDefinition,
 	DashboardDefinition,
 	List
-} from '$lib';
+} from '$lib/index.js';
 import carbon from '$lib/themes/svelte/carbon';
 
 type Book = object;

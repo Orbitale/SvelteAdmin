@@ -5,7 +5,7 @@ import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 import User from 'carbon-icons-svelte/lib/User.svelte';
 
-import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
+import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib/index.js';
 import { carbon } from '$lib/themes/svelte';
 
 import fr from './translations/fr';

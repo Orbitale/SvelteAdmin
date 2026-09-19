@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { ComponentType } from 'svelte';
+	import type { Component } from 'svelte';
 	import Tabs from 'carbon-components-svelte/src/Tabs/Tabs.svelte';
 	import Tab from 'carbon-components-svelte/src/Tabs/Tab.svelte';
 	import TabContent from 'carbon-components-svelte/src/Tabs/TabContent.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { Tabs as TabsField } from '$lib/Fields/Tabs';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { Tabs as TabsField } from '$lib/Fields/Tabs.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	let {
 		FieldComponent,
@@ -17,7 +17,7 @@
 		value,
 		theme
 	}: {
-		FieldComponent: ComponentType;
+		FieldComponent: Component;
 		field: TabsField;
 		operation: CrudOperation;
 		entityObject?: Record<string, unknown>;

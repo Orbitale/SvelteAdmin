@@ -14,7 +14,7 @@ import {
 	type FilterOptions,
 	type PaginationOptions,
 	defaultPaginationOptions
-} from '$lib';
+} from '$lib/index.js';
 
 /** */
 export type CrudOperationName =

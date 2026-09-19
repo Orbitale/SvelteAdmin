@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ActionIcon } from '$lib/Actions';
+	import type { ActionIcon } from '$lib/Actions.js';
 
 	let { icon, ...rest }: {
 		icon: ActionIcon;

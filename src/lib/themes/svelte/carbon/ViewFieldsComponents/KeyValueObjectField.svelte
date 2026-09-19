@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject';
+	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject.js';
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
 	let { field, value }: { field: KeyValueObjectField; value: object; } = $props();
 
-	let displayValue: unknown = $state();
-
-	if (value) {
-		displayValue = value;
-		field.propertyPath.split('.').forEach((key) => (displayValue = displayValue[key] ?? undefined));
-	}
+	let displayValue: unknown = $derived.by(() => {
+		if (value) {
+			field.propertyPath.split('.').forEach((key) => (value = value[key] ?? undefined));
+		}
+		return value;
+	});
 </script>
 
 {#if value === undefined}

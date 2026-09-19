@@ -15,7 +15,7 @@ import {
 	type RequestParameters,
 	UrlAction,
 	View
-} from '$lib';
+} from '$lib/index.js';
 
 import { faker } from '@faker-js/faker';
 

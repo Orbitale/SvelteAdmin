@@ -3,7 +3,7 @@
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { type CrudOperation, SingleField } from '$lib/Crud/Operations';
+	import { type CrudOperation, SingleField } from '$lib/Crud/Operations.js';
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
 	import { CrudDefinition } from '$lib/Crud';
 

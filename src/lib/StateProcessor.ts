@@ -1,4 +1,4 @@
-import type { CrudOperation, RequestParameters } from '$lib';
+import type { CrudOperation, RequestParameters } from '$lib/index.js';
 
 /** */
 export type StateProcessorInput<T> = T | Array<T> | null;

@@ -37,7 +37,7 @@ import {
 	type FieldInterface,
 	type FieldOptions,
 	ArrayField
-} from '$lib';
+} from '$lib/index.js';
 
 import { type Test, getStorage } from './internal/testsInternal';
 

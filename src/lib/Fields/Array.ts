@@ -4,8 +4,8 @@ import type {
 	ViewFieldTheme,
 	FieldInterface,
 	FieldOptions
-} from '$lib';
-import { BaseField } from '$lib/Fields';
+} from '$lib/index.js';
+import { BaseField } from '$lib/Fields/index.js';
 
 /** */
 export type ArrayFieldOptions = InputFieldOptions & {

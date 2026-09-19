@@ -1,5 +1,5 @@
-import { type ActionIcon, type ActionOptions, CallbackAction } from '$lib/Actions';
-import { type MenuLink, Submenu } from '$lib/Menu';
+import { type ActionIcon, type ActionOptions, CallbackAction } from '$lib/Actions.js';
+import { type MenuLink, Submenu } from '$lib/Menu.js';
 
 type Optional<T> = T | null | undefined;
 

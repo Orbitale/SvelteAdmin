@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { ArrayField } from '$lib/Fields/Array';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { FieldInterface } from '$lib/Fields';
-	import type { FieldOptions } from '$lib/Fields';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { FieldInterface } from '$lib/Fields/index.js';
+	import type { FieldOptions } from '$lib/Fields/index.js';
+	import type { ThemeConfig } from '$lib/types.js';
 	import CrudViewField from '$lib/themes/svelte/carbon/Crud/CrudViewField.svelte';
 
 	let {

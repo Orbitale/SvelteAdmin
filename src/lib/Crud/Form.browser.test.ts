@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { getSubmittedFormData } from '$lib';
+import { getSubmittedFormData } from '$lib/index.js';
 import { JSDOM } from 'jsdom';
 
 describe('Submitted form data', () => {

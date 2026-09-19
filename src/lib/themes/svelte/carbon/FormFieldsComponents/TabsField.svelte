@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Tabs from '../Tabs/Tabs.svelte';
 	import type { Tabs as TabsField } from '$lib/Fields/Tabs';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	let {
 		field,

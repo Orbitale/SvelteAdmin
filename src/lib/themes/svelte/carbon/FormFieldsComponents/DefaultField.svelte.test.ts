@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './DefaultField.svelte';
-import { TextField } from '$lib';
+import { TextField } from '$lib/index.js';
 
 describe(
 	'DefaultField component',

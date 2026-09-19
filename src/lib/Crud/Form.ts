@@ -1,4 +1,4 @@
-import type { CrudOperation, FieldInterface, FieldOptions } from '$lib';
+import type { CrudOperation, FieldInterface, FieldOptions } from '$lib/index.js';
 
 export type SubmittedData = Record<string, FormDataEntryValue | Array<FormDataEntryValue>>;
 

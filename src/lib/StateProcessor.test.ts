@@ -4,7 +4,7 @@ import {
 	BaseCrudOperation,
 	type CrudOperation,
 	type StateProcessorCallback
-} from '$lib';
+} from '$lib/index.js';
 
 describe(
 	'Callback State processor',

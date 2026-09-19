@@ -1,4 +1,4 @@
-import type { FieldInterface, FieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib';
+import type { FieldInterface, FieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib/index.js';
 
 /** */
 export type ColumnOptions = FieldOptions & {

@@ -9,7 +9,7 @@ import {
 	initLocale,
 	TextField,
 	View
-} from '$lib';
+} from '$lib/index.js';
 import ComponentToTest from './ArrayField.svelte';
 import carbon from '$lib/themes/svelte/carbon';
 

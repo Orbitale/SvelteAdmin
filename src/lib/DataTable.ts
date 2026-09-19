@@ -1,4 +1,4 @@
-import type { CrudOperation } from '$lib';
+import type { CrudOperation } from '$lib/index.js';
 
 export type DataTableKey = string;
 

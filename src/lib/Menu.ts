@@ -1,4 +1,4 @@
-import { type Action, type ActionIcon, type ActionOptions, DefaultAction } from '$lib';
+import { type Action, type ActionIcon, type ActionOptions, DefaultAction } from '$lib/index.js';
 
 type Optional<T> = T | null | undefined;
 

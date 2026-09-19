@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CallbackStateProcessor, CallbackStateProvider, CrudDefinition, List } from '$lib';
+import { CallbackStateProcessor, CallbackStateProvider, CrudDefinition, List } from '$lib/index.js';
 
 type Book = object;
 

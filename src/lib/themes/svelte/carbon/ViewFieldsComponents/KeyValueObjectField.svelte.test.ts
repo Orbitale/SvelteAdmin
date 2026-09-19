@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import ComponentToTest from './KeyValueObjectField.svelte';
-import { KeyValueObjectField } from '$lib';
+import { KeyValueObjectField } from '$lib/index.js';
 
 describe(
 	'KeyValueObjectField component',
 	() => {
 		it('displays error with undefined', async () => {
 			const rendered = render(ComponentToTest, {
-				// @ts-ignore
+				// @ts-expect-error Initially accepts an object, but what if it's not even defined?
 				value: undefined,
 				field: new KeyValueObjectField('', '', '', {})
 			});

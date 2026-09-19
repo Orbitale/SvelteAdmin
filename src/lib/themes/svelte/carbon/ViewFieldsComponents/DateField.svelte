@@ -15,4 +15,4 @@
 	}
 </script>
 
-{value.substring(0, 10)}
+{String(value||'').substring(0, 10)}
