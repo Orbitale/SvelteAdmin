@@ -4,8 +4,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import { initLocale } from '$lib/index.js';
-	import { dashboard } from '../testApp/Dashboard';
-	import fr from '../testApp/translations/fr';
+	import { dashboard } from '../testApp/Dashboard.js';
+	import fr from '../testApp/translations/fr.js';
 
 	initLocale('fr', { fr });
 

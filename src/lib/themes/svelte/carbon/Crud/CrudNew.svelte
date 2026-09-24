@@ -30,7 +30,7 @@
 			return;
 		}
 
-		window.location.href = document.referrer || dashboard.getFirstActionUrl();
+		window.location.href = dashboard.getFirstActionUrl();
 	}
 </script>
 
@@ -38,12 +38,6 @@
 	theme={dashboard.theme}
 	{operation}
 	{onSubmitData}
-	on:click
-	on:keydown
-	on:mouseover
-	on:mouseenter
-	on:mouseleave
-	on:submit
 >
 	{#snippet formHeader()}
 		<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>

@@ -39,7 +39,7 @@ import {
 	ArrayField
 } from '$lib/index.js';
 
-import { type Test, getStorage } from './internal/testsInternal';
+import { type Test, getStorage } from './internal/testsInternal.js';
 
 const itemsPerPage = 10;
 

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { InMemoryStorage } from './memoryStorage';
+import { InMemoryStorage } from './memoryStorage.js';
 
 let storage: null | InMemoryStorage<Book> = null;
 

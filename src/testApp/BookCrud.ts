@@ -24,7 +24,7 @@ import { faker } from '@faker-js/faker';
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
-import { type Book, getStorage } from './internal/booksInternal';
+import { type Book, getStorage } from './internal/booksInternal.js';
 
 const fields = [
 	new TextField('title', 'Title', { placeholder: "Enter the book's title", sortable: true }),

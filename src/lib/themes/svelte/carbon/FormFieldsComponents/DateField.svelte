@@ -16,7 +16,7 @@
 	}
 
 	function dateFormatToRegex(dateFormat: string) {
-		const regex = dateFormat
+		return dateFormat
 				// Escape special characters in the date format string
 				.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`)
 				// Convert date format to regular expression pattern
@@ -28,8 +28,6 @@
 				.replace(/hh?/i, `\\d{2}`)
 				.replace(/ss/i, `\\d{2}`)
 		;
-		console.info('date format to regex', dateFormat, regex);
-		return regex;
 	}
 </script>
 

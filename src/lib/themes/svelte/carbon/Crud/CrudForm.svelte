@@ -21,6 +21,7 @@
 		submitButtonType = 'primary',
 		method = 'post',
 		defaultData = {},
+		onFieldChange = () => {},
 		onSubmitData = () => {},
 		theme = carbon,
 	}: {
@@ -31,6 +32,7 @@
 		method?: 'get' | 'post';
 		defaultData?: undefined | null | Record<string, unknown>;
 		theme?: ThemeConfig;
+		onFieldChange?: (data: {"key": string, value: any}) => void;
 		onSubmitData?: (data: SubmittedData) => void;
 	} = $props();
 
@@ -64,12 +66,12 @@
 >
 	{@render formHeader?.()}
 
-	{#each fields as field}
+	{#each fields as field (field)}
 		{#if field instanceof Tabs || field instanceof Columns}
-			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
+			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} {onFieldChange} />
 		{:else}
 			<FormGroup>
-				<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
+				<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} {onFieldChange} />
 			</FormGroup>
 		{/if}
 	{/each}

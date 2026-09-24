@@ -1,6 +1,9 @@
 <script lang="ts">
 	import 'carbon-components-svelte/css/all.css';
 	import Content from 'carbon-components-svelte/src/UIShell/Content.svelte';
+	import Grid from 'carbon-components-svelte/src/Grid/Grid.svelte';
+	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
+	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
@@ -73,5 +76,11 @@ initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', trans
 {/if}
 
 <Content>
-	{@render children?.()}
+	<Grid>
+		<Row>
+			<Column>
+				{@render children?.()}
+			</Column>
+		</Row>
+	</Grid>
 </Content>

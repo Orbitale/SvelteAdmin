@@ -64,12 +64,6 @@
 			{operation}
 			{onSubmitData}
 			defaultData={data}
-			on:click
-			on:keydown
-			on:mouseover
-			on:mouseenter
-			on:mouseleave
-			on:submit
 		>
 			{#snippet formHeader()}
 				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>

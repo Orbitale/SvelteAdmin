@@ -43,16 +43,4 @@
 	{data}
 	{theme}
 	on:change={propagateFieldChange}
-	on:blur
-	on:check
-	on:click
-	on:focus
-	on:input
-	on:keydown
-	on:keyup
-	on:mouseenter
-	on:mouseleave
-	on:mouseover
-	on:paste
-	on:toggle
 />

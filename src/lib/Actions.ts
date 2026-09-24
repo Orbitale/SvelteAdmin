@@ -1,10 +1,10 @@
-import type { ComponentType, SvelteComponent } from 'svelte';
+import type { Component, SvelteComponent } from 'svelte';
 import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
 type Optional<T> = T | null | undefined;
 
 /** */
-export type ActionIcon = string | SvelteComponent | ComponentType;
+export type ActionIcon = string | SvelteComponent | Component;
 
 /** */
 export type ActionOptions = {

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { type Book, getStorage as getBookStorage } from './booksInternal';
-import { InMemoryStorage } from './memoryStorage';
+import { type Book, getStorage as getBookStorage } from './booksInternal.js';
+import { InMemoryStorage } from './memoryStorage.js';
 
 let storage: null | InMemoryStorage<Test> = null;
 

@@ -11,8 +11,8 @@
 	import type { Writable } from 'svelte/store';
 	import { _ } from 'svelte-i18n';
 
-	import { Divider, Submenu } from '$lib/Menu';
-	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
+	import { Divider, Submenu } from '$lib/Menu.js';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions.js';
 	import Icon from '$lib/Layout/Icon.svelte';
 
 	let {
@@ -28,10 +28,10 @@
 
 <SideNav rail={autoClose} bind:isOpen={$is_side_menu_open}>
 	<SideNavItems>
-		{#each links as link}
+		{#each links as link (link)}
 			{#if link instanceof Submenu}
 				<SideNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : ''}>
-					{#each link.links as subLink}
+					{#each link.links as subLink (subLink)}
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}
