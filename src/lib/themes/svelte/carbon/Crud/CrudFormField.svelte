@@ -20,10 +20,11 @@
 	} = $props();
 
 	let storedValue = $derived.by(() => {
-		if (value === undefined && data) {
-			value = data[field.name];
+		let innerValue = value;
+		if (innerValue === undefined && data) {
+			innerValue = data[field.name];
 		}
-		return value;
+		return innerValue;
 	});
 
 	function propagateFieldChange(e: InputEvent) {

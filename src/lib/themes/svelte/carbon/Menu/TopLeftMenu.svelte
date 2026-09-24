@@ -15,10 +15,10 @@
 </script>
 
 <HeaderNav>
-	{#each links as link}
+	{#each links as link (link)}
 		{#if link instanceof Submenu}
 			<HeaderNavMenu icon={link.icon || Folder} text={link.label ? $_(link.label) : ''}>
-				{#each link.links as subLink}
+				{#each link.links as subLink (subLink)}
 					{#if subLink instanceof Divider}
 						<br />
 					{:else if subLink instanceof UrlAction}

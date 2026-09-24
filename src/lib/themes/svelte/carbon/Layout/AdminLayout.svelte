@@ -38,6 +38,8 @@
 
 	const is_side_menu_open: Writable<boolean> = writable(false);
 
+	// svelte-ignore state_referenced_locally
+initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
 	$effect(() => {
 		initLocale(adminConfig?.defaultLocale || getLocaleFromNavigator() || 'en', translations);
 	});
@@ -48,7 +50,7 @@
 </script>
 
 <div id="toast_container">
-<!--	<SvelteToast />-->
+	<SvelteToast />
 </div>
 
 {#if top_menu}

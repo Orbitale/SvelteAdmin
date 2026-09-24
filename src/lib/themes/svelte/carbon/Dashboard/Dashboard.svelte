@@ -28,7 +28,14 @@
 	let currentCrud: CrudDefinition<unknown> | undefined = $state();
 	let currentCrudOperation: CrudOperation | undefined = $state();
 
+	let loading: boolean = $state(true);
+
 	$effect(() => {
+		loading = false;
+		checkCrud();
+	});
+
+	function checkCrud() {
 		dashboard.cruds
 			.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
 			.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
@@ -36,7 +43,7 @@
 		currentCrud?.options.operations
 			.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
 			.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
-	});
+	}
 
 	const ThemeComponent = $derived(currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName]);
 
@@ -55,7 +62,7 @@
 	{#if children}
 		{@render children()}
 	{:else}
-		{#if !currentCrud}
+		{#if !currentCrud && !loading}
 			<InlineNotification hideCloseButton={true}>
 				{#if crud}
 					{$_('error.crud.could_not_find_crud_name', { values: { crud } })}

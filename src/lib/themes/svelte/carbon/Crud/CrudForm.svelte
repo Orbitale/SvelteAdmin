@@ -45,6 +45,7 @@
 	function onSubmit(e: SubmitEvent) {
 		if (operation.options?.preventHttpFormSubmit ?? true) {
 			e.preventDefault();
+			e.stopPropagation();
 		}
 
 		onSubmitData(sanitizeFormData(getSubmittedFormData(e), defaultData ?? {}, operation));
@@ -59,7 +60,7 @@
 	on:mouseover
 	on:mouseenter
 	on:mouseleave
-	onsubmit={onSubmit}
+	on:submit={onSubmit}
 >
 	{@render formHeader?.()}
 

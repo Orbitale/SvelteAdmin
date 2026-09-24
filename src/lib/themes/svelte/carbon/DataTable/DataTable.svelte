@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type Snippet } from 'svelte';
+	import { type Snippet, onMount } from 'svelte';
 	import { _ } from 'svelte-i18n';
 	import DataTable, {
 		type DataTableHeader,
@@ -66,17 +66,7 @@
 	let sortDirection: 'ascending' | 'descending' | 'none' = $state('none');
 	let currentFilters: SubmittedData = {};
 
-	let storedHeaders: Readonly<Headers> = $derived.by(() => {
-		  let baseHeaders = headers;
-			if (actions.length) {
-				baseHeaders.push({
-					key: '__item_actions',
-					empty: true
-				});
-				actionsCellIndex = baseHeaders.length - 1;
-			}
-			return baseHeaders;
-	});
+	let storedHeaders: Readonly<Headers> = $state([]);
 
 	function getFieldFromRow(fieldName: string, row: Row): FieldInterface<FieldOptions> {
 		if (!row.__crud_operation) {
@@ -150,96 +140,99 @@
 		...globalActions,
 		...(sortKey && sortDirection !== 'none' ? [resetSortingAction] : [])
 	]);
+
+	let resolvedRows: Rows = $state([]);
+
+	$effect(() => {
+		rows.then((r: Rows) => resolvedRows = r);
+	});
+
+	onMount(() => {
+		let baseHeaders = [...headers];
+		if (actions.length) {
+			baseHeaders.push({
+				key: '__item_actions',
+				empty: true
+			});
+			actionsCellIndex = baseHeaders.length - 1;
+		}
+		storedHeaders = baseHeaders;
+	});
 </script>
 
-{#await rows}
-	<DataTableSkeleton headers={storedHeaders} size="short" zebra={true} {...rest} />
-{:then resolvedRows}
-	<DataTable
-		headers={storedHeaders}
-		{page}
-		{sortable}
-		{title}
-		{description}
-		bind:sortKey
-		bind:sortDirection
-		zebra
-		selectable={batchActions.length > 0}
-		batchSelection={batchSelectionIsActive}
-		rows={resolvedRows}
-		size="short"
-		on:click:header={onHeaderClick}
-		bind:selectedRowIds
-		{...rest}
-	>
-		{#if globalActionsDisplay.length || filters.length}
-			<DataTableToolbar
-				{theme}
-				actions={globalActionsDisplay || []}
-				filters={filters || []}
-				filtersValues={filtersValues || {}}
-				onFiltersSubmit={submitFilters}
-			/>
-		{/if}
+<DataTable
+	headers={storedHeaders}
+	{page}
+	{sortable}
+	{title}
+	{description}
+	bind:sortKey
+	bind:sortDirection
+	zebra
+	selectable={batchActions.length > 0}
+	batchSelection={batchSelectionIsActive}
+	rows={resolvedRows}
+	size="short"
+	on:click:header={onHeaderClick}
+	bind:selectedRowIds
+	{...rest}
+>
+	{#if globalActionsDisplay.length || filters.length}
+		<DataTableToolbar
+			{theme}
+			actions={globalActionsDisplay || []}
+			filters={filters || []}
+			filtersValues={filtersValues || {}}
+			onFiltersSubmit={submitFilters}
+		/>
+	{/if}
 
-		{#if batchActions.length > 0}
-			<Toolbar>
-				<ToolbarBatchActions bind:active={batchSelectionIsActive} on:cancel={onCancelSelection}>
-					{#each batchActions as action}
-						<ToolbarAction {action} action_arguments={[selectedRowIds]} />
-					{/each}
-				</ToolbarBatchActions>
-				<!--<ToolbarContent>-->
-				<!--	<Button on:click={() => (active = true)}>Edit rows</Button>-->
-				<!--</ToolbarContent>-->
-			</Toolbar>
-		{/if}
+	{#if batchActions.length > 0}
+		<Toolbar>
+			<ToolbarBatchActions bind:active={batchSelectionIsActive} on:cancel={onCancelSelection}>
+				{#each batchActions as action}
+					<ToolbarAction {action} action_arguments={[selectedRowIds]} />
+				{/each}
+			</ToolbarBatchActions>
+			<!--<ToolbarContent>-->
+			<!--	<Button on:click={() => (active = true)}>Edit rows</Button>-->
+			<!--</ToolbarContent>-->
+		</Toolbar>
+	{/if}
 
-		{#if !resolvedRows.length}
-			<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
-				{$_('error.crud.list.no_elements')}
-			</InlineNotification>
-		{/if}
-
-		{@render children?.()}
-
-		{#await rows}
-			<Loading />
-		{/await}
-
-		{#snippet cell({ cell, row, cellIndex })}
-				<div>
-				{#if cellIndex === actionsCellIndex}
-					<ItemActions {actions} item={row} />
-				{:else}
-					{@const ViewFieldComponent = getViewFieldComponent(cell.key, row)}
-					<ViewFieldComponent
-						field={getFieldFromRow(cell.key, row)}
-						value={cell.display ? cell.display(cell.value, row) : cell.value}
-						operation={rest.operation}
-						entityObject={row}
-						{theme}
-					>
-						{cell.display ? cell.display(cell.value, row) : cell.value}
-					</ViewFieldComponent>
-				{/if}
-			</div>
-			{/snippet}
-	</DataTable>
-{:catch error}
-	<DataTable
-		headers={storedHeaders}
-		{page}
-		{title}
-		{description}
-		zebra
-		rows={[]}
-		size="short"
-		{...rest}
-	>
-		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
-			{$_('error.crud.list.load_error')}<br />
-			{error.toString()}
+	{#if !resolvedRows.length}
+		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
+			{$_('error.crud.list.no_elements')}
 		</InlineNotification>
-	</DataTable>
-{/await}
+	{/if}
+
+	{@render children?.()}
+
+	{#await rows}
+		<Loading />
+	{:catch error}
+			<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
+				{$_('error.crud.list.load_error')}<br />
+				{error.toString()}
+			</InlineNotification>
+	{/await}
+
+	{#snippet cell({ cell, row, cellIndex })}
+			<div>
+			{#if cellIndex === actionsCellIndex}
+				<ItemActions {actions} item={row} />
+			{:else}
+				{@const ViewFieldComponent = getViewFieldComponent(cell.key, row)}
+				<ViewFieldComponent
+					field={getFieldFromRow(cell.key, row)}
+					value={cell.display ? cell.display(cell.value, row) : cell.value}
+					operation={rest.operation}
+					entityObject={row}
+					{theme}
+				>
+					{cell.display ? cell.display(cell.value, row) : cell.value}
+				</ViewFieldComponent>
+			{/if}
+		</div>
+		{/snippet}
+</DataTable>

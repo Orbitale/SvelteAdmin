@@ -8,20 +8,15 @@
 
 	let { filter, value }: {
 		filter: DateRangeFilter;
-		value: undefined | string | Array<string>;
+		value: undefined | string | [string, string];
 	} = $props();
 
-	let from: string = $state('');
-	let to: string = $state('');
-
-	if (value && Array.isArray(value)) {
-		if (value[0]) {
-			from = value[0];
-		}
-		if (value[1]) {
-			to = value[1];
-		}
-	}
+	let from: string = $derived.by(() => {
+		return value && Array.isArray(value) && value[0] ? value[0] : '';
+	});
+	let to: string = $derived.by(() => {
+		return value && Array.isArray(value) && value[1] ? value[1] : '';
+	});
 </script>
 
 <FilterContainer {filter}>

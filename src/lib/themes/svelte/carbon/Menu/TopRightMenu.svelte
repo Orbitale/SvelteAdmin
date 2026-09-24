@@ -30,7 +30,7 @@
 				on:open={() => links.filter((s) => s !== link).forEach((s) => (s.options.isOpen = false))}
 			>
 				<HeaderPanelLinks>
-					{#each link.links as subLink}
+					{#each link.links as subLink (subLink)}
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}

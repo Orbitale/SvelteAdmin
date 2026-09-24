@@ -4,8 +4,8 @@
 	import { _ } from 'svelte-i18n';
 
 	import { type CrudOperation, SingleField } from '$lib/Crud/Operations.js';
-	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
-	import { CrudDefinition } from '$lib/Crud';
+	import type { CrudEntityField } from '$lib/Fields/CrudEntity.js';
+	import { CrudDefinition } from '$lib/Crud/index.js';
 
 	let { field, operation, value }: {
 		field: CrudEntityField;
@@ -13,15 +13,12 @@
 		value: unknown;
 	} = $props();
 
-	const crud: CrudDefinition<unknown> | undefined =
-		operation.dashboard.cruds.filter(
-			(def: CrudDefinition<unknown>) => def.name === field.options.crud_name
-		)[0] ?? undefined;
+	const crud: CrudDefinition<any> | undefined = $derived(operation.dashboard.cruds.filter((def: CrudDefinition<any>) => def.name === field.options.crud_name)[0] ?? undefined);
 
-	async function fetchData() {
+	async function fetchData(): Promise<undefined|null|Record<'id'|string, any>> {
 		if (!crud) {
 			console.error('No CRUD to fetch data from.');
-			return;
+			return Promise.resolve(null);
 		}
 
 		const fieldOperation = new SingleField(
@@ -31,9 +28,7 @@
 		fieldOperation.crud = crud;
 		fieldOperation.dashboard = operation.dashboard;
 
-		return crud.options.stateProvider.provide(fieldOperation, {
-			field_value: value
-		});
+		return crud.options.stateProvider.provide(fieldOperation, { field_value: value });
 	}
 </script>
 
@@ -45,7 +40,7 @@
 	{#await fetchData()}
 		<SkeletonText />
 	{:then data}
-		{@const item = data[field.options.get_provider_operation.entity_field] ?? undefined}
+		{@const item = field.options.get_provider_operation.entity_field ? (data ? data[field.options.get_provider_operation.entity_field] : undefined) : undefined}
 		{#if !item}
 			<InlineNotification kind="error" hideCloseButton>
 				{$_('error.crud.form.entity_field_view_fetch_error', {

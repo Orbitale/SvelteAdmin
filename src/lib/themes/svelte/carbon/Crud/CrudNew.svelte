@@ -21,7 +21,14 @@
 	} = $props();
 
 	async function onSubmitData(data: SubmittedData) {
-		await crud.options.stateProcessor.process(data, operation, requestParameters);
+		try {
+			await crud.options.stateProcessor.process(data, operation, requestParameters);
+		} catch (err) {
+			console.error('SUBMIT ERROR');
+			console.error(err);
+
+			return;
+		}
 
 		window.location.href = document.referrer || dashboard.getFirstActionUrl();
 	}

@@ -48,9 +48,9 @@
 
 	const DataTableComponent = $derived(dashboard.theme.dataTable);
 
-	let showPagination = $derived(operation.options.pagination.enabled);
-	let rows: Promise<unknown> = $state(Promise.resolve(undefined));
-	let paginator: PaginatedResults<unknown> | undefined = $state();
+	let showPagination = $derived(operation.options.pagination?.enabled);
+	let rows: Promise<any> = $state(Promise.resolve(undefined));
+	let paginator: PaginatedResults<any> | undefined = $state();
 	let globalActions: Array<Action> = $derived(operation.options.globalActions || []);
 	let batchActions: Array<Action> = $derived(operation.options.batchActions || []);
 
@@ -74,7 +74,7 @@
 	fetchResultsFromProvider();
 
 	function fetchResultsFromProvider() {
-		let providerResponse: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+		let providerResponse: StateProviderResult<any> = crud.options.stateProvider.provide(
 			operation,
 			requestParameters
 		);
@@ -89,7 +89,7 @@
 		type Item = {
 			id?: null | string | number;
 			__crud_operation?: CrudOperation;
-			[key: string]: unknown;
+			[key: string]: any;
 		};
 
 		rows = providerResponse.then((responseResults): Item[] => {
@@ -135,8 +135,8 @@
 		fetchResultsFromProvider();
 	}
 
-	function onFiltersSubmit(event: CustomEvent<SubmittedData>) {
-		requestParameters.filters = event.detail;
+	function onFiltersSubmit(data: SubmittedData) {
+		requestParameters.filters = data;
 		fetchResultsFromProvider();
 	}
 
@@ -172,14 +172,14 @@
 	{globalActions}
 	{batchActions}
 	{page}
-	title={$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
 	{operation}
 	{onSort}
+	{onFiltersSubmit}
+	title={$_(operation.label, { values: { name: $_(crud.options.label.plural) } })}
 	sortable={sortableDataTable}
 	filters={configuredFilters}
 	filtersValues={requestParameters.filters}
 	theme={dashboard.theme}
-	on:submitFilters={onFiltersSubmit}
 >
 </DataTableComponent>
 
