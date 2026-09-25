@@ -5,7 +5,6 @@
 		type DataTableHeader,
 		type DataTableKey
 	} from 'carbon-components-svelte/src/DataTable/DataTable.svelte';
-	import DataTableSkeleton from 'carbon-components-svelte/src/DataTable/DataTableSkeleton.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import Loading from 'carbon-components-svelte/src/Loading/Loading.svelte';
 	import Toolbar from 'carbon-components-svelte/src/DataTable/Toolbar.svelte';
@@ -59,14 +58,14 @@
 		[key: string]: unknown;
 	} = $props();
 
+	let resolved = $state(false);
 	let actionsCellIndex = $state(-1);
 	let batchSelectionIsActive = $state(false);
 	let selectedRowIds: ReadonlyArray<DataTableKey> = $state([]);
 	let sortKey: DataTableKey | string | undefined = $state();
 	let sortDirection: 'ascending' | 'descending' | 'none' = $state('none');
-	let currentFilters: SubmittedData = {};
-
 	let storedHeaders: Readonly<Headers> = $state([]);
+	let currentFilters: SubmittedData = $state({});
 
 	function getFieldFromRow(fieldName: string, row: Row): FieldInterface<FieldOptions> {
 		if (!row.__crud_operation) {
@@ -100,17 +99,20 @@
 	}
 
 	function resetSorting() {
+		resolvedRows = [];
 		sortKey = undefined;
 		sortDirection = 'none';
 		onFiltersSubmit(currentFilters);
 	}
 
 	function submitFilters(data: SubmittedData) {
+		resolvedRows = [];
 		currentFilters = data;
 		onFiltersSubmit(currentFilters);
 	}
 
 	function onCancelSelection(e: CustomEvent<null>) {
+		resolvedRows = [];
 		e.preventDefault();
 		batchSelectionIsActive = false;
 	}
@@ -122,7 +124,9 @@
 	};
 
 	function onHeaderClick(e: CustomEvent<SortEvent>) {
-		if (onSort) {
+		if (onSort && e.detail?.sortDirection) {
+			console.info('header click', e);
+			resolvedRows = [];
 			onSort(e);
 		}
 	}
@@ -144,7 +148,8 @@
 	let resolvedRows: Rows = $state([]);
 
 	$effect(() => {
-		rows.then((r: Rows) => resolvedRows = r);
+		resolved = false;
+		rows.then((r: Rows) => { resolved = true; resolvedRows = r; });
 	});
 
 	onMount(() => {
@@ -190,17 +195,14 @@
 	{#if batchActions.length > 0}
 		<Toolbar>
 			<ToolbarBatchActions bind:active={batchSelectionIsActive} on:cancel={onCancelSelection}>
-				{#each batchActions as action}
+				{#each batchActions as action (action)}
 					<ToolbarAction {action} action_arguments={[selectedRowIds]} />
 				{/each}
 			</ToolbarBatchActions>
-			<!--<ToolbarContent>-->
-			<!--	<Button on:click={() => (active = true)}>Edit rows</Button>-->
-			<!--</ToolbarContent>-->
 		</Toolbar>
 	{/if}
 
-	{#if !resolvedRows.length}
+	{#if !resolvedRows.length && resolved}
 		<InlineNotification kind="warning" hideCloseButton={true} lowContrast={true}>
 			{$_('error.crud.list.no_elements')}
 		</InlineNotification>
@@ -209,7 +211,7 @@
 	{@render children?.()}
 
 	{#await rows}
-		<Loading />
+		<Loading  />
 	{:catch error}
 			<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
 				{$_('error.crud.list.load_error')}<br />
@@ -218,7 +220,7 @@
 	{/await}
 
 	{#snippet cell({ cell, row, cellIndex })}
-			<div>
+		<div>
 			{#if cellIndex === actionsCellIndex}
 				<ItemActions {actions} item={row} />
 			{:else}
@@ -234,5 +236,5 @@
 				</ViewFieldComponent>
 			{/if}
 		</div>
-		{/snippet}
+	{/snippet}
 </DataTable>

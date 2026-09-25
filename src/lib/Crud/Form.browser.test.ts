@@ -9,6 +9,7 @@ describe('Submitted form data', () => {
 			const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);
 
 			const submitted = getSubmittedFormData({} as unknown as SubmitEvent);
+			console.info({ submitted });
 
 			expect(submitted).toStrictEqual({});
 			expect(consoleError).toHaveBeenCalledOnce();

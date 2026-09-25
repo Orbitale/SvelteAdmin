@@ -44,7 +44,7 @@
 	async function onSubmitData(data: SubmittedData) {
 		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		window.location.href = document.referrer || dashboard.getFirstActionUrl();
+		window.location.href = dashboard.getFirstActionUrl();
 	}
 </script>
 

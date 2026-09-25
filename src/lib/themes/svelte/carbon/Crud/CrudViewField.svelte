@@ -25,18 +25,18 @@
 
 	const ViewComponent = $derived(theme?.viewFields[field.viewComponent] ?? DefaultField);
 	const ViewLabelComponent = $derived(theme?.viewFields?.label);
-
-	$effect(() => {
+	let internalValue = $derived.by(() => {
 		if (value === undefined && entityObject) {
-			value = entityObject[field.name];
+			return entityObject[field.name];
 		}
+		return value;
 	});
 
 	const fullSize = $derived(!(field.label || field.name));
 </script>
 
 {#if fullSize}
-	<ViewComponent {field} {operation} {theme} {entityObject} {value} />
+	<ViewComponent {field} {operation} {theme} {entityObject} value={internalValue} />
 {:else}
 	<Grid>
 		<Row padding noGutterLeft noGutterRight narrow condensed>
@@ -44,7 +44,7 @@
 				<ViewLabelComponent {field} />
 			</Column>
 			<Column sm={2} md={5} lg={12}>
-				<ViewComponent {field} {operation} {theme} {entityObject} {value} />
+				<ViewComponent {field} {operation} {theme} {entityObject} value={internalValue} />
 			</Column>
 		</Row>
 	</Grid>

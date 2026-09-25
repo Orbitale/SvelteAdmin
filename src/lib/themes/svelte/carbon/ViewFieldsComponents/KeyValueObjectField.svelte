@@ -5,10 +5,12 @@
 	let { field, value }: { field: KeyValueObjectField; value: object; } = $props();
 
 	let displayValue: unknown = $derived.by(() => {
-		if (value) {
-			field.propertyPath.split('.').forEach((key) => (value = value[key] ?? undefined));
+		let internalValue = value;
+		if (internalValue) {
+			// @ts-expect-error internalValue is of type "any"
+			field.propertyPath.split('.').forEach((key) => internalValue = internalValue[key] ?? undefined);
 		}
-		return value;
+		return internalValue;
 	});
 </script>
 

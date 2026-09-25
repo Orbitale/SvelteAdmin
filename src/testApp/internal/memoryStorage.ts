@@ -65,7 +65,7 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 	public update(object: T): void {
 		const item = this.get(object.id);
 
-		this.saveList(this.all().map((i) => (i.id === item.id ? item : i)));
+		this.saveList(this.all().map((i) => (i.id === item.id ? object : i)));
 	}
 
 	public all(): Array<T> {
