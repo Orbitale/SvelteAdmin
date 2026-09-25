@@ -26,10 +26,7 @@ describe('ArrayField component', () => {
 		expect(label?.innerHTML).toStrictEqual('Text field');
 		const valueElement = label?.parentElement?.nextElementSibling;
 		expect(valueElement).toBeDefined();
-		expect(valueElement?.childNodes).toBeDefined();
-		expect(valueElement?.childNodes[0]).toBeInstanceOf(Text);
-		const textNode: Text = valueElement?.childNodes[0] as Text;
-		expect(textNode.wholeText).toStrictEqual('default_value');
+		expect(valueElement?.textContent).toStrictEqual('default_value');
 	});
 });
 

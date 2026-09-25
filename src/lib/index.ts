@@ -27,7 +27,6 @@ export * from './Fields/Email.js';
 
 export * from './i18n.js';
 export * from './Menu.js';
-export * from './Notification.js';
 export * from './Pagination.js';
 export * from './Request.js';
 export * from './StateProcessor.js';

@@ -4,7 +4,6 @@
 	import Grid from 'carbon-components-svelte/src/Grid/Grid.svelte';
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
-	import { SvelteToast } from '@zerodevx/svelte-toast';
 	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
 	import { getLocaleFromNavigator } from 'svelte-i18n';
@@ -51,10 +50,6 @@
 		document.documentElement.setAttribute('theme', theme);
 	});
 </script>
-
-<div id="toast_container">
-	<SvelteToast />
-</div>
 
 {#if top_menu}
 	{@render top_menu()}

@@ -21,7 +21,7 @@
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"test:unit": "vitest",
-		"test": "pnpm run test:unit -- --run",
+		"test": "vitest --run",
 		"typedoc": "typedoc --options typedoc.json --readme none"
 	},
 	"exports": {
@@ -64,7 +64,6 @@
 		"@testing-library/user-event": "^14.6.7",
 		"@types/node": "^24.13.6",
 		"@vitest/browser-playwright": "^5.0.1",
-		"@zerodevx/svelte-toast": "^0.9.6",
 		"carbon-components-svelte": "^0.112.0",
 		"carbon-icons-svelte": "^13.15.0",
 		"eslint": "^10.11.0",

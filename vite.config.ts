@@ -1,5 +1,4 @@
 import { defineConfig } from 'vitest/config';
-import { playwright } from '@vitest/browser-playwright';
 import adapter from '@sveltejs/adapter-static';
 import { sveltekit } from '@sveltejs/kit/vite';
 
@@ -22,14 +21,13 @@ export default defineConfig({
 		projects: [
 			{
 				extends: './vite.config.ts',
+				resolve: {
+					// Use Svelte's browser runtime so mount()/testing-library works under jsdom.
+					conditions: ['browser']
+				},
 				test: {
 					name: 'client',
 					environment: 'jsdom',
-					browser: {
-						enabled: true,
-						provider: playwright(),
-						instances: [{ browser: 'chromium', headless: true }]
-					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}', 'src/**/*.browser.test.{js,ts}'],
 					exclude: ['src/lib/server/**']
 				}

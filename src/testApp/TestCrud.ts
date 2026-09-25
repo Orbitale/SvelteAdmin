@@ -23,7 +23,6 @@ import {
 	NumericFilter,
 	KeyValueObjectField,
 	PaginatedResults,
-	success,
 	Tabs,
 	TextareaField,
 	TextField,
@@ -143,7 +142,7 @@ export const testCrud = new CrudDefinition<Test>({
 						if (!item) {
 							item = [];
 						}
-						success('Selected IDs to process:\n' + (item as Array<string>).join('\n'));
+						console.info('Selected IDs to process:\n' + (item as Array<string>).join('\n'));
 					})
 				],
 				filters: [
@@ -209,7 +208,7 @@ export const testCrud = new CrudDefinition<Test>({
 	) {
 		if (operation.name === 'delete') {
 			const id = (requestParameters.id || '').toString();
-			success(`Deleting ${operation.crud.options.label.singular} with id ${id}!`);
+			console.info(`Deleting ${operation.crud.options.label.singular} with id ${id}!`);
 
 			return Promise.resolve();
 		}
@@ -220,7 +219,7 @@ export const testCrud = new CrudDefinition<Test>({
 			const entity = data as Test;
 			entity.id = id;
 
-			success(
+			console.info(
 				(operation.name === 'edit'
 					? `Editing ${operation.crud.options.label.singular} with id ${id}!`
 					: `Creating new ${operation.crud.options.label.singular} with id ${id}!`) +
