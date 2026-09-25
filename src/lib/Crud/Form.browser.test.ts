@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { getSubmittedFormData } from '$lib/index.js';
-
+import { getSubmittedFormData } from '$lib/Crud/Form.js';
 describe('Submitted form data', () => {
 	it('does not work if no target is specified', () => {
 		const consoleError = vi.spyOn(console, 'error').mockImplementation(() => undefined);

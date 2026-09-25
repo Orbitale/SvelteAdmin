@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ArrayField } from '$lib/Fields/Array';
+	import { ArrayField } from '$lib/Fields/Array.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
 	import type { FieldInterface } from '$lib/Fields/index.js';
 	import type { FieldOptions } from '$lib/Fields/index.js';

@@ -1,5 +1,5 @@
-import type { InputFieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib/index.js';
-import { BaseField } from '$lib/Fields/index.js';
+import { type InputFieldOptions, BaseField } from '$lib/Fields/index.js';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */
 export type ObjectOptions = InputFieldOptions & {

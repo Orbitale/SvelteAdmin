@@ -1,16 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
 import type { ComponentOptions } from '@testing-library/svelte-core/types';
-import { carbon } from '$lib/themes/svelte/index.js';
-import {
-	CallbackStateProcessor,
-	CallbackStateProvider,
-	Columns,
-	CrudDefinition,
-	DashboardDefinition,
-	initLocale,
-	TextField
-} from '$lib/index.js';
+import carbon from '$lib/themes/svelte/carbon/index.js';
+import { CallbackStateProcessor } from '$lib/StateProcessor.js';
+import { CallbackStateProvider } from '$lib/StateProvider.js';
+import { Columns } from '$lib/Fields/Columns.js';
+import { CrudDefinition } from '$lib/Crud/index.js';
+import { DashboardDefinition } from '$lib/Dashboard.js';
+import { initLocale } from '$lib/i18n.js';
+import { TextField } from '$lib/Fields/Text.js';
 import { View } from '$lib/Crud/Operations.js';
 import ComponentToTest from './Columns.svelte';
 import TextComponent from '../ViewFieldsComponents/DefaultField.svelte';

@@ -1,15 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import {
-	List,
-	CheckboxField,
-	BaseField,
-	NumberField,
-	Tabs,
-	TextareaField,
-	TextField,
-	ToggleField,
-	UrlField
-} from '$lib/index.js';
+import { List } from '$lib/Crud/Operations.js';
+import { CheckboxField } from '$lib/Fields/Checkbox.js';
+import { BaseField } from '$lib/Fields/index.js';
+import { NumberField } from '$lib/Fields/Number.js';
+import { Tabs } from '$lib/Fields/Tabs.js';
+import { TextareaField } from '$lib/Fields/Textarea.js';
+import { TextField } from '$lib/Fields/Text.js';
+import { ToggleField } from '$lib/Fields/Toggle.js';
+import { UrlField } from '$lib/Fields/Url.js';
 import { Columns } from '$lib/Fields/Columns.js';
 
 describe('DataTable', () => {

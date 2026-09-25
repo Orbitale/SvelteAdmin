@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
 import ComponentToTest from './KeyValueObjectField.svelte';
-import { KeyValueObjectField } from '$lib/index.js';
+import { KeyValueObjectField } from '$lib/Fields/KeyValueObject.js';
 
 describe('KeyValueObjectField component', () => {
 	it('displays error with undefined', async () => {

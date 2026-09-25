@@ -1,17 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
-import {
-	CallbackStateProcessor,
-	CallbackStateProvider,
-	ArrayField,
-	CrudDefinition,
-	DashboardDefinition,
-	initLocale,
-	TextField,
-	View
-} from '$lib/index.js';
+import { CallbackStateProcessor } from '$lib/StateProcessor.js';
+import { CallbackStateProvider } from '$lib/StateProvider.js';
+import { ArrayField } from '$lib/Fields/Array.js';
+import { CrudDefinition } from '$lib/Crud/index.js';
+import { DashboardDefinition } from '$lib/Dashboard.js';
+import { initLocale } from '$lib/i18n.js';
+import { TextField } from '$lib/Fields/Text.js';
+import { View } from '$lib/Crud/Operations.js';
 import ComponentToTest from './ArrayField.svelte';
-import carbon from '$lib/themes/svelte/carbon';
+import carbon from '$lib/themes/svelte/carbon/index.js';
 
 describe('ArrayField component', () => {
 	it('can be instantiated', async () => {

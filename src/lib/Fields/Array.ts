@@ -1,11 +1,10 @@
-import type {
-	InputFieldOptions,
-	FormFieldTheme,
-	ViewFieldTheme,
-	FieldInterface,
-	FieldOptions
-} from '$lib/index.js';
-import { BaseField } from '$lib/Fields/index.js';
+import {
+	type InputFieldOptions,
+	type FieldInterface,
+	type FieldOptions,
+	BaseField
+} from '$lib/Fields/index.js';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */
 export type ArrayFieldOptions = InputFieldOptions & {

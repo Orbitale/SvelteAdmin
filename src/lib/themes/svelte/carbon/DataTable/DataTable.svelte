@@ -19,7 +19,8 @@
 	import type { FilterInterface, FilterOptions } from '$lib/Filter.js';
 	import type { ThemeConfig } from '$lib/types.js';
 	import type { SubmittedData } from '$lib/Crud/Form.js';
-	import { type FieldInterface, type FieldOptions, TextField } from '$lib/index.js';
+	import { TextField } from '$lib/Fields/Text.js';
+	import type { FieldInterface, FieldOptions } from '$lib/Fields/index.js';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 	let {

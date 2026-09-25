@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
 import ComponentToTest from './EmailField.svelte';
-import { EmailField } from '$lib/index.js';
+import { EmailField } from '$lib/Fields/Email.js';
 
 describe('EmailField component', () => {
 	it('can be instantiated with undefined', async () => {

@@ -1,4 +1,5 @@
-import type { TextOptions, FormFieldTheme, ViewFieldTheme } from '$lib/index.js';
+import type { TextOptions } from '$lib/Fields/Text.js';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 import { BaseField } from '$lib/Fields/index.js';
 
 /** */

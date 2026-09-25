@@ -12,7 +12,7 @@
 	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
 	import type { SubmitButtonType, ThemeConfig } from '$lib/types.js';
 	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form.js';
-	import { carbon } from '$lib/themes/svelte/index.js';
+	import carbon from '$lib/themes/svelte/carbon/index.js';
 
 	let {
 		formHeader,
