@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
 import type { ComponentOptions } from '@testing-library/svelte-core/types';
-import carbon from '$lib/themes/svelte/carbon/index.js';
+import carbon from '$lib/themes/svelte/carbon/theme.js';
 import { CallbackStateProcessor } from '$lib/StateProcessor.js';
 import { CallbackStateProvider } from '$lib/StateProvider.js';
 import { Columns } from '$lib/Fields/Columns.js';
-import { CrudDefinition } from '$lib/Crud/index.js';
+import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 import { DashboardDefinition } from '$lib/Dashboard.js';
 import { initLocale } from '$lib/i18n.js';
 import { TextField } from '$lib/Fields/Text.js';

@@ -9,10 +9,10 @@
 
 	import { Columns } from '$lib/Fields/Columns.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
 	import type { SubmitButtonType, ThemeConfig } from '$lib/types.js';
 	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form.js';
-	import carbon from '$lib/themes/svelte/carbon/index.js';
+	import carbon from '$lib/themes/svelte/carbon/theme.js';
 
 	let {
 		formHeader,

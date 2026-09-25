@@ -8,7 +8,7 @@
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
 	import type { DashboardDefinition } from '$lib/Dashboard.js';
 	import type { StateProviderResult } from '$lib/StateProvider.js';

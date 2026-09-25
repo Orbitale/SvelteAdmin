@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { List } from '$lib/Crud/Operations.js';
-import { CrudDefinition } from '$lib/Crud/index.js';
+import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 import { CallbackStateProcessor } from '$lib/StateProcessor.js';
 import { CallbackStateProvider } from '$lib/StateProvider.js';
 type Book = object;

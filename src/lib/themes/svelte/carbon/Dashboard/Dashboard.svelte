@@ -6,7 +6,7 @@
 	import AdminLayout from '$lib/themes/svelte/carbon/Layout/AdminLayout.svelte';
 	import type { DashboardDefinition } from '$lib/Dashboard.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
-	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 	import type { RequestParameters } from '$lib/Request.js';
 
 	import type { Snippet } from 'svelte';

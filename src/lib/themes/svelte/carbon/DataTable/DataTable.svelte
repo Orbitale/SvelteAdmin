@@ -20,7 +20,7 @@
 	import type { ThemeConfig } from '$lib/types.js';
 	import type { SubmittedData } from '$lib/Crud/Form.js';
 	import { TextField } from '$lib/Fields/Text.js';
-	import type { FieldInterface, FieldOptions } from '$lib/Fields/index.js';
+	import type { FieldInterface, FieldOptions } from '$lib/Fields/Field.js';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 
 	let {

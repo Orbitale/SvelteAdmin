@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { CallbackStateProcessor } from '$lib/StateProcessor.js';
 import { CallbackStateProvider } from '$lib/StateProvider.js';
-import { CrudDefinition } from '$lib/Crud/index.js';
+import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 import { DashboardDefinition } from '$lib/Dashboard.js';
 import { List } from '$lib/Crud/Operations.js';
-import carbon from '$lib/themes/svelte/carbon/index.js';
+import carbon from '$lib/themes/svelte/carbon/theme.js';
 
 type Book = object;
 

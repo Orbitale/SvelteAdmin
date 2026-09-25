@@ -3,7 +3,7 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 	import { CallbackAction, UrlAction } from '$lib/Actions.js';
 	import { type CrudOperation, Delete } from '$lib/Crud/Operations.js';
 	import type { RequestParameters } from '$lib/Request.js';

@@ -1,5 +1,5 @@
 import type { CrudOperation } from '$lib/Crud/Operations.js';
-import type { FieldInterface, FieldOptions } from '$lib/Fields/index.js';
+import type { FieldInterface, FieldOptions } from '$lib/Fields/Field.js';
 
 export type SubmittedData = Record<string, FormDataEntryValue | Array<FormDataEntryValue>>;
 

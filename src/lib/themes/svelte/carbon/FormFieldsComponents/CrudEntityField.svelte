@@ -7,7 +7,7 @@
 
 	import { type CrudOperation, SingleField } from '$lib/Crud/Operations.js';
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity.js';
-	import { CrudDefinition } from '$lib/Crud/index.js';
+	import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 
 	let {
 		field,

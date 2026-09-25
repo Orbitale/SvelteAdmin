@@ -12,7 +12,7 @@ import fr from './translations/fr.js';
 import { bookCrud } from './BookCrud.js';
 import { authorCrud } from './AuthorCrud.js';
 import { testCrud } from './TestCrud.js';
-import { ThemeChangerAction } from '$lib/themes/svelte/carbon/index.js';
+import { ThemeChangerAction } from '$lib/themes/svelte/carbon/theme.js';
 
 let newLinkIndex = 1;
 

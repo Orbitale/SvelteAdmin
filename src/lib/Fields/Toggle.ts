@@ -1,4 +1,4 @@
-import { type CommonFieldOptions, BaseField } from '$lib/Fields/index.js';
+import { type CommonFieldOptions, BaseField } from '$lib/Fields/Field.js';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */

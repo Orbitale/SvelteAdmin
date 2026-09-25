@@ -4,9 +4,9 @@
  */
 
 import type { Action } from '$lib/Actions.js';
-import type { CrudDefinition } from '$lib/Crud/index.js';
+import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 import type { DashboardDefinition } from '$lib/Dashboard.js';
-import type { FieldOptions, FieldInterface } from '$lib/Fields/index.js';
+import type { FieldOptions, FieldInterface } from '$lib/Fields/Field.js';
 import type { FilterInterface, FilterOptions } from '$lib/Filter.js';
 import { type PaginationOptions, defaultPaginationOptions } from '$lib/Pagination.js';
 import type { CrudTheme } from '$lib/types.js';

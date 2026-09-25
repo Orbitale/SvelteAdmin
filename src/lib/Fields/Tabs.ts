@@ -1,4 +1,4 @@
-import type { FieldInterface, FieldOptions } from '$lib/Fields/index.js';
+import type { FieldInterface, FieldOptions } from '$lib/Fields/Field.js';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */

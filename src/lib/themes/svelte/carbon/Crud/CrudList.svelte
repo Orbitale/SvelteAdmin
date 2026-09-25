@@ -4,8 +4,8 @@
 	import Pagination from 'carbon-components-svelte/src/Pagination/Pagination.svelte';
 
 	import type { Header, Headers } from '$lib/DataTable.js';
-	import type { BaseField, FieldOptions } from '$lib/Fields/index.js';
-	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { BaseField, FieldOptions } from '$lib/Fields/Field.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 
 	import { type CrudOperation, List } from '$lib/Crud/Operations.js';
 

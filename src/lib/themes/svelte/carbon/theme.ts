@@ -55,7 +55,7 @@ import DateRangeFilter from './FilterComponents/DateRangeFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
-import type { ThemeConfig } from '$lib/index.js';
+import type { ThemeConfig } from '$lib/types.js';
 
 const theme: ThemeConfig = {
 	adminLayout: AdminLayout,

@@ -1,9 +1,7 @@
-import {
-	type CrudOperation,
-	type StateProvider,
-	type StateProcessor,
-	type DashboardDefinition
-} from '$lib/index.js';
+import type { CrudOperation } from '$lib/Crud/Operations.js';
+import type { DashboardDefinition } from '$lib/Dashboard.js';
+import type { StateProcessor } from '$lib/StateProcessor.js';
+import type { StateProvider } from '$lib/StateProvider.js';
 
 /** */
 export type CrudDefinitionOptionsArgument<EntityType> = {

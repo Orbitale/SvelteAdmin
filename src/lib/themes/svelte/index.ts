@@ -1,1 +1,1 @@
-export { default as carbon } from './carbon/index.js';
+export { default as carbon } from './carbon/theme.js';

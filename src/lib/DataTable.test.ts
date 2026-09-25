@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { List } from '$lib/Crud/Operations.js';
 import { CheckboxField } from '$lib/Fields/Checkbox.js';
-import { BaseField } from '$lib/Fields/index.js';
+import { BaseField } from '$lib/Fields/Field.js';
 import { NumberField } from '$lib/Fields/Number.js';
 import { Tabs } from '$lib/Fields/Tabs.js';
 import { TextareaField } from '$lib/Fields/Textarea.js';

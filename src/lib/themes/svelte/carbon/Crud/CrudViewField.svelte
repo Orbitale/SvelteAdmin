@@ -3,7 +3,7 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
 	import type { ThemeConfig } from '$lib/types.js';
 

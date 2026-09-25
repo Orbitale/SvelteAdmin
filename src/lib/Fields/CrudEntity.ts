@@ -1,4 +1,4 @@
-import { type InputFieldOptions, BaseField } from '$lib/Fields/index.js';
+import { type InputFieldOptions, BaseField } from '$lib/Fields/Field.js';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 export type CrudEntityListProviderOptions = { [key: string]: string };

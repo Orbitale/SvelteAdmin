@@ -56,12 +56,12 @@ const carbonDir = path.resolve(themesDir + '/svelte/carbon');
 		);
 	}
 
-	await fs.copyFile(carbonDir + '/index.ts', newThemePath + '/index.ts');
+	await fs.copyFile(carbonDir + '/theme.ts', newThemePath + '/theme.ts');
 
 	const themesIndex = themesDir + '/' + themeType + '/index.ts';
 	let indexContent = (await fs.readFile(themesIndex)).toString();
 	if (!indexContent.match(new RegExp(`export *\\{ *default as ${themeName}`), 'gi')) {
-		indexContent += `\nexport { default as ${themeName} } from './${themeName}';`;
+		indexContent += `\nexport { default as ${themeName} } from './${themeName}/theme.js';`;
 	}
 	indexContent = indexContent.replace(/\n\n+/, '\n').trim() + '\n';
 	await fs.writeFile(themesIndex, indexContent);

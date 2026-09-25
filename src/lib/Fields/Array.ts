@@ -3,7 +3,7 @@ import {
 	type FieldInterface,
 	type FieldOptions,
 	BaseField
-} from '$lib/Fields/index.js';
+} from '$lib/Fields/Field.js';
 import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */

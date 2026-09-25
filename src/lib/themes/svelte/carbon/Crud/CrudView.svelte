@@ -4,10 +4,10 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud/index.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 	import type { DashboardDefinition } from '$lib/Dashboard.js';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/index.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
 	import type { StateProviderResult } from '$lib/StateProvider.js';
 	import type { RequestParameters } from '$lib/Request.js';
 

@@ -7,8 +7,8 @@
 	import CrudFormField from '$lib/themes/svelte/carbon/Crud/CrudFormField.svelte';
 	import { ArrayField } from '$lib/Fields/Array';
 	import type { CrudOperation } from '$lib/Crud/Operations.js';
-	import type { FieldInterface } from '$lib/Fields/index.js';
-	import type { FieldOptions } from '$lib/Fields/index.js';
+	import type { FieldInterface } from '$lib/Fields/Field.js';
+	import type { FieldOptions } from '$lib/Fields/Field.js';
 	import type { ThemeConfig } from '$lib/types.js';
 
 	let {
