@@ -2,13 +2,15 @@
 	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject.js';
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
-	let { field, value }: { field: KeyValueObjectField; value: object; } = $props();
+	let { field, value }: { field: KeyValueObjectField; value: object } = $props();
 
 	let displayValue: unknown = $derived.by(() => {
 		let internalValue = value;
 		if (internalValue) {
 			// @ts-expect-error internalValue is of type "any"
-			field.propertyPath.split('.').forEach((key) => internalValue = internalValue[key] ?? undefined);
+			field.propertyPath
+				.split('.')
+				.forEach((key) => (internalValue = internalValue[key] ?? undefined));
 		}
 		return internalValue;
 	});

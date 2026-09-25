@@ -18,21 +18,15 @@
 		requestParameters?: RequestParameters;
 	}
 
-	let {
-		dashboard,
-		operation,
-		crud,
-		requestParameters = {}
-	}: Props = $props();
+	let { dashboard, operation, crud, requestParameters = {} }: Props = $props();
 
 	const CrudViewField = $derived(dashboard.theme.viewField);
 
 	let fields: FieldInterface<CommonFieldOptions>[] = $derived(operation.fields);
 
-	let providerResultPromise: StateProviderResult<unknown> = $derived(crud.options.stateProvider.provide(
-		operation,
-		requestParameters
-	));
+	let providerResultPromise: StateProviderResult<unknown> = $derived(
+		crud.options.stateProvider.provide(operation, requestParameters)
+	);
 
 	onMount(async () => {
 		const data = await providerResultPromise;

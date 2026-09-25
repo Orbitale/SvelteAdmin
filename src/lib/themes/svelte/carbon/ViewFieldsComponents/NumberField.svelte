@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
-	let { value = $bindable() }: { value: number | bigint | string | unknown; } = $props();
+	let { value = $bindable() }: { value: number | bigint | string | unknown } = $props();
 
 	if (typeof value === 'bigint') {
 		value = value.toString().replace(/n$/gi, '');

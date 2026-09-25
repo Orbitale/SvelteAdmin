@@ -4,7 +4,7 @@
 
 	let {
 		field,
-		value = $bindable(),
+		value = $bindable()
 	}: {
 		field: TextField;
 		value: string | undefined;

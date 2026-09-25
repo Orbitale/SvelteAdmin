@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { DateTime } from 'luxon';
 
-	let { value = $bindable() }: {
+	let {
+		value = $bindable()
+	}: {
 		value: Date | string | undefined;
 	} = $props();
 
@@ -15,4 +17,4 @@
 	}
 </script>
 
-{String(value||'').substring(0, 10)}
+{String(value || '').substring(0, 10)}

@@ -9,7 +9,6 @@
 	import type { Columns as ColumnField } from '$lib/Fields/Columns.js';
 	import type { ThemeConfig } from '$lib/types.js';
 
-
 	let {
 		FieldComponent,
 		field,

@@ -9,7 +9,7 @@
 
 	let {
 		action,
-		item = undefined,
+		item = undefined
 	}: {
 		action: Action;
 		item?: object | Record<string, unknown> | undefined;

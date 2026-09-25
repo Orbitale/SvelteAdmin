@@ -2,13 +2,7 @@ import type { Component, ComponentProps } from 'svelte';
 
 /** */
 export type SubmitButtonType =
-	| 'primary'
-	| 'secondary'
-	| 'tertiary'
-	| 'ghost'
-	| 'danger'
-	| 'danger-tertiary'
-	| 'danger-ghost';
+	'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger' | 'danger-tertiary' | 'danger-ghost';
 
 /** */
 export type ThemeConfig = {

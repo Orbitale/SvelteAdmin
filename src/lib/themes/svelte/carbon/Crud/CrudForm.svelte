@@ -23,16 +23,16 @@
 		defaultData = {},
 		onFieldChange = () => {},
 		onSubmitData = () => {},
-		theme = carbon,
+		theme = carbon
 	}: {
-		formHeader?: Snippet,
-		formFooter?: Snippet,
+		formHeader?: Snippet;
+		formFooter?: Snippet;
 		operation: CrudOperation;
 		submitButtonType?: SubmitButtonType;
 		method?: 'get' | 'post';
 		defaultData?: undefined | null | Record<string, unknown>;
 		theme?: ThemeConfig;
-		onFieldChange?: (data: {"key": string, value: any}) => void;
+		onFieldChange?: (data: { key: string; value: any }) => void;
 		onSubmitData?: (data: SubmittedData) => void;
 	} = $props();
 
@@ -71,7 +71,14 @@
 			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} {onFieldChange} />
 		{:else}
 			<FormGroup>
-				<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} {onFieldChange} />
+				<CrudFormField
+					{operation}
+					{field}
+					{data}
+					value={data[field.name]}
+					{theme}
+					{onFieldChange}
+				/>
 			</FormGroup>
 		{/if}
 	{/each}

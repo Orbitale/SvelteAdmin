@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Toggle from 'carbon-components-svelte/src/Toggle/Toggle.svelte';
 
-	let { value = $bindable() }: { value: boolean | undefined; } = $props();
+	let { value = $bindable() }: { value: boolean | undefined } = $props();
 	if (value === undefined) {
 		value = false;
 	}

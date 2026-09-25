@@ -72,7 +72,9 @@
 			throw new Error('Internal "__crud_operation" property isn\'t properly injected.');
 		}
 
-		const matchingFields = row.__crud_operation.fields.filter((f: FieldInterface<FieldOptions>) => f.name === fieldName);
+		const matchingFields = row.__crud_operation.fields.filter(
+			(f: FieldInterface<FieldOptions>) => f.name === fieldName
+		);
 
 		if (!matchingFields.length) {
 			console.warn(`Field "${fieldName}" was not found in current operation.`);
@@ -149,7 +151,10 @@
 
 	$effect(() => {
 		resolved = false;
-		rows.then((r: Rows) => { resolved = true; resolvedRows = r; });
+		rows.then((r: Rows) => {
+			resolved = true;
+			resolvedRows = r;
+		});
 	});
 
 	onMount(() => {
@@ -211,12 +216,12 @@
 	{@render children?.()}
 
 	{#await rows}
-		<Loading  />
+		<Loading />
 	{:catch error}
-			<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
-				{$_('error.crud.list.load_error')}<br />
-				{error.toString()}
-			</InlineNotification>
+		<InlineNotification kind="error" hideCloseButton={true} lowContrast={true}>
+			{$_('error.crud.list.load_error')}<br />
+			{error.toString()}
+		</InlineNotification>
 	{/await}
 
 	{#snippet cell({ cell, row, cellIndex })}

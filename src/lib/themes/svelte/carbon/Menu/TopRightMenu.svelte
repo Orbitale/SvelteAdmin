@@ -15,7 +15,9 @@
 	import { Divider, type MenuLink, Submenu } from '$lib/Menu';
 	import { CallbackAction, UrlAction } from '$lib/Actions';
 
-	let { links = [] }: {
+	let {
+		links = []
+	}: {
 		links?: Array<MenuLink>;
 	} = $props();
 </script>

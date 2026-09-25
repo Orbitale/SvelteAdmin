@@ -18,14 +18,7 @@ import {
 
 /** */
 export type CrudOperationName =
-	| 'new'
-	| 'edit'
-	| 'view'
-	| 'list'
-	| 'delete'
-	| 'entity_view'
-	| 'entity_list'
-	| string;
+	'new' | 'edit' | 'view' | 'list' | 'delete' | 'entity_view' | 'entity_list' | string;
 
 /** */
 export interface CrudOperation {

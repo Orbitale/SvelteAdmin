@@ -7,15 +7,23 @@
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity.js';
 	import { CrudDefinition } from '$lib/Crud/index.js';
 
-	let { field, operation, value }: {
+	let {
+		field,
+		operation,
+		value
+	}: {
 		field: CrudEntityField;
 		operation: CrudOperation;
 		value: unknown;
 	} = $props();
 
-	const crud: CrudDefinition<any> | undefined = $derived(operation.dashboard.cruds.filter((def: CrudDefinition<any>) => def.name === field.options.crud_name)[0] ?? undefined);
+	const crud: CrudDefinition<any> | undefined = $derived(
+		operation.dashboard.cruds.filter(
+			(def: CrudDefinition<any>) => def.name === field.options.crud_name
+		)[0] ?? undefined
+	);
 
-	async function fetchData(): Promise<undefined|null|Record<'id'|string, any>> {
+	async function fetchData(): Promise<undefined | null | Record<'id' | string, any>> {
 		if (!crud) {
 			console.error('No CRUD to fetch data from.');
 			return Promise.resolve(null);
@@ -40,7 +48,11 @@
 	{#await fetchData()}
 		<SkeletonText />
 	{:then data}
-		{@const item = field.options.get_provider_operation.entity_field ? (data ? data[field.options.get_provider_operation.entity_field] : undefined) : undefined}
+		{@const item = field.options.get_provider_operation.entity_field
+			? data
+				? data[field.options.get_provider_operation.entity_field]
+				: undefined
+			: undefined}
 		{#if !item}
 			<InlineNotification kind="error" hideCloseButton>
 				{$_('error.crud.form.entity_field_view_fetch_error', {

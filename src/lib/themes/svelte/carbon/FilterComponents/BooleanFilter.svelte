@@ -8,7 +8,9 @@
 	import type { TextFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	let { filter }: {
+	let {
+		filter
+	}: {
 		filter: TextFilter;
 	} = $props();
 

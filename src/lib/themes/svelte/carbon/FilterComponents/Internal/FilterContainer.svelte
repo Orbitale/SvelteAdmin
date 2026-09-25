@@ -5,7 +5,7 @@
 
 	let {
 		filter,
-	  children,
+		children
 	}: {
 		filter: FilterInterface<FilterOptions>;
 		children?: Snippet;

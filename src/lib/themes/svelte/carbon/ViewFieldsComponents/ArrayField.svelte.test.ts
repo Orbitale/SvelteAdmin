@@ -13,28 +13,25 @@ import {
 import ComponentToTest from './ArrayField.svelte';
 import carbon from '$lib/themes/svelte/carbon';
 
-describe(
-	'ArrayField component',
-	() => {
-		it('can be instantiated', async () => {
-			const props = mockComponentProps(
-				new ArrayField('array', 'Array label', new TextField('text', 'Text field'))
-			);
+describe('ArrayField component', () => {
+	it('can be instantiated', async () => {
+		const props = mockComponentProps(
+			new ArrayField('array', 'Array label', new TextField('text', 'Text field'))
+		);
 
-			const rendered = render(ComponentToTest, props);
+		const rendered = render(ComponentToTest, props);
 
-			const label = rendered.container.querySelector('div > strong');
-			expect(label).toBeDefined();
-			expect(label?.innerHTML).toStrictEqual('Text field');
-			const valueElement = label?.parentElement?.nextElementSibling;
-			expect(valueElement).toBeDefined();
-			expect(valueElement?.childNodes).toBeDefined();
-			expect(valueElement?.childNodes[0]).toBeInstanceOf(Text);
-			const textNode: Text = valueElement?.childNodes[0] as Text;
-			expect(textNode.wholeText).toStrictEqual('default_value');
-		});
-	}
-);
+		const label = rendered.container.querySelector('div > strong');
+		expect(label).toBeDefined();
+		expect(label?.innerHTML).toStrictEqual('Text field');
+		const valueElement = label?.parentElement?.nextElementSibling;
+		expect(valueElement).toBeDefined();
+		expect(valueElement?.childNodes).toBeDefined();
+		expect(valueElement?.childNodes[0]).toBeInstanceOf(Text);
+		const textNode: Text = valueElement?.childNodes[0] as Text;
+		expect(textNode.wholeText).toStrictEqual('default_value');
+	});
+});
 
 function mockComponentProps(field: ArrayField<TextField>) {
 	const dashboard = new DashboardDefinition({

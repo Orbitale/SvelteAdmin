@@ -4,7 +4,10 @@
 	import { _ } from 'svelte-i18n';
 	import type { DateField } from '$lib/Fields/Date.js';
 
-	let { field, value = $bindable() }: {
+	let {
+		field,
+		value = $bindable()
+	}: {
 		field: DateField;
 		value: Date | string | undefined;
 	} = $props();
@@ -16,18 +19,19 @@
 	}
 
 	function dateFormatToRegex(dateFormat: string) {
-		return dateFormat
+		return (
+			dateFormat
 				// Escape special characters in the date format string
 				.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`)
 				// Convert date format to regular expression pattern
 				.replace(/dd?/i, `\\d{2}`)
 				.replace(/yyyy/i, `\\d{4}`)
 				.replace(/yy/i, `\\d{2}`)
-			  .replace(/Y/i, `\\d{4}`)
+				.replace(/Y/i, `\\d{4}`)
 				.replace(/mm?/i, `\\d{2}`)
 				.replace(/hh?/i, `\\d{2}`)
 				.replace(/ss/i, `\\d{2}`)
-		;
+		);
 	}
 </script>
 

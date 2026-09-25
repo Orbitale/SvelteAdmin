@@ -3,7 +3,10 @@
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
 	import { UrlField } from '$lib/Fields/Url.js';
 
-	let { value, field }: {
+	let {
+		value,
+		field
+	}: {
 		value: string | undefined;
 		field: UrlField;
 	} = $props();
@@ -24,16 +27,16 @@
 	});
 
 	function getOrigin() {
-		const w = typeof window !== 'undefined' ? window : {location: {origin: null}};
+		const w = typeof window !== 'undefined' ? window : { location: { origin: null } };
 
-		return (w || {location: {origin: null}})?.location?.origin ?? '';
+		return (w || { location: { origin: null } })?.location?.origin ?? '';
 	}
 
 	const attrs = $derived.by(() => {
 		if (field.options.openInNewTab) {
 			return {
-				'target': '_blank',
-				'rel': 'noopener',
+				target: '_blank',
+				rel: 'noopener'
 			};
 		}
 

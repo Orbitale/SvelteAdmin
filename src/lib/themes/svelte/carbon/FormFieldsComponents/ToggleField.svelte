@@ -5,11 +5,11 @@
 	let {
 		field,
 		value = $bindable(),
-		onChange = () => {},
+		onChange = () => {}
 	}: {
 		field: ToggleField;
 		value: boolean | undefined;
-		onChange: (is_checked: boolean) => void
+		onChange: (is_checked: boolean) => void;
 	} = $props();
 
 	if (value === undefined) {

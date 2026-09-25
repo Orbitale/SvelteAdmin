@@ -3,7 +3,10 @@
 	import type { TextFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	let { filter, value }: {
+	let {
+		filter,
+		value
+	}: {
 		filter: TextFilter;
 		value: string;
 	} = $props();

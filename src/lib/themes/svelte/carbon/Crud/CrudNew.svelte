@@ -34,11 +34,7 @@
 	}
 </script>
 
-<CrudForm
-	theme={dashboard.theme}
-	{operation}
-	{onSubmitData}
->
+<CrudForm theme={dashboard.theme} {operation} {onSubmitData}>
 	{#snippet formHeader()}
 		<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
 	{/snippet}

@@ -45,7 +45,9 @@
 			.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
 	}
 
-	const ThemeComponent = $derived(currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName]);
+	const ThemeComponent = $derived(
+		currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName]
+	);
 
 	const sideMenu = $derived(dashboard.stores.sideMenu);
 	const topLeftMenu = $derived(dashboard.stores.topLeftMenu);

@@ -34,7 +34,9 @@
 
 	const configuredFilters = $derived(operation.options?.filters || []);
 	const actions = $derived(operation.contextActions);
-	const sortableDataTable = $derived(operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length > 0);
+	const sortableDataTable = $derived(
+		operation.fields.filter((field: BaseField<FieldOptions>) => !field.options?.sortable).length > 0
+	);
 	const headers: Headers = $derived(
 		operation.fields.map((field: BaseField<FieldOptions>): Header => {
 			return {
@@ -180,8 +182,7 @@
 	filters={configuredFilters}
 	filtersValues={requestParameters.filters}
 	theme={dashboard.theme}
->
-</DataTableComponent>
+></DataTableComponent>
 
 {#if showPagination && paginator}
 	<Pagination

@@ -11,7 +11,7 @@
 	let {
 		operation,
 		crud,
-		requestParameters = {},
+		requestParameters = {}
 	}: {
 		operation: CrudOperation;
 		crud: CrudDefinition<unknown>;

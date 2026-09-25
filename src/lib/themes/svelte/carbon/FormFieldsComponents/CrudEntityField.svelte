@@ -9,15 +9,23 @@
 	import type { CrudEntityField } from '$lib/Fields/CrudEntity.js';
 	import { CrudDefinition } from '$lib/Crud/index.js';
 
-	let { field, operation, value }: {
+	let {
+		field,
+		operation,
+		value
+	}: {
 		field: CrudEntityField;
 		operation: CrudOperation;
 		value: any;
 	} = $props();
 
-	const crud: CrudDefinition<any> | undefined = $derived(operation.dashboard.cruds.filter((def: CrudDefinition<any>) => def.name === field.options.crud_name)[0] ?? undefined);
+	const crud: CrudDefinition<any> | undefined = $derived(
+		operation.dashboard.cruds.filter(
+			(def: CrudDefinition<any>) => def.name === field.options.crud_name
+		)[0] ?? undefined
+	);
 
-	function fetchList(): Promise<undefined|null|Array<Record<'id'|string, any>>> {
+	function fetchList(): Promise<undefined | null | Array<Record<'id' | string, any>>> {
 		if (!crud) {
 			console.error('No CRUD to fetch entities list.');
 			return Promise.resolve(null);
@@ -53,8 +61,11 @@
 				<SelectItem value="" text="-" />
 			{:else}
 				{#each values as itemValue (itemValue)}
-					{@const val = itemValue[field.options?.list_provider_operation?.value_field ?? 'id'] ?? undefined}
-					{@const txt = field.options?.list_provider_operation?.label_field ? (itemValue[field.options?.list_provider_operation?.label_field] ?? val) : ""}
+					{@const val =
+						itemValue[field.options?.list_provider_operation?.value_field ?? 'id'] ?? undefined}
+					{@const txt = field.options?.list_provider_operation?.label_field
+						? (itemValue[field.options?.list_provider_operation?.label_field] ?? val)
+						: ''}
 					{#if val && txt}
 						<SelectItem value={val} text={txt} />
 					{/if}

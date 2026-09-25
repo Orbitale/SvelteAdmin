@@ -2,7 +2,7 @@
 	import { _ } from 'svelte-i18n';
 	import type { CheckboxField } from '$lib/index.js';
 
-	let { field }: { field: CheckboxField; } = $props();
+	let { field }: { field: CheckboxField } = $props();
 </script>
 
 <strong>

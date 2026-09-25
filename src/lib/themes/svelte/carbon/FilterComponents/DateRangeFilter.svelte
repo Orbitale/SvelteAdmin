@@ -6,7 +6,10 @@
 	import type { DateRangeFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	let { filter, value }: {
+	let {
+		filter,
+		value
+	}: {
 		filter: DateRangeFilter;
 		value: undefined | string | [string, string];
 	} = $props();

@@ -8,7 +8,7 @@
 
 	let {
 		action,
-		action_arguments = [],
+		action_arguments = []
 	}: {
 		action: Action;
 		action_arguments?: Array<unknown>;

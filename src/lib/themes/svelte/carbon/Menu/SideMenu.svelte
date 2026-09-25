@@ -18,7 +18,7 @@
 	let {
 		autoClose = true,
 		is_side_menu_open,
-		links = [],
+		links = []
 	}: {
 		autoClose?: boolean;
 		is_side_menu_open: Writable<boolean>;

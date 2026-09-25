@@ -89,7 +89,6 @@
 			{/snippet}
 
 			<Form on:submit={submitFilters}>
-
 				{#each filters as filter}
 					<br />
 					<FilterComponent {filter} {theme} value={filtersValues[filter.field]} />
@@ -106,9 +105,7 @@
 					<FilterReset />
 					{$_('datatable.filters.reset_filters')}
 				</Button>
-
 			</Form>
-
 		</AccordionItem>
 	</Accordion>
 {/if}

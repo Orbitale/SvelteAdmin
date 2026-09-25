@@ -8,7 +8,7 @@
 
 	let {
 		actions = [],
-		item = undefined,
+		item = undefined
 	}: {
 		actions?: Action[];
 		item?: object | undefined;

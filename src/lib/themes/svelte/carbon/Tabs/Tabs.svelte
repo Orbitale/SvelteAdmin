@@ -31,19 +31,19 @@
 		<Tab label={$_(tab.label || tab.name)} tabindex={i.toString()} />
 	{/each}
 	{#snippet content()}
-			{#each field.fields as tab}
-				<TabContent>
-					{#each tab.fields as tabbedField}
-						<FieldComponent
-							{operation}
-							{entityObject}
-							{value}
-							{theme}
-							field={tabbedField}
-							on:fieldChange
-						/>
-					{/each}
-				</TabContent>
-			{/each}
+		{#each field.fields as tab}
+			<TabContent>
+				{#each tab.fields as tabbedField}
+					<FieldComponent
+						{operation}
+						{entityObject}
+						{value}
+						{theme}
+						field={tabbedField}
+						on:fieldChange
+					/>
+				{/each}
+			</TabContent>
+		{/each}
 	{/snippet}
 </Tabs>

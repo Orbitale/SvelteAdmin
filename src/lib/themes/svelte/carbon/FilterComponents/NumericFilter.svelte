@@ -3,7 +3,10 @@
 	import type { NumericFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	let { filter, value }: {
+	let {
+		filter,
+		value
+	}: {
 		filter: NumericFilter;
 		value: string;
 	} = $props();

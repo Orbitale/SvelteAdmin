@@ -2,7 +2,10 @@
 	import NumberInput from 'carbon-components-svelte/src/NumberInput/NumberInput.svelte';
 	import type { NumberField } from '$lib/Fields/Number.js';
 
-	let { field, value = $bindable() }: {
+	let {
+		field,
+		value = $bindable()
+	}: {
 		field: NumberField;
 		value: unknown;
 	} = $props();

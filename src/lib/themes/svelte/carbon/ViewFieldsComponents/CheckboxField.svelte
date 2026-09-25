@@ -2,7 +2,7 @@
 	import CheckboxChecked from 'carbon-icons-svelte/lib/CheckboxChecked.svelte';
 	import Checkbox from 'carbon-icons-svelte/lib/Checkbox.svelte';
 
-	let { value = $bindable() }: { value: boolean | undefined; } = $props();
+	let { value = $bindable() }: { value: boolean | undefined } = $props();
 
 	if (value === undefined) {
 		value = false;

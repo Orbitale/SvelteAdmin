@@ -29,10 +29,9 @@
 
 	const CrudForm = $derived(dashboard.theme.form);
 
-	let defaultData: StateProviderResult<unknown> = $derived(crud.options.stateProvider.provide(
-		operation,
-		requestParameters
-	));
+	let defaultData: StateProviderResult<unknown> = $derived(
+		crud.options.stateProvider.provide(operation, requestParameters)
+	);
 
 	onMount(async () => {
 		const data = await defaultData;
@@ -59,12 +58,7 @@
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		<CrudForm
-			theme={dashboard.theme}
-			{operation}
-			{onSubmitData}
-			defaultData={data}
-		>
+		<CrudForm theme={dashboard.theme} {operation} {onSubmitData} defaultData={data}>
 			{#snippet formHeader()}
 				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
 			{/snippet}

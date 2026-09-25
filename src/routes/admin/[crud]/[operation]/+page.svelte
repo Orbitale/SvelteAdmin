@@ -12,10 +12,5 @@
 </script>
 
 {#key page}
-	<DashboardComponent
-		{dashboard}
-		{crud}
-		{operation}
-		{requestParameters}
-	/>
+	<DashboardComponent {dashboard} {crud} {operation} {requestParameters} />
 {/key}

@@ -15,28 +15,25 @@ import { View } from '$lib/Crud/Operations.js';
 import ComponentToTest from './Columns.svelte';
 import TextComponent from '../ViewFieldsComponents/DefaultField.svelte';
 
-describe(
-	'Columns component',
-	() => {
-		it('can be instantiated', async () => {
-			const props = mockComponentProps(
-				new Columns('columns', 'Columns label', [
-					{
-						name: 'column_1',
-						label: 'Column 1',
-						fields: [new TextField('text', 'Text field')]
-					}
-				])
-			);
+describe('Columns component', () => {
+	it('can be instantiated', async () => {
+		const props = mockComponentProps(
+			new Columns('columns', 'Columns label', [
+				{
+					name: 'column_1',
+					label: 'Column 1',
+					fields: [new TextField('text', 'Text field')]
+				}
+			])
+		);
 
-			const rendered = render(ComponentToTest, props);
+		const rendered = render(ComponentToTest, props);
 
-			const h2 = rendered.container.querySelector('h2');
-			expect(h2).toBeDefined();
-			expect(h2?.innerHTML).toStrictEqual('Column 1');
-		});
-	},
-);
+		const h2 = rendered.container.querySelector('h2');
+		expect(h2).toBeDefined();
+		expect(h2?.innerHTML).toStrictEqual('Column 1');
+	});
+});
 
 function mockComponentProps(field: Columns): ComponentOptions {
 	const dashboard = new DashboardDefinition({

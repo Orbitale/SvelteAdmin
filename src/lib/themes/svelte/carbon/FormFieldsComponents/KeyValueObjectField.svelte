@@ -12,7 +12,10 @@
 	import type { KeyValueObjectField } from '$lib/index.js';
 	import { _ } from 'svelte-i18n';
 
-	let { field, value = $bindable() }: {
+	let {
+		field,
+		value = $bindable()
+	}: {
 		field: KeyValueObjectField;
 		value: unknown;
 	} = $props();

@@ -8,7 +8,10 @@
 	// The lowest value is the safest one to use for cross-browser and servers compatibility. Rounded to 2000 to avoid picky questions.
 	const maxLength = 2000;
 
-	let { field, value = $bindable() }: {
+	let {
+		field,
+		value = $bindable()
+	}: {
 		field: UrlField;
 		value: URL | string | null | undefined;
 	} = $props();
