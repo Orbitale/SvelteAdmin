@@ -1,7 +1,4 @@
-import chalk from 'chalk';
-
 import prompts from 'prompts';
-import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

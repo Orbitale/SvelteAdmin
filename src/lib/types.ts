@@ -1,4 +1,4 @@
-import type { Component, ComponentProps } from 'svelte';
+import type { Component } from 'svelte';
 
 /** */
 export type SubmitButtonType =

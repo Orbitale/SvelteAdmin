@@ -57,8 +57,6 @@ import TextFilter from './FilterComponents/TextFilter.svelte';
 
 import type { ThemeConfig } from '$lib/index.js';
 
-import type { ComponentProps } from 'svelte';
-
 const theme: ThemeConfig = {
 	adminLayout: AdminLayout,
 	dashboard: Dashboard,
