@@ -4,33 +4,54 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
 	import AdminLayout from '$lib/themes/svelte/carbon/Layout/AdminLayout.svelte';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { RequestParameters } from '$lib/Request';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+	import type { RequestParameters } from '$lib/Request.js';
 
-	export let dashboard: DashboardDefinition;
-	export let crud: string | undefined = undefined;
-	export let operation: string | undefined = undefined;
-	export let requestParameters: RequestParameters = {};
+	import type { Snippet } from 'svelte';
 
-	let currentCrud: CrudDefinition<unknown> | undefined;
-	let currentCrudOperation: CrudOperation | undefined;
+	let {
+		dashboard,
+		crud = undefined,
+		operation = undefined,
+		requestParameters = {},
+		children
+	}: {
+		dashboard: DashboardDefinition;
+		crud?: string | undefined;
+		operation?: string | undefined;
+		requestParameters?: RequestParameters;
+		children?: Snippet;
+	} = $props();
 
-	dashboard.cruds
-		.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
-		.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
+	let currentCrud: CrudDefinition<unknown> | undefined = $state();
+	let currentCrudOperation: CrudOperation | undefined = $state();
 
-	currentCrud?.options.operations
-		.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
-		.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
+	let loading: boolean = $state(true);
 
-	const themeComponent =
-		currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName];
+	$effect(() => {
+		loading = false;
+		checkCrud();
+	});
 
-	const sideMenu = dashboard.stores.sideMenu;
-	const topLeftMenu = dashboard.stores.topLeftMenu;
-	const topRightMenu = dashboard.stores.topRightMenu;
+	function checkCrud() {
+		dashboard.cruds
+			.filter((dashboardCrud: CrudDefinition<unknown>) => crud === dashboardCrud.name)
+			.forEach((resolved: CrudDefinition<unknown>) => (currentCrud = resolved));
+
+		currentCrud?.options.operations
+			.filter((crudOperation: CrudOperation) => operation === crudOperation.name)
+			.forEach((resolved: CrudOperation) => (currentCrudOperation = resolved));
+	}
+
+	const ThemeComponent = $derived(
+		currentCrudOperation?.dashboard.theme.crudActions[currentCrudOperation?.displayComponentName]
+	);
+
+	const sideMenu = $derived(dashboard.stores.sideMenu);
+	const topLeftMenu = $derived(dashboard.stores.topLeftMenu);
+	const topRightMenu = $derived(dashboard.stores.topRightMenu);
 </script>
 
 <AdminLayout
@@ -40,8 +61,10 @@
 	top_left_menu_links={$topLeftMenu}
 	top_right_menu_links={$topRightMenu}
 >
-	<slot>
-		{#if !currentCrud}
+	{#if children}
+		{@render children()}
+	{:else}
+		{#if !currentCrud && !loading}
 			<InlineNotification hideCloseButton={true}>
 				{#if crud}
 					{$_('error.crud.could_not_find_crud_name', { values: { crud } })}
@@ -61,19 +84,18 @@
 				{/if}
 			</InlineNotification>
 		{/if}
-		{#if currentCrud && currentCrudOperation && !themeComponent}
+		{#if currentCrud && currentCrudOperation && !ThemeComponent}
 			<InlineNotification hideCloseButton={true}>
 				{$_('error.crud.could_not_find_component', {
 					values: { crud, operation }
 				})}
 			</InlineNotification>
 		{/if}
-		<svelte:component
-			this={themeComponent}
+		<ThemeComponent
 			{dashboard}
 			crud={currentCrud}
 			operation={currentCrudOperation}
 			{requestParameters}
 		/>
-	</slot>
+	{/if}
 </AdminLayout>

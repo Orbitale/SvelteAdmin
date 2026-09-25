@@ -48,8 +48,10 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 		try {
 			item = this.get(object.id);
 		} catch (e) {
-			console.error('Could not fetch item from storage: ');
-			console.error(e);
+			// No item found, or multiple items found
+			if (e?.toString()?.match(/Error: Found multiple objects of/)) {
+				throw e;
+			}
 		}
 		if (item) {
 			throw new Error(
@@ -63,7 +65,7 @@ export class InMemoryStorage<T extends Entity> implements InternalStorage<T> {
 	public update(object: T): void {
 		const item = this.get(object.id);
 
-		this.saveList(this.all().map((i) => (i.id === item.id ? item : i)));
+		this.saveList(this.all().map((i) => (i.id === item.id ? object : i)));
 	}
 
 	public all(): Array<T> {

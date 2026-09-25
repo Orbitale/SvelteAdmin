@@ -1,46 +1,56 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import Form from 'carbon-components-svelte/src/Form/Form.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
-	import { createEventDispatcher } from 'svelte';
+
 	import { _ } from 'svelte-i18n';
+	import { Tabs } from '$lib/Fields/Tabs.js';
 
-	import { Tabs } from '$lib/Fields/Tabs';
-	import { Columns } from '$lib/Fields/Columns';
+	import { Columns } from '$lib/Fields/Columns.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
+	import type { SubmitButtonType, ThemeConfig } from '$lib/types.js';
+	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form.js';
+	import carbon from '$lib/themes/svelte/carbon/theme.js';
 
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { SubmitButtonType, ThemeConfig } from '$lib/types';
-	import { getSubmittedFormData, sanitizeFormData, type SubmittedData } from '$lib/Crud/Form';
-	import { carbon } from '$lib/themes/svelte';
+	let {
+		formHeader,
+		formFooter,
+		operation,
+		submitButtonType = 'primary',
+		method = 'post',
+		defaultData = {},
+		onFieldChange = () => {},
+		onSubmitData = () => {},
+		theme = carbon
+	}: {
+		formHeader?: Snippet;
+		formFooter?: Snippet;
+		operation: CrudOperation;
+		submitButtonType?: SubmitButtonType;
+		method?: 'get' | 'post';
+		defaultData?: undefined | null | Record<string, unknown>;
+		theme?: ThemeConfig;
+		onFieldChange?: (data: { key: string; value: any }) => void;
+		onSubmitData?: (data: SubmittedData) => void;
+	} = $props();
 
-	export let submitButtonType: SubmitButtonType = 'primary';
-	export let method: 'get' | 'post' = 'post';
-	export let operation: CrudOperation;
-	export let defaultData: undefined | null | Record<string, unknown> = {};
-	export let theme: ThemeConfig = carbon;
+	const CrudFormField = $derived(theme.formField);
 
-	const CrudFormField = theme.formField;
+	const data: Record<string, unknown> = $derived(defaultData ?? {});
 
-	const data: Record<string, unknown> = defaultData ?? {};
+	let htmlFormElement: HTMLFormElement | null | undefined = $state();
 
-	export let htmlFormElement: HTMLFormElement | null | undefined;
+	let fields: Array<FieldInterface<CommonFieldOptions>> = $derived(operation.fields);
 
-	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
-
-	const dispatchEvent = createEventDispatcher<{ submitData: SubmittedData }>();
-
-	function onSubmit(event: SubmitEvent) {
+	function onSubmit(e: SubmitEvent) {
 		if (operation.options?.preventHttpFormSubmit ?? true) {
-			event.preventDefault();
+			e.preventDefault();
+			e.stopPropagation();
 		}
 
-		const normalizedData = sanitizeFormData(
-			getSubmittedFormData(event),
-			defaultData ?? {},
-			operation
-		);
-		dispatchEvent('submitData', normalizedData);
+		onSubmitData(sanitizeFormData(getSubmittedFormData(e), defaultData ?? {}, operation));
 	}
 </script>
 
@@ -53,21 +63,27 @@
 	on:mouseenter
 	on:mouseleave
 	on:submit={onSubmit}
-	on:submit
 >
-	<slot name="form-header" />
+	{@render formHeader?.()}
 
-	{#each fields as field}
+	{#each fields as field (field)}
 		{#if field instanceof Tabs || field instanceof Columns}
-			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
+			<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} {onFieldChange} />
 		{:else}
 			<FormGroup>
-				<CrudFormField {operation} {field} {data} value={data[field.name]} {theme} on:fieldChange />
+				<CrudFormField
+					{operation}
+					{field}
+					{data}
+					value={data[field.name]}
+					{theme}
+					{onFieldChange}
+				/>
 			</FormGroup>
 		{/if}
 	{/each}
 
 	<Button kind={submitButtonType} type="submit">{$_('crud.form.submit')}</Button>
 
-	<slot name="form-footer" />
+	{@render formFooter?.()}
 </Form>

@@ -1,0 +1,61 @@
+import { describe, it, expect } from 'vitest';
+import { render } from '@testing-library/svelte';
+import type { ComponentOptions } from '@testing-library/svelte-core/types';
+import carbon from '$lib/themes/svelte/carbon/theme.js';
+import { CallbackStateProcessor } from '$lib/StateProcessor.js';
+import { CallbackStateProvider } from '$lib/StateProvider.js';
+import { Columns } from '$lib/Fields/Columns.js';
+import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+import { DashboardDefinition } from '$lib/Dashboard.js';
+import { initLocale } from '$lib/i18n.js';
+import { TextField } from '$lib/Fields/Text.js';
+import { View } from '$lib/Crud/Operations.js';
+import ComponentToTest from './Columns.svelte';
+import TextComponent from '../ViewFieldsComponents/DefaultField.svelte';
+
+describe('Columns component', () => {
+	it('can be instantiated', async () => {
+		const props = mockComponentProps(
+			new Columns('columns', 'Columns label', [
+				{
+					name: 'column_1',
+					label: 'Column 1',
+					fields: [new TextField('text', 'Text field')]
+				}
+			])
+		);
+
+		const rendered = render(ComponentToTest, props);
+
+		const h2 = rendered.container.querySelector('h2');
+		expect(h2).toBeDefined();
+		expect(h2?.innerHTML).toStrictEqual('Column 1');
+	});
+});
+
+function mockComponentProps(field: Columns): ComponentOptions {
+	const dashboard = new DashboardDefinition({
+		theme: carbon,
+		adminConfig: {},
+		cruds: [
+			new CrudDefinition<string>({
+				name: 'test_field',
+				label: { singular: 'Test Field', plural: 'Test Fields' },
+				operations: [new View([field])],
+				stateProvider: new CallbackStateProvider<string>(() => Promise.resolve(null)),
+				stateProcessor: new CallbackStateProcessor<string>(() => {})
+			})
+		]
+	});
+
+	initLocale('fr');
+
+	return {
+		FieldComponent: TextComponent,
+		field: field,
+		operation: (dashboard.cruds[0] as CrudDefinition<string>).options.operations[0],
+		entityObject: { test_field: 'default_value' },
+		value: 'default_value',
+		theme: dashboard.theme
+	};
+}

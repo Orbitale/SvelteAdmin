@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-
 import prompts from 'prompts';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
@@ -15,8 +14,8 @@ const libDir = path.resolve(projectDir + '/src/lib/');
 const fieldsDir = path.resolve(libDir + '/Fields/');
 const libIndexFile = path.resolve(libDir + '/index.ts');
 const typesFile = path.resolve(libDir + '/types.ts');
-const carbonDir = path.resolve(libDir + '/themes/carbon/');
-const carbonIndexFile = path.resolve(carbonDir + '/index.ts');
+const carbonDir = path.resolve(libDir + '/themes/svelte/carbon/');
+const carbonIndexFile = path.resolve(carbonDir + '/theme.ts');
 
 const filesToFormat = [carbonIndexFile, typesFile];
 
@@ -192,8 +191,8 @@ async function updateLibIndexFile() {
 	process.stdout.write(' > Adding field to global lib file...\n');
 
 	const indexFile = (await fs.readFile(libIndexFile, 'utf8')).replace(
-		/(\s+export \* from '.\/i18n';)$/gm,
-		`\nexport * from './Fields/${fieldName.basePascalCase}';$1`
+		/(\s+export \* from '\.\/i18n\.js';)$/gm,
+		`\nexport * from './Fields/${fieldName.basePascalCase}.js';$1`
 	);
 
 	await fs.writeFile(libIndexFile, indexFile);

@@ -1,5 +1,5 @@
-import type { CommonFieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib';
-import { BaseField } from '$lib/Fields';
+import { type CommonFieldOptions, BaseField } from '$lib/Fields/Field.js';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */
 export type ToggleOptions = CommonFieldOptions;

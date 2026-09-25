@@ -3,37 +3,48 @@
 	import Row from 'carbon-components-svelte/src/Grid/Row.svelte';
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
 	import DefaultField from '$lib/themes/svelte/carbon/ViewFieldsComponents/DefaultField.svelte';
 
-	export let operation: CrudOperation;
-	export let field: FieldInterface<CommonFieldOptions>;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		operation,
+		field,
+		entityObject = {},
+		value = $bindable(),
+		theme
+	}: {
+		operation: CrudOperation;
+		field: FieldInterface<CommonFieldOptions>;
+		entityObject?: Record<string, unknown>;
+		value: unknown;
+		theme: ThemeConfig;
+	} = $props();
 
-	const viewComponent = theme?.viewFields[field.viewComponent] ?? DefaultField;
+	const ViewComponent = $derived(theme?.viewFields[field.viewComponent] ?? DefaultField);
+	const ViewLabelComponent = $derived(theme?.viewFields?.label);
+	let internalValue = $derived.by(() => {
+		if (value === undefined && entityObject) {
+			return entityObject[field.name];
+		}
+		return value;
+	});
 
-	if (value === undefined && entityObject) {
-		value = entityObject[field.name];
-	}
-
-	const fullSize = !(field.label || field.name);
+	const fullSize = $derived(!(field.label || field.name));
 </script>
 
 {#if fullSize}
-	<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
+	<ViewComponent {field} {operation} {theme} {entityObject} value={internalValue} />
 {:else}
 	<Grid>
 		<Row padding noGutterLeft noGutterRight narrow condensed>
 			<Column sm={2} md={3} lg={4}>
-				<svelte:component this={theme?.viewFields?.label} {field} />
+				<ViewLabelComponent {field} />
 			</Column>
 			<Column sm={2} md={5} lg={12}>
-				<svelte:component this={viewComponent} {field} {operation} {theme} {entityObject} {value} />
+				<ViewComponent {field} {operation} {theme} {entityObject} value={internalValue} />
 			</Column>
 		</Row>
 	</Grid>

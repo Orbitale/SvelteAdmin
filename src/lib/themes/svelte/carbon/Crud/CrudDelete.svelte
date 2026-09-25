@@ -3,16 +3,22 @@
 	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud';
-	import { CallbackAction, UrlAction } from '$lib/Actions';
-	import { type CrudOperation, Delete } from '$lib/Crud/Operations';
-	import type { RequestParameters } from '$lib/Request';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+	import { CallbackAction, UrlAction } from '$lib/Actions.js';
+	import { type CrudOperation, Delete } from '$lib/Crud/Operations.js';
+	import type { RequestParameters } from '$lib/Request.js';
 
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	let {
+		operation,
+		crud,
+		requestParameters = {}
+	}: {
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	} = $props();
 
-	const data = crud.options.stateProvider.provide(operation, requestParameters);
+	const data = $derived(crud.options.stateProvider.provide(operation, requestParameters));
 
 	function clickCancel() {
 		// TODO: check if it's the best method
@@ -43,7 +49,7 @@
 	<InlineNotification kind="warning" hideCloseButton={true}>
 		{$_('crud.delete.are_you_sure', {
 			values: {
-				id: requestParameters[crud.options.identifierFieldName] || '',
+				id: String(requestParameters[crud.options.identifierFieldName] || ''),
 				name: $_(crud.options.label.singular)
 			}
 		})}

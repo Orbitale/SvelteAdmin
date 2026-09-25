@@ -1,35 +1,49 @@
 <script lang="ts">
+	/* eslint svelte/no-navigation-without-resolve: "off" */
+
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
-	import { UrlField } from '$lib/Fields/Url';
+	import { UrlField } from '$lib/Fields/Url.js';
 
-	export let value: string | undefined;
-	export let field: UrlField;
+	let {
+		value,
+		field
+	}: {
+		value: string | undefined;
+		field: UrlField;
+	} = $props();
 
 	// URL will be validated if not empty
-	let valid = false;
+	let valid = $derived.by(() => {
+		if (!value || value?.length <= 0) {
+			return false;
+		}
 
-	if (value?.length > 0) {
 		try {
 			new URL(value, getOrigin()); // Throws exception on invalid URLs
-			valid = true;
+			return true;
 		} catch (e) {
 			console.warn('URL parsing error: ' + e);
-			valid = false;
+			return false;
 		}
-	}
+	});
 
 	function getOrigin() {
-		const w = typeof window !== 'undefined' ? window : {};
+		const w = typeof window !== 'undefined' ? window : { location: { origin: null } };
 
-		return (w || {})?.location?.origin;
+		return (w || { location: { origin: null } })?.location?.origin ?? '';
 	}
 
-	const attrs = {};
-	if (field.options.openInNewTab) {
-		attrs['target'] = '_blank';
-		attrs['rel'] = 'noopener';
-	}
+	const attrs = $derived.by(() => {
+		if (field.options.openInNewTab) {
+			return {
+				target: '_blank',
+				rel: 'noopener'
+			};
+		}
+
+		return {};
+	});
 </script>
 
 {#if valid}
@@ -39,7 +53,7 @@
 		{/if}
 		{value}
 	</a>
-{:else if value.length > 0}
+{:else if value && value.length > 0}
 	<Tag>Invalid URL!</Tag>
 {:else}
 	-

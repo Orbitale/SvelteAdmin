@@ -5,10 +5,15 @@
 	import Link from 'carbon-components-svelte/src/Link/Link.svelte';
 	import ToastNotification from 'carbon-components-svelte/src/Notification/ToastNotification.svelte';
 
-	import { type Action, CallbackAction, UrlAction } from '$lib/Actions';
+	import { type Action, CallbackAction, UrlAction } from '$lib/Actions.js';
 
-	export let action: Action;
-	export let item: object | undefined = undefined;
+	let {
+		action,
+		item = undefined
+	}: {
+		action: Action;
+		item?: object | Record<string, unknown> | undefined;
+	} = $props();
 </script>
 
 {#if action instanceof UrlAction}

@@ -1,34 +1,35 @@
-export * from './types';
-export * from './Actions';
-export * from './Config';
+export * from './types.js';
+export * from './Actions.js';
+export * from './Config.js';
 
-export * from './Crud';
-export * from './Crud/Form';
-export * from './Crud/Operations';
+export * from './Crud/CrudDefinition.js';
+export * from './Crud/Form.js';
+export * from './Crud/Operations.js';
 
-export * from './Dashboard';
-export * from './DataTable';
-export * from './Filter';
+export * from './Dashboard.js';
+export * from './DataTable.js';
+export * from './Filter.js';
 
-export * from './Fields';
-export * from './Fields/Checkbox';
-export * from './Fields/Columns';
-export * from './Fields/CrudEntity';
-export * from './Fields/Date';
-export * from './Fields/KeyValueObject';
-export * from './Fields/Number';
-export * from './Fields/Tabs';
-export * from './Fields/Textarea';
-export * from './Fields/Text';
-export * from './Fields/Toggle';
-export * from './Fields/Url';
-export * from './Fields/Array';
-export * from './Fields/Email';
+export * from './Fields/Array.js';
+export * from './Fields/Checkbox.js';
+export * from './Fields/Columns.js';
+export * from './Fields/CrudEntity.js';
+export * from './Fields/Date.js';
+export * from './Fields/Email.js';
+export * from './Fields/Field.js';
+export * from './Fields/KeyValueObject.js';
+export * from './Fields/Number.js';
+export * from './Fields/Tabs.js';
+export * from './Fields/Text.js';
+export * from './Fields/Textarea.js';
+export * from './Fields/Toggle.js';
+export * from './Fields/Url.js';
 
-export * from './i18n';
-export * from './Menu';
-export * from './Notification';
-export * from './Pagination';
-export * from './Request';
-export * from './StateProcessor';
-export * from './StateProvider';
+export * from './i18n.js';
+export * from './Menu.js';
+export * from './Pagination.js';
+export * from './Request.js';
+export * from './StateProcessor.js';
+export * from './StateProvider.js';
+
+export { default as Icon } from './Layout/Icon.svelte';

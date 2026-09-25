@@ -1,10 +1,10 @@
-import type { ComponentType, SvelteComponent } from 'svelte';
+import type { Component, SvelteComponent } from 'svelte';
 import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
 
 type Optional<T> = T | null | undefined;
 
 /** */
-export type ActionIcon = string | SvelteComponent | ComponentType;
+export type ActionIcon = string | SvelteComponent | Component;
 
 /** */
 export type ActionOptions = {
@@ -76,12 +76,12 @@ export class UrlAction extends DefaultAction {
 	}
 
 	public url(
-		item: object & { [key: string]: string | number | boolean } = {},
+		item: object | Record<string, string | number | boolean> = {},
 		identifierFieldName: string = 'id'
 	): string {
 		if (Array.isArray(item)) {
 			console.warn(
-				'Provided item for UrlAction is an array, and arrays are not supported. Using the first item of the array, or an empty object if not set.'
+				'Provided item for UrlAction is an array, and arrays are not supported. Falling back to using the first item of the array, or an empty object if not set.'
 			);
 			item = item[0] ?? {};
 		}
@@ -92,7 +92,7 @@ export class UrlAction extends DefaultAction {
 		const hasIdAsParameter = url.match(':id');
 
 		for (const field in item) {
-			let value = item[field];
+			let value = item[field] ?? '';
 			value = !value.toString ? '' : value.toString();
 			if (value.length) {
 				url = url.replace(`:${field}`, value.toString() || '');

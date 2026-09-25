@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n';
-	import type { CheckboxField } from '$lib';
+	import type { CheckboxField } from '$lib/Fields/Checkbox.js';
 
-	export let field: CheckboxField;
+	let { field }: { field: CheckboxField } = $props();
 </script>
 
 <strong>

@@ -5,14 +5,14 @@ import Menu from 'carbon-icons-svelte/lib/Menu.svelte';
 import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 import User from 'carbon-icons-svelte/lib/User.svelte';
 
-import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib';
-import { carbon } from '$lib/themes/svelte';
+import { DashboardDefinition, CallbackAction, UrlAction, Submenu } from '$lib/index.js';
+import { carbon } from '$lib/themes/svelte/index.js';
 
-import fr from './translations/fr';
-import { bookCrud } from './BookCrud';
-import { authorCrud } from './AuthorCrud';
-import { testCrud } from './TestCrud';
-import { ThemeChangerAction } from '$lib/themes/svelte/carbon';
+import fr from './translations/fr.js';
+import { bookCrud } from './BookCrud.js';
+import { authorCrud } from './AuthorCrud.js';
+import { testCrud } from './TestCrud.js';
+import { ThemeChangerAction } from '$lib/themes/svelte/carbon/theme.js';
 
 let newLinkIndex = 1;
 

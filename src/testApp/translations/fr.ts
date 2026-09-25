@@ -1,4 +1,4 @@
-import type { Dictionary } from '$lib/i18n';
+import type { Dictionary } from '$lib/i18n.js';
 
 const dictionary: Dictionary = {
 	Book: 'Livre',

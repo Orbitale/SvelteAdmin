@@ -18,23 +18,26 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 18.x
+          - 22.x
+          - 24.x
+          - 26.x
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-      - uses: pnpm/action-setup@v4
-
-      - name: 🟢 Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: pnpm/setup@v1
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
+          version: 12
+          runtime: node@${{ matrix.node-version }}
+          cache: true
 
       - run: pnpm install --frozen-lockfile
 
       - name: 🖌 Lint
         run: pnpm run lint
 
-      - name: 🛠 Unit tests
+      - name: 🔬 Unit tests
         run: pnpm run test:unit --run
+
+      - name: 🏗️ Build
+        run: pnpm run build

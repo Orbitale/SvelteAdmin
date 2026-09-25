@@ -5,22 +5,30 @@
 	import SelectItem from 'carbon-components-svelte/src/Select/SelectItem.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { type CrudOperation, SingleField } from '$lib/Crud/Operations';
-	import type { CrudEntityField } from '$lib/Fields/CrudEntity';
-	import { CrudDefinition } from '$lib/Crud';
+	import { type CrudOperation, SingleField } from '$lib/Crud/Operations.js';
+	import type { CrudEntityField } from '$lib/Fields/CrudEntity.js';
+	import { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
 
-	export let field: CrudEntityField;
-	export let operation: CrudOperation;
-	export let value: unknown;
+	let {
+		field,
+		operation,
+		value
+	}: {
+		field: CrudEntityField;
+		operation: CrudOperation;
+		value: any;
+	} = $props();
 
-	const crud: CrudDefinition<unknown> | undefined =
+	const crud: CrudDefinition<any> | undefined = $derived(
 		operation.dashboard.cruds.filter(
-			(def: CrudDefinition<unknown>) => def.name === field.options.crud_name
-		)[0] ?? undefined;
+			(def: CrudDefinition<any>) => def.name === field.options.crud_name
+		)[0] ?? undefined
+	);
 
-	function fetchList() {
+	function fetchList(): Promise<undefined | null | Array<Record<'id' | string, any>>> {
 		if (!crud) {
-			return;
+			console.error('No CRUD to fetch entities list.');
+			return Promise.resolve(null);
 		}
 
 		const fieldOperation = new SingleField(
@@ -30,7 +38,7 @@
 		fieldOperation.crud = crud;
 		fieldOperation.dashboard = operation.dashboard;
 
-		return crud.options.stateProvider.provide(fieldOperation);
+		return crud.options.stateProvider.provide(fieldOperation, {});
 	}
 </script>
 
@@ -40,23 +48,29 @@
 	</InlineNotification>
 {:else}
 	{#await fetchList()}
-		<SelectSkeleton labelText={$_(field.label)} />
+		<SelectSkeleton />
 	{:then data}
 		{@const values = data}
 		<Select
 			name={field.name}
 			labelText={$_(field.label)}
-			selected={value}
+			selected={isNaN(Number(value)) ? String(value) : Number(value)}
 			disabled={field.options.disabled}
 		>
-			{#each values as itemValue}
-				{@const val =
-					itemValue[field.options.list_provider_operation.value_field ?? 'id'] ?? undefined}
-				{@const txt = itemValue[field.options.list_provider_operation.label_field] ?? val}
-				{#if val && txt}
-					<SelectItem value={val} text={txt} />
-				{/if}
-			{/each}
+			{#if !values || !values.length}
+				<SelectItem value="" text="-" />
+			{:else}
+				{#each values as itemValue (itemValue)}
+					{@const val =
+						itemValue[field.options?.list_provider_operation?.value_field ?? 'id'] ?? undefined}
+					{@const txt = field.options?.list_provider_operation?.label_field
+						? (itemValue[field.options?.list_provider_operation?.label_field] ?? val)
+						: ''}
+					{#if val && txt}
+						<SelectItem value={val} text={txt} />
+					{/if}
+				{/each}
+			{/if}
 		</Select>
 	{:catch error}
 		<InlineNotification kind="error" hideCloseButton>

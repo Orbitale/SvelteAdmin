@@ -1,16 +1,19 @@
 <script lang="ts">
-	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject';
+	import { KeyValueObjectField } from '$lib/Fields/KeyValueObject.js';
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 
-	export let field: KeyValueObjectField;
-	export let value: object;
+	let { field, value }: { field: KeyValueObjectField; value: object } = $props();
 
-	let displayValue: unknown = undefined;
-
-	if (value) {
-		displayValue = value;
-		field.propertyPath.split('.').forEach((key) => (displayValue = displayValue[key] ?? undefined));
-	}
+	let displayValue: unknown = $derived.by(() => {
+		let internalValue = value;
+		if (internalValue) {
+			// @ts-expect-error internalValue is of type "any"
+			field.propertyPath
+				.split('.')
+				.forEach((key) => (internalValue = internalValue[key] ?? undefined));
+		}
+		return internalValue;
+	});
 </script>
 
 {#if value === undefined}

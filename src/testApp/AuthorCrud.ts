@@ -15,14 +15,14 @@ import {
 	type RequestParameters,
 	UrlAction,
 	View
-} from '$lib';
+} from '$lib/index.js';
 
 import { faker } from '@faker-js/faker';
 
 import Pen from 'carbon-icons-svelte/lib/Pen.svelte';
 import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 import ViewIcon from 'carbon-icons-svelte/lib/View.svelte';
-import { type Author, getStorage } from './internal/authorsInternal';
+import { type Author, getStorage } from './internal/authorsInternal.js';
 
 const fields = [
 	new TextField('first_name', 'First name'),

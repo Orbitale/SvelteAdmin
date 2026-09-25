@@ -3,29 +3,17 @@
  * @module
  */
 
-import {
-	type FieldOptions,
-	type FieldInterface,
-	type CrudDefinition,
-	type DashboardDefinition,
-	type Action,
-	type CrudTheme,
-	type FilterInterface,
-	type FilterOptions,
-	type PaginationOptions,
-	defaultPaginationOptions
-} from '$lib';
+import type { Action } from '$lib/Actions.js';
+import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+import type { DashboardDefinition } from '$lib/Dashboard.js';
+import type { FieldOptions, FieldInterface } from '$lib/Fields/Field.js';
+import type { FilterInterface, FilterOptions } from '$lib/Filter.js';
+import { type PaginationOptions, defaultPaginationOptions } from '$lib/Pagination.js';
+import type { CrudTheme } from '$lib/types.js';
 
 /** */
 export type CrudOperationName =
-	| 'new'
-	| 'edit'
-	| 'view'
-	| 'list'
-	| 'delete'
-	| 'entity_view'
-	| 'entity_list'
-	| string;
+	'new' | 'edit' | 'view' | 'list' | 'delete' | 'entity_view' | 'entity_list' | string;
 
 /** */
 export interface CrudOperation {

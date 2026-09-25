@@ -4,15 +4,20 @@
 	import Column from 'carbon-components-svelte/src/Grid/Column.svelte';
 
 	import SingleAction from '$lib/themes/svelte/carbon/DataTable/actions/SingleAction.svelte';
-	import type { Action } from '$lib/Actions';
+	import type { Action } from '$lib/Actions.js';
 
-	export let actions: Action[] = [];
-	export let item: object | undefined = undefined;
+	let {
+		actions = [],
+		item = undefined
+	}: {
+		actions?: Action[];
+		item?: object | undefined;
+	} = $props();
 </script>
 
 <Grid style="max-width: 14rem;">
 	<Row>
-		{#each actions as action}
+		{#each actions as action (action.label)}
 			<Column>
 				<SingleAction {action} {item} />
 			</Column>

@@ -15,7 +15,11 @@
 	import { Divider, type MenuLink, Submenu } from '$lib/Menu';
 	import { CallbackAction, UrlAction } from '$lib/Actions';
 
-	export let links: Array<MenuLink> = [];
+	let {
+		links = []
+	}: {
+		links?: Array<MenuLink>;
+	} = $props();
 </script>
 
 <HeaderUtilities>
@@ -28,7 +32,7 @@
 				on:open={() => links.filter((s) => s !== link).forEach((s) => (s.options.isOpen = false))}
 			>
 				<HeaderPanelLinks>
-					{#each link.links as subLink}
+					{#each link.links as subLink (subLink)}
 						{#if subLink instanceof Divider}
 							<br />
 						{:else if subLink instanceof UrlAction}

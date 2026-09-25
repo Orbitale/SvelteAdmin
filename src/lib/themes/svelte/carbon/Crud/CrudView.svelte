@@ -4,25 +4,28 @@
 	import InlineNotification from 'carbon-components-svelte/src/Notification/InlineNotification.svelte';
 	import SkeletonText from 'carbon-components-svelte/src/SkeletonText/SkeletonText.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { StateProviderResult } from '$lib/StateProvider';
-	import type { RequestParameters } from '$lib/Request';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
+	import type { StateProviderResult } from '$lib/StateProvider.js';
+	import type { RequestParameters } from '$lib/Request.js';
 
-	export let dashboard: DashboardDefinition;
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
+	interface Props {
+		dashboard: DashboardDefinition;
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	}
 
-	const CrudViewField = dashboard.theme.viewField;
+	let { dashboard, operation, crud, requestParameters = {} }: Props = $props();
 
-	let fields: FieldInterface<CommonFieldOptions>[] = operation.fields;
+	const CrudViewField = $derived(dashboard.theme.viewField);
 
-	let providerResultPromise: StateProviderResult<unknown> = crud.options.stateProvider.provide(
-		operation,
-		requestParameters
+	let fields: FieldInterface<CommonFieldOptions>[] = $derived(operation.fields);
+
+	let providerResultPromise: StateProviderResult<unknown> = $derived(
+		crud.options.stateProvider.provide(operation, requestParameters)
 	);
 
 	onMount(async () => {
@@ -45,7 +48,7 @@
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		{#each fields as field}
+		{#each fields as field (field.name)}
 			<CrudViewField
 				{operation}
 				{field}

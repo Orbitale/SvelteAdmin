@@ -1,4 +1,5 @@
-import type { FieldInterface, FieldOptions, FormFieldTheme, ViewFieldTheme } from '$lib';
+import type { FieldInterface, FieldOptions } from '$lib/Fields/Field.js';
+import type { FormFieldTheme, ViewFieldTheme } from '$lib/types.js';
 
 /** */
 export type TabOptions = FieldOptions & {

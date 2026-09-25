@@ -3,23 +3,23 @@
 	import DatePickerInput from 'carbon-components-svelte/src/DatePicker/DatePickerInput.svelte';
 	import DatePicker from 'carbon-components-svelte/src/DatePicker/DatePicker.svelte';
 
-	import type { DateRangeFilter } from '$lib/Filter';
+	import type { DateRangeFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	export let filter: DateRangeFilter;
-	export let value: undefined | string | Array<string>;
+	let {
+		filter,
+		value
+	}: {
+		filter: DateRangeFilter;
+		value: undefined | string | [string, string];
+	} = $props();
 
-	let from: string = '';
-	let to: string = '';
-
-	if (value && Array.isArray(value)) {
-		if (value[0]) {
-			from = value[0];
-		}
-		if (value[1]) {
-			to = value[1];
-		}
-	}
+	let from: string = $derived.by(() => {
+		return value && Array.isArray(value) && value[0] ? value[0] : '';
+	});
+	let to: string = $derived.by(() => {
+		return value && Array.isArray(value) && value[1] ? value[1] : '';
+	});
 </script>
 
 <FilterContainer {filter}>

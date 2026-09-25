@@ -23,7 +23,6 @@ import {
 	NumericFilter,
 	KeyValueObjectField,
 	PaginatedResults,
-	success,
 	Tabs,
 	TextareaField,
 	TextField,
@@ -37,9 +36,9 @@ import {
 	type FieldInterface,
 	type FieldOptions,
 	ArrayField
-} from '$lib';
+} from '$lib/index.js';
 
-import { type Test, getStorage } from './internal/testsInternal';
+import { type Test, getStorage } from './internal/testsInternal.js';
 
 const itemsPerPage = 10;
 
@@ -143,15 +142,15 @@ export const testCrud = new CrudDefinition<Test>({
 						if (!item) {
 							item = [];
 						}
-						success('Selected IDs to process:\n' + (item as Array<string>).join('\n'));
+						console.info('Selected IDs to process:\n' + (item as Array<string>).join('\n'));
 					})
 				],
 				filters: [
-					new TextFilter('text_field', 'Filter text'),
-					new BooleanFilter('checkbox_field', 'Filter checkbox'),
-					new DateRangeFilter('date_field', 'Filter date'),
-					new ExistsFilter('toggle_field', 'Filter toggle'),
-					new NumericFilter('number_field', 'Filter number')
+					new TextFilter('text_field', 'Filter text (TextFilter)'),
+					new BooleanFilter('checkbox_field', 'Filter checkbox (BooleanFilter)'),
+					new DateRangeFilter('date_field', 'Filter date (DateRangeFilter)'),
+					new ExistsFilter('toggle_field', 'Filter toggle (ExistsFilter)'),
+					new NumericFilter('number_field', 'Filter number (NumericFilter)')
 				],
 				pagination: {
 					enabled: true,
@@ -209,7 +208,7 @@ export const testCrud = new CrudDefinition<Test>({
 	) {
 		if (operation.name === 'delete') {
 			const id = (requestParameters.id || '').toString();
-			success(`Deleting ${operation.crud.options.label.singular} with id ${id}!`);
+			console.info(`Deleting ${operation.crud.options.label.singular} with id ${id}!`);
 
 			return Promise.resolve();
 		}
@@ -220,7 +219,7 @@ export const testCrud = new CrudDefinition<Test>({
 			const entity = data as Test;
 			entity.id = id;
 
-			success(
+			console.info(
 				(operation.name === 'edit'
 					? `Editing ${operation.crud.options.label.singular} with id ${id}!`
 					: `Creating new ${operation.crud.options.label.singular} with id ${id}!`) +

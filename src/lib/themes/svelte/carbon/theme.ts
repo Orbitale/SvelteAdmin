@@ -55,7 +55,7 @@ import DateRangeFilter from './FilterComponents/DateRangeFilter.svelte';
 import NumericFilter from './FilterComponents/NumericFilter.svelte';
 import TextFilter from './FilterComponents/TextFilter.svelte';
 
-import type { ThemeConfig } from '$lib';
+import type { ThemeConfig } from '$lib/types.js';
 
 const theme: ThemeConfig = {
 	adminLayout: AdminLayout,
@@ -120,4 +120,4 @@ const theme: ThemeConfig = {
 
 export default theme;
 
-export { default as ThemeChangerAction } from './lib/ThemeChangeMenu';
+export { default as ThemeChangerAction } from './lib/ThemeChangeMenu.js';

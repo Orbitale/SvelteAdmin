@@ -3,14 +3,18 @@
 	import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
 	import { _ } from 'svelte-i18n';
 
-	import { initLocale } from '$lib';
-	import { dashboard } from '../testApp/Dashboard';
-	import fr from '../testApp/translations/fr';
+	import { initLocale } from '$lib/index.js';
+	import { dashboard } from '../testApp/Dashboard.js';
+	import fr from '../testApp/translations/fr.js';
+
+	import { resolve } from '$app/paths';
 
 	initLocale('fr', { fr });
+
+	const DashboardComponent = dashboard.theme.dashboard;
 </script>
 
-<svelte:component this={dashboard.theme.dashboard} {dashboard}>
+<DashboardComponent {dashboard}>
 	<h1>Svelte Admin demo app</h1>
 
 	<p>
@@ -26,15 +30,15 @@
 	<p>Here are the available CRUDs for the demo app:</p>
 
 	<UnorderedList expressive={true}>
-		{#each dashboard.cruds as crud}
+		{#each dashboard.cruds as crud (crud.name)}
 			<li>
-				<a href="/admin/{crud.name}/{crud.options.defaultOperationName}">
+				<a href={resolve('/admin/{crud.name}/{crud.options.defaultOperationName}')}>
 					{$_(crud.options.label.plural)}
 				</a>
 			</li>
 		{/each}
 	</UnorderedList>
-</svelte:component>
+</DashboardComponent>
 
 <style>
 	li {

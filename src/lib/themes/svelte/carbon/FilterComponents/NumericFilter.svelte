@@ -1,10 +1,15 @@
 <script lang="ts">
 	import TextInput from 'carbon-components-svelte/src/TextInput/TextInput.svelte';
-	import type { NumericFilter } from '$lib/Filter';
+	import type { NumericFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	export let filter: NumericFilter;
-	export let value: string;
+	let {
+		filter,
+		value
+	}: {
+		filter: NumericFilter;
+		value: string;
+	} = $props();
 </script>
 
 <FilterContainer {filter}>

@@ -1,54 +1,46 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CommonFieldOptions, FieldInterface } from '$lib/Fields/Field.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
-	export let operation: CrudOperation;
-	export let field: FieldInterface<CommonFieldOptions>;
-	export let data: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		operation,
+		field,
+		theme,
+		value = $bindable(),
+		onFieldChange = () => {},
+		data = {}
+	}: {
+		operation: CrudOperation;
+		field: FieldInterface<CommonFieldOptions>;
+		theme: ThemeConfig;
+		value: unknown;
+		onFieldChange?: (data: { key: string; value: object | unknown }) => void;
+		data?: Record<string, unknown>;
+	} = $props();
 
-	if (value === undefined && data) {
-		value = data[field.name];
+	let storedValue = $derived.by(() => {
+		let innerValue = value;
+		if (innerValue === undefined && data) {
+			innerValue = data[field.name];
+		}
+		return innerValue;
+	});
+
+	function propagateFieldChange(e: InputEvent) {
+		onFieldChange({ key: field.name, value: e.detail });
 	}
 
-	const dispatchEvent = createEventDispatcher<{
-		fieldChange: {
-			key: string;
-			value: object | unknown;
-		};
-	}>();
+	const formComponent = $derived(operation?.dashboard.theme.formFields[field.formComponent]);
 
-	function onFieldChange(e: InputEvent) {
-		dispatchEvent('fieldChange', {
-			key: field.name,
-			value: e.detail
-		});
-	}
-
-	const formComponent = operation?.dashboard.theme.formFields[field.formComponent];
+	const SvelteComponent = $derived(formComponent);
 </script>
 
-<svelte:component
-	this={formComponent}
+<SvelteComponent
 	{field}
 	{operation}
-	{value}
+	value={storedValue}
 	{data}
 	{theme}
-	on:change={onFieldChange}
-	on:blur
-	on:check
-	on:click
-	on:focus
-	on:input
-	on:keydown
-	on:keyup
-	on:mouseenter
-	on:mouseleave
-	on:mouseover
-	on:paste
-	on:toggle
+	onchange={propagateFieldChange}
 />

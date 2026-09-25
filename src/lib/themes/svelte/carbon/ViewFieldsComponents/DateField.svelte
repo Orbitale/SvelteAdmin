@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { DateTime } from 'luxon';
 
-	export let value: Date | string | undefined;
+	let {
+		value = $bindable()
+	}: {
+		value: Date | string | undefined;
+	} = $props();
 
 	if (value instanceof Date) {
 		const luxonDate = DateTime.fromISO(value.toISOString());
@@ -13,4 +17,4 @@
 	}
 </script>
 
-{value.substring(0, 10)}
+{String(value || '').substring(0, 10)}

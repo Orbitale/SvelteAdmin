@@ -1,78 +1,68 @@
 <script lang="ts">
 	import RadioButtonGroup from 'carbon-components-svelte/src/RadioButtonGroup/RadioButtonGroup.svelte';
-	import Button from 'carbon-components-svelte/src/Button/Button.svelte';
+	import RadioButton from 'carbon-components-svelte/src/RadioButton/RadioButton.svelte';
 	import CheckboxChecked from 'carbon-icons-svelte/lib/CheckboxChecked.svelte';
 	import Close from 'carbon-icons-svelte/lib/Close.svelte';
 	import CheckboxIndeterminate from 'carbon-icons-svelte/lib/CheckboxIndeterminate.svelte';
-	import type { TextFilter } from '$lib/Filter';
+	import type { TextFilter } from '$lib/Filter.js';
 	import FilterContainer from '$lib/themes/svelte/carbon/FilterComponents/Internal/FilterContainer.svelte';
 
-	export let filter: TextFilter;
-	let value: boolean | null = null;
+	let {
+		filter
+	}: {
+		filter: TextFilter;
+	} = $props();
 
-	const style = 'padding: 0.5rem;';
+	let value: boolean | null = $state(null);
 
-	function checkboxStyle(
-		currentValue: boolean | null,
-		expectedValue: boolean | null,
-		activeColor: string
-	): string {
-		if (currentValue === expectedValue) {
-			return `color: ${activeColor}; border-color: #aaa;`;
-		}
-		return `color: #aaa; border-color: ${activeColor};`;
-	}
-
-	function buttonStyle(
-		currentValue: boolean | null,
-		expectedValue: boolean | null,
-		activeColor: string
-	): string {
-		if (currentValue === expectedValue) {
-			return `${style};border-color: ${activeColor};`;
-		}
-		return `${style};border-color: transparent;`;
-	}
-
-	$: inputValue = value === true ? 1 : value === false ? 0 : '';
+	let inputValue = $derived(value === true ? 1 : value === false ? 0 : '');
+	let stringValue = $derived(value === true ? 'true' : value === false ? 'false' : 'null');
 </script>
 
 <input type="hidden" name={filter.field} value={inputValue} />
 
 <FilterContainer {filter}>
-	<RadioButtonGroup name={filter.field} labelPosition="right">
-		<Button
-			value={true}
-			disabled={value === true}
-			on:click={() => (value = true)}
-			size="small"
-			kind="tertiary"
-			style={buttonStyle(value, true, '#0a0')}
+	<RadioButtonGroup name={filter.field} labelPosition="right" selected={stringValue}>
+		<RadioButton
+			value="true"
+			class="sva--filter-boolean-radio-button"
+			onclick={() => (value = true)}
+			style="--sva-input-color: #0a0;"
 		>
-			<CheckboxChecked size={24} style={checkboxStyle(value, true, '#0a0')} />
-		</Button>
+			{#snippet labelChildren()}
+				<CheckboxChecked size={24} style="color: #0a0;" />
+			{/snippet}
+		</RadioButton>
 
-		<Button
-			value={false}
-			disabled={value === false}
-			on:click={() => (value = false)}
-			size="small"
-			kind="tertiary"
-			style={buttonStyle(value, false, '#a00')}
+		<RadioButton
+			value="false"
+			class="sva--filter-boolean-radio-button"
+			onclick={() => (value = false)}
+			style="--sva-input-color: #a00;"
 		>
-			<Close size={24} style={checkboxStyle(value, false, '#a00')} />
-		</Button>
+			{#snippet labelChildren()}
+				<Close size={24} style="color: #a00;" />
+			{/snippet}
+		</RadioButton>
 
-		<Button
-			labelText="null"
-			value={null}
-			disabled={value === null}
-			on:click={() => (value = null)}
-			size="small"
-			kind="tertiary"
-			style={buttonStyle(value, null, '#333')}
+		<RadioButton
+			value="null"
+			class="sva--filter-boolean-radio-button"
+			onclick={() => (value = null)}
+			style="--sva-input-color: #333;"
 		>
-			<CheckboxIndeterminate size={24} style={checkboxStyle(value, null, '#333')} />
-		</Button>
+			{#snippet labelChildren()}
+				<CheckboxIndeterminate size={24} style="color: #333;" />
+			{/snippet}
+		</RadioButton>
 	</RadioButtonGroup>
 </FilterContainer>
+
+<style>
+	:global(.sva--filter-boolean-radio-button .bx--radio-button__label) {
+		align-items: center;
+	}
+	:global(.sva--filter-boolean-radio-button .bx--radio-button__appearance) {
+		border-color: var(--sva-input-color);
+	}
+</style>

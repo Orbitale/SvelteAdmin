@@ -1,14 +1,20 @@
 <script lang="ts">
 	import Columns from '../Columns/Columns.svelte';
-	import type { Columns as ColumnsField } from '$lib/Fields/Columns';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { ThemeConfig } from '$lib/types';
+	import type { Columns as ColumnsField } from '$lib/Fields/Columns.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
-	export let field: ColumnsField;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown;
-	export let theme: ThemeConfig;
+	let {
+		field,
+		operation,
+		entityObject = {},
+		theme
+	}: {
+		field: ColumnsField;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		theme: ThemeConfig;
+	} = $props();
 </script>
 
-<Columns FieldComponent={theme.viewField} {field} {operation} {entityObject} {theme} {value} />
+<Columns FieldComponent={theme.viewField} {field} {operation} {entityObject} {theme} />

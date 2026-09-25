@@ -2,10 +2,15 @@
 	import DatePickerInput from 'carbon-components-svelte/src/DatePicker/DatePickerInput.svelte';
 	import DatePicker from 'carbon-components-svelte/src/DatePicker/DatePicker.svelte';
 	import { _ } from 'svelte-i18n';
-	import type { DateField } from '$lib/Fields/Date';
+	import type { DateField } from '$lib/Fields/Date.js';
 
-	export let field: DateField;
-	export let value: Date | string | undefined;
+	let {
+		field,
+		value = $bindable()
+	}: {
+		field: DateField;
+		value: Date | string | undefined;
+	} = $props();
 
 	if (value instanceof Date) {
 		value.setHours(0, 0, 0);
@@ -13,27 +18,19 @@
 		value = value.toISOString().substring(0, 10);
 	}
 
-	function dateFormatToRegex(dateFormat) {
+	function dateFormatToRegex(dateFormat: string) {
 		return (
 			dateFormat
 				// Escape special characters in the date format string
-				.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+				.replace(/[.*+?^${}()|[\]\\]/g, `\\$&`)
 				// Convert date format to regular expression pattern
-				.replace('Y', '\\d{4}')
-				.replace('yyyy', '\\d{4}')
-				.replace('yy', '\\d{2}')
-				.replace('mm', '\\d{2}')
-				.replace('dd', '\\d{2}')
-				.replace('d', '\\d{2}')
-				.replace('M', '\\d')
-				.replace('yyyy', '\\d{4}')
-				.replace('hh', '\\d{2}')
-				.replace('mm', '\\d{2}')
-				.replace('m', '\\d{2}')
-				.replace('ss', '\\d{2}')
-				.replace('HH', '\\d{2}')
-				.replace('MM', '\\d{2}')
-				.replace('SS', '\\d{2}')
+				.replace(/dd?/i, `\\d{2}`)
+				.replace(/yyyy/i, `\\d{4}`)
+				.replace(/yy/i, `\\d{2}`)
+				.replace(/Y/i, `\\d{4}`)
+				.replace(/mm?/i, `\\d{2}`)
+				.replace(/hh?/i, `\\d{2}`)
+				.replace(/ss/i, `\\d{2}`)
 		);
 	}
 </script>

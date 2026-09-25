@@ -1,78 +1,72 @@
-import type { ComponentType } from 'svelte';
+import type { Component } from 'svelte';
 
 /** */
 export type SubmitButtonType =
-	| 'primary'
-	| 'secondary'
-	| 'tertiary'
-	| 'ghost'
-	| 'danger'
-	| 'danger-tertiary'
-	| 'danger-ghost';
+	'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger' | 'danger-tertiary' | 'danger-ghost';
 
 /** */
 export type ThemeConfig = {
-	dashboard: ComponentType;
-	dataTable: ComponentType;
-	adminLayout: ComponentType;
-	viewField: ComponentType;
-	formField: ComponentType;
-	form: ComponentType;
+	dashboard: Component;
+	dataTable: Component;
+	adminLayout: Component;
+	viewField: Component;
+	formField: Component;
+	form: Component;
 	crudActions: {
-		view: ComponentType;
-		new: ComponentType;
-		list: ComponentType;
-		edit: ComponentType;
-		delete: ComponentType;
-		[key: string]: ComponentType;
+		view: Component;
+		new: Component;
+		list: Component;
+		edit: Component;
+		delete: Component;
+		[key: string]: Component;
 	};
 	viewFields: {
-		checkbox: ComponentType;
-		column: ComponentType;
-		crud_entity: ComponentType;
-		date: ComponentType;
-		default: ComponentType;
-		label: ComponentType;
-		number: ComponentType;
-		key_value_object: ComponentType;
-		tabs: ComponentType;
-		textarea: ComponentType;
-		text: ComponentType;
-		toggle: ComponentType;
-		url: ComponentType;
-		array: ComponentType;
-		email: ComponentType;
-		[key: string]: ComponentType;
+		checkbox: Component;
+		column: Component;
+		crud_entity: Component;
+		date: Component;
+		default: Component;
+		label: Component;
+		number: Component;
+		key_value_object: Component;
+		tabs: Component;
+		textarea: Component;
+		text: Component;
+		toggle: Component;
+		url: Component;
+		array: Component;
+		email: Component;
+		[key: string]: Component;
 	};
 	formFields: {
-		checkbox: ComponentType;
-		column: ComponentType;
-		crud_entity: ComponentType;
-		date: ComponentType;
-		default: ComponentType;
-		number: ComponentType;
-		key_value_object: ComponentType;
-		tabs: ComponentType;
-		textarea: ComponentType;
-		text: ComponentType;
-		toggle: ComponentType;
-		url: ComponentType;
-		array: ComponentType;
-		email: ComponentType;
-		[key: string]: ComponentType;
+		checkbox: Component;
+		column: Component;
+		crud_entity: Component;
+		date: Component;
+		default: Component;
+		number: Component;
+		key_value_object: Component;
+		tabs: Component;
+		textarea: Component;
+		text: Component;
+		toggle: Component;
+		url: Component;
+		array: Component;
+		email: Component;
+		[key: string]: Component;
 	};
 	filters: {
-		boolean: ComponentType;
-		text: ComponentType;
-		date_range: ComponentType;
-		numeric: ComponentType;
-		[key: string]: ComponentType;
+		boolean: Component;
+		text: Component;
+		date_range: Component;
+		numeric: Component;
+		[key: string]: Component;
 	};
 	menu: {
-		sideMenu: ComponentType;
-		topLeftMenu: ComponentType;
-		topMenu: ComponentType;
-		topRightMenu: ComponentType;
+		sideMenu: Component;
+		topLeftMenu: Component;
+		topMenu: Component;
+		topRightMenu: Component;
 	};
 };
 

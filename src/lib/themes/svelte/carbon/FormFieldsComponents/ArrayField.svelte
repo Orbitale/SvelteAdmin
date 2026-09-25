@@ -6,16 +6,24 @@
 
 	import CrudFormField from '$lib/themes/svelte/carbon/Crud/CrudFormField.svelte';
 	import { ArrayField } from '$lib/Fields/Array';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { FieldInterface } from '$lib/Fields';
-	import type { FieldOptions } from '$lib/Fields';
-	import type { ThemeConfig } from '$lib/types';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { FieldInterface } from '$lib/Fields/Field.js';
+	import type { FieldOptions } from '$lib/Fields/Field.js';
+	import type { ThemeConfig } from '$lib/types.js';
 
-	export let field: ArrayField<FieldInterface<FieldOptions>>;
-	export let operation: CrudOperation;
-	export let entityObject: Record<string, unknown> = {};
-	export let value: unknown[];
-	export let theme: ThemeConfig;
+	let {
+		field,
+		operation,
+		entityObject = {},
+		value,
+		theme
+	}: {
+		field: ArrayField<FieldInterface<FieldOptions>>;
+		operation: CrudOperation;
+		entityObject?: Record<string, unknown>;
+		value: unknown[];
+		theme: ThemeConfig;
+	} = $props();
 </script>
 
 <Grid fullWidth>
@@ -27,13 +35,13 @@
 	<Row>
 		<Column>
 			<Grid>
-				{#each value || [] as itemValue}
+				{#each value || [] as itemValue (itemValue)}
 					<Row>
 						<Column>
 							<CrudFormField
 								{operation}
 								field={field.innerField}
-								{entityObject}
+								data={entityObject}
 								{theme}
 								value={itemValue}
 							/>
@@ -45,7 +53,7 @@
 							<CrudFormField
 								{operation}
 								field={field.innerField}
-								{entityObject}
+								data={entityObject}
 								{theme}
 								value={null}
 							/>

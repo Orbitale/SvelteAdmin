@@ -1,15 +1,20 @@
 <script lang="ts">
 	import TextArea from 'carbon-components-svelte/src/TextArea/TextArea.svelte';
-	import type { TextareaField } from '$lib/Fields/Textarea';
+	import type { TextareaField } from '$lib/Fields/Textarea.js';
 
-	export let field: TextareaField;
-	export let value: string | undefined;
+	let {
+		field,
+		value = $bindable()
+	}: {
+		field: TextareaField;
+		value: string | undefined;
+	} = $props();
 
 	function onChangeStripTags() {
 		if (!field.options.stripTags) {
 			return false;
 		}
-		value = value.replace(/[<>]/gi, '');
+		value = (value || '').replace(/[<>]/gi, '');
 	}
 </script>
 

@@ -8,22 +8,29 @@
 	import TextInputSkeleton from 'carbon-components-svelte/src/TextInput/TextInputSkeleton.svelte';
 	import FormGroup from 'carbon-components-svelte/src/FormGroup/FormGroup.svelte';
 
-	import type { CrudDefinition } from '$lib/Crud';
-	import type { CrudOperation } from '$lib/Crud/Operations';
-	import type { DashboardDefinition } from '$lib/Dashboard';
-	import type { StateProviderResult } from '$lib/StateProvider';
-	import type { RequestParameters } from '$lib/Request';
+	import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+	import type { CrudOperation } from '$lib/Crud/Operations.js';
+	import type { DashboardDefinition } from '$lib/Dashboard.js';
+	import type { StateProviderResult } from '$lib/StateProvider.js';
+	import type { RequestParameters } from '$lib/Request.js';
+	import type { SubmittedData } from '$lib/Crud/Form.js';
 
-	export let dashboard: DashboardDefinition;
-	export let operation: CrudOperation;
-	export let crud: CrudDefinition<unknown>;
-	export let requestParameters: RequestParameters = {};
-
-	const CrudForm = dashboard.theme.form;
-
-	let defaultData: StateProviderResult<unknown> = crud.options.stateProvider.provide(
+	let {
+		dashboard,
 		operation,
-		requestParameters
+		crud,
+		requestParameters = {}
+	}: {
+		dashboard: DashboardDefinition;
+		operation: CrudOperation;
+		crud: CrudDefinition<unknown>;
+		requestParameters?: RequestParameters;
+	} = $props();
+
+	const CrudForm = $derived(dashboard.theme.form);
+
+	let defaultData: StateProviderResult<unknown> = $derived(
+		crud.options.stateProvider.provide(operation, requestParameters)
 	);
 
 	onMount(async () => {
@@ -33,12 +40,10 @@
 		}
 	});
 
-	async function onSubmitData(event: CustomEvent<Record<string, unknown>>) {
-		const data = event.detail;
-
+	async function onSubmitData(data: SubmittedData) {
 		await crud.options.stateProcessor.process(data, operation, requestParameters);
 
-		window.location.href = document.referrer || dashboard.getFirstActionUrl();
+		window.location.href = dashboard.getFirstActionUrl();
 	}
 </script>
 
@@ -53,22 +58,10 @@
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		<CrudForm
-			theme={dashboard.theme}
-			{operation}
-			defaultData={data}
-			on:click
-			on:keydown
-			on:mouseover
-			on:mouseenter
-			on:mouseleave
-			on:submit
-			on:submitData
-			on:submitData={onSubmitData}
-		>
-			<svelte:fragment slot="form-header">
+		<CrudForm theme={dashboard.theme} {operation} {onSubmitData} defaultData={data}>
+			{#snippet formHeader()}
 				<h2>{$_(operation.label, { values: { name: $_(crud.options.label.singular) } })}</h2>
-			</svelte:fragment>
+			{/snippet}
 		</CrudForm>
 	{/if}
 {/await}

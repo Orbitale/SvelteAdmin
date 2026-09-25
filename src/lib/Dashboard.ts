@@ -1,12 +1,10 @@
 import { get, writable, type Writable } from 'svelte/store';
-import {
-	type AdminConfig,
-	type MenuLink,
-	type CrudDefinition,
-	type Dictionaries,
-	defaultAdminConfig,
-	type ThemeConfig
-} from '$lib';
+import { defaultAdminConfig } from '$lib/Config.js';
+import { type AdminConfig } from './Config.js';
+import type { MenuLink } from '$lib/Menu.js';
+import type { CrudDefinition } from '$lib/Crud/CrudDefinition.js';
+import type { Dictionaries } from '$lib/i18n.js';
+import type { ThemeConfig } from '$lib/types.js';
 
 /** */
 export type DashboardStores = {
