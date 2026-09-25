@@ -1,6 +1,6 @@
 import { get, writable, type Writable } from 'svelte/store';
+import { type AdminConfig } from './Config.js';
 import {
-	type AdminConfig,
 	type MenuLink,
 	type CrudDefinition,
 	type Dictionaries,

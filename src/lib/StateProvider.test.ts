@@ -14,7 +14,7 @@ describe('Callback State Provider', () => {
 function mockOperation(): CrudOperation {
 	return new (class extends BaseCrudOperation {
 		constructor(...args: unknown[]) {
-			// @ts-ignore
+			// @ts-expect-error because of spread args needing tuple types
 			super(...args);
 		}
 	})('', '', '', [], [], {});

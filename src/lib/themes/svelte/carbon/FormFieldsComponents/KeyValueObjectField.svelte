@@ -19,16 +19,14 @@
 		field: KeyValueObjectField;
 		value: unknown;
 	} = $props();
-	let gridWrapper: HTMLElement = $state();
 
-	if (value && value?.constructor !== Object) {
-		throw new Error('Value was expected to be an object, but "' + typeof value + '" given.');
-	}
-	if (!value) {
-		value = { '': '' };
-	}
-
-	let valueEntries = $state(Object.entries(value));
+	let valueEntries = $derived.by(() => {
+		let v = value;
+		if (v && v?.constructor !== Object) {
+			throw new Error('Value was expected to be an object, but "' + typeof v + '" given.');
+		}
+		return !v ? Object.entries({ '': '' }) : Object.entries(v);
+	});
 
 	let existingKeys = $derived(getDuplicateKeys(valueEntries));
 
@@ -39,8 +37,8 @@
 		valueEntries = [...valueEntries, ['', '']];
 	}
 	function getDuplicateKeys(entries: Array<[string, string]>): Array<string> {
-		const keys = [];
-		const duplicates = [];
+		const keys: string[] = [];
+		const duplicates: string[] = [];
 		entries.forEach(([key]) => {
 			if (keys.indexOf(key) >= 0 && duplicates.indexOf(key) < 0) {
 				duplicates.push(key);
@@ -52,59 +50,57 @@
 	}
 </script>
 
-<div bind:this={gridWrapper}>
-	<Grid style="margin: 0;">
-		{#each valueEntries as entry, i}
-			{@const key = entry[0]}
-			{@const entryValue = entry[1]}
-			{@const inputId = field.name + '_' + key.replace(/[^a-z0-9_-]/gi, '_')}
-			{@const inputName = field.name + '[' + key + ']'}
-			<Row>
-				<Column sm={0} md={1} lg={1} xlg={1} max={1}>
-					<Button kind="ghost" size="small" disabled style="cursor: default;">
-						<label for={inputId}>{i}</label>
-					</Button>
-					{#if key.length}
-						<input type="hidden" id={inputId} name={inputName} value={entryValue} />
-					{/if}
-				</Column>
-				<Column sm={1} md={2} lg={6} xlg={6} max={6}>
-					<TextInput
-						invalid={key && existingKeys.indexOf(key) >= 0}
-						warn={key.length === 0}
-						invalidText={$_('error.crud.form.object.duplicate_key')}
-						size="sm"
-						data-key={i}
-						disabled={field.options.disabled}
-						bind:value={valueEntries[i][0]}
-					/>
-				</Column>
-				<Column sm={1} md={1} lg={1} xlg={1} max={1} style="text-align: center;">
-					<ArrowRight size="24" style="margin-top: 5px;" />
-				</Column>
-				<Column sm={1} md={2} lg={6} xlg={6} max={6}>
-					<TextInput
-						size="sm"
-						data-value={i}
-						disabled={field.options.disabled}
-						bind:value={valueEntries[i][1]}
-					/>
-				</Column>
-				{#if !field.options.disabled}
-					<Column sm={1} md={1} lg={1} xlg={1} max={1} style="text-align: left;">
-						<Button kind="ghost" size="small" on:click={() => removeKey(i)}>
-							<TrashCan size={20} />
-						</Button>
-					</Column>
-				{/if}
-			</Row>
-		{/each}
-		{#if !field.options.disabled}
-			<Column style="text-align: left;">
-				<Button kind="ghost" size="small" on:click={() => addKey()}>
-					<AddFilled size={20} />
+<Grid style="margin: 0;">
+	{#each valueEntries as entry, i (entry)}
+		{@const key = entry[0]}
+		{@const entryValue = entry[1]}
+		{@const inputId = field.name + '_' + key.replace(/[^a-z0-9_-]/gi, '_')}
+		{@const inputName = field.name + '[' + key + ']'}
+		<Row>
+			<Column sm={0} md={1} lg={1} xlg={1} max={1}>
+				<Button kind="ghost" size="small" disabled style="cursor: default;">
+					<label for={inputId}>{i}</label>
 				</Button>
+				{#if key.length}
+					<input type="hidden" id={inputId} name={inputName} value={entryValue} />
+				{/if}
 			</Column>
-		{/if}
-	</Grid>
-</div>
+			<Column sm={1} md={2} lg={6} xlg={6} max={6}>
+				<TextInput
+					invalid={!!key && existingKeys.indexOf(key) >= 0}
+					warn={key.length === 0}
+					invalidText={$_('error.crud.form.object.duplicate_key')}
+					size="sm"
+					data-key={i}
+					disabled={field.options.disabled}
+					bind:value={valueEntries[i][0]}
+				/>
+			</Column>
+			<Column sm={1} md={1} lg={1} xlg={1} max={1} style="text-align: center;">
+				<ArrowRight size="24" style="margin-top: 5px;" />
+			</Column>
+			<Column sm={1} md={2} lg={6} xlg={6} max={6}>
+				<TextInput
+					size="sm"
+					data-value={i}
+					disabled={field.options.disabled}
+					bind:value={valueEntries[i][1]}
+				/>
+			</Column>
+			{#if !field.options.disabled}
+				<Column sm={1} md={1} lg={1} xlg={1} max={1} style="text-align: left;">
+					<Button kind="ghost" size="small" on:click={() => removeKey(i)}>
+						<TrashCan size={20} />
+					</Button>
+				</Column>
+			{/if}
+		</Row>
+	{/each}
+	{#if !field.options.disabled}
+		<Column style="text-align: left;">
+			<Button kind="ghost" size="small" on:click={() => addKey()}>
+				<AddFilled size={20} />
+			</Button>
+		</Column>
+	{/if}
+</Grid>

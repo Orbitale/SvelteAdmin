@@ -27,21 +27,14 @@
 </script>
 
 <Tabs>
-	{#each field.fields as tab, i}
+	{#each field.fields as tab, i (tab.name)}
 		<Tab label={$_(tab.label || tab.name)} tabindex={i.toString()} />
 	{/each}
 	{#snippet content()}
-		{#each field.fields as tab}
+		{#each field.fields as tab (tab.name)}
 			<TabContent>
-				{#each tab.fields as tabbedField}
-					<FieldComponent
-						{operation}
-						{entityObject}
-						{value}
-						{theme}
-						field={tabbedField}
-						on:fieldChange
-					/>
+				{#each tab.fields as tabbedField (tabbedField.name)}
+					<FieldComponent {operation} {entityObject} {value} {theme} field={tabbedField} />
 				{/each}
 			</TabContent>
 		{/each}

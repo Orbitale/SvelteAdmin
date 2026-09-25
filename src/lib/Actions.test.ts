@@ -69,7 +69,6 @@ describe('Callback actions', () => {
 		};
 		const callback = (item?: unknown): void => {
 			called = true;
-			// @ts-ignore
 			item.field = 'newValue';
 		};
 		const action = new CallbackAction('', null, callback);

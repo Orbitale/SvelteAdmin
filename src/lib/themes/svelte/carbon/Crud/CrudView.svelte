@@ -48,7 +48,7 @@
 			{$_('error.crud.entity.not_found')}
 		</InlineNotification>
 	{:else}
-		{#each fields as field}
+		{#each fields as field (field.name)}
 			<CrudViewField
 				{operation}
 				{field}

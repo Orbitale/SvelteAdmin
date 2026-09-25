@@ -25,7 +25,7 @@
 	}
 </script>
 
-{#each value || [] as itemValue}
+{#each value || [] as itemValue, i (i)}
 	<div>
 		<CrudViewField {operation} field={field.innerField} {entityObject} {theme} value={itemValue} />
 	</div>

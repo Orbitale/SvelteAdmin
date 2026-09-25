@@ -1,4 +1,6 @@
 <script lang="ts">
+	/* eslint svelte/no-navigation-without-resolve: "off" */
+
 	import Tag from 'carbon-components-svelte/src/Tag/Tag.svelte';
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
 	import { UrlField } from '$lib/Fields/Url.js';

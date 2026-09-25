@@ -7,6 +7,8 @@
 	import { dashboard } from '../testApp/Dashboard.js';
 	import fr from '../testApp/translations/fr.js';
 
+	import { resolve } from '$app/paths';
+
 	initLocale('fr', { fr });
 
 	const DashboardComponent = dashboard.theme.dashboard;
@@ -28,9 +30,9 @@
 	<p>Here are the available CRUDs for the demo app:</p>
 
 	<UnorderedList expressive={true}>
-		{#each dashboard.cruds as crud}
+		{#each dashboard.cruds as crud (crud.name)}
 			<li>
-				<a href="/admin/{crud.name}/{crud.options.defaultOperationName}">
+				<a href={resolve('/admin/{crud.name}/{crud.options.defaultOperationName}')}>
 					{$_(crud.options.label.plural)}
 				</a>
 			</li>

@@ -42,5 +42,5 @@
 	value={storedValue}
 	{data}
 	{theme}
-	on:change={propagateFieldChange}
+	onchange={propagateFieldChange}
 />

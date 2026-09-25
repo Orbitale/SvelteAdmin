@@ -35,13 +35,13 @@
 	<Row>
 		<Column>
 			<Grid>
-				{#each value || [] as itemValue}
+				{#each value || [] as itemValue (itemValue)}
 					<Row>
 						<Column>
 							<CrudFormField
 								{operation}
 								field={field.innerField}
-								{entityObject}
+								data={entityObject}
 								{theme}
 								value={itemValue}
 							/>
@@ -53,7 +53,7 @@
 							<CrudFormField
 								{operation}
 								field={field.innerField}
-								{entityObject}
+								data={entityObject}
 								{theme}
 								value={null}
 							/>

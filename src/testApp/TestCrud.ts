@@ -146,11 +146,11 @@ export const testCrud = new CrudDefinition<Test>({
 					})
 				],
 				filters: [
-					new TextFilter('text_field', 'Filter text'),
-					new BooleanFilter('checkbox_field', 'Filter checkbox'),
-					new DateRangeFilter('date_field', 'Filter date'),
-					new ExistsFilter('toggle_field', 'Filter toggle'),
-					new NumericFilter('number_field', 'Filter number')
+					new TextFilter('text_field', 'Filter text (TextFilter)'),
+					new BooleanFilter('checkbox_field', 'Filter checkbox (BooleanFilter)'),
+					new DateRangeFilter('date_field', 'Filter date (DateRangeFilter)'),
+					new ExistsFilter('toggle_field', 'Filter toggle (ExistsFilter)'),
+					new NumericFilter('number_field', 'Filter number (NumericFilter)')
 				],
 				pagination: {
 					enabled: true,

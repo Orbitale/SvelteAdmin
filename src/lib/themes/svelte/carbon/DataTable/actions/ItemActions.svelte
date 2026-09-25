@@ -17,7 +17,7 @@
 
 <Grid style="max-width: 14rem;">
 	<Row>
-		{#each actions as action}
+		{#each actions as action (action.label)}
 			<Column>
 				<SingleAction {action} {item} />
 			</Column>

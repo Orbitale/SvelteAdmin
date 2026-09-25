@@ -69,7 +69,7 @@
 {#if actions.length}
 	<Toolbar>
 		<ToolbarContent>
-			{#each actions as action}
+			{#each actions as action (action)}
 				<ToolbarAction {action} />
 			{/each}
 		</ToolbarContent>
@@ -89,7 +89,7 @@
 			{/snippet}
 
 			<Form on:submit={submitFilters}>
-				{#each filters as filter}
+				{#each filters as filter (filter)}
 					<br />
 					<FilterComponent {filter} {theme} value={filtersValues[filter.field]} />
 				{/each}

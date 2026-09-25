@@ -26,7 +26,7 @@
 
 <Grid fullWidth>
 	<Row>
-		{#each field.fields as column}
+		{#each field.fields as column (column)}
 			<Column
 				sm={{ span: column.size, offset: column.offset || 0 }}
 				md={{ span: column.size, offset: column.offset || 0 }}
@@ -41,7 +41,7 @@
 						<span>{$_(String(column.label || column.name))}</span>
 					{/if}
 				{/if}
-				{#each column.fields as columnedField}
+				{#each column.fields as columnedField (columnedField)}
 					<FieldComponent
 						{operation}
 						{entityObject}
